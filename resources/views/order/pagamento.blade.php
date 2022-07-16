@@ -1,0 +1,55 @@
+@extends('layouts')
+
+@section('title', 'Pagamento ordine')
+
+@section('topbar')
+<div class="g-0 row">
+    <div class="col-lg-12">
+        <div class="row g-0 topbar-style">
+            <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
+                <x-cart-button></x-cart-button>
+                <x-login></x-login>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('header')
+<div class="g-0 row">
+    <x-header></x-header>
+</div>
+@endsection
+
+@section('content')
+<div class="row g-0 flex-grow-1 p-4">
+    <div class="col-lg-12">
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <script type="text/javascript">
+            // Create a Stripe client.
+            var stripe = Stripe("{{$checkout_public_key}}");
+            stripe.redirectToCheckout({
+                    // Get the id field from the Checkout Session creation API response
+                    sessionId: '{{$checkout_session_id}}'
+                })
+                .then(function(result) {
+                    // If `redirectToCheckout` fails due to a browser or network
+                    // error, display the localized error message to your customer
+                    // using `result.error.message`.
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                });
+
+        </script>
+    </div>
+</div>
+@endsection
