@@ -22,21 +22,21 @@ Route::get('/categoria/{category:slug}', [CategoryController::class, 'show'])->n
 
 Route::prefix("carrello")->group(function () {
     Route::get("", [CartController::class, "show"])->name("cart.show");
-    Route::post('AggiungiAlCarrello', [CartController::class, 'postAddToCart'])->name('cart.add_item');
-    Route::post('RimuoviDalCarrello', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
-    Route::post('IncrementaQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
-    Route::post('RiduciQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
+    Route::post('aggiungiAlCarrello', [CartController::class, 'postAddToCart'])->name('cart.add_item');
+    Route::post('rimuoviDalCarrello', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
+    Route::post('incrementaQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
+    Route::post('riduciQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
 });
 
 Route::prefix("account")->group(function () {
 
-    Route::prefix("profilo")->middleware('verified')->group(function () {
+    Route::prefix("profilo")->middleware(['auth', 'verified'])->group(function () {
         Route::get('', [AccountController::class, 'dashboard'])->name("account.dashboard");
         Route::get('cambia-password', [AccountController::class, "cambiaPassword"])->name("account.cambia-password");
         Route::get('informazioni-personali', [AccountController::class, "informazioniPersonaliView"])->name("account.informazioni-personali");
     });
 
-    Route::prefix("ordini")->group(function () {
+    Route::prefix("ordini")->middleware(['auth', 'verified'])->group(function () {
 
         Route::get("", [OrderController::class, "list"])->name("ordini.list");
         Route::get("view/{order}", [OrderController::class, "orderView"])->name("ordini.view");
@@ -87,17 +87,17 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
 });
 
 
-Route::prefix('cassa')->middleware('auth')->group(function () {
+Route::prefix('cassa')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
 
     //Scegliere consegna o ritiro 
-    Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1")->middleware('cartIsFilled');
-    Route::post('step1', [CheckoutController::class, "storeStep1"])->name("checkout.step1")->middleware('cartIsFilled');
+    Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1");
+    Route::post('step1', [CheckoutController::class, "storeStep1"])->name("checkout.step1");
 
     //Se scelto consegna mettere l'indirizzo e l'orario
-    Route::get('step2', [CheckoutController::class, "step2"])->name("checkout.step2")->middleware('cartIsFilled');;
-    Route::post('step2', [CheckoutController::class, "storeStep2"])->name("checkout.step2")->middleware('cartIsFilled');
+    Route::get('step2', [CheckoutController::class, "step2"])->name("checkout.step2");;
+    Route::post('step2', [CheckoutController::class, "storeStep2"])->name("checkout.step2");
 
     //Riepilogo ordine e possibilità di inserire una nota per l'ordine
-    Route::get('step3', [CheckoutController::class, "step3"])->name("checkout.step3")->middleware('cartIsFilled');;
-    Route::post('step3', [CheckoutController::class, "storeStep3"])->name("checkout.step")->middleware('cartIsFilled');
+    Route::get('step3', [CheckoutController::class, "step3"])->name("checkout.step3");;
+    Route::post('step3', [CheckoutController::class, "storeStep3"])->name("checkout.step");
 });
