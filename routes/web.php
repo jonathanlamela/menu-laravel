@@ -18,25 +18,27 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [ErrorController::class, 'index']);
 Route::get('/categoria/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
-Route::post('/carrello/AggiungiAlCarrello', [CartController::class, 'postAddToCart'])->name('cart.add_item');
-Route::post('/carrello/RimuoviDalCarrello', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
-Route::post('/carrello/IncrementaQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
-Route::post('/carrello/RiduciQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
 
+
+Route::prefix("carrello")->group(function () {
+    Route::get("", [CartController::class, "show"])->name("cart.show");
+    Route::post('AggiungiAlCarrello', [CartController::class, 'postAddToCart'])->name('cart.add_item');
+    Route::post('RimuoviDalCarrello', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
+    Route::post('IncrementaQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
+    Route::post('RiduciQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
+});
 
 Route::prefix("account")->group(function () {
 
-    Route::get('profilo', [AccountController::class, 'dashboard'])->name("account.dashboard")->middleware('verified');
-    Route::get('user/password', function () {
-        return Inertia::render('PasswordChangePage');
-    })->name("account.cambia-password");
-    Route::get('profilo/informazioni-personali', function () {
-        return Inertia::render('ProfiloUpdateInfoPage');
-    })->name("account.informazioni-personali");
+    Route::prefix("profilo")->middleware('verified')->group(function () {
+        Route::get('', [AccountController::class, 'dashboard'])->name("account.dashboard");
+        Route::get('cambia-password', [AccountController::class, "cambiaPassword"])->name("account.cambia-password");
+        Route::get('informazioni-personali', [AccountController::class, "informazioniPersonaliView"])->name("account.informazioni-personali");
+    });
 
     Route::prefix("ordini")->group(function () {
 
-        Route::get("list/", [OrderController::class, "list"])->name("ordini.list");
+        Route::get("", [OrderController::class, "list"])->name("ordini.list");
         Route::get("view/{order}", [OrderController::class, "orderView"])->name("ordini.view");
         Route::get("paga/{order}", [OrderController::class, "paga"])->name("ordini.paga")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
         Route::get("paga/{order}/completato", [OrderController::class, "storePagamento"])->name("ordini.pagamento-completato");
@@ -44,10 +46,6 @@ Route::prefix("account")->group(function () {
 });
 
 Route::get('/cerca', [SearchController::class, 'doSearch'])->name("searchGlobally");
-
-Route::prefix("carrello")->group(function () {
-    Route::get("", [CartController::class, "show"])->name("cart.show");
-});
 
 Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
 

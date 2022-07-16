@@ -7,6 +7,15 @@ use Inertia\Inertia;
 class AccountController extends Controller
 {
 
+    public function cambiaPassword()
+    {
+        return Inertia::render('PasswordChangePage');
+    }
+
+    public function informazioniPersonaliView()
+    {
+        return Inertia::render('ProfiloUpdateInfoPage');
+    }
 
     public function dashboard()
     {
