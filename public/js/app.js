@@ -3104,7 +3104,7 @@ __webpack_require__.r(__webpack_exports__);
       className: "text-center"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("b", null, "Totale")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("td", {
       className: "text-center"
-    }, cart.subTotal.toFixed(2), " \u20AC"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
+    }, cart.subtotal.toFixed(2), " \u20AC"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "row g-0"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "col-lg-4"

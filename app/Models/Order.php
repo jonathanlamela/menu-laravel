@@ -11,12 +11,12 @@ class Order extends Model
 
     protected $fillable = [
         "user_id",
-        "subTotal",
-        "shippingCosts",
-        "isShipping",
-        "shippingAddress",
-        "shippingDateTime",
-        "orderStatus",
+        "subtotal",
+        "shipping_costs",
+        "is_shipping",
+        "shipping_address",
+        "shipping_datetime",
+        "order_status",
         "note"
     ];
 
@@ -26,7 +26,7 @@ class Order extends Model
             $filters['search'] ?? false,
             fn ($query, $search) =>
             $query->where('id', 'like', '%' . $search . '%')
-                ->orWhere('shippingAddress', 'like', '%' . $search . '%')
+                ->orWhere('shipping_address', 'like', '%' . $search . '%')
                 ->orWhereHas('user', fn ($query) => $query->where('firstname', 'like', '%' . $search . '%')->orWhere('lastname', 'like', '%' . $search . '%'))
         );
     }
@@ -37,7 +37,7 @@ class Order extends Model
         return $this->belongsTo(User::class, "user_id");
     }
 
-    public function orderDetails()
+    public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
     }

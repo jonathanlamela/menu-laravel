@@ -36,7 +36,7 @@ class StripeEventListener
             $metadata = $event->payload["data"]["object"]["metadata"];
             $order_sku = $metadata["order_sku"];
             $order = Order::find($order_sku);
-            $order->isPaid = true;
+            $order->is_paid = true;
             $order->save();
 
             Mail::to($order->user)->send(new OrderPaid($order));

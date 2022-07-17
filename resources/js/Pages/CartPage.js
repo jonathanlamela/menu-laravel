@@ -68,7 +68,7 @@ export default () => {
                             <td></td>
                             <td></td>
                             <td className="text-center"><b>Totale</b></td>
-                            <td className="text-center">{cart.subTotal.toFixed(2)} €</td>
+                            <td className="text-center">{cart.subtotal.toFixed(2)} €</td>
                         </tr>
                     </tfoot>
                 </table >

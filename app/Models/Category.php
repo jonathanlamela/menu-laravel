@@ -52,11 +52,6 @@ class Category extends Model
 
     public function foods()
     {
-        return $this->hasMany(Food::class, "categoryId");
-    }
-
-    public function firstFiveFoods()
-    {
-        return $this->hasMany(Food::class)->limit(5);
+        return $this->hasMany(Food::class, "category_id");
     }
 }

@@ -18,7 +18,7 @@ class OrderIsNotPaid
     public function handle(Request $request, Closure $next)
     {
         if ($request->route('order_id')) {
-            if (Order::find($request->route('order_id'))->isPaid) {
+            if (Order::find($request->route('order_id'))->is_paid) {
                 return redirect(route('checkout.pagamento-completato', ["order_id" => $request->route('order_id')]));
             }
         }

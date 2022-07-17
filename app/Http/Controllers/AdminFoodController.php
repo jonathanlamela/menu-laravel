@@ -85,14 +85,14 @@ class AdminFoodController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'price' => 'required|numeric',
-            'categoryId' => 'required',
+            'category_id' => 'required',
             'immagine' => 'image',
             'ingredients' => ''
         ], [
             'name.required' => "Il campo nome è obbligatorio",
             'price.required' => "Il prezzo del prodotto è obbligatorio",
             'price.numeric' => "Inserisci un valore numerico",
-            'categoryId.required' => "Seleziona una categoria",
+            'category_id.required' => "Seleziona una categoria",
             'immagine.image' => "Seleziona un file di immagine valido"
         ]);
 

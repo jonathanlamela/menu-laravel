@@ -25,7 +25,7 @@ class CheckoutController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'tipoConsegna' => 'required',
+            'tipo_consegna' => 'required',
 
         ], []);
 
@@ -38,7 +38,7 @@ class CheckoutController extends Controller
 
         $attributes = $validator->validated();
 
-        session()->put('tipoConsegna', $attributes["tipoConsegna"]);
+        session()->put('tipo_consegna', $attributes["tipo_consegna"]);
 
 
         return redirect(route('checkout.step2'));
@@ -46,7 +46,7 @@ class CheckoutController extends Controller
 
     public function step2()
     {
-        if (session("tipoConsegna") == "asporto") {
+        if (session("tipo_consegna") == "asporto") {
             return redirect()->action([CheckoutController::class, 'step3']);
         }
         return view('checkout/step2');
@@ -84,7 +84,7 @@ class CheckoutController extends Controller
     {
         $cart = session('cart', [
             "items" => [],
-            "subTotal" => 0
+            "subtotal" => 0
         ]);
 
         if ($cart) {
@@ -101,17 +101,17 @@ class CheckoutController extends Controller
 
         $cart = session('cart', [
             "items" => [],
-            "subTotal" => 0
+            "subtotal" => 0
         ]);
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "subTotal" => (float)$cart["subTotal"] + ($request->session()->get('tipoConsegna') != "asporto" ? 2.00 : 0.00),
-            "shippingCosts" => $request->session()->get('tipoConsegna') != "asporto" ? 2.00 : 0.00,
-            "isShipping" => $request->session()->get('tipoConsegna') != "asporto",
-            "shippingAddress" => $request->session()->get('indirizzo') ?? "",
-            "shippingDateTime" => $request->session()->get('orario') ?? "",
-            "orderStatus" => "Ordine creato",
+            "sub_total" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? 2.00 : 0.00),
+            "shipping_costs" => $request->session()->get('tipo_consegna') != "asporto" ? 2.00 : 0.00,
+            "is_shipping" => $request->session()->get('tipo_consegna') != "asporto",
+            "shipping_address" => $request->session()->get('indirizzo') ?? "",
+            "shipping_datetime" => $request->session()->get('orario') ?? "",
+            "order_status" => "Ordine creato",
             "note" => $note
         ];
 
@@ -130,7 +130,7 @@ class CheckoutController extends Controller
             ]);
         }
 
-        $request->session()->forget(['cart', 'tipoConsegna', 'indirizzo', 'orario']);
+        $request->session()->forget(['cart', 'tipo_consegna', 'indirizzo', 'orario']);
 
         Mail::to($request->user())->send(new OrderCreated($order));
 

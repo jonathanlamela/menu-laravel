@@ -13,7 +13,7 @@ class CartController extends Controller
     {
         $cart = session('cart', [
             "items" => [],
-            "subTotal" => 0
+            "subtotal" => 0
         ]);
 
         return Inertia::render("CartPage", [
@@ -39,7 +39,7 @@ class CartController extends Controller
 
             $cart = session('cart', [
                 "items" => [],
-                "subTotal" => 0
+                "subtotal" => 0
             ]);
 
 
@@ -58,11 +58,11 @@ class CartController extends Controller
 
             //update subtotal
 
-            $cart["subTotal"] = 0;
+            $cart["subtotal"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subTotal"] += $item["price"] * $item["quantity"];
+                $cart["subtotal"] += $item["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -84,7 +84,7 @@ class CartController extends Controller
 
             $cart = session('cart', [
                 "items" => [],
-                "subTotal" => 0
+                "subtotal" => 0
             ]);
 
             $cart["items"]["product_" . $food_id]["quantity"] = $cart["items"]["product_" . $food_id]["quantity"] + 1;
@@ -92,11 +92,11 @@ class CartController extends Controller
 
             //update subtotal
 
-            $cart["subTotal"] = 0;
+            $cart["subtotal"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subTotal"] += $item["price"] * $item["quantity"];
+                $cart["subtotal"] += $item["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -118,7 +118,7 @@ class CartController extends Controller
 
             $cart = session('cart', [
                 "items" => [],
-                "subTotal" => 0
+                "subtotal" => 0
             ]);
 
             if ($cart["items"]["product_" . $food_id]["quantity"] == 1) {
@@ -131,11 +131,11 @@ class CartController extends Controller
 
             //update subtotal
 
-            $cart["subTotal"] = 0;
+            $cart["subtotal"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subTotal"] += $item["price"] * $item["quantity"];
+                $cart["subtotal"] += $item["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -157,18 +157,18 @@ class CartController extends Controller
 
             $cart = session('cart', [
                 "items" => [],
-                "subTotal" => 0
+                "subtotal" => 0
             ]);
 
             unset($cart["items"]["product_" . $food_id]);
 
             //update subtotal
 
-            $cart["subTotal"] = 0;
+            $cart["subtotal"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subTotal"] += $item["price"] * $item["quantity"];
+                $cart["subtotal"] += $item["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);

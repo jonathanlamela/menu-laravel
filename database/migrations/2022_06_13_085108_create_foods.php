@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('ingredients')->nullable();
-            $table->unsignedInteger('categoryId');
+            $table->unsignedInteger('category_id');
             $table->double('price');
             $table->string('slug')->nullable();
             $table->timestamps();

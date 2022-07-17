@@ -39,7 +39,7 @@ class OrderController extends Controller
             array_push($line_items, [
                 'price_data' => [
                     "currency" => "eur",
-                    "unit_amount" => $order->shippingCosts * 100,
+                    "unit_amount" => $order->shipping_costs * 100,
                     "product_data" => [
                         "name" => "Spese di consegna"
                     ],

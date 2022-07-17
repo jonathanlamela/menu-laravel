@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->decimal('subTotal');
-            $table->decimal('shippingCosts');
-            $table->boolean('isShipping');
-            $table->string('shippingAddress')->nullable();
-            $table->string('shippingDateTime')->nullable();
-            $table->string('orderStatus');
-            $table->boolean('isPaid');
+            $table->decimal('subtotal');
+            $table->decimal('shipping_costs');
+            $table->boolean('is_shipping');
+            $table->string('shipping_address')->nullable();
+            $table->string('shipping_datetime')->nullable();
+            $table->string('order_status');
+            $table->boolean('is_paid');
             $table->text('note')->nullable();
             $table->timestamps();
         });
