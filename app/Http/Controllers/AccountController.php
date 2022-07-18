@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 
 class AccountController extends Controller
 {
 
     public function cambiaPassword()
     {
-        return view('account.password-change');
+        return Inertia::render('PasswordChangePage');
     }
 
     public function informazioniPersonaliView()
     {
-        return view('account.profile-update');
+        return Inertia::render('ProfiloUpdateInfoPage');
     }
 
     public function dashboard()
     {
-        return view('account.index');
+        return Inertia::render('ProfiloPage');
+    }
+
+    public function updatePasswordView()
+    {
+        return view('account/password-change');
     }
 }

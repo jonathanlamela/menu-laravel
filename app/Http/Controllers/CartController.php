@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -15,7 +16,7 @@ class CartController extends Controller
             "subtotal" => 0
         ]);
 
-        return view("cart.show", [
+        return Inertia::render("CartPage", [
             "cart" => $cart
         ]);
     }

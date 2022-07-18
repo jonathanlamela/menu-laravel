@@ -13,6 +13,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [ErrorController::class, 'index']);
