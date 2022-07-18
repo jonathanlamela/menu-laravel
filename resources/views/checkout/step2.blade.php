@@ -3,29 +3,32 @@
 @section('title', 'Cassa')
 
 @section('topbar')
-<div class="g-0 row">
-    <div class="col-lg-12">
-        <div class="row g-0 topbar-style">
-            <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
-            </div>
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
-                <x-cart-button></x-cart-button>
-                <x-login></x-login>
-            </div>
-        </div>
+<x-topbar>
+    <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
     </div>
-</div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
+        <x-cart-button></x-cart-button>
+        <x-login></x-login>
+    </div>
+</x-topbar>
 @endsection
 
 @section('header')
-<div class="g-0 row">
-    <x-header></x-header>
-</div>
+<x-header></x-header>
 @endsection
 
 @section('content')
+<x-breadcrumb>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route("cart.show")}}">Carrello</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route("checkout.step1")}}">Tipologia consegna</a>
+    </li>
+    <li class=" breadcrumb-item active text-light" aria-current="page">Informazioni consegna</li>
+</x-breadcrumb>
 <div class="row g-0 flex-grow-1 p-4">
     <div class="col-lg-12">
         <div class="row g-0 mb-3">

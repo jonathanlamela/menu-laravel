@@ -3,33 +3,43 @@
 @section('title', 'Riepilogo ordine')
 
 @section('topbar')
-<div class="g-0 row">
-    <div class="col-lg-12">
-        <div class="row g-0 topbar-style">
-            <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
-            </div>
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
-                <x-cart-button></x-cart-button>
-                <x-login></x-login>
-            </div>
-        </div>
+
+<x-topbar>
+    <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
     </div>
-</div>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
+        <x-cart-button></x-cart-button>
+        <x-login></x-login>
+    </div>
+</x-topbar>
+
 @endsection
 
 @section('header')
-<div class="g-0 row">
-    <x-header></x-header>
-</div>
+<x-header></x-header>
 @endsection
 
 @section('content')
+<x-breadcrumb>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route("cart.show")}}">Carrello</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route("checkout.step1")}}">Tipologia consegna</a>
+    </li>
+    @if(session('tipo_consegna')!='asporto')
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route("checkout.step2")}}">Informazioni consegna</a>
+    </li>
+    @endif
+    <li class=" breadcrumb-item active text-light" aria-current="page">Riepilogo</li>
+</x-breadcrumb>
 <div class="row g-0 flex-grow-1 p-4">
     <div class="col-lg-12">
         <div class="row g-0 mb-3">
-            @if(session('tipoConsegna')=='asporto')
+            @if(session('tipo_consegna')=='asporto')
             <a href="{{route('checkout.step1')}}">Indietro</a>
             @else
             <a href="{{route('checkout.step2')}}">Indietro</a>
@@ -37,7 +47,7 @@
         </div>
         <div class="row g-0">
             <h6>Consegna</h6>
-            @if(session('tipoConsegna')=='asporto')
+            @if(session('tipo_consegna')=='asporto')
             <p>Hai scelto di ritirare in negozio</p>
             @else
             <p>Hai scelto la consegna a domicilio</p>
@@ -68,7 +78,7 @@
                         <td class="text-center">{{number_format($item["price"],2)}} €</td>
                     </tr>
                     @endforeach
-                    @if(session('tipoConsegna')!='asporto')
+                    @if(session('tipo_consegna')!='asporto')
                     <tr class="align-middle">
                         <td class="">Consegna</td>
                         <td class="text-center">1</td>
@@ -80,10 +90,10 @@
                     <tr>
                         <td></td>
                         <td class="text-center"><b>Totale</b></td>
-                        @if(session('tipoConsegna')=='asporto')
-                        <td class="text-center">{{number_format(session('cart')["subTotal"],2)}} €</td>
+                        @if(session('tipo_consegna')=='asporto')
+                        <td class="text-center">{{number_format(session('cart')["subtotal"],2)}} €</td>
                         @else
-                        <td class="text-center">{{number_format(session('cart')["subTotal"]+2,2)}} €</td>
+                        <td class="text-center">{{number_format(session('cart')["subtotal"]+2,2)}} €</td>
                         @endif
                     </tr>
                 </tfoot>
