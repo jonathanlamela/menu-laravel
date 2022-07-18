@@ -22,7 +22,7 @@ class FoodFactory extends Factory
             "slug" => $this->faker->slug(nbWords: 1),
             "ingredients" => $this->faker->words(nb: 5, asText: true),
             "price" => floatval($this->faker->numerify("#.##")),
-            "categoryId" => Category::factory()
+            "category_id" => Category::factory()
         ];
     }
 }

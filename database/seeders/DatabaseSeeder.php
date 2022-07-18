@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $category) {
 
             Food::factory(10)->create([
-                "categoryId" => $category->id
+                "category_id" => $category->id
             ]);
         }*/
 

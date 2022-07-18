@@ -31,9 +31,9 @@ Route::get("/categories/{id}", function ($id) {
 });
 
 Route::get("/foods", function () {
-    return Food::all(["id", "name", "image", "ingredients", "price", "categoryId"]);
+    return Food::all(["id", "name", "image", "ingredients", "price", "category_id"]);
 });
 
-Route::get("/categories/{categoryId}/foods", function ($categoryId) {
-    return Food::where("categoryId", '=', $categoryId)->get(["id", "name", "image", "ingredients", "price", "categoryId"]);
+Route::get("/categories/{category_id}/foods", function ($category_id) {
+    return Food::where("category_id", '=', $category_id)->get(["id", "name", "image", "ingredients", "price", "category_id"]);
 });

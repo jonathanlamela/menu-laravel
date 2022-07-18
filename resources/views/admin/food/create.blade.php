@@ -49,7 +49,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Ingredienti</label>
-                <input type="text" name="ingredients" value="{{old('ingredients')}}" class="form-control @error('ingredients') is-invalid @enderror">
+                <textarea name="ingredients" class="form-control @error('ingredients') is-invalid @enderror">{{old('ingredients')}}</textarea>
                 @error('ingredients')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -71,17 +71,17 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
-                <select name="categoryId" class="form-control @error('categoryId') is-invalid @enderror">
+                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
                     <option></option>
                     @foreach($categories as $cat)
-                    @if($cat->id == old('categoryId'))
+                    @if($cat->id == old('category_id'))
                     <option value="{{$cat->id}}" selected>{{$cat->name}}</option>
                     @else
                     <option value="{{$cat->id}}">{{$cat->name}}</option>
                     @endif
                     @endforeach
                 </select>
-                @error('categoryId')
+                @error('category_id')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
