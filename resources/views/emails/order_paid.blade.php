@@ -2,7 +2,7 @@
 
 <p>Gentile cliente abbiamo ricevuto il tuo pagamento.</p>
 <p><b>Codice ordine</b> : {{$order->id}}</p>
-<p>Hai pagato: {{number_format($order->subTotal,2)}} €</p>
+<p>Hai pagato: {{number_format($order->subtotal,2)}} €</p>
 
 <b>Cosa c'era nel tuo ordine</b><br />
 <table style="width:100%">
@@ -21,7 +21,7 @@
             <td>{{$item->quantity}}</td>
         </tr>
         @endforeach
-        @if ($order->isShipping)
+        @if ($order->is_shipping)
         <tr>
             <td>Spese di consegna</td>
             <td>{{number_format(2,2)}} €</td>
