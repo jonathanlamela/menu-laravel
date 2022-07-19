@@ -4,15 +4,13 @@
 
 @section('topbar')
 <x-topbar>
-    <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
+    <x-topbar-left>
         <x-home-button></x-home-button>
-    </div>
-    <div class="col-lg-4">
-    </div>
-    <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
+    </x-topbar-left>
+    <x-topbar-right>
         <x-cart-button></x-cart-button>
-        <x-login />
-    </div>
+        <x-login></x-login>
+    </x-topbar-right>
 </x-topbar>
 @endsection
 

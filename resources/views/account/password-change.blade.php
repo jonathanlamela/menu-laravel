@@ -4,15 +4,13 @@
 
 @section('topbar')
 <x-topbar>
-    <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
+    <x-topbar-left>
         <x-home-button></x-home-button>
-    </div>
-    <div class="col-lg-4">
-    </div>
-    <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
+    </x-topbar-left>
+    <x-topbar-right>
         <x-cart-button></x-cart-button>
-        <x-login />
-    </div>
+        <x-login></x-login>
+    </x-topbar-right>
 </x-topbar>
 @endsection
 
@@ -34,8 +32,9 @@
 <x-messages></x-messages>
 <div class="row g-0 d-flex flex-grow-1">
     <div class="col-lg-12 p-4 d-flex flex-column align-items-center justify-content-center">
-        <p>Compila il form per cambiare la tua password</p>
         <form class="row col-lg-4" method="post" action="{{route('user-password.update')}}">
+            <p>Compila il form per cambiare la tua password</p>
+
             @csrf
             @method('put')
             <div class="mb-3 form-group">

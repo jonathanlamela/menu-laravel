@@ -7,7 +7,7 @@
     <link href="/css/app.css" rel="stylesheet" />
 </head>
 <body class="d-flex flex-column flex-grow-1" style="background-color:#f8f9fa">
-    <div class="container w-75 d-flex flex-column flex-grow-1">
+    <div class="container-md p-0 d-flex flex-column flex-grow-1">
         <div class="shadow bg-white d-flex flex-column flex-grow-1">
             <div class="col-lg-12 d-flex flex-column flex-grow-1">
                 @section('topbar')

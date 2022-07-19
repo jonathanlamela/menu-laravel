@@ -125,7 +125,8 @@ class CheckoutController extends Controller
                 "order_id" => $order->id,
                 "food_id" => $item["id"],
                 "quantity" => $item["quantity"],
-                "price" => $item["price"],
+                "unit_price" => $item["price"],
+                "price" => $item["price"] * $item["quantity"],
                 "name" => $item["name"]
             ]);
         }

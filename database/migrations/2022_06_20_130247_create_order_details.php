@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('food_id');
             $table->integer('quantity');
             $table->decimal('price');
+            $table->decimal('unit_price');
             $table->string("name");
             $table->timestamps();
         });

@@ -2,49 +2,45 @@
 
 @section('title', "Elimina categoria ".$item->name)
 
-@section('topbar')
-<div class="g-0 row">
-    <div class="col-lg-12">
-        <div class="row g-0" style="background-color:#58151c">
-            <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
-                <a class="btn btn-link text-light" href="{{route('admin.category.list')}}">Elenco categorie</a>
-            </div>
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
-                <x-login></x-login>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
 @section('header')
-<div class="g-0 row">
-    <x-header></x-header>
-</div>
+<x-header></x-header>
 @endsection
 
-@section('nav')
-
+@section('topbar')
+<x-topbar>
+    <x-topbar-left>
+        <x-global-search-form></x-global-search-form>
+    </x-topbar-left>
+    <x-topbar-right>
+        <x-login></x-login>
+    </x-topbar-right>
+</x-topbar>
 @endsection
 
 @section('content')
-<div class="col-lg-12 p-4 flex-grow-1">
-    <div class="row g-0">
-        <h4>Elimina categoria {{$item->name}}</h4>
-    </div>
-    <div class="row g-0">
-        <form class="col-lg-4" method="post">
-            @csrf
-            <div class="mb-3">
-                Sei sicuro di voler eliminare questa categoria ?
-                <input type="hidden" name="id" value="{{$item->id}}" />
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-success">Elimina</button>
-            </div>
-        </form>
-    </div>
+<x-breadcrumb>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route('account.dashboard')}}">Profilo</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route('admin.category.list')}}">Categorie</a>
+    </li>
+    <li class="breadcrumb-item active text-light" aria-current="page">Elimina categoria</li>
+</x-breadcrumb>
+<x-messages></x-messages>
+<div class="row g-0 ps-4 pe-4">
+    <h4>Elimina categoria {{$item->name}}</h4>
+</div>
+<div class="row g-0 ps-4 pe-4">
+    <form class="col-lg-4" method="post">
+        @csrf
+        <div class="mb-3">
+            Sei sicuro di voler eliminare questa categoria ?
+            <input type="hidden" name="id" value="{{$item->id}}" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Elimina</button>
+        </div>
+    </form>
 </div>
 @endsection

@@ -4,20 +4,13 @@
 
 
 @section('topbar')
-<div class="g-0 row">
-    <div class="col-lg-12">
-        <div class="row g-0" style="background-color:#58151c">
-            <div class="col-lg-4 d-flex justify-content-start align-items-center p-2">
-                <x-home-button></x-home-button>
-            </div>
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4 d-flex justify-content-end align-items-center p-2 ">
-                <x-login></x-login>
-            </div>
-        </div>
-    </div>
-</div>
+<x-topbar>
+    <x-topbar-left>
+    </x-topbar-left>
+    <x-topbar-right>
+        <x-login></x-login>
+    </x-topbar-right>
+</x-topbar>
 @endsection
 
 @section('content')
