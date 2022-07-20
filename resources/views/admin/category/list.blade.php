@@ -34,12 +34,12 @@
 </div>
 <div class="row g-0 bg-light ms-4 me-4 mb-4 p-2 rounded-2 shadow-sm d-flex flex-row justify-content-end align-items-center">
     <div class="col-lg-9 mt-md-0">
-        <a class="btn btn-secondary text-decoration-none" href="{{route('admin.category.create')}}">Crea nuovo cibo</a>
+        <a class="btn btn-secondary text-decoration-none" href="{{route('admin.category.create')}}">Crea nuova categoria</a>
     </div>
     <div class="col-lg-3 mt-3 mt-md-0">
         <form class="m-0">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" placeHolder="Cerca un cibo" value="{{request('search')}}">
+                <input type="text" class="form-control" name="search" placeHolder="Cerca una categoria" value="{{request('search')}}">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                 </button>
@@ -62,8 +62,10 @@
                 <td class="">{{$item->id}}</td>
                 <td class="col-lg-8">{{$item->name}}</td>
                 <td class="col-lg-4 text-center">
-                    <a href="{{route('admin.category.edit',["category"=>$item->id])}}">Modifica</a>
-                    <a href="{{route('admin.category.delete',["category"=>$item->id])}}">Elimina</a>
+                    <a class="text-decoration-none badge bg-secondary text-bg-dark p-2" href="{{route('admin.category.edit',["category"=>$item->id])}}"><i class="bi bi-pencil-square"></i>
+                        Modifica</a>
+                    <a class="text-decoration-none badge bg-danger text-bg-dark p-2" href="{{route('admin.category.delete',["category"=>$item->id])}}"><i class="bi bi-trash"></i>
+                        Elimina</a>
                 </td>
             </tr>
             @endforeach

@@ -46,7 +46,7 @@
     </div>
 </div>
 <div class="row g-0 ms-4 me-4">
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -63,9 +63,11 @@
                 <td>{{$item->name}}</td>
                 <td>{{$item->category->name}}</td>
                 <td>{{number_format($item->price,2)}} €</td>
-                <td class="text-center">
-                    <a href="{{route('admin.food.edit',["food"=>$item->id])}}">Modifica</a>
-                    <a href="{{route('admin.food.delete',["food"=>$item->id])}}">Elimina</a>
+                <td class="col-lg-4 text-center">
+                    <a class="text-decoration-none badge bg-secondary text-bg-dark p-2" href="{{route('admin.food.edit',["food"=>$item->id])}}"><i class="bi bi-pencil-square"></i>
+                        Modifica</a>
+                    <a class="text-decoration-none badge bg-danger text-bg-dark p-2" href="{{route('admin.food.delete',["food"=>$item->id])}}"><i class="bi bi-trash"></i>
+                        Elimina</a>
                 </td>
             </tr>
             @endforeach
