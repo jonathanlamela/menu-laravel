@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('value');
+            $table->string('site_name');
+            $table->decimal('shipping_costs');
             $table->timestamps();
         });
     }
