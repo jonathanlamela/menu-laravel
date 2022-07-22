@@ -106,12 +106,12 @@ class CheckoutController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "sub_total" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? 2.00 : 0.00),
-            "shipping_costs" => $request->session()->get('tipo_consegna') != "asporto" ? 2.00 : 0.00,
+            "sub_total" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
+            "shipping_costs" => $request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00,
             "is_shipping" => $request->session()->get('tipo_consegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
-            "order_status" => "Ordine creato",
+            "order_status" => setting('order_state_created', 'default value'),
             "note" => $note
         ];
 

@@ -25,7 +25,6 @@
         <a class='text-light' href="{{route('account.dashboard')}}">Profilo</a>
     </li>
     <li class="breadcrumb-item active text-light" aria-current="page">Amministrazione</li>
-
     <li class="breadcrumb-item active text-light" aria-current="page">Impostazioni</li>
 </x-breadcrumb>
 <div class="row g-0">

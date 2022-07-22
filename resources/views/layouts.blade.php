@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>@yield('title') - Menu</title>
+    <title>@yield('title') :: {{setting('app_name', 'default value')}}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
 

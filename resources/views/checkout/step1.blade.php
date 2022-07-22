@@ -26,21 +26,30 @@
     <li class="breadcrumb-item">
         <a class='text-light' href="{{route("cart.show")}}">Carrello</a>
     </li>
-    <li class=" breadcrumb-item active text-light" aria-current="page">Spedizione e consegna</li>
+    <li class=" breadcrumb-item active text-light" aria-current="page">1. Spedizione e consegna</li>
 </x-breadcrumb>
-<div class="row g-0 flex-grow-1 p-4">
-    <form method="post" class="col-lg-4" action="{{route('checkout.step1')}}">
-        @csrf
-        <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
-        <div class="form-row mb-3">
-            <select class="form-control" name="tipo_consegna">
-                <option value="domicilio">Consegna a domicilio (+2€)</option>
-                <option value="asporto">Ritiro in negozio (asporto)</option>
-            </select>
-        </div>
-        <div class="form-row">
-            <button type="submit" class="btn btn-success">Vai</button>
-        </div>
-    </form>
+<div class="row g-0 p-4">
+    <div class="col-lg-12 bg-light p-4 shadow">
+        <form method="post" class="col-lg-4" action="{{route('checkout.step1')}}">
+            <h5 class="m-0">1. Spedizione e consegna</h5>
+            @csrf
+            <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
+            <div class="form-row mb-3">
+                <select class="form-control" name="tipo_consegna">
+                    <option value="domicilio">Consegna a domicilio ({{setting('shipping_costs',0.00)}}€)</option>
+                    <option value="asporto">Ritiro in negozio (asporto)</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <button type="submit" class="btn btn-success">Vai</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-12 bg-light p-4 shadow d-flex justify-content-center flex-column mt-2">
+        <h5 class="m-0">2. Indirizzo e orario</h5>
+    </div>
+    <div class="col-lg-12 bg-light p-4 shadow d-flex justify-content-center flex-column mt-2">
+        <h5 class="m-0">3. Riepilogo</h5>
+    </div>
 </div>
 @endsection
