@@ -90,9 +90,9 @@ return [
     'flash_partial' => 'app_settings::_flash',
 
     // Setting section class setting
-    'section_class' => 'card mb-3',
-    'section_heading_class' => 'card-header',
-    'section_body_class' => 'card-body',
+    'section_class' => 'mb-3',
+    'section_heading_class' => 'fw-bold',
+    'section_body_class' => '',
 
     // Input wrapper and group class setting
     'input_wrapper_class' => 'form-group',
