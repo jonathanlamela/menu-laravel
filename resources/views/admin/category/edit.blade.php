@@ -56,6 +56,7 @@
             <img width="120px" class="rounded" src="{{url($item->image)}}" />
         </div>
         @endif
+
         <div class="mb-3">
             <button type="submit" class="btn btn-success">Aggiorna</button>
         </div>

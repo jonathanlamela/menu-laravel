@@ -43,7 +43,7 @@ class Category extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => url($value),
+            get: fn ($value) => $value != null ? url($value) : null,
             set: fn ($value) => $value,
         );
     }

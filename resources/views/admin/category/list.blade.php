@@ -48,7 +48,7 @@
     </div>
 </div>
 <div class="row g-0 ms-4 me-4">
-    <table class="table table-striped">
+    <table class="table table-striped align-middle">
         <thead>
             <tr>
                 <th scope="col">#</th>
