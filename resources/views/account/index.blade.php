@@ -42,6 +42,7 @@
             <a class="text-decoration-none" href="{{route('admin.category.list')}}">Gestisci categorie</a>
             <a class="text-decoration-none" href="{{route('admin.food.list')}}">Gestisci cibi</a>
             <a class="text-decoration-none" href="{{route('admin.order.list')}}">Gestisci ordini</a>
+            <a class="text-decoration-none" href="/amministrazione/impostazioni">Impostazioni</a>
 
         </div>
 
