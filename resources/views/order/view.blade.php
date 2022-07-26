@@ -35,6 +35,54 @@
         <div class="row g-0">
             <h4>Ordine {{$order->id}}</h4>
         </div>
+        <div class="row g-0">
+            <p>
+                <b>Stato dell'ordine</b>
+                <br />
+                <span class="">{{ $order->order_status}}</span>
+            </p>
+            @if(!$order->is_paid)
+            <p>
+                <b>Azioni sull'ordine</b>
+                <br />
+                <a href="{{route('ordini.paga',["order"=>$order])}}" class="btn btn-sm btn-success">Paga ora</a>
+            </p>
+            @endif
+        </div>
+        <div class="row g-0">
+            <b>Cosa c'è nel tuo ordine</b>
+        </div>
+        <div class="row g-0">
+            <div class="col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cibo</th>
+                            <th class="text-center" scope="col">Prezzo unitario</th>
+                            <th class="text-center" scope="col">Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($order->order_details as $item)
+                        <tr class="align-middle">
+                            <td>{{ $item->quantity }}x {{ $item->name }}</td>
+                            <td class="text-center">{{ number_format($item->unit_price,2) }} €</td>
+                            <td class="text-center">{{ number_format($item->price,2) }} €</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td class="text-center">
+                                <b>Totale</b>
+                            </td>
+                            <td class="text-center">{{ number_format($order->subtotal,2) }} €</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

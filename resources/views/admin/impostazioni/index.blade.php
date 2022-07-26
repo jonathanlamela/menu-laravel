@@ -1,6 +1,6 @@
 @extends('layouts')
 
-@section('title', 'Categorie')
+@section('title', 'Impostazioni negozio')
 
 @section('header')
 <x-header></x-header>

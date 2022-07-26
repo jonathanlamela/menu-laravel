@@ -36,6 +36,7 @@ class StripeEventListener
             $metadata = $event->payload["data"]["object"]["metadata"];
             $order_sku = $metadata["order_sku"];
             $order = Order::find($order_sku);
+            $order->order_status = setting('order_state_paid', "Pagato");
             $order->is_paid = true;
             $order->save();
 

@@ -150,7 +150,7 @@ class CheckoutController extends Controller
         session()->flash("success_message", "Ordine creato");
 
         return redirect()->action([OrderController::class, "orderView"], [
-            "order_id" => $order->id
+            "order" => $order->id
         ]);
     }
 }

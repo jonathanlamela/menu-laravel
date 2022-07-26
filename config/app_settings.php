@@ -50,7 +50,7 @@ return [
                     'type' => 'text', // type of input can be text, number, textarea, select, boolean, checkbox etc.
                     'label' => 'Stato per ordine pagato', // label for input
                     'placeholder' => 'Ordine creato', // placeholder for input
-                    'class' => 'form-control mb-3', // override global input_class
+                    'class' => 'form-control', // override global input_class
                     'style' => '', // any inline styles
                     'rules' => 'required', // validation rules for this input
                     'value' => '', // any default value

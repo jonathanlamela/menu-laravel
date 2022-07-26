@@ -35,21 +35,7 @@ class OrderController extends Controller
         $line_items = [];
 
 
-        if ($order->isShipping) {
-            array_push($line_items, [
-                'price_data' => [
-                    "currency" => "eur",
-                    "unit_amount" => $order->shipping_costs * 100,
-                    "product_data" => [
-                        "name" => "Spese di consegna"
-                    ],
-                ],
-                'quantity' => 1,
-            ]);
-        }
-
-
-        foreach ($order->orderDetails as $row) {
+        foreach ($order->order_details as $row) {
 
             array_push($line_items, [
                 'price_data' => [

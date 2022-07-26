@@ -53,7 +53,7 @@
                             @foreach($orders as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
-                                <td>{{ $row->order_status}}</td>
+                                <td><span class="badge bg-dark">{{ $row->order_status}}</span></td>
                                 <td>€ {{ $row->subtotal }}</td>
                                 <td>
                                     <a class="text-decoration-none" href="{{route('ordini.view',["order"=>$row->id])}}">
