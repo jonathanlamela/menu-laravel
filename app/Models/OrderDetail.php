@@ -14,7 +14,8 @@ class OrderDetail extends Model
         "food_id",
         "price",
         "quantity",
-        "name"
+        "name",
+        "unit_price"
     ];
 
     public function food()

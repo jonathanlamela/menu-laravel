@@ -106,13 +106,14 @@ class CheckoutController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "sub_total" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
+            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
             "shipping_costs" => $request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00,
             "is_shipping" => $request->session()->get('tipo_consegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
             "order_status" => setting('order_state_created', 'default value'),
-            "note" => $note
+            "note" => $note,
+            "is_paid" => False
         ];
 
 
@@ -131,6 +132,16 @@ class CheckoutController extends Controller
             ]);
         }
 
+        if ($order->is_shipping) {
+            OrderDetail::create([
+                "order_id" => $order->id,
+                "quantity" => 1,
+                "unit_price" => setting('shipping_costs', 0.00),
+                "price" => setting('shipping_costs', 0.00),
+                "name" => "Spese di consegna"
+            ]);
+        }
+
         $request->session()->forget(['cart', 'tipo_consegna', 'indirizzo', 'orario']);
 
         Mail::to($request->user())->send(new OrderCreated($order));
@@ -138,7 +149,7 @@ class CheckoutController extends Controller
         //TODO: Inviare email all'amministrazione
         session()->flash("success_message", "Ordine creato");
 
-        return redirect()->action([OrderController::class, "view"], [
+        return redirect()->action([OrderController::class, "orderView"], [
             "order_id" => $order->id
         ]);
     }

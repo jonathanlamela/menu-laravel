@@ -17,7 +17,8 @@ class Order extends Model
         "shipping_address",
         "shipping_datetime",
         "order_status",
-        "note"
+        "note",
+        "is_paid"
     ];
 
     public function scopeFilter($query, array $filters)

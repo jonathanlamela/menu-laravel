@@ -20,6 +20,13 @@
 @endsection
 
 @section('content')
+<x-breadcrumb>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route('account.dashboard')}}">Profilo</a>
+    </li>
+    <li class="breadcrumb-item active text-light" aria-current="page">I miei ordini</li>
+</x-breadcrumb>
+<x-messages></x-messages>
 <div class="row g-0 flex-grow-1">
     <div class="col-lg-12 p-4">
         @if(session()->has('success_message'))
@@ -46,8 +53,8 @@
                             @foreach($orders as $row)
                             <tr>
                                 <td>{{ $row->id }}</td>
-                                <td>{{ $row->orderStatus}}</td>
-                                <td>€ {{ $row->subTotal }}</td>
+                                <td>{{ $row->order_status}}</td>
+                                <td>€ {{ $row->subtotal }}</td>
                                 <td>
                                     <a class="text-decoration-none" href="{{route('ordini.view',["order"=>$row->id])}}">
                                         <i class="bi bi-three-dots"></i> Dettaglio

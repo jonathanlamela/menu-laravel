@@ -20,15 +20,18 @@
 @endsection
 
 @section('content')
+<x-breadcrumb>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route('account.dashboard')}}">Profilo</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a class='text-light' href="{{route('ordini.list')}}">I miei ordini</a>
+    </li>
+    <li class="breadcrumb-item active text-light" aria-current="page">Ordine {{$order->id}}</li>
+</x-breadcrumb>
+<x-messages></x-messages>
 <div class="row g-0 flex-grow-1">
     <div class="col-lg-12 p-4">
-        @if(session()->has('success_message'))
-        <div class="row g-0">
-            <div class="alert alert-success" role="alert">
-                {{session('success_message')}}
-            </div>
-        </div>
-        @endif
         <div class="row g-0">
             <h4>Ordine {{$order->id}}</h4>
         </div>

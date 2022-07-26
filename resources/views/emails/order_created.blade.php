@@ -15,20 +15,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($order->orderDetails as $item)
+        @foreach($order->order_details as $item)
         <tr>
             <td>{{$item->name}}</td>
             <td>{{number_format($item->price,2)}} €</td>
             <td>{{$item->quantity}}</td>
         </tr>
         @endforeach
-        @if ($order->is_shipping)
-        <tr>
-            <td>Spese di consegna</td>
-            <td>{{number_format(2,2)}} €</td>
-            <td>1</td>
-        </tr>
-        @endif
     </tbody>
 </table>
 

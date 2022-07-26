@@ -34,6 +34,8 @@
                 Informazioni personali</a>
             <a class="text-decoration-none" href="{{route('account.cambia-password')}}"><i class="bi bi-key me-2"></i>
                 Cambia la password</a>
+            <a class="text-decoration-none" href="{{route('ordini.list')}}"><i class="bi bi-bag me-2"></i>
+                I miei ordini</a>
         </div>
 
         @can('isAdmin')
