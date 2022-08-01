@@ -28,9 +28,14 @@
 <div class="row g-0 p-4 flex-grow-1">
     <div class="col-lg-12">
         <div class="row g-0">
+            @if(count($foods)>0)
             @foreach($foods as $food)
             <x-food-item :item="$food"></x-food-item>
             @endforeach
+            @else
+            <p>Non ci sono cibi per questa categoria</p>
+            @endif
+
         </div>
 
         @if(count($foods)>5)
