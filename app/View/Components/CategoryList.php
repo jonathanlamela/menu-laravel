@@ -24,12 +24,12 @@ class CategoryList extends Component
      */
     public function render()
     {
-        $categories = cache()->remember('categories',30,function(){
-            return Category::all();
+        $categories = cache()->remember('categories', 30, function () {
+            return Category::has("foods")->get();
         });
 
-        return view('components.category-list',[
-            "categories"=>$categories
+        return view('components.category-list', [
+            "categories" => $categories
         ]);
     }
 }
