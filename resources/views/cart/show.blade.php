@@ -5,6 +5,7 @@
 @section('topbar')
 <x-topbar>
     <x-topbar-left>
+        <x-home-button></x-home-button>
     </x-topbar-left>
     <x-topbar-right>
         <x-cart-button></x-cart-button>
@@ -12,8 +13,6 @@
     </x-topbar-right>
 </x-topbar>
 @endsection
-
-
 
 @section('header')
 <x-header></x-header>

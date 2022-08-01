@@ -41,10 +41,13 @@
         @can('isAdmin')
         <div class="row g-0 mt-3">
             <h4>Amministrazione</h4>
-            <a class="text-decoration-none" href="{{route('admin.category.list')}}">Gestisci categorie</a>
-            <a class="text-decoration-none" href="{{route('admin.food.list')}}">Gestisci cibi</a>
-            <a class="text-decoration-none" href="{{route('admin.order.list')}}">Gestisci ordini</a>
-            <a class="text-decoration-none" href="/amministrazione/impostazioni">Impostazioni</a>
+            <h6 class="mt-1">CATALOGO</h6>
+            <a class="text-decoration-none" href="{{route('admin.category.list')}}">Categorie</a>
+            <a class="text-decoration-none" href="{{route('admin.food.list')}}">Cibi</a>
+            <h6 class="mt-3">ORDINI</h6>
+            <a class="text-decoration-none" href="{{route('admin.order.list')}}">Ordini</a>
+            <h6 class="mt-3">IMPOSTAZIONI</h6>
+            <a class="text-decoration-none" href="/amministrazione/impostazioni">Generali</a>
 
         </div>
 
