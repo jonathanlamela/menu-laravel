@@ -1,3 +1,3 @@
 #laravel-menu
 
-Laravel app with React Frontend
+Laravel app with back-office crud and payment with Stripe.
