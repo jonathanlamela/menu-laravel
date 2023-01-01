@@ -10920,9 +10920,6 @@ body {
 .nav-item .nav-link {
   color: black;
 }
-.nav-item .nav-pill-item {
-  background-color: #f1f1f1;
-}
 .nav-item .nav-pill-item.active {
   background-color: #730202;
 }

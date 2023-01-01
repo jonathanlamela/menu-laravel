@@ -25,7 +25,7 @@ class CategoryList extends Component
     public function render()
     {
         $categories = cache()->remember('categories', 30, function () {
-            return Category::has("foods")->get();
+            return Category::get();
         });
 
         return view('components.category-list', [
