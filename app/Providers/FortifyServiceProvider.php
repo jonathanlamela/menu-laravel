@@ -13,6 +13,8 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\LogoutResponse;
+use Illuminate\Http\JsonResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,18 @@ class FortifyServiceProvider extends ServiceProvider
                 return $request->wantsJson()
                     ? response()->json(['two_factor' => false])
                     : redirect()->intended(Fortify::redirects('login'));
+            }
+        });
+
+        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse
+        {
+            public function toResponse($request)
+            {
+                session()->flash("info_message", "Sei stato disconnesso con successo");
+
+                return $request->wantsJson()
+                    ? new JsonResponse('', 204)
+                    : redirect(Fortify::redirects('logout', '/'));
             }
         });
     }

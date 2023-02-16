@@ -140,4 +140,8 @@ return [
 
     ],
 
+    'redirects' => [
+        'logout' => '/account/login'
+    ]
+
 ];
