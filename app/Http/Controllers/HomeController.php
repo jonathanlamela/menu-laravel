@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+
 
 
 class HomeController extends Controller
@@ -10,6 +12,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('index');
+        return Inertia::render('HomePage', []);
     }
 }
