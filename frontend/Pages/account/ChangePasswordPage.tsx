@@ -64,7 +64,7 @@ export default function ChangePasswordPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center pl-8 text-white h-16">
                     <li>
-                        <BreadcrumbLink href="/account">
+                        <BreadcrumbLink href={route("account.dashboard")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

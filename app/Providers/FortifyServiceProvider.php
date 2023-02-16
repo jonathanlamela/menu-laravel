@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Inertia\Inertia;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,18 @@ class FortifyServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse
+        {
+            public function toResponse($request)
+            {
+                session()->flash("success_message", "Bentornato " . $request->user()->firstname . " " . $request->user()->lastname);
+
+                return $request->wantsJson()
+                    ? response()->json(['two_factor' => false])
+                    : redirect()->intended(Fortify::redirects('login'));
+            }
+        });
     }
 
     /**

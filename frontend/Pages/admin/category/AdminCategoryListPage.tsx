@@ -112,7 +112,7 @@ export default function AdminCategoryListPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href="/account">
+                        <BreadcrumbLink href={route("account.dashboard")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

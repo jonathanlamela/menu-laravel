@@ -15,8 +15,9 @@ import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import { useState } from "react";
 import ButtonCircularProgress from "@src/components/ButtonCircularProgress";
 import HomeButton from "@src/components/HomeButton";
-import { usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { Page } from "@inertiajs/inertia";
+import route from "ziggy-js";
 
 
 export default function LoginPage() {
@@ -38,7 +39,7 @@ export default function LoginPage() {
 
         setIsPending(true)
 
-        //TODO
+        router.put(route("user-profile-information.update"), data)
 
         setIsPending(false);
     }
@@ -59,7 +60,7 @@ export default function LoginPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href="/account">
+                        <BreadcrumbLink href={route("account.dashboard")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

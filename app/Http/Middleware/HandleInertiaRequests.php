@@ -73,6 +73,9 @@ class HandleInertiaRequests extends Middleware
                 case "verification-link-sent":
                     $message['text'] = "Email di verifica inviata";
                     break;
+                case "profile-information-updated":
+                    $message['text'] = "Informazioni profilo aggiornate";
+                    break;
                 default:
                     $message['text'] = $request->session()->get('status');
                     break;

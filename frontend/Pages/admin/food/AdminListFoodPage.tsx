@@ -128,7 +128,7 @@ export default function AdminFoodListPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center h-16 pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href="/account">
+                        <BreadcrumbLink href={route("account.dashboard")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>
