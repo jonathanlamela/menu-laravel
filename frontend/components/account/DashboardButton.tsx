@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@inertiajs/react";
 
 
 export type DashboardButtonProps = {
@@ -11,7 +11,7 @@ export default function DashboardButton({ link, title, icon }: DashboardButtonPr
     return <>
         <div className='w-full md:w-1/2 lg:w-1/6 bg-slate-50 lg:max-w-xs hover:bg-slate-500  hover:text-white border-b-red-900  border-b-8 text-red-900'>
             <Link className="flex flex-col space-y-8 p-8 justify-center items-center"
-                to={link}>
+                href={link}>
                 <div className="w-full flex justify-center items-center">
                     {icon}
                 </div>

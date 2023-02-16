@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -39,20 +40,54 @@ class HandleInertiaRequests extends Middleware
     {
         $cart = session('cart', [
             "items" => [],
-            "subTotal" => 0
+            "subTotal" => 0,
         ]);
+
+        $settings = [];
+
+        foreach (Setting::all() as $row) {
+            $settings[$row->key] = $row->value;
+        }
+
+        $message = [];
+
+        if ($request->session()->get('success_message')) {
+            $message['tag'] = "success";
+            $message['text'] = $request->session()->get('success_message');
+        }
+
+        if ($request->session()->get('info_message')) {
+            $message['tag'] = "info";
+            $message['text'] = $request->session()->get('info_message');
+        }
+
+        if ($request->session()->get('error_message')) {
+            $message['tag'] = "error";
+            $message['text'] = $request->session()->get('error_message');
+        }
+
+        if ($request->session()->get('status')) {
+            $message['tag'] = "info";
+
+            switch ($request->session()->get('status')) {
+                case "verification-link-sent":
+                    $message['text'] = "Email di verifica inviata";
+                    break;
+                default:
+                    $message['text'] = $request->session()->get('status');
+                    break;
+            }
+        }
+
         return array_merge(parent::share($request), [
             "cart" => $cart,
             "user" => fn () => $request->user()
                 ? $request->user()->only(['id', 'firstname', 'lastname', 'role', 'email'])
                 : null,
+            "settings" => $settings,
             "categories" => Category::all(["id", "name", "slug"]),
-            'flash' => [
-                'success_message' => fn () => $request->session()->get('success_message'),
-                'error_message' => fn () => $request->session()->get('error_message'),
-                'info_message' => fn () => $request->session()->get('info_message'),
-                'status_message' => fn () => $request->session()->get('status'),
-            ],
+            "message" => $message,
+            "tipoConsegna" => session('tipoConsegna', 'ASPORTO')
         ]);
     }
 }

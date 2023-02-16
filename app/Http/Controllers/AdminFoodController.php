@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Food;
+use Inertia\Inertia;
 
 class AdminFoodController extends Controller
 {
 
     public function list()
     {
-        return view('admin.food.list', [
-            "items" => Food::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
+        return Inertia::render('admin/category/AdminFoodListPage', [
+            "items" => Category::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
     }
@@ -73,7 +74,7 @@ class AdminFoodController extends Controller
 
     public function edit(Food $food)
     {
-        return view('admin.food.edit', [
+        return Inertia::render("admin/food/AdminFoodEditPage", [
             "item" => $food,
             "categories" => Category::all(["id", "name"])
         ]);
@@ -128,7 +129,7 @@ class AdminFoodController extends Controller
 
     public function delete(Food $food)
     {
-        return view('admin.food.delete', [
+        return Inertia::render("admin/food/AdminFoodDeletePage", [
             "item" => $food
         ]);
     }

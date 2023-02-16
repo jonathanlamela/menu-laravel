@@ -25,8 +25,7 @@ class CheckoutController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'tipo_consegna' => 'required',
-
+            'tipoConsegna' => 'required',
         ], []);
 
         if ($validator->fails()) {
@@ -38,7 +37,7 @@ class CheckoutController extends Controller
 
         $attributes = $validator->validated();
 
-        session()->put('tipo_consegna', $attributes["tipo_consegna"]);
+        session()->put('tipoConsegna', $attributes["tipoConsegna"]);
 
 
         return redirect(route('checkout.step2'));
@@ -46,7 +45,7 @@ class CheckoutController extends Controller
 
     public function step2()
     {
-        if (session("tipo_consegna") == "asporto") {
+        if (session("tipoConsegna") == "asporto") {
             return redirect()->action([CheckoutController::class, 'step3']);
         }
         return view('checkout/step2');
@@ -106,9 +105,9 @@ class CheckoutController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
-            "shipping_costs" => $request->session()->get('tipo_consegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00,
-            "is_shipping" => $request->session()->get('tipo_consegna') != "asporto",
+            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipoConsegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
+            "shipping_costs" => $request->session()->get('tipoConsegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00,
+            "is_shipping" => $request->session()->get('tipoConsegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
             "order_status" => setting('order_state_created', 'default value'),
@@ -142,7 +141,7 @@ class CheckoutController extends Controller
             ]);
         }
 
-        $request->session()->forget(['cart', 'tipo_consegna', 'indirizzo', 'orario']);
+        $request->session()->forget(['cart', 'tipoConsegna', 'indirizzo', 'orario']);
 
         Mail::to($request->user())->send(new OrderCreated($order));
 

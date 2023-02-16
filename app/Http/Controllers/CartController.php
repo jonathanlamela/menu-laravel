@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
 
     public function show()
     {
-        $cart = session('cart', [
-            "items" => [],
-            "subtotal" => 0
-        ]);
-
-        return view("cart.show", [
-            "cart" => $cart
-        ]);
+        return Inertia::render("cart/CarrelloPage");
     }
 
     public function postAddToCart(Request $request)
@@ -41,7 +35,6 @@ class CartController extends Controller
                 "subtotal" => 0
             ]);
 
-
             if (key_exists("product_" . $food_id, $cart["items"])) {
                 $row = $cart["items"]["product_" . $food_id];
                 $cart["items"]["product_" . $food_id]["quantity"] = $row["quantity"] + 1;
@@ -53,7 +46,6 @@ class CartController extends Controller
                     "id" => $food_id
                 ];
             }
-
 
             //update subtotal
 
@@ -125,9 +117,6 @@ class CartController extends Controller
             } else {
                 $cart["items"]["product_" . $food_id]["quantity"] = $cart["items"]["product_" . $food_id]["quantity"] - 1;
             }
-
-
-
             //update subtotal
 
             $cart["subtotal"] = 0;

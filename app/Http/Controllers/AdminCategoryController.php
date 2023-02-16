@@ -7,14 +7,14 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class AdminCategoryController extends Controller
 {
 
     public function list()
     {
-        return view('admin.category.list', [
+        return Inertia::render('admin/category/AdminCategoryListPage', [
             "items" => Category::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
@@ -22,7 +22,7 @@ class AdminCategoryController extends Controller
 
     public function create()
     {
-        return view('admin.category.create');
+        return Inertia::render('admin/category/AdminCategoryCreatePage', []);
     }
 
     public function store(Request $request)
@@ -65,7 +65,7 @@ class AdminCategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admin/category/edit', [
+        return Inertia::render('admin/category/AdminCategoryEditPage', [
             "item" => $category
         ]);
     }
@@ -109,7 +109,7 @@ class AdminCategoryController extends Controller
 
     public function delete(Category $category)
     {
-        return view('admin.category.delete', [
+        return Inertia::render('admin/category/AdminCategoryDeletePage', [
             "item" => $category
         ]);
     }

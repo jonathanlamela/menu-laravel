@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminSettingsController extends Controller
 {
-    //
     public function index()
     {
-        return view('admin/settings/index', [
-            "object" => Setting::all()->first()
+        return Inertia::render('admin/settings/ImpostazioniGeneraliPage', [
+            "object" => Setting::all()
         ]);
     }
 }

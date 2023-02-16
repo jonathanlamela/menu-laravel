@@ -16,12 +16,12 @@ class SearchController extends Controller
         ]);
 
         if ($attributes["search"]) {
-            return view("search/results", [
+            return view("CercaPage", [
                 "foods" => Food::filter(request(['search']))->paginate(request('elementsPerPage') ?? 10),
                 "elementsPerPage" => request('elementsPerPage') ?? 10
             ]);
         }
 
-        return back();
+        return redirect('/');
     }
 }

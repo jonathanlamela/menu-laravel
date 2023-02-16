@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class AdminOrderController extends Controller
 {
     public function list()
     {
-        return view('admin.order.list', [
+        return Inertia::render('admin/order/OrderListPage', [
             "items" => Order::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
@@ -35,7 +36,7 @@ class AdminOrderController extends Controller
 
     public function delete(Order $order)
     {
-        return view('admin.order.delete', [
+        return Inertia::render('AdminOrderDeletePage', [
             "item" => $order
         ]);
     }

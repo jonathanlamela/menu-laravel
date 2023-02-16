@@ -15,7 +15,6 @@
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "qcod/laravel-app-settings": "^1.5",
         "stripe/stripe-php": "^8.8",
         "tightenco/ziggy": "^1.4"
     },

@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux"
+import { Page } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/react";
 import CategoryPill from "@src/components/CategoryPill";
 
 
 export default function CategoryPills() {
-    const appState = useSelector((state: any) => state.app);
-    const { categories } = appState;
+    const page = usePage<Page<{ categories: any[] }>>();
+    const { categories } = page.props;
 
     return <>
         <ul className="w-full md:flex flew-row md:space-x-2 items-center justify-center">

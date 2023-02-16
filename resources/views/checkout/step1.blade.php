@@ -35,7 +35,7 @@
             @csrf
             <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
             <div class="form-row mb-3">
-                <select class="form-control" name="tipo_consegna">
+                <select class="form-control" name="tipoConsegna">
                     <option value="domicilio">Consegna a domicilio ({{setting('shipping_costs',0.00)}}€)</option>
                     <option value="asporto">Ritiro in negozio (asporto)</option>
                 </select>

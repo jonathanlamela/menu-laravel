@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link } from "@inertiajs/react";
 import AddToCartButton from "@src/components/AddToCartButton";
+import route from 'ziggy-js'
+
 
 export default function FoodItemWithCategory({ item }: any) {
     return <>
         <div className="flex flex-col space-y-2">
             <div className="w-full">
                 <div className="p-1 w-20 text-center bg-slate-600 text-white">
-                    <Link to={"/categoria/" + item.category.slug}><span
+                    <Link href={route("category.show", { slug: item.category.slug })}><span
                         className="badge bg-secondary">{item.category.name}</span></Link>
                 </div>
             </div>

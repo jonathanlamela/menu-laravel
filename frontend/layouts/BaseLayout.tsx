@@ -1,16 +1,16 @@
-import { Head } from "@inertiajs/react";
-import React from 'react'
+import { Page } from "@inertiajs/inertia";
+import { Head, usePage } from "@inertiajs/react";
 
 export default function BaseLayout({ title, children }: any) {
-    /*const appState = useAppSelector((state) => state.app);
-
-    const { settings } = appState;*/
 
     var site_name = '';
 
-    /*if (settings.site_name) {
+    const page = usePage<Page<{ settings: any }>>();
+    const { settings } = page.props;
+
+    if (settings.site_name) {
         site_name = ` :: ${(settings.site_name ?? "")}`
-    }*/
+    }
 
     return <>
         <Head>

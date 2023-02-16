@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
-import { storeDispatch, useAppSelector } from "@src/redux/hooks";
-import { resetMessages } from "@src/redux/reducers/messages";
-import { useLocation } from "react-router-dom";
+import { Page } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/react";
 
 
 export default function Messages() {
 
-    const location = useLocation();
-
-    const messagesState = useAppSelector((state) => state.messages);
-    var [message, setMessage] = useState(null);
-
-
-    useEffect(() => {
-
-        if (messagesState.message != null) {
-            setMessage(messagesState.message as any);
-        } else if (location.state?.message != null) {
-            setMessage(location.state.message);
-        }
-
-        return () => {
-            window.history.replaceState({}, "")
-
-            storeDispatch(resetMessages());
-        }
-
-    }, [messagesState.message, location.state])
+    const page = usePage<Page<{ message: any, errors: any }>>();
+    const { message, errors } = page.props;
 
     if (message != null) {
 
@@ -60,6 +39,7 @@ export default function Messages() {
                 </>
         }
     }
+
 
     return null;
 

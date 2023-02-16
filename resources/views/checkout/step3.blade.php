@@ -27,7 +27,7 @@
     <li class="breadcrumb-item">
         <a class='text-light' href="{{route("checkout.step1")}}">1. Tipologia consegna</a>
     </li>
-    @if(session('tipo_consegna')!='asporto')
+    @if(session('tipoConsegna')!='asporto')
     <li class="breadcrumb-item">
         <a class='text-light' href="{{route("checkout.step2")}}">2. Informazioni consegna</a>
     </li>
@@ -40,7 +40,7 @@
             <h5 class="m-0">1. Spedizione e consegna</h5>
         </a>
     </div>
-    @if(session('tipo_consegna')!='asporto')
+    @if(session('tipoConsegna')!='asporto')
     <div class="col-lg-12 bg-light p-4 shadow d-flex justify-content-center flex-column mt-2">
         <a class="text-decoration-none" href="{{route("checkout.step2")}}">
             <h5 class="m-0">2. Indirizzo e orario</h5>
@@ -48,7 +48,7 @@
     </div>
     @endif
     <div class="col-lg-12 bg-light p-4 shadow d-flex justify-content-center flex-column mt-2">
-        @if(session('tipo_consegna')!='asporto')
+        @if(session('tipoConsegna')!='asporto')
         <h5>3. Riepilogo</h5>
         @else
         <h5>2. Riepilogo</h5>
@@ -57,7 +57,7 @@
 
             <div class="row g-0">
                 <h6>Consegna</h6>
-                @if(session('tipo_consegna')=='asporto')
+                @if(session('tipoConsegna')=='asporto')
                 <p>Hai scelto di ritirare in negozio</p>
                 @else
                 <p>Hai scelto la consegna a domicilio</p>
@@ -88,7 +88,7 @@
                             <td class="text-center">{{number_format($item["price"],2)}} €</td>
                         </tr>
                         @endforeach
-                        @if(session('tipo_consegna')!='asporto')
+                        @if(session('tipoConsegna')!='asporto')
                         <tr class="align-middle">
                             <td class="">Consegna</td>
                             <td class="text-center">1</td>
@@ -100,7 +100,7 @@
                         <tr>
                             <td></td>
                             <td class="text-center"><b>Totale</b></td>
-                            @if(session('tipo_consegna')=='asporto')
+                            @if(session('tipoConsegna')=='asporto')
                             <td class="text-center">{{number_format(session('cart')["subtotal"],2)}} €</td>
                             @else
                             <td class="text-center">{{number_format(session('cart')["subtotal"]+setting('shipping_costs',0.00),2)}} €</td>
