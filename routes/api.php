@@ -65,3 +65,10 @@ Route::get("/foods", function () {
 Route::get("/categories/{category_id}/foods", function ($category_id) {
     return Food::where("category_id", '=', $category_id)->get(["id", "name", "image", "ingredients", "price", "category_id"]);
 });
+
+
+Route::get("/emailExists", function (Request $request) {
+    return response()->json([
+        "result" => User::where("email", $request->input('email'))->count() > 0
+    ]);
+});

@@ -14,17 +14,28 @@ import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import LoadingContent from "@src/components/LoadingContent";
 import { Link, usePage } from "@inertiajs/inertia-react";
-import { Page } from "@inertiajs/inertia";
 import AdminOrderToggler from "@src/Pages/admin/components/AdminOrderToggler";
 import AdminCategoryRow from "@src/Pages/admin/category/components/AdminCategoryRow";
 import AdminPerPage from "@src/Pages/admin/components/AdminPerPage";
 import AdminPagination from "@src/Pages/admin/components/AdminPagination";
+import route from "ziggy-js";
+import { Page } from "@inertiajs/inertia";
 
 export default function AdminCategoryListPage() {
 
-    const pageData = usePage<Page<{ perPage: number, page: number, ascending: boolean, searchKey: string, categories: any[], count: number, orderBy: string }>>();
+
 
     const [isPending, setIsPending] = useState(false);
+
+    const pageData = usePage<Page<{
+        perPage: number,
+        page: number,
+        ascending: boolean,
+        searchKey: string,
+        categories: any[],
+        count: number,
+        orderBy: string
+    }>>();
 
     const { ascending, categories, count, page, perPage, searchKey, orderBy } = pageData.props;
 

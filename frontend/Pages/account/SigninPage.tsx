@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import AccountManage from "@src/components/AccountManage";
 import CartButton from "@src/components/CartButton";
@@ -19,6 +19,7 @@ import Messages from "@src/components/Messages";
 import ButtonCircularProgress from "@src/components/ButtonCircularProgress";
 import { router, usePage } from "@inertiajs/react";
 import { Page } from "@inertiajs/inertia";
+import route from "ziggy-js";
 
 
 export default function SigninPage() {
@@ -34,18 +35,12 @@ export default function SigninPage() {
 
     const page = usePage<Page<{ errors?: any }>>();
 
-    console.log(page);
-    console.log(page.props.errors);
+
 
     const onSubmit = async (data: SigninFields) => {
         setIsPending(true);
-
-        //TODO
         router.post(page.url, data);
-
         setIsPending(false);
-
-
     }
     const [isPending, setIsPending] = useState(false);
 
@@ -66,7 +61,7 @@ export default function SigninPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center pl-8 text-white h-16">
                     <li>
-                        <BreadcrumbLink href="/account/login">
+                        <BreadcrumbLink href={route("login")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

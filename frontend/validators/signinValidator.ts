@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as yup from "yup";
 
 export default yup.object({
@@ -7,8 +8,15 @@ export default yup.object({
     "Questo campo è obbligatorio",
   ).test("is-busy", "Email in uso", function (value) {
     return new Promise((res, rej) => {
-      //TODO
-      res(true);
+      axios.get("/api/emailExists", {
+        params: {
+          email: value,
+        },
+      }).then((response) => {
+        res(!response.data.result);
+      }).catch(() => {
+        res(false);
+      });
     });
   }),
   password: yup.string().matches(

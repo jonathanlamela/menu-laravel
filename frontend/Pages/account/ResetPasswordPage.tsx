@@ -16,6 +16,8 @@ import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import { useState } from "react";
 import ButtonCircularProgress from "@src/components/ButtonCircularProgress";
+import { router, usePage } from "@inertiajs/react";
+import route from "ziggy-js";
 
 export default function ResetPasswordPage() {
 
@@ -26,6 +28,8 @@ export default function ResetPasswordPage() {
         }
     });
 
+    const page = usePage();
+
     const [isPending, setIsPending] = useState(false);
 
 
@@ -34,6 +38,9 @@ export default function ResetPasswordPage() {
         setIsPending(true)
 
         //TODO
+        router.post(route("password.email"), data);
+
+        setIsPending(false)
 
 
     }
@@ -72,6 +79,7 @@ export default function ResetPasswordPage() {
                             className={errors.email ? "text-input-invalid" : "text-input"} />
                         <div className="invalid-feedback">
                             {errors.email?.message}
+                            {page.props.errors.email}
                         </div>
                     </div>
                     <div className="flex flex-row space-x-2">

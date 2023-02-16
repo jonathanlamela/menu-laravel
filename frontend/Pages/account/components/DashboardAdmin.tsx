@@ -1,6 +1,7 @@
 import DashboardButton from "@src/components/account/DashboardButton";
 import { usePage } from "@inertiajs/react";
 import { Page } from "@inertiajs/inertia";
+import route from "ziggy-js";
 
 
 export default function DashboardAdmin() {
@@ -14,7 +15,7 @@ export default function DashboardAdmin() {
                 <h4 className='text-2xl antialiased font-sans'>Catalogo</h4>
             </div>
             <div className='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
-                <DashboardButton title='Categorie' link="/amministrazione/categorie" icon={
+                <DashboardButton title='Categorie' link={route("admin.category.list")} icon={
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                         stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round"
