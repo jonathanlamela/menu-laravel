@@ -1,10 +1,6 @@
-<div class="row g-0">
-    <div class="col-lg-12 app-title d-flex justify-content-center align-items-center flex-column p-4 bg-primary">
-        <div class="text-center">
-            <a href="{{route('home')}}" class="text-decoration-none text-light">
-                <h2 style="font-family: Smooch, cursive">{{setting('app_name', 'default value')}}</h2>
-                <p>RISTORANTE PIZZERIA</p>
-            </a>
-        </div>
-    </div>
+<div class="p-8 bg-red-900">
+    <a href="/" class="text-white text-center">
+        <p class=" text-4xl font-sans" style="font-family: 'Smooch'">{{$settings['site_title']}}</p>
+        <p class="font-sans">{{$settings['site_subtitle']}}</p>
+    </a>
 </div>

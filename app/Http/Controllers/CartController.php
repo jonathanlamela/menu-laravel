@@ -11,7 +11,7 @@ class CartController extends Controller
 
     public function show()
     {
-        return Inertia::render("cart/CarrelloPage");
+        return view("cart/show");
     }
 
     public function postAddToCart(Request $request)

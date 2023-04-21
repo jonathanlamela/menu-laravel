@@ -2,16 +2,13 @@
 
 @section('title', 'Aggiorna profilo')
 
-@section('topbar')
-<x-topbar>
-    <x-topbar-left>
-        <x-home-button></x-home-button>
-    </x-topbar-left>
-    <x-topbar-right>
-        <x-cart-button></x-cart-button>
-        <x-login></x-login>
-    </x-topbar-right>
-</x-topbar>
+@section('topbarLeft')
+<x-global-search-form></x-global-search-form>
+@endsection
+
+@section('topbarRight')
+<x-cart-button></x-cart-button>
+<x-account-manage></x-account-manage>
 @endsection
 
 @section('header')

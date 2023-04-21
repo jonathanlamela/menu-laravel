@@ -12,7 +12,7 @@ class AdminOrderController extends Controller
 {
     public function list()
     {
-        return Inertia::render('admin/order/OrderListPage', [
+        return view('admin/order/list', [
             "items" => Order::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
@@ -36,7 +36,7 @@ class AdminOrderController extends Controller
 
     public function delete(Order $order)
     {
-        return Inertia::render('AdminOrderDeletePage', [
+        return view('admin/order/delete', [
             "item" => $order
         ]);
     }

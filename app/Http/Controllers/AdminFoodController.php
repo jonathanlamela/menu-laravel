@@ -14,7 +14,7 @@ class AdminFoodController extends Controller
 
     public function list()
     {
-        return Inertia::render('admin/category/AdminFoodListPage', [
+        return view('admin/category/list', [
             "items" => Category::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
@@ -74,7 +74,7 @@ class AdminFoodController extends Controller
 
     public function edit(Food $food)
     {
-        return Inertia::render("admin/food/AdminFoodEditPage", [
+        return view("admin/food/AdminFoodEditPage", [
             "item" => $food,
             "categories" => Category::all(["id", "name"])
         ]);
@@ -129,7 +129,7 @@ class AdminFoodController extends Controller
 
     public function delete(Food $food)
     {
-        return Inertia::render("admin/food/AdminFoodDeletePage", [
+        return view("admin/food/AdminFoodDeletePage", [
             "item" => $food
         ]);
     }

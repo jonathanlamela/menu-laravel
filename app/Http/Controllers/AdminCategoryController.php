@@ -14,7 +14,7 @@ class AdminCategoryController extends Controller
 
     public function list()
     {
-        return Inertia::render('admin/category/AdminCategoryListPage', [
+        return view('admin/category/list', [
             "items" => Category::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
@@ -22,7 +22,7 @@ class AdminCategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render('admin/category/AdminCategoryCreatePage', []);
+        return view('admin/category/create', []);
     }
 
     public function store(Request $request)
@@ -65,7 +65,7 @@ class AdminCategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return Inertia::render('admin/category/AdminCategoryEditPage', [
+        return view('admin/category/edit', [
             "item" => $category
         ]);
     }
@@ -109,7 +109,7 @@ class AdminCategoryController extends Controller
 
     public function delete(Category $category)
     {
-        return Inertia::render('admin/category/AdminCategoryDeletePage', [
+        return view('admin/category/delete', [
             "item" => $category
         ]);
     }
