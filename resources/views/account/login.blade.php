@@ -15,45 +15,56 @@
 <x-header></x-header>
 @endsection
 
-@section('content')
-<x-breadcrumb>
-    <li class="breadcrumb-item">
-        <a class='text-light' href="{{route('home')}}">Home</a>
-    </li>
-    <li class="breadcrumb-item active text-light" aria-current="page">Accedi</li>
-</x-breadcrumb>
-<x-messages></x-messages>
-<div class="row g-0 d-flex flex-grow-1">
-    <div class="col-lg-12 p-4 d-flex flex-column align-items-center justify-content-center">
-        <form method="post" class="col-lg-4">
-            @csrf
-            <div class="form-group pt-4">
-                <label for="staticEmail">Email</label>
-                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror">
-                @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="form-group pt-4">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
-                @error('password')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="form-group pt-2">
-                <a class="justify-content-start text-decoration-none" href="{{route('password.request')}}">Ho dimenticato la password</a>
-            </div>
-            <div class="form-group pt-4">
-                <button type="submit" class="btn btn-primary">Accedi</button>
-                <a class="btn btn-secondary" href="{{route('register')}}">Crea account</a>
-            </div>
-
-        </form>
-    </div>
+@section('nav')
+<div class="flex h-16">
+    <ol class="breadcrumb-container">
+        <li>
+            <a class="breadcrumb-link" href="/">
+                Profilo
+            </a>
+        </li>
+        <li>::</li>
+        <li>Accedi</li>
+    </ol>
 </div>
+@endsection
+
+@section('content')
+<div class="px-8 pt-4">
+    <x-messages></x-messages>
+</div>
+<div class='flex flex-grow justify-center items-center'>
+    <form method="post" class="w-full p-16 md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2">
+        @csrf
+        <div class="flex flex-col space-y-2">
+            <label class="form-label">Email</label>
+            <input type="text" name="email" class="text-input @error('email') text-input-invalid @enderror" />
+            @error('email')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="flex flex-col space-y-2">
+            <label>Password</label>
+            <input type="password" name="password" class="text-input @error('password') text-input-invalid @enderror" />
+            @error('password')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="flex flex-col space-y-0.5">
+            <a href="{{route('password.request')}}" class=" hover:text-red-900">Ho dimenticato la
+                password</a>
+        </div>
+        <div class="flex flex-row space-x-2">
+            <button type="submit" class="btn-primary">Accedi</button>
+            <a href="{{route('register')}}" class="btn-secondary-outlined">Crea account</a>
+        </div>
+    </form>
+
+</div>
+
+
 @endsection

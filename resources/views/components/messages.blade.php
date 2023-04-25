@@ -1,38 +1,50 @@
-<div class="row g-0 ps-4 pt-4 pe-4">
     @if(session()->has('success_message'))
-    <div class="alert alert-success" role="alert">
-        {{session('success_message')}}
+    <div class="pb-4">
+        <div class="bg-lime-700/25 border-l-lime-700 border-l-8 p-4 text-green-900">
+            {{session('success_message')}}
+        </div>
     </div>
     @endif
 
     @if(session()->has('error_message'))
-    <div class="alert alert-success" role="alert">
-        {{session('error_message')}}
+    <div class="pb-4">
+        <div className="bg-red-700/25 border-l-red-700 border-l-8 p-4 text-red-900">
+            {{session('error_message')}}
+
+        </div>
     </div>
     @endif
 
     @if(session()->has('info_message'))
-    <div class="alert alert-success" role="alert">
-        {{session('info_message')}}
+    <div class="pb-4">
+        <div class="bg-gray-400/25 border-l-gray-700 border-l-8 p-4 text-gray-900">
+            {{session('info_message')}}
+        </div>
     </div>
     @endif
 
 
     @if(session()->has('status'))
     @if(session('status')==="password-updated")
-    <div class="alert alert-success" role="alert">
-        Password cambiata con successo
+
+    <div class="pb-4">
+        <div class="bg-lime-700/25 border-l-lime-700 border-l-8 p-4 text-green-900">
+            Password cambiata con successo
+        </div>
     </div>
     @elseif(session('status')==="profile-information-updated")
-    <div class="alert alert-success" role="alert">
-        Informazioni profilo aggiornate
+    <div class="pb-4">
+        <div class="bg-lime-700/25 border-l-lime-700 border-l-8 p-4 text-green-900">
+            Informazioni profilo aggiornate
+        </div>
     </div>
     @else
-    <div class="alert alert-info" role="alert">
-        {{session('status')}}
+    <div class="pb-4">
+        <div class="bg-gray-400/25 border-l-gray-700 border-l-8 p-4 text-gray-900">
+            {{session('status')}}
+
+        </div>
     </div>
     @endif
 
     @endif
-
-</div>

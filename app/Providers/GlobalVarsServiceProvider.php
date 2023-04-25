@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
 
-class GlobalVars extends ServiceProvider
+class GlobalVarsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -23,5 +24,12 @@ class GlobalVars extends ServiceProvider
      */
     public function boot()
     {
+        $settings = [];
+
+        foreach (Setting::all() as $row) {
+            $settings[$row->key] = $row->value;
+        }
+
+        view()->share('settings', $settings);
     }
 }
