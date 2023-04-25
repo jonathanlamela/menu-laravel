@@ -3,85 +3,92 @@
 @section('title', 'Crea account')
 
 @section('topbarLeft')
-<x-global-search-form></x-global-search-form>
+    <x-global-search-form></x-global-search-form>
 @endsection
 
 @section('topbarRight')
-<x-cart-button></x-cart-button>
-<x-account-manage></x-account-manage>
+    <x-cart-button></x-cart-button>
+    <x-account-manage></x-account-manage>
 @endsection
 
 @section('header')
-<x-header></x-header>
+    <x-header></x-header>
+@endsection
+
+@section('nav')
+    <div class="flex h-16">
+        <ol class="breadcrumb-container">
+            <li>
+                <a class="breadcrumb-link" href="{{ route('login') }}">
+                    Profilo
+                </a>
+            </li>
+            <li>::</li>
+            <li>Crea account</li>
+        </ol>
+    </div>
 @endsection
 
 
 
 @section('content')
-<x-breadcrumb>
-    <li class="breadcrumb-item">
-        <a class='text-light' href="{{route("home")}}">Home</a>
-    </li>
-    <li class=" breadcrumb-item active text-light" aria-current="page">Crea account</li>
-</x-breadcrumb>
-<x-messages></x-messages>
-<div class="row g-0  d-flex flex-grow-1">
-    <div class="col-lg-12 p-4 d-flex flex-column align-items-center justify-content-center">
-        <p>Compila il form per creare il tuo account</p>
-        <form class="row col-lg-4" method="post">
+
+    <x-messages></x-messages>
+    <div class='flex flex-grow justify-center items-center'>
+        <form method="post" class="w-full p-16 md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2">
             @csrf
-
-            <div class="mb-3 form-group">
+            <div class="flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
-                <input type="text" name="firstname" value="{{old('firstname')}}" class="form-control @error('firstname') is-invalid @enderror" />
+                <input type="text" value="{{ old('firstname') }}" name="firstname"
+                    class="text-input @error('firstname') text-input-invalid @enderror" />
                 @error('firstname')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-
-            <div class="mb-3 form-group">
+            <div class="flex flex-col space-y-2">
                 <label class="form-label">Cognome</label>
-                <input type="text" name="lastname" value="{{old('lastname')}}" class="form-control @error('lastname') is-invalid @enderror" />
+                <input type="text" value="{{ old('lastname') }}" name="lastname"
+                    class="text-input @error('lastname') text-input-invalid @enderror" />
                 @error('lastname')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-
-            <div class="mb-3 form-group">
+            <div class="flex flex-col space-y-2">
                 <label class="form-label">Email</label>
-                <input type="text" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror">
+                <input type="text" value="{{ old('email') }}" name="email"
+                    class="text-input @error('email') text-input-invalid @enderror" />
                 @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-            <div class="mb-3 form-group">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" />
+            <div class="flex flex-col space-y-2">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="text-input @error('password') text-input-invalid @enderror" />
                 @error('password')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-            <div class="mb-3 form-group">
-                <label for="inputPassword" class="form-label">Conferma password</label>
-                <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+            <div class="flex flex-col space-y-2">
+                <label class="form-label">Conferma password</label>
+                <input type="password" name="password_confirmation"
+                    class="text-input @error('password_confirmation') text-input-invalid @enderror" />
                 @error('password_confirmation')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-            <div class="mb-3 form-group">
-                <button type="submit" class="btn btn-success">Crea account</button>
+            <div class="flex flex-row space-x-2 pt-4">
+                <button type="submit" class="btn-primary">Crea account</button>
             </div>
         </form>
     </div>
-</div>
 @endsection
