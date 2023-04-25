@@ -14,8 +14,8 @@ class AdminFoodController extends Controller
 
     public function list()
     {
-        return view('admin/category/list', [
-            "items" => Category::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
+        return view('admin/food/list', [
+            "items" => Food::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
     }
@@ -34,14 +34,12 @@ class AdminFoodController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
-            'immagine' => 'image',
             'ingredients' => ''
         ], [
             'name.required' => "Il campo nome è obbligatorio",
             'price.required' => "Il prezzo del prodotto è obbligatorio",
             'price.numeric' => "Inserisci un valore numerico",
             'category_id.required' => "Seleziona una categoria",
-            'immagine.image' => "Seleziona un file di immagine valido"
         ]);
 
         if ($validator->fails()) {
@@ -55,17 +53,6 @@ class AdminFoodController extends Controller
 
         $food = Food::create($attributes);
 
-        if ($request->file('immagine')) {
-            $uploadedFile = $request->file('immagine');
-
-            $file_path = Storage::putFileAs('media/food', $uploadedFile, $food->id . "." . $uploadedFile->extension());
-
-            if ($file_path) {
-                $food->update([
-                    "image" => $file_path
-                ]);
-            }
-        }
 
         session()->flash("success_message", "Cibo creato");
 
@@ -87,14 +74,12 @@ class AdminFoodController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
-            'immagine' => 'image',
             'ingredients' => ''
         ], [
             'name.required' => "Il campo nome è obbligatorio",
             'price.required' => "Il prezzo del prodotto è obbligatorio",
             'price.numeric' => "Inserisci un valore numerico",
             'category_id.required' => "Seleziona una categoria",
-            'immagine.image' => "Seleziona un file di immagine valido"
         ]);
 
         if ($validator->fails()) {
@@ -106,18 +91,6 @@ class AdminFoodController extends Controller
 
 
         $attributes = $validator->validated();
-
-        if ($request->file('immagine')) {
-            $uploadedFile = $request->file('immagine');
-
-            $file_path = Storage::putFileAs('media/food', $uploadedFile, $food->id . "." . $uploadedFile->extension());
-
-            if ($file_path) {
-                $attributes['image'] = $file_path;
-            }
-        }
-
-
 
         $food->update($attributes);
 
@@ -152,8 +125,6 @@ class AdminFoodController extends Controller
         $id = $validator->validated()['id'];
 
         $food = Food::find($id);
-
-        Storage::delete("media/food", $food->image);
 
         session()->flash("success_message", "Cibo " . $food->name . " eliminato");
 

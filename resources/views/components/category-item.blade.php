@@ -1,7 +1,9 @@
-<li class="nav-item">
-    @if(str_ends_with(Request::url(),$item->slug))
-    <a class="nav-link nav-pill-item me-2 my-1 my-sm-0 active text-light" href="{{route('category.show',['category'=>$item->slug])}}">{{$item->name}}</a>
+<li class="w-full md:w-auto flex items-center justify-center py-2">
+    @if (str_ends_with(Request::url(), $item->slug))
+        <a class="text-white p-4 hover:bg-slate-600 w-full text-center mx-4 md:mx-0 bg-red-900 border border-slate-50/5"
+            href="{{ route('category.show', ['category' => $item->slug]) }}">{{ $item->name }}</a>
     @else
-    <a class="nav-link nav-pill-item me-2 text-light my-1 my-sm-0" href="{{route('category.show',['category'=>$item->slug])}}">{{$item->name}}</a>
+        <a class="text-white p-4 hover:bg-slate-600 w-full text-center mx-4 md:mx-0"
+            href="{{ route('category.show', ['category' => $item->slug]) }}">{{ $item->name }}</a>
     @endif
 </li>
