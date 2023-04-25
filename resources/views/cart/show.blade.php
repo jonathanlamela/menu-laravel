@@ -3,63 +3,67 @@
 @section('title', 'Carrello')
 
 @section('topbarLeft')
-<x-global-search-form></x-global-search-form>
+    <x-global-search-form></x-global-search-form>
 @endsection
 
 @section('topbarRight')
-<x-cart-button></x-cart-button>
-<x-account-manage></x-account-manage>
+    <x-cart-button></x-cart-button>
+    <x-account-manage></x-account-manage>
 @endsection
 
 @section('header')
-<x-header></x-header>
+    <x-header></x-header>
 @endsection
 
 @section('nav')
-<x-category-list></x-category-list>
+    <x-category-list></x-category-list>
 @endsection
 
 @section('content')
-<div class="row g-0">
-    <div class="col-lg-12 p-4">
-        <div class="col-lg-12 flex-grow-1">
-            @if(session('cart') && session('cart')["items"])
-            <div class="row g-0">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Cibo</th>
-                            <th class="text-center" scope="col">Quantità</th>
-                            <th class="text-center" scope="col">Prezzo</th>
-                            <th class="text-center" scope="col">Azioni</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($cart["items"] as $item)
-                        <x-cart-table-row :item="$item"></x-cart-table-row>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="text-center"><b>Totale</b></td>
-                            <td class="text-center">{{number_format(session('cart')["subtotal"],2)}} €</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <div class="row g-0">
-                <div class="col-lg-4">
-                    <a class="btn btn-success" href="{{route('checkout.step1')}}">Vai alla cassa</a>
+    <div class="flex p-8">
+        <div class="w-full">
+
+            @if (session('cart') && session('cart')['items'])
+                <div class="flex flex-col">
+                    <div class="w-full">
+                        <table class="flex flex-col">
+                            <thead>
+                                <tr class='flex'>
+                                    <th class="w-3/6 text-left">Cibo</th>
+                                    <th class="w-1/6 text-center">Quantità</th>
+                                    <th class="w-1/6 text-center">Prezzo</th>
+                                    <th class="w-1/6 text-center">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($cart['items'] as $item)
+                                    <x-cart-table-row :item="$item" :showAction="true"></x-cart-table-row>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr class='flex text-center pt-2'>
+                                    <td class="w-3/6"></td>
+                                    <td class="w-1/6 font-semibold">Totale</td>
+                                    <td class="w-1/6">{{ number_format(session('cart')['subtotal'], 2) }} €</td>
+                                    <td class="w-1/6"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="w-full">
+                        @if (auth()->user())
+                            <div class="flex">
+                                <a class="btn-success" href="{{ route('checkout.step1') }}">Vai
+                                    alla cassa</a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-            </div>
             @else
-            <div class="row g-0">
                 <p>Non ci sono elementi nel carrello</p>
-            </div>
             @endif
         </div>
     </div>
-</div>
+
 @endsection

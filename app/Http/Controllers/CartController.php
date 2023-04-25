@@ -11,7 +11,13 @@ class CartController extends Controller
 
     public function show()
     {
-        return view("cart/show");
+        $cart = session('cart', [
+            "items" => [],
+            "subtotal" => 0
+        ]);
+        return view("cart/show", [
+            "cart" => $cart
+        ]);
     }
 
     public function postAddToCart(Request $request)
