@@ -2,46 +2,55 @@
 
 @section('title', 'Verifica account')
 
-@section('topbar')
-<x-topbar>
-    <x-topbar-left>
-        <x-home-button></x-home-button>
-    </x-topbar-left>
-    <x-topbar-right>
-        <x-cart-button></x-cart-button>
-    </x-topbar-right>
-</x-topbar>
+@section('topbarLeft')
+    <x-global-search-form></x-global-search-form>
+@endsection
+
+@section('topbarRight')
+    <x-cart-button></x-cart-button>
+    <x-account-manage></x-account-manage>
 @endsection
 
 @section('header')
-<x-header></x-header>
+    <x-header></x-header>
+@endsection
+
+@section('nav')
+    <div class="flex h-16">
+        <ol class="breadcrumb-container">
+            <li>
+                <a class="breadcrumb-link" href="/">
+                    Profilo
+                </a>
+            </li>
+            <li>::</li>
+            <li>Account non verificato</li>
+        </ol>
+    </div>
 @endsection
 
 @section('content')
-<x-breadcrumb>
-    <li class="breadcrumb-item">
-        <a class='text-light' href="{{route("home")}}">Home</a>
-    </li>
-    <li class=" breadcrumb-item active text-light" aria-current="page">Verifica email</li>
-</x-breadcrumb>
-<x-messages></x-messages>
-<div class="row g-0 d-flex flex-grow-1">
-    <div class="col-lg-12 p-4 d-flex flex-column align-items-center justify-content-center">
-        <div class="row d-flex flex-column align-items-center justify-content-center">
-            <div class="col-lg-6">
-                <p>Il tuo account è stato creato, ma dobbiamo verificare che la mail sia realmente tua.
-                    Ti abbiamo inviato su ({{request()->user()->email}}) un link da
-                    cliccare per verificare la tua email.</p>
-                <form method="post" action="{{route('verification.send')}}">
+    <div class="px-8 pt-4">
+        <x-messages></x-messages>
+    </div>
+    <div class='flex flex-grow justify-center items-center'>
+        <div class="flex flex-col space-y-2 w-full md:w-1/2">
+            <p>Il tuo account è stato creato, ma dobbiamo verificare che la mail sia realmente tua.
+                Ti abbiamo inviato su ({{ request()->user()->email }}) un link da
+                cliccare per verificare la tua email.</p>
+            <div class="flex flex-row space-x-2">
+                <form method="post" action="{{ route('verification.send') }}">
                     @csrf
                     <button class="btn btn-primary">Non ho ricevuto la mail</button>
                 </form>
-                <form method="post" class="m-0" action="{{route('logout')}}">
+                <form method="post" class="m-0" action="{{ route('logout') }}">
                     @csrf
-                    <button class="btn btn-info">Esci da questo account</button>
+                    <button class="btn btn-secondary-outlined">Esci da questo account</button>
                 </form>
             </div>
+
         </div>
+
     </div>
-</div>
+
 @endsection
