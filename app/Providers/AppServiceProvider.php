@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+
+        Paginator::useTailwind();
 
         Category::updating(function ($model) {
             $model->slug = Str::slug($model->title);
