@@ -134,7 +134,10 @@ class AdminCategoryController extends Controller
 
         $category = Category::find($id);
 
-        Storage::delete("media/category", $category->image);
+        if ($category->image) {
+            Storage::delete("media/category", $category->image);
+        }
+
 
         session()->flash("success_message", "Categoria " . $category->name . " eliminata");
 
