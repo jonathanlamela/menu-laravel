@@ -64,7 +64,7 @@
         </a>
     </div>
     <div class='dashboard-button'>
-        <a class='dashboard-button-link' href="{% url 'admin_impostazionispedizioni_updateview' %}">
+        <a class='dashboard-button-link' href="{{ route('admin.impostazioni.spedizione') }}">
             <div class="dashboard-button-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -77,7 +77,7 @@
         </a>
     </div>
     <div class='dashboard-button'>
-        <a class='dashboard-button-link' href="{% url 'admin_impostazionivendite_updateview' %}">
+        <a class='dashboard-button-link' href="{{ route('admin.impostazioni.ordini') }}">
             <div class="dashboard-button-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">

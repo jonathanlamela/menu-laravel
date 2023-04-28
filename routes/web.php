@@ -4,6 +4,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminFoodController;
 use App\Http\Controllers\AdminImpostazioniGeneraliController;
+use App\Http\Controllers\AdminImpostazioniOrdiniController;
+use App\Http\Controllers\AdminImpostazioniSpedizioneController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -52,6 +54,12 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
     Route::prefix("impostazioni")->group(function () {
         Route::get("generali", [AdminImpostazioniGeneraliController::class, "index"])->name("admin.impostazioni.generali");
         Route::post("generali", [AdminImpostazioniGeneraliController::class, "store"])->name("admin.impostazioni.generali");
+
+        Route::get("spedizione", [AdminImpostazioniSpedizioneController::class, "index"])->name("admin.impostazioni.spedizione");
+        Route::post("spedizione", [AdminImpostazioniSpedizioneController::class, "store"])->name("admin.impostazioni.spedizione");
+
+        Route::get("ordini", [AdminImpostazioniOrdiniController::class, "index"])->name("admin.impostazioni.ordini");
+        Route::post("ordini", [AdminImpostazioniOrdiniController::class, "store"])->name("admin.impostazioni.ordini");
     });
 
     Route::prefix("categorie")->group(function () {
