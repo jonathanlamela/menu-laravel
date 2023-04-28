@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminOrderStateController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,12 +84,24 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
         Route::post("modifica/{order}", [AdminOrderController::class, "update"])->name("admin.order.update");
         Route::post("elimina/{order}", [AdminOrderController::class, "destroy"])->name("admin.order.destroy");
     });
+
+    Route::prefix("stati-ordine")->group(function () {
+
+        Route::get("", [AdminOrderStateController::class, "list"])->name("admin.order-state.list");
+        Route::get("crea", [AdminOrderStateController::class, "create"])->name("admin.order-state.create");
+        Route::get("modifica/{orderState}", [AdminOrderStateController::class, "edit"])->name("admin.order-state.edit");
+        Route::get("elimina/{orderState}", [AdminOrderStateController::class, "delete"])->name("admin.order-state.delete");
+
+        Route::post("crea", [AdminOrderStateController::class, "store"])->name("admin.order-state.store");
+        Route::post("modifica/{orderState}", [AdminOrderStateController::class, "update"])->name("admin.order-state.update");
+        Route::post("elimina/{orderState}", [AdminOrderStateController::class, "destroy"])->name("admin.order-state.destroy");
+    });
 });
 
 
 Route::prefix('cassa')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
 
-    //Scegliere consegna o ritiro 
+    //Scegliere consegna o ritiro
     Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1");
     Route::post('step1', [CheckoutController::class, "storeStep1"])->name("checkout.step1");
 

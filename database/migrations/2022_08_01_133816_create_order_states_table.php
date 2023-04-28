@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('order_states', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('badge_css_class')->nullable();
+            $table->string('css_badge_class')->nullable();
             $table->timestamps();
         });
     }

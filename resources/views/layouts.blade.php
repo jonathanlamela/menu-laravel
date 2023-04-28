@@ -2,7 +2,7 @@
 <html lang="it" class="flex flex-col flex-grow h-full">
 
 <head>
-    <title>@yield('title') :: {{$settings['site_title'] ?? ""}}</title>
+    <title>@yield('title') :: {{ $settings['site_title'] ?? '' }}</title>
 
     @vite('resources/css/app.css')
 
@@ -37,6 +37,8 @@
             </main>
         </div>
     </div>
+    @section('extrascripts')
+    @show
 </body>
 
 </html>
