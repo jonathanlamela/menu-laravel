@@ -61,7 +61,7 @@ class AdminFoodController extends Controller
 
     public function edit(Food $food)
     {
-        return view("admin/food/AdminFoodEditPage", [
+        return view("admin/food/edit", [
             "item" => $food,
             "categories" => Category::all(["id", "name"])
         ]);
@@ -102,7 +102,7 @@ class AdminFoodController extends Controller
 
     public function delete(Food $food)
     {
-        return view("admin/food/AdminFoodDeletePage", [
+        return view("admin/food/delete", [
             "item" => $food
         ]);
     }

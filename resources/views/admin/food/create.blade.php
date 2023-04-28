@@ -3,75 +3,61 @@
 @section('title', 'Crea cibo')
 
 
+@section('topbarLeft')
+    <x-global-search-form></x-global-search-form>
+@endsection
+
+@section('topbarRight')
+    <x-cart-button></x-cart-button>
+    <x-account-manage></x-account-manage>
+@endsection
+
+
 @section('header')
     <x-header></x-header>
 @endsection
 
-@section('topbar')
-    <x-topbar>
-        <x-topbar-left>
-            <x-global-search-form></x-global-search-form>
-        </x-topbar-left>
-        <x-topbar-right>
-            <x-account-manage></x-account-manage>
-        </x-topbar-right>
-    </x-topbar>
-@endsection
-
-
 @section('content')
-    <x-breadcrumb>
-        <li class="breadcrumb-item">
-            <a class='text-light' href="{{ route('account.dashboard') }}">Profilo</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class='text-light' href="{{ route('admin.food.list') }}">Cibi</a>
-        </li>
-        <li class="breadcrumb-item active text-light" aria-current="page">Crea cibo</li>
-    </x-breadcrumb>
-    <x-messages></x-messages>
-    <div class="row g-0 ps-4 pe-4">
-        <h4>Crea un nuovo cibo</h4>
-    </div>
-    <div class="row g-0 flex-grow-1 ps-4 pe-4">
-        <form class="col-lg-4" method="post" enctype="multipart/form-data">
+
+
+    <div class="flex flex-col p-8 flex-grow">
+        <x-messages></x-messages>
+
+        <form class="flex-col space-y-2" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">
+            <div class="w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
-                <input type="text" name="name" value="{{ old('name') }}"
-                    class="form-control @error('name') is-invalid @enderror">
+                <input type="text" name="name" name="name" value="{{ old('name') }}"
+                    class="text-input @error('name') text-input-invalid @enderror">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Ingredienti</label>
-                <textarea name="ingredients" class="form-control @error('ingredients') is-invalid @enderror">{{ old('ingredients') }}</textarea>
+                <input type="text" name="ingredients" value="{{ old('ingredients') }}"
+                    class="text-input @error('ingredients') text-input-invalid @enderror">
                 @error('ingredients')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="mb-3 ">
-
+            <div class="w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Prezzo</label>
-                <div class="input-group">
-                    <span class="input-group-text">€</span>
-                    <input type="text" name="price" value="{{ old('price') }}"
-                        class="form-control @error('price') is-invalid @enderror">
-                    @error('price')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                <input type="text" name="price" value="{{ old('price') }}"
+                    class="text-input @error('price') text-input-invalid @enderror">
+                @error('price')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-            <div class="mb-3">
+            <div class="w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Categoria</label>
-                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                <select name="category_id" class="text-input @error('category_id') text-input-invalid first-line:@enderror">
                     <option></option>
                     @foreach ($categories as $cat)
                         @if ($cat->id == old('category_id'))
@@ -87,10 +73,27 @@
                     </div>
                 @enderror
             </div>
-
-            <div class="mb-3">
+            <div class="w-1/3 flex flex-col space-y-2 items-start">
                 <button type="submit" class="btn btn-success">Crea</button>
             </div>
         </form>
+    </div>
+
+@endsection
+
+
+
+
+@section('nav')
+    <div class="flex h-16">
+        <ol class="breadcrumb-container">
+            <li>
+                <a class="breadcrumb-link" href="{{ route('admin.food.list') }}">Cibi</a>
+            </li>
+            <li>::</li>
+            <li>
+                Crea
+            </li>
+        </ol>
     </div>
 @endsection
