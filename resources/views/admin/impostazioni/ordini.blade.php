@@ -29,7 +29,6 @@
     </x-breadcrumb>
     <div class="row g-0">
         <div class="col-lg-12 ms-4 mt-4">
-            @include('app_settings::_settings')
         </div>
     </div>
 @endsection

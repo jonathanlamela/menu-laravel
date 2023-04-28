@@ -52,7 +52,7 @@
 </div>
 <div class='w-full pb-2 pt-4 flex flex-col space-y-4 md:flex-row  md:space-x-4 md:space-y-0'>
     <div class='dashboard-button'>
-        <a class='dashboard-button-link' href="{% url 'admin_impostazionigenerali_updateview' %}">
+        <a class='dashboard-button-link' href="{{ route('admin.impostazioni.generali') }}">
             <div class="dashboard-button-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                     stroke="currentColor" class="w-6 h-6">

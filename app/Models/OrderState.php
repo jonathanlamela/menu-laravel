@@ -19,7 +19,7 @@ class OrderState extends Model
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
-            $query->where('name', 'like', '%' . $search . '%')
+            $query->where('description', 'like', '%' . $search . '%')
         );
     }
 }

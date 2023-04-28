@@ -3,7 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminFoodController;
-
+use App\Http\Controllers\AdminImpostazioniGeneraliController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -48,6 +48,11 @@ Route::prefix("account")->group(function () {
 Route::get('/cerca', [SearchController::class, 'doSearch'])->name("searchGlobally");
 
 Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
+
+    Route::prefix("impostazioni")->group(function () {
+        Route::get("generali", [AdminImpostazioniGeneraliController::class, "index"])->name("admin.impostazioni.generali");
+        Route::post("generali", [AdminImpostazioniGeneraliController::class, "store"])->name("admin.impostazioni.generali");
+    });
 
     Route::prefix("categorie")->group(function () {
 

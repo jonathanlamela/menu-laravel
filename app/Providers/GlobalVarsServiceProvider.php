@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
 
@@ -24,12 +25,6 @@ class GlobalVarsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $settings = [];
-
-        foreach (Setting::all() as $row) {
-            $settings[$row->key] = $row->value;
-        }
-
-        view()->share('settings', $settings);
+        view()->share('settings', GeneralSetting::first() ?? new GeneralSetting());
     }
 }
