@@ -7,18 +7,21 @@ use App\Mail\OrderCreated;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\OrdiniSetting;
+use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
-
-
+use Stripe\Service\OrderService;
 
 class CheckoutController extends Controller
 {
     public function step1()
     {
-        return view('checkout/step1');
+        return view('checkout/step1', [
+            "shippingSettings" => ShippingSetting::first() ?? new ShippingSetting()
+        ]);
     }
 
     public function storeStep1(Request $request)
@@ -88,7 +91,8 @@ class CheckoutController extends Controller
 
         if ($cart) {
             return view('checkout/step3', [
-                "cart" => $cart
+                "cart" => $cart,
+                "shippingSettings" => ShippingSetting::first() ?? new ShippingSetting()
             ]);
         }
     }
@@ -103,14 +107,17 @@ class CheckoutController extends Controller
             "subtotal" => 0
         ]);
 
+        $shipping_costs = (ShippingSetting::first()->shipping_costs) ?? 0;
+
+
         $attributes = [
             "user_id" => $request->user()->id,
-            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipoConsegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00),
-            "shipping_costs" => $request->session()->get('tipoConsegna') != "asporto" ? setting('shipping_costs', 0.00) : 0.00,
+            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipoConsegna') != "asporto" ? $shipping_costs : 0.00),
+            "shipping_costs" => $request->session()->get('tipoConsegna') != "asporto" ? $shipping_costs : 0.00,
             "is_shipping" => $request->session()->get('tipoConsegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
-            "order_status" => setting('order_state_created', 'default value'),
+            "order_status" => OrdiniSetting::first()->order_created_state_id ?? null,
             "note" => $note,
             "is_paid" => False
         ];
@@ -135,8 +142,8 @@ class CheckoutController extends Controller
             OrderDetail::create([
                 "order_id" => $order->id,
                 "quantity" => 1,
-                "unit_price" => setting('shipping_costs', 0.00),
-                "price" => setting('shipping_costs', 0.00),
+                "unit_price" => $shipping_costs,
+                "price" => $shipping_costs,
                 "name" => "Spese di consegna"
             ]);
         }

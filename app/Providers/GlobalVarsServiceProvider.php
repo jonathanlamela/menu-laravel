@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use App\Models\ShippingSetting;
 
 class GlobalVarsServiceProvider extends ServiceProvider
 {

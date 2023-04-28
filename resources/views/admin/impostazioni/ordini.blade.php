@@ -59,10 +59,6 @@
     </div>
 @endsection
 
-
-
-
-
 @section('nav')
     <div class="flex h-16">
         <ol class="breadcrumb-container">
