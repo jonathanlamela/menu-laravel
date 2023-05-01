@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('is_shipping');
             $table->string('shipping_address')->nullable();
             $table->string('shipping_datetime')->nullable();
-            $table->string('order_status');
+            $table->unsignedInteger('order_status_id');
             $table->boolean('is_paid');
             $table->text('note')->nullable();
             $table->timestamps();

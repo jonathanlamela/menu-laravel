@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
-use Stripe\Service\OrderService;
 
 class CheckoutController extends Controller
 {
@@ -117,7 +116,7 @@ class CheckoutController extends Controller
             "is_shipping" => $request->session()->get('tipoConsegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
-            "order_status" => OrdiniSetting::first()->order_created_state_id ?? null,
+            "order_status_id" => OrdiniSetting::first()->order_created_state_id ?? null,
             "note" => $note,
             "is_paid" => False
         ];

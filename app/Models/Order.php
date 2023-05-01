@@ -32,6 +32,11 @@ class Order extends Model
         );
     }
 
+    public function getFormattedPrice()
+    {
+        return number_format($this->unit_price, 2);
+    }
+
 
     public function user()
     {
@@ -41,5 +46,10 @@ class Order extends Model
     public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function order_status()
+    {
+        return $this->belongsTo(OrderState::class, "order_status_id");
     }
 }

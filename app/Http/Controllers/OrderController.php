@@ -66,7 +66,7 @@ class OrderController extends Controller
 
         return view('order.pagamento', [
             "checkout_session_id" => $checkout_session["id"],
-            "checkout_public_key" => env('STRIPE_KEY')
+            "checkout_public_key" => env('STRIPE_PUBLIC_KEY')
         ]);
     }
 
