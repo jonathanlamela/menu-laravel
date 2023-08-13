@@ -41,13 +41,13 @@ export type ResetPasswordTokenFields = {
   token: string;
   password: string;
   confirmPassword: string;
-  email: string | null;
+  email: string;
 };
 
 export type SigninFields = {
   email: string;
   password: string;
-  confirmPassword: string;
+  password_confirmation: string;
   firstname: string;
   lastname: string;
 };

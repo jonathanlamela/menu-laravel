@@ -15,6 +15,8 @@ use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Laravel\Fortify\Http\Controllers\LoginController;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,7 @@ class FortifyServiceProvider extends ServiceProvider
                     : redirect()->intended(Fortify::redirects('login'));
             }
         });
+
 
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse
         {
@@ -74,20 +77,24 @@ class FortifyServiceProvider extends ServiceProvider
             return Inertia::render("Account/LoginPage");
         });
 
+
         Fortify::registerView(function () {
-            return view('account/register');
+            return Inertia::render("Account/SigninPage");
         });
 
         Fortify::verifyEmailView(function () {
-            return view('account/verify-email');
+            return Inertia::render("Account/ConfermaEmailPage");
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return view('account/password-forgot');
+            return Inertia::render("Account/ResetPasswordPage");
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return view('account/password-reset', ['request' => $request]);
+            return Inertia::render("Account/ResetPasswordTokenPage", [
+                "token" => $request->token,
+                "email" => $request->email
+            ]);
         });
     }
 }

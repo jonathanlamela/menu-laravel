@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
 
 
 
-        $message = [];
+        $message = null;
 
         if ($request->session()->get('success_message')) {
             $message['type'] = "success";

@@ -8,38 +8,33 @@ import TopbarRight from "@src/components/TopbarRight";
 import BaseLayout from "@src/layouts/BaseLayout";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import HomeButton from "@src/components/HomeButton";
 import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
-import HomeButton from "@src/components/HomeButton";
-import { LoginFields } from "@src/types";
-import { loginValidator } from "@src/validators";
-import { Link, usePage } from "@inertiajs/react";
-import { router } from "@inertiajs/core";
-import route from "ziggy-js";
+import { ResetPasswordFields } from "@src/types";
+import { resetPasswordValidator } from "@src/validators";
+import { router } from "@inertiajs/react";
 
-export default function LoginPage() {
+import route from "ziggy-js"
 
-    const page = usePage<{ backUrl: string | null }>();
-
-    const { backUrl } = page.props;
-
-    const formErrors = page.props.errors;
+export default function ResetPasswordPage() {
 
 
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm<LoginFields>({
-        resolver: yupResolver(loginValidator),
-        mode: "onChange",
-        reValidateMode: "onChange"
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<ResetPasswordFields>({
+        resolver: yupResolver(resetPasswordValidator),
+        mode: "onChange"
     });
 
 
-    const onSubmit = async (data: LoginFields) => {
-        router.post("/account/login", data);
+
+    const onSubmit = async (data: ResetPasswordFields) => {
+        router.post(route('password.email'), {
+            email: data.email
+        });
     }
-
     return <>
-
-        <BaseLayout title='Accedi'>
+        <BaseLayout title='Recupera password'>
             <Topbar>
                 <TopbarLeft>
                     <HomeButton></HomeButton>
@@ -49,7 +44,6 @@ export default function LoginPage() {
                     <AccountManage></AccountManage>
                 </TopbarRight>
             </Topbar>
-
             <Header></Header>
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center pl-8 text-white h-16">
@@ -59,16 +53,14 @@ export default function LoginPage() {
                         </BreadcrumbLink>
                     </li>
                     <li>::</li>
-                    <li>Accedi</li>
+                    <li>Reset password</li>
                 </ol>
             </HeaderMenu>
-            <div className="px-8 pt-8">
-                <Messages></Messages>
-            </div>
-            <div className='flex flex-grow flex-col justify-center items-center'>
 
-                <form className="w-full p-16 md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2" onSubmit={handleSubmit(onSubmit)}>
-                    {backUrl ? <input type="hidden" {...register("backUrl")} name="backUrl" value={backUrl} /> : null}
+            <div className='p-8'>
+                <Messages></Messages>
+                <form className="w-full md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2" onSubmit={handleSubmit(onSubmit)}>
+
                     <div className="flex flex-col space-y-2">
                         <label className="form-label">Email</label>
                         <input type="text"
@@ -78,27 +70,10 @@ export default function LoginPage() {
                             {errors.email?.message}
                         </div>
                     </div>
-                    <div className="flex flex-col space-y-2">
-                        <label className="form-label">Password</label>
-                        <input type="password"
-                            {...register("password")}
-                            className={errors.password ? "text-input-invalid" : "text-input"} />
-                        <div className="invalid-feedback">
-                            {errors.password?.message}
-                        </div>
-                    </div>
-                    <div className="flex flex-col space-y-0.5">
-                        <Link href={route("password.request")} className="hover:text-red-900">
-                            Ho dimenticato la password
-                        </Link>
-                    </div>
                     <div className="flex flex-row space-x-2">
                         <button disabled={!isValid} type="submit" className="btn-primary">
-                            Accedi
+                            <span>Reset password</span>
                         </button>
-                        <Link href={route("register")} className="btn-secondary-outlined">
-                            Crea account
-                        </Link>
                     </div>
                 </form>
             </div>

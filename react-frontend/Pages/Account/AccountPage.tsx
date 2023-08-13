@@ -1,4 +1,3 @@
-import { Link, useLocation } from "react-router-dom";
 import DashboardAdmin from "@src/Pages/Account/components/DashboardAdmin";
 import AccountManage from "@src/components/AccountManage";
 import CartButton from "@src/components/CartButton";
@@ -12,8 +11,7 @@ import HomeButton from "@src/components/HomeButton";
 import HeaderMenu from "@src/components/HeaderMenu";
 import DashboardDefault from "@src/Pages/Account/components/DashboardDefault";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
-import { usePage } from "@inertiajs/react";
-
+import route from "ziggy-js"
 
 export default function LoginPage() {
 
@@ -33,7 +31,7 @@ export default function LoginPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center pl-8 text-white h-16">
                     <li>
-                        <BreadcrumbLink href="/account">
+                        <BreadcrumbLink href={route('account.dashboard')}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

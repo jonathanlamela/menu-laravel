@@ -71,4 +71,4 @@ Route::get("/emailExists", function (Request $request) {
     return response()->json([
         "result" => User::where("email", $request->input('email'))->count() > 0
     ]);
-});
+})->name("api.email_exists");

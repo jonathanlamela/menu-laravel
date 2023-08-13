@@ -33,7 +33,7 @@ Route::prefix("carrello")->group(function () {
 
 Route::prefix("account")->group(function () {
 
-    Route::prefix("profilo")->middleware(['auth', 'verified'])->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('', [AccountController::class, 'dashboard'])->name("account.dashboard");
         Route::get('cambia-password', [AccountController::class, "cambiaPassword"])->name("account.cambia-password");
         Route::get('informazioni-personali', [AccountController::class, "informazioniPersonaliView"])->name("account.informazioni-personali");

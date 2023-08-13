@@ -26,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         WebhookReceived::class => [
             StripeEventListener::class,
         ],
+        'Illuminate\Auth\Events\Failed' => [
+            'App\Listeners\LoginEventListener'
+        ]
     ];
 
     /**
