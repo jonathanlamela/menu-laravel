@@ -20,6 +20,17 @@ class Food extends Model
         'ingredients'
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($food) {
+            $food->ingredients = strtolower($food->ingredients);
+        });
+
+        static::updating(function ($food) {
+            $food->ingredients = strtolower($food->ingredients);
+        });
+    }
+
 
 
     public function scopeFilter($query, array $filters)
