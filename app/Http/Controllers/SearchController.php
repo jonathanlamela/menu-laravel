@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SearchController extends Controller
 {
-    //
-
     public function doSearch()
     {
-        $attributes = request()->validate([
-            "search" => "required|min:1"
-        ]);
+        $attributes = request();
 
-        if ($attributes["search"]) {
-            return view("CercaPage", [
-                "foods" => Food::filter(request(['search']))->paginate(request('elementsPerPage') ?? 10),
-                "elementsPerPage" => request('elementsPerPage') ?? 10
+        if ($attributes["chiave"]) {
+            return Inertia::render("CercaPage", [
+                "foods" => Food::filter(request(['chiave']))->with('category')->get(),
+                "chiave" => request("chiave")
             ]);
         }
 

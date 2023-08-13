@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         "user_id",
-        "subtotal",
+        "total",
         "shipping_costs",
         "is_shipping",
         "shipping_address",
@@ -34,7 +34,7 @@ class Order extends Model
 
     public function getFormattedPrice()
     {
-        return number_format($this->subtotal, 2);
+        return number_format($this->total, 2);
     }
 
 

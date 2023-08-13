@@ -10,7 +10,7 @@
 
                 <form method="post" class="d-flex m-0" action="{{ route('cart.increase_qty') }}">
                     @csrf
-                    <input type="hidden" name="food_id" value="{{ $item['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $item['id'] }}" />
                     <button class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700 rounded-xl" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -24,7 +24,7 @@
 
                 <form method="post" class="d-flex m-0" action="{{ route('cart.decrease_qty') }}">
                     @csrf
-                    <input type="hidden" name="food_id" value="{{ $item['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $item['id'] }}" />
                     <button type="submit" class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700 rounded-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
 
                 <form method="post" class="d-flex m-0" action="{{ route('cart.remove_item') }}">
                     @csrf
-                    <input type="hidden" name="food_id" value="{{ $item['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $item['id'] }}" />
                     <button type="submit" class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700  rounded-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16">

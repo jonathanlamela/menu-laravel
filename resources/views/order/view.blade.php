@@ -63,7 +63,7 @@
                             <td class="text-center">
                                 <b>Totale</b>
                             </td>
-                            <td class="text-center">{{ number_format($order->subtotal, 2) }} €</td>
+                            <td class="text-center">{{ number_format($order->total, 2) }} €</td>
                         </tr>
                     </tfoot>
                 </table>

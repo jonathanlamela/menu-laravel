@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Inertia\Inertia;
 use Throwable;
+use App\Models\GeneralSetting;
 
 class Handler extends ExceptionHandler
 {
@@ -46,5 +48,26 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        $response = parent::render($request, $exception);
+
+
+        if ($response->status() === 404) {
+
+            return Inertia::render("Error404Page", [
+                "general_settings" => GeneralSetting::all()->first(),
+            ])->toResponse($request)->setStatusCode(404);
+        }
+
+        if ($response->status() === 403) {
+            return Inertia::render("Error403Page", [[
+                "general_settings" => GeneralSetting::all()->first(),
+            ]])->toResponse($request)->setStatusCode(403);
+        }
+
+        return parent::render($request, $exception);
     }
 }

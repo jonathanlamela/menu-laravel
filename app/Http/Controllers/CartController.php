@@ -13,9 +13,9 @@ class CartController extends Controller
     {
         $cart = session('cart', [
             "items" => [],
-            "subtotal" => 0
+            "total" => 0
         ]);
-        return view("cart/show", [
+        return Inertia::render("Cart/CarrelloPage", [
             "cart" => $cart
         ]);
     }
@@ -24,42 +24,43 @@ class CartController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'food_id' => 'required',
-            'food_name' => 'required',
-            'food_price' => 'required'
+            'id' => 'required',
+            'name' => 'required',
+            'price' => 'required'
         ]);
 
         if (!$validator->fails()) {
             $attributes = $validator->validated();
 
-            $food_id = $attributes["food_id"];
-            $food_name = $attributes["food_name"];
-            $food_price = $attributes["food_price"];
+            $id = $attributes["id"];
+            $food_name = $attributes["name"];
+            $food_price = $attributes["price"];
 
             $cart = session('cart', [
                 "items" => [],
-                "subtotal" => 0
+                "total" => 0
             ]);
 
-            if (key_exists("product_" . $food_id, $cart["items"])) {
-                $row = $cart["items"]["product_" . $food_id];
-                $cart["items"]["product_" . $food_id]["quantity"] = $row["quantity"] + 1;
+            if (key_exists("product_" . $id, $cart["items"])) {
+                $row = $cart["items"]["product_" . $id];
+                $cart["items"]["product_" . $id]["quantity"] = $row["quantity"] + 1;
             } else {
-                $cart["items"]["product_" . $food_id] = [
+                $cart["items"]["product_" . $id] = [
                     "quantity" => 1,
-                    "name" => $food_name,
-                    "price" => $food_price,
-                    "id" => $food_id
+                    "item" => [
+                        "name" => $food_name,
+                        "price" => $food_price,
+                        "id" => $id
+                    ]
                 ];
             }
 
-            //update subtotal
 
-            $cart["subtotal"] = 0;
+            $cart["total"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subtotal"] += $item["price"] * $item["quantity"];
+                $cart["total"] += $item["item"]["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -71,29 +72,29 @@ class CartController extends Controller
     public function increaseQty(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'food_id' => 'required'
+            'id' => 'required'
         ]);
 
         if (!$validator->fails()) {
             $attributes = $validator->validated();
 
-            $food_id = $attributes["food_id"];
+            $id = $attributes["id"];
 
             $cart = session('cart', [
                 "items" => [],
-                "subtotal" => 0
+                "total" => 0
             ]);
 
-            $cart["items"]["product_" . $food_id]["quantity"] = $cart["items"]["product_" . $food_id]["quantity"] + 1;
+            $cart["items"]["product_" . $id]["quantity"] = $cart["items"]["product_" . $id]["quantity"] + 1;
 
 
-            //update subtotal
+            //update total
 
-            $cart["subtotal"] = 0;
+            $cart["total"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subtotal"] += $item["price"] * $item["quantity"];
+                $cart["total"] += $item["item"]["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -105,31 +106,31 @@ class CartController extends Controller
     public function decreaseQty(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'food_id' => 'required'
+            'id' => 'required'
         ]);
 
         if (!$validator->fails()) {
             $attributes = $validator->validated();
 
-            $food_id = $attributes["food_id"];
+            $id = $attributes["id"];
 
             $cart = session('cart', [
                 "items" => [],
-                "subtotal" => 0
+                "total" => 0
             ]);
 
-            if ($cart["items"]["product_" . $food_id]["quantity"] == 1) {
-                unset($cart["items"]["product_" . $food_id]);
+            if ($cart["items"]["product_" . $id]["quantity"] == 1) {
+                unset($cart["items"]["product_" . $id]);
             } else {
-                $cart["items"]["product_" . $food_id]["quantity"] = $cart["items"]["product_" . $food_id]["quantity"] - 1;
+                $cart["items"]["product_" . $id]["quantity"] = $cart["items"]["product_" . $id]["quantity"] - 1;
             }
-            //update subtotal
+            //update total
 
-            $cart["subtotal"] = 0;
+            $cart["total"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subtotal"] += $item["price"] * $item["quantity"];
+                $cart["total"] += $item["item"]["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);
@@ -141,28 +142,28 @@ class CartController extends Controller
     public function removeFromCart(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'food_id' => 'required'
+            'id' => 'required'
         ]);
 
         if (!$validator->fails()) {
             $attributes = $validator->validated();
 
-            $food_id = $attributes["food_id"];
+            $id = $attributes["id"];
 
             $cart = session('cart', [
                 "items" => [],
-                "subtotal" => 0
+                "total" => 0
             ]);
 
-            unset($cart["items"]["product_" . $food_id]);
+            unset($cart["items"]["product_" . $id]);
 
-            //update subtotal
+            //update total
 
-            $cart["subtotal"] = 0;
+            $cart["total"] = 0;
 
             foreach ($cart["items"] as $item) {
 
-                $cart["subtotal"] += $item["price"] * $item["quantity"];
+                $cart["total"] += $item["item"]["price"] * $item["quantity"];
             }
 
             session(["cart" => $cart]);

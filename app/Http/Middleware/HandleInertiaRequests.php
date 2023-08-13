@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Models\GeneralSetting;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -40,34 +41,31 @@ class HandleInertiaRequests extends Middleware
     {
         $cart = session('cart', [
             "items" => [],
-            "subTotal" => 0,
+            "total" => 0,
         ]);
 
-        $settings = [];
 
-        foreach (Setting::all() as $row) {
-            $settings[$row->key] = $row->value;
-        }
+
 
         $message = [];
 
         if ($request->session()->get('success_message')) {
-            $message['tag'] = "success";
+            $message['type'] = "success";
             $message['text'] = $request->session()->get('success_message');
         }
 
         if ($request->session()->get('info_message')) {
-            $message['tag'] = "info";
+            $message['type'] = "info";
             $message['text'] = $request->session()->get('info_message');
         }
 
         if ($request->session()->get('error_message')) {
-            $message['tag'] = "error";
+            $message['type'] = "error";
             $message['text'] = $request->session()->get('error_message');
         }
 
         if ($request->session()->get('status')) {
-            $message['tag'] = "info";
+            $message['type'] = "info";
 
             switch ($request->session()->get('status')) {
                 case "verification-link-sent":
@@ -87,7 +85,7 @@ class HandleInertiaRequests extends Middleware
             "user" => fn () => $request->user()
                 ? $request->user()->only(['id', 'firstname', 'lastname', 'role', 'email'])
                 : null,
-            "settings" => $settings,
+            "general_settings" => GeneralSetting::all()->first(),
             "categories" => Category::all(["id", "name", "slug"]),
             "message" => $message,
             "tipoConsegna" => session('tipoConsegna', 'ASPORTO')

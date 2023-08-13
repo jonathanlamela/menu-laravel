@@ -46,7 +46,7 @@
                                             <p>Totale</p>
                                         </div>
                                         <div class="w-2/3 flex items-center justify-end">
-                                            <span>{{ number_format($row->subtotal, 2) }} €</span>
+                                            <span>{{ number_format($row->total, 2) }} €</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-row items-center">

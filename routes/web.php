@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [ErrorController::class, 'index']);
 Route::get('/categoria/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
+Route::get('/cerca', [SearchController::class, 'doSearch'])->name("searchGlobally");
 
 
 Route::prefix("carrello")->group(function () {
@@ -47,7 +48,6 @@ Route::prefix("account")->group(function () {
     });
 });
 
-Route::get('/cerca', [SearchController::class, 'doSearch'])->name("searchGlobally");
 
 Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
 

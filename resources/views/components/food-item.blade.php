@@ -12,7 +12,7 @@
             <span class="font-light antialiased"> {{ number_format($item->price, 2) }} €</span>
             <form method="post" class="m-0" action="{{ route('cart.add_item') }}">
                 @csrf
-                <input type="hidden" name="food_id" value="{{ $item->id }}" />
+                <input type="hidden" name="id" value="{{ $item->id }}" />
                 <input type="hidden" name="food_name" value="{{ $item->name }}" />
                 <input type="hidden" name="food_price" value="{{ $item->price }}" />
                 <button class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700 rounded-xl">

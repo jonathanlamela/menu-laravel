@@ -85,7 +85,7 @@ class CheckoutController extends Controller
     {
         $cart = session('cart', [
             "items" => [],
-            "subtotal" => 0
+            "total" => 0
         ]);
 
         if ($cart) {
@@ -103,7 +103,7 @@ class CheckoutController extends Controller
 
         $cart = session('cart', [
             "items" => [],
-            "subtotal" => 0
+            "total" => 0
         ]);
 
         $shipping_costs = (ShippingSetting::first()->shipping_costs) ?? 0;
@@ -111,7 +111,7 @@ class CheckoutController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "subtotal" => (float)$cart["subtotal"] + ($request->session()->get('tipoConsegna') != "asporto" ? $shipping_costs : 0.00),
+            "total" => (float)$cart["total"] + ($request->session()->get('tipoConsegna') != "asporto" ? $shipping_costs : 0.00),
             "shipping_costs" => $request->session()->get('tipoConsegna') != "asporto" ? $shipping_costs : 0.00,
             "is_shipping" => $request->session()->get('tipoConsegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
@@ -129,7 +129,7 @@ class CheckoutController extends Controller
 
             OrderDetail::create([
                 "order_id" => $order->id,
-                "food_id" => $item["id"],
+                "id" => $item["id"],
                 "quantity" => $item["quantity"],
                 "unit_price" => $item["price"],
                 "price" => $item["price"] * $item["quantity"],

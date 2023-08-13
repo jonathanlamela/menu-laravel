@@ -20,6 +20,6 @@ class AccountController extends Controller
 
     public function dashboard()
     {
-        return view('account/index', []);
+        return Inertia::render("Account/AccountPage", []);
     }
 }

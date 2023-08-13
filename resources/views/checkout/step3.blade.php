@@ -95,11 +95,11 @@
                                             <b>Totale</b>
                                         </td>
                                         @if (session('tipoConsegna') == 'asporto')
-                                            <td class="text-center">{{ number_format(session('cart')['subtotal'], 2) }} €
+                                            <td class="text-center">{{ number_format(session('cart')['total'], 2) }} €
                                             </td>
                                         @else
                                             <td class="text-center">
-                                                {{ number_format(session('cart')['subtotal'] + ($shippingSettings->shipping_costs ?? 0), 2) }}
+                                                {{ number_format(session('cart')['total'] + ($shippingSettings->shipping_costs ?? 0), 2) }}
                                                 €</td>
                                         @endif
                                     </tr>

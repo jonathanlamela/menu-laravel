@@ -3,7 +3,7 @@ module.exports = {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./frontend/**/*.tsx",
+    "./react-frontend/**/*.tsx",
   ],
   theme: {
     extend: {},

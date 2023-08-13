@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->decimal('subtotal');
+            $table->decimal('total');
             $table->decimal('shipping_costs');
             $table->boolean('is_shipping');
             $table->string('shipping_address')->nullable();

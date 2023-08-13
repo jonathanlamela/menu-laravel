@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
 
     public function show(Category $category)
     {
-        return view("category/show", [
+
+        $foods = $category->foods()->filter(request(['search']))->get();
+
+        return Inertia::render("CategoriaPage", [
             "category" => $category,
-            "foods" => $category->foods()->filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
+            "foods" => $foods,
             "elementsPerPage" => request('elementsPerPage') ?? 5
         ]);
     }

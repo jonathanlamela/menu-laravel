@@ -28,13 +28,5 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Paginator::useTailwind();
-
-        Category::updating(function ($model) {
-            $model->slug = Str::slug($model->title);
-        });
-
-        Category::creating(function ($model) {
-            $model->slug = Str::slug($model->title);
-        });
     }
 }
