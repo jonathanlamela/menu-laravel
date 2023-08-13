@@ -11,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import HomeButton from "@src/components/HomeButton";
-import { LoginFields } from "@src/types";
+import { CurrentUser, LoginFields } from "@src/types";
 import { loginValidator } from "@src/validators";
 import { Link, usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/core";
@@ -19,10 +19,8 @@ import route from "ziggy-js";
 
 export default function ConfermaEmailPage() {
 
-    const page = usePage<{ backUrl: string | null }>();
-
-
-    const user: any = page.props.user;
+    const page = usePage<{ backUrl: string | null, user: CurrentUser }>();
+    const { user } = page.props;
 
 
 

@@ -23,9 +23,6 @@ export default function LoginPage() {
 
     const { backUrl } = page.props;
 
-    const formErrors = page.props.errors;
-
-
     const { register, handleSubmit, formState: { errors, isValid } } = useForm<LoginFields>({
         resolver: yupResolver(loginValidator),
         mode: "onChange",
@@ -54,7 +51,7 @@ export default function LoginPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center pl-8 text-white h-16">
                     <li>
-                        <BreadcrumbLink href="/account/login">
+                        <BreadcrumbLink href={route("login")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

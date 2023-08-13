@@ -20,14 +20,14 @@ class OrderController extends Controller
         );
     }
 
-    public function orderView(Order $order)
+    public function orderView($id)
     {
         return view('order.view', [
-            "order" => $order
+            "order" => Order::where("id", "=", $id)->get()
         ]);
     }
 
-    public function paga(Request $request, Order $order)
+    public function paga(Order $order)
     {
 
         Stripe::setApiKey(env('STRIPE_SECRET'));

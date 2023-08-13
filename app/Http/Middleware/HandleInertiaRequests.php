@@ -74,6 +74,9 @@ class HandleInertiaRequests extends Middleware
                 case "profile-information-updated":
                     $message['text'] = "Informazioni profilo aggiornate";
                     break;
+                case "password-updated":
+                    $message['text'] = "Password aggiornata con successo";
+                    break;
                 default:
                     $message['text'] = $request->session()->get('status');
                     break;
@@ -88,7 +91,6 @@ class HandleInertiaRequests extends Middleware
             "general_settings" => GeneralSetting::all()->first(),
             "categories" => Category::all(["id", "name", "slug"]),
             "message" => $message,
-            "tipoConsegna" => session('tipoConsegna', 'ASPORTO')
         ]);
     }
 }

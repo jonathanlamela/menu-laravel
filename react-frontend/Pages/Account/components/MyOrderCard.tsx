@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link } from "@inertiajs/react";
+import route from "ziggy-js";
 
 
 export default function MyOrderCard({ order }: { order: any }) {
     return <>
-        <Link to={`/account/i-miei-ordini/${order.id}`}>
+        <Link href={route("ordini.view", { id: order.id })}>
             <div className="w-full md:w-1/3 bg-red-100/30 p-4 shadow">
                 <div className="flex flex-col space-y-2">
                     <p className="font-bold">Ordine #{order.id}</p>
@@ -24,7 +25,7 @@ export default function MyOrderCard({ order }: { order: any }) {
                         </div>
                     </div>
                     <div className="flex flex-row items-center">
-                        <Link className="underline text-red-900" to={`/account/i-miei-ordini/${order.id}`}>
+                        <Link className="underline text-red-900" href={route("ordini.view", { id: order.id })}>
                             Dettaglio ordine
                         </Link>
                     </div>

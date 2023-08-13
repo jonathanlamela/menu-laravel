@@ -17,9 +17,9 @@ export type CategoryFields = {
 
 export type ChangePasswordFields = {
   email: string;
-  currentPassword: string;
+  current_password: string;
   password: string;
-  confirmPassword: string;
+  password_confirmation: string;
 };
 
 export type LoginFields = {
@@ -185,4 +185,12 @@ export type Message = {
 export type GeneralSettings = {
   site_title: string;
   site_subtitle: string;
+};
+
+export type CurrentUser = {
+  email: string;
+  firstname: string;
+  id: number;
+  lastname: string;
+  role: string;
 };

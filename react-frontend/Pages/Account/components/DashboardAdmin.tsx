@@ -1,10 +1,11 @@
 import { usePage } from "@inertiajs/react";
 import DashboardButton from "@src/components/account/DashboardButton";
+import { CurrentUser } from "@src/types";
 
 
 export default function DashboardAdmin() {
 
-    const page = usePage<{ user: any }>();
+    const page = usePage<{ user: CurrentUser }>();
     const { user } = page.props;
 
     if (user.role === "admin") {

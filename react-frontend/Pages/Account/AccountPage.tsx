@@ -13,7 +13,7 @@ import DashboardDefault from "@src/Pages/Account/components/DashboardDefault";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import route from "ziggy-js"
 
-export default function LoginPage() {
+export default function AccountPage() {
 
 
     return <>

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import React from "react";
 import { usePage } from "@inertiajs/react";
 import { router } from '@inertiajs/react'
 import route from "ziggy-js"

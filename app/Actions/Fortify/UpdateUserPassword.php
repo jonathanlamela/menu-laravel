@@ -30,6 +30,8 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'current_password.required' => "Il campo password attuale è obbligatorio"
         ])->after(function ($validator) use ($user, $input) {
             if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
+                session()->flash("error_message", "Password attuale non valida");
+
                 $validator->errors()->add('current_password', "La password attuale non è valida");
             }
         })->validate();
