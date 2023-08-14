@@ -90,7 +90,7 @@ class HandleInertiaRequests extends Middleware
                 ? $request->user()->only(['id', 'firstname', 'lastname', 'role', 'email'])
                 : null,
             "settings" => Settings::all()->first(),
-            "categories" => Category::all(["id", "name", "slug"]),
+            "categories_for_pills" => Category::all(["id", "name", "slug"]),
             "message" => $message,
         ]);
     }

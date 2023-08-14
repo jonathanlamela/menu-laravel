@@ -1,4 +1,4 @@
-import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, UpdateCategoryFields, UpdateFoodFields } from "@react-src/types";
+import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, Settings, UpdateCategoryFields, UpdateFoodFields } from "@react-src/types";
 import { Resolver } from "react-hook-form";
 import * as yup from "yup";
 
@@ -149,14 +149,15 @@ export const resetPasswordValidator = yup.object({
     ),
 }).required();
 
-export const settingValidator = yup.object({
-    siteName: yup.string().required("Il campo nome del sito è obbligatorio"),
-    shippingCosts: yup.number().typeError("Inserisci un numero valido").min(
+export const settingValidator = yup.object().shape<SchemaObject<Settings>>({
+    site_title: yup.string().required("Il campo nome del sito è obbligatorio"),
+    site_subtitle: yup.string().nullable(),
+    shipping_costs: yup.number().typeError("Inserisci un numero valido").min(
         0.01,
         "Il prezzo deve essere maggiore di 0",
     ),
-    orderCreatedStateId: yup.string().required("Seleziona uno stato valido"),
-    orderPaidStateId: yup.string().required("Seleziona uno stato valido"),
+    order_created_state_id: yup.string().required("Seleziona uno stato valido"),
+    order_paid_state_id: yup.string().required("Seleziona uno stato valido"),
 });
 
 const verifyEmail = async (value: string, values: yup.TestContext<any>) => {

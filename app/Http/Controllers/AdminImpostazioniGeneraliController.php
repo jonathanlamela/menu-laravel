@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GeneralSetting;
+use App\Models\OrderState;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\OrderDetail;
-use App\Models\Setting;
+use App\Models\Settings;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -14,8 +12,9 @@ class AdminImpostazioniGeneraliController extends Controller
 {
     public function index()
     {
-        return view('admin/impostazioni/generali', [
-            "item" => GeneralSetting::first() ?? new GeneralSetting()
+        return Inertia::render('admin/settings/ImpostazioniGeneraliPage', [
+            "item" => Settings::first() ?? new Settings(),
+            "order_states" => OrderState::all()
         ]);
     }
 
@@ -23,10 +22,19 @@ class AdminImpostazioniGeneraliController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'site_title' => 'required',
-            'site_subtitle' => ''
+            'site_subtitle' => '',
+            'order_created_state_id' => 'required|numeric',
+            'order_paid_state_id' => 'required|numeric',
+            'shipping_costs' => 'required|numeric',
+
         ], [
             'site_title.required' => "Il campo nome del sito è obbligatorio",
+            'order_created_state_id.required' => "Campo obbligatorio",
+            'order_paid_state_id.required' => "Campo obbligatorio",
+            'shipping_costs.required' => "Il campo spese di spedizione è obbligatorio",
+            'shipping_costs.numeric' => "Inserisci un costo valido ",
         ]);
+
 
         if ($validator->fails()) {
             return redirect(route('admin.impostazioni.generali'))
@@ -37,10 +45,10 @@ class AdminImpostazioniGeneraliController extends Controller
 
         $attributes = $validator->validated();
 
-        if (GeneralSetting::first()) {
-            GeneralSetting::first()->update($attributes);
+        if (Settings::first()) {
+            Settings::first()->update($attributes);
         } else {
-            GeneralSetting::create($attributes);
+            Settings::create($attributes);
         }
 
         session()->flash("success_message", "Impostazioni aggiornate");
