@@ -10,9 +10,13 @@ export type CartRow = {
 };
 
 export type CategoryFields = {
-  id: number;
   name: string;
   image: FileList;
+};
+
+export type CreateCategoryFields = CategoryFields;
+export type UpdateCategoryFields = CategoryFields & {
+  id: number;
 };
 
 export type ChangePasswordFields = {
@@ -56,14 +60,6 @@ export type VerifyAccountFields = {
   email: string;
 };
 
-export type SettingFields = {
-  siteName: string;
-  siteSubtitle: string;
-  shippingCosts: number;
-  orderCreatedStateId?: number;
-  orderPaidStateId?: number;
-};
-
 export type SearchFields = {
   search: string;
 };
@@ -82,23 +78,10 @@ export type FoodFields = {
   categoryId: number;
 };
 
-export type CategoryUpdateRequest = {
+export type Category = {
+  id: number;
   name: string;
-  image: File;
-};
-
-export type CategoryListRequest = {
-  page: number;
-  perPage: number;
-  search: string;
-  orderBy: string;
-  ascend: boolean;
-  paginated: boolean;
-};
-
-export type CategoryCreateRequest = {
-  name: string;
-  image: File;
+  image: FileList;
 };
 
 export type InformazioniConsegnaFields = {
@@ -146,17 +129,6 @@ export type AccountState = {
   userLogged: any;
 };
 
-export type AppState = {
-  categories: [];
-  settings: SettingFields;
-};
-
-export type AdminState = {
-  categories: [] | null;
-  requestIsPending: boolean;
-  requestResult: RequestResult;
-};
-
 export type CartState = {
   items: { [name: string]: CartRow };
   total: number;
@@ -168,13 +140,6 @@ export type CartState = {
 
 export type MessagesState = {
   message?: Message | null;
-};
-
-export type RootState = {
-  app: AppState;
-  cart: CartState;
-  messages: MessagesState;
-  account: AccountState;
 };
 
 export type Message = {
@@ -194,3 +159,29 @@ export type CurrentUser = {
   lastname: string;
   role: string;
 };
+
+export interface OrderState {
+  id: number;
+  name: string;
+  cssBadgeClass: string | null;
+}
+
+export interface OrderDetail {
+  id: number;
+  name: string | null;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface GetOrderDetailResponse {
+  id: number;
+  orderState: OrderState | null;
+  isPaid: boolean;
+  isShippingRequired: boolean;
+  deliveryAddress: string | null;
+  deliveryTime: string | null;
+  notes: string | null;
+  shippingCosts: number;
+  orderDetails: OrderDetail[] | null;
+  total: number;
+}

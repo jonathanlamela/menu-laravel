@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import React from "react"

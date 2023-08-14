@@ -1,12 +1,15 @@
-import { ResetPasswordTokenFields } from "@src/types";
+import { CreateCategoryFields, ResetPasswordTokenFields, UpdateCategoryFields } from "@src/types";
 import { Resolver } from "react-hook-form";
 import * as yup from "yup";
 
 import route from "ziggy-js";
 
-export const categoryValidator = yup.object({
+type SchemaObject<T> = {
+    [key in keyof T]: yup.Schema<any>
+}
+export const createCategoryValidator = yup.object().shape<SchemaObject<CreateCategoryFields>>({
     name: yup.string().required("Il campo nome è obbligatorio"),
-    image: yup.mixed().test(
+    image: yup.mixed().nullable().test(
         "fileSize",
         "File troppo grande (max 1 mega)",
         (value: any) => {
@@ -25,6 +28,34 @@ export const categoryValidator = yup.object({
                     return true;
                 }
 
+                return value[0] &&
+                    ["image/jpg", "image/jpeg", "image/png"].includes(
+                        value[0].type,
+                    );
+            },
+        ),
+}).required();
+
+export const updateCategoryValidator = yup.object().shape<SchemaObject<UpdateCategoryFields>>({
+    id: yup.number().required(),
+    name: yup.string().required("Il campo nome è obbligatorio"),
+    image: yup.mixed().nullable().test(
+        "fileSize",
+        "File troppo grande (max 1 mega)",
+        (value: any) => {
+            if (value == null || value.length === 0) {
+                return true;
+            }
+            return value.length && value[0].size <= 1000 * 1000;
+        },
+    )
+        .test(
+            "fileFormat",
+            "Formato non accettato",
+            (value: any) => {
+                if (value == null || value.length === 0) {
+                    return true;
+                }
                 return value[0] &&
                     ["image/jpg", "image/jpeg", "image/png"].includes(
                         value[0].type,

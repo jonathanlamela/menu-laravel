@@ -5,25 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\Order;
-
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
 
     public function list()
     {
-        return view(
-            "order.list",
-            [
-                "orders" => Order::where("user_id", "=", request()->user()->id)->get()
-            ]
-        );
+        return Inertia::render("Account/Order/OrderListPage", [
+            "orders" => Order::where("user_id", "=", request()->user()->id)->get()
+        ]);
     }
 
-    public function orderView($id)
+    public function orderView(Order $order)
     {
-        return view('order.view', [
-            "order" => Order::where("id", "=", $id)->get()
+        return Inertia::render("Account/Order/OrderDetailPage", [
+            "order" => $order
         ]);
     }
 
