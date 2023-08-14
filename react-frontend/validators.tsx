@@ -1,4 +1,4 @@
-import { CreateCategoryFields, ResetPasswordTokenFields, UpdateCategoryFields } from "@src/types";
+import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, UpdateCategoryFields, UpdateFoodFields } from "@src/types";
 import { Resolver } from "react-hook-form";
 import * as yup from "yup";
 
@@ -9,7 +9,8 @@ type SchemaObject<T> = {
 }
 export const createCategoryValidator = yup.object().shape<SchemaObject<CreateCategoryFields>>({
     name: yup.string().required("Il campo nome è obbligatorio"),
-    image: yup.mixed().nullable().test(
+    image: yup.string().nullable(),
+    imageFile: yup.mixed().nullable().test(
         "fileSize",
         "File troppo grande (max 1 mega)",
         (value: any) => {
@@ -39,13 +40,15 @@ export const createCategoryValidator = yup.object().shape<SchemaObject<CreateCat
 export const updateCategoryValidator = yup.object().shape<SchemaObject<UpdateCategoryFields>>({
     id: yup.number().required(),
     name: yup.string().required("Il campo nome è obbligatorio"),
-    image: yup.mixed().nullable().test(
+    image: yup.string().nullable(),
+    imageFile: yup.mixed().test(
         "fileSize",
         "File troppo grande (max 1 mega)",
         (value: any) => {
             if (value == null || value.length === 0) {
                 return true;
             }
+            console.log(value);
             return value.length && value[0].size <= 1000 * 1000;
         },
     )
@@ -61,7 +64,7 @@ export const updateCategoryValidator = yup.object().shape<SchemaObject<UpdateCat
                         value[0].type,
                     );
             },
-        ),
+        ).nullable(),
 }).required();
 
 export const changePasswordValidator = yup.object({
@@ -78,7 +81,7 @@ export const changePasswordValidator = yup.object({
     ).oneOf([yup.ref("password")], "Le due password devono corrispondere"),
 }).required();
 
-export const foodValidator = yup.object({
+export const createFoodValidator = yup.object().shape<SchemaObject<CreateFoodFields>>({
     name: yup.string().required("Il campo nome è obbligatorio"),
     price: yup.number().typeError("Inserisci un numero valido").required(
         "Il campo prezzo è obbligatorio",
@@ -86,7 +89,21 @@ export const foodValidator = yup.object({
         0.01,
         "Il prezzo deve essere maggiore di 0",
     ),
-    categoryId: yup.number().required("La categoria è obbligatoria"),
+    ingredients: yup.string().nullable(),
+    category_id: yup.number().required("La categoria è obbligatoria"),
+}).required();
+
+export const updateFoodValidator = yup.object().shape<SchemaObject<UpdateFoodFields>>({
+    id: yup.number().required(),
+    name: yup.string().required("Il campo nome è obbligatorio"),
+    price: yup.number().typeError("Inserisci un numero valido").required(
+        "Il campo prezzo è obbligatorio",
+    ).min(
+        0.01,
+        "Il prezzo deve essere maggiore di 0",
+    ),
+    ingredients: yup.string().nullable(),
+    category_id: yup.number().required("La categoria è obbligatoria"),
 }).required();
 
 export const informazioniConsegnaValidator = yup.object({

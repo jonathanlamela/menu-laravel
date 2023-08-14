@@ -11,31 +11,27 @@ import { useForm } from "react-hook-form";
 import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
 import Messages from "@src/components/Messages";
-import { CreateCategoryFields } from "@src/types";
-import { createCategoryValidator } from "@src/validators";
+import { Category, CreateFoodFields } from "@src/types";
+import { createFoodValidator } from "@src/validators";
+import { router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
-import { router } from "@inertiajs/react";
 
 
-export default function AdminCategoryCreatePage() {
+export default function AdminCategoryFoodPage() {
 
-
-    const { register, handleSubmit, formState: { errors }, } = useForm<CreateCategoryFields>({
-        resolver: yupResolver(createCategoryValidator)
+    const page = usePage<{ categories: Category[] }>();
+    const { categories } = page.props;
+    const { register, handleSubmit, formState: { errors } } = useForm<CreateFoodFields>({
+        resolver: yupResolver(createFoodValidator)
     });
 
-    const onSubmit = async (data: CreateCategoryFields) => {
-        router.post(route("admin.category.store"), {
-            name: data.name,
-            image: data.image ? data.image[0] : null
-        }, {
-            forceFormData: true
-        });
+    const onSubmit = async (data: CreateFoodFields) => {
+        router.post(route("admin.food.store"), data);
     }
 
-    return <>
-        <BaseLayout title="Nuova categoria">
 
+    return <>
+        <BaseLayout title="Crea cibo">
             <Topbar>
                 <TopbarLeft>
                     <HomeButton></HomeButton>
@@ -49,19 +45,15 @@ export default function AdminCategoryCreatePage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("account.dashboard")}>
-                            Profilo
+                        <BreadcrumbLink href={route("admin.food.list")}>
+                            Cibi
                         </BreadcrumbLink>
                     </li>
                     <li>::</li>
-                    <li>
-                        <BreadcrumbLink href={route("admin.category.list")}>
-                            Categorie
-                        </BreadcrumbLink>
-                    </li>
-                    <li>Crea categoria</li>
+                    <li>Crea cibo</li>
                 </ol>
             </HeaderMenu>
+
             <div className="flex flex-col p-8 flex-grow">
                 <Messages></Messages>
                 <form className="flex-col space-y-2" onSubmit={handleSubmit(onSubmit)}>
@@ -75,16 +67,31 @@ export default function AdminCategoryCreatePage() {
                         </div>
                     </div>
                     <div className="w-1/3 flex flex-col space-y-2">
-                        <label className="form-label">Immagine</label>
-                        <input type="file"
-                            {...register("image")}
-                        />
+                        <label className="form-label">Ingredienti</label>
+                        <textarea className="text-input" {...register("ingredients")}></textarea>
+                    </div>
+                    <div className="w-1/3 flex flex-col space-y-2">
+                        <label className="form-label">Prezzo</label>
+                        <input type="text"
+                            {...register("price")}
+                            className={errors.price ? "text-input-invalid" : "text-input"} />
                         <div className="invalid-feedback">
-                            {errors.image?.message}
+                            {errors.price?.message}
                         </div>
                     </div>
+                    <div className="w-1/3 flex flex-col space-y-2">
+                        <label className="form-label">Categoria</label>
+                        <select {...register("category_id")}
+                            className={errors.category_id ? "text-input-invalid" : "text-input"}>
+                            {categories.map((cat: any) => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
+                        </select>
+                        <div className="invalid-feedback">
+                            {errors.category_id?.message}
+                        </div>
+                    </div>
+
                     <div className="w-1/3 flex flex-col space-y-2 items-start">
-                        <button type="submit" className="btn-success ">
+                        <button type="submit" className="btn-success">
                             Crea
                         </button>
                     </div>

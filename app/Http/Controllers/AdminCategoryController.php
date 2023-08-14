@@ -23,7 +23,6 @@ class AdminCategoryController extends Controller
             "search" => request('search', null),
             "orderBy" => $orderBy,
             "ascending" => $ascending_value === "true",
-            "ascending_text" => $ascending
         ]);
     }
 
@@ -53,8 +52,8 @@ class AdminCategoryController extends Controller
 
         $category = Category::create($attributes);
 
-        if ($request->file('image')) {
-            $uploadedFile = $request->file('image');
+        if ($request->file('imageFile')) {
+            $uploadedFile = $request->file('imageFile');
 
             $file_path = Storage::putFileAs('media/category', $uploadedFile, $category->id . "." . $uploadedFile->extension());
 
@@ -96,8 +95,8 @@ class AdminCategoryController extends Controller
 
         $attributes = $validator->validated();
 
-        if ($request->file('image')) {
-            $uploadedFile = $request->file('image');
+        if ($request->file('imageFile')) {
+            $uploadedFile = $request->file('imageFile');
 
             $file_path = Storage::putFileAs('media/category', $uploadedFile, $category->id . "." . $uploadedFile->extension());
 

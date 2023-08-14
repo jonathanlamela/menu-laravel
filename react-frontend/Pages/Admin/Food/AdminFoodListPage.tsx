@@ -8,17 +8,20 @@ import Topbar from "@src/components/Topbar";
 import TopbarLeft from "@src/components/TopbarLeft";
 import TopbarRight from "@src/components/TopbarRight";
 import BaseLayout from "@src/layouts/BaseLayout";
-import AdminCategoryRow from "@src/Pages/Admin/Category/components/AdminCategoryRow";
+import { useEffect, useState } from "react";
+import AdminFoodRow from "@src/Pages/Admin/Food/components/AdminFoodRow";
 import AdminPagination from "@src/Pages/Admin/components/AdminPagination";
 import AdminPerPage from "@src/Pages/Admin/components/AdminPerPage";
 import HeaderMenu from "@src/components/HeaderMenu";
 import BreadcrumbLink from "@src/components/BreadcrumbLink";
+import LoadingContent from "@src/components/LoadingContent";
 import AdminOrderToggler from "@src/Pages/Admin/components/AdminOrderToggler";
 import { SearchFields } from "@src/types";
 import { Link, router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
 
-export default function AdminCategoryListPage() {
+export default function AdminFoodListPage() {
+
 
     const page = usePage<{ data: any, search: string, ascending: boolean, orderBy: string, perPage: number }>();
     const { search, ascending, orderBy, data } = page.props;
@@ -31,7 +34,7 @@ export default function AdminCategoryListPage() {
     });
 
     const onSubmit = async (formData: SearchFields) => {
-        router.visit(route("admin.category.list"), {
+        router.visit(route("admin.food.list"), {
             data: {
                 search: formData.search,
                 page: data.current_page,
@@ -46,7 +49,7 @@ export default function AdminCategoryListPage() {
 
         if (by === orderBy) {
 
-            router.visit(route("admin.category.list"), {
+            router.visit(route("admin.food.list"), {
                 data: {
                     search: search,
                     page: data.current_page,
@@ -56,7 +59,7 @@ export default function AdminCategoryListPage() {
                 }
             })
         } else {
-            router.visit(route("admin.category.list"), {
+            router.visit(route("admin.food.list"), {
                 data: {
                     search: search,
                     page: data.current_page,
@@ -69,7 +72,7 @@ export default function AdminCategoryListPage() {
     }
 
     const goToPage = (page: number) => {
-        router.visit(route("admin.category.list"), {
+        router.visit(route("admin.food.list"), {
             data: {
                 search: search,
                 page: page,
@@ -81,7 +84,7 @@ export default function AdminCategoryListPage() {
     }
 
     const editPerPage = (value: number) => {
-        router.visit(route("admin.category.list"), {
+        router.visit(route("admin.food.list"), {
             data: {
                 search: search,
                 page: data.current_page,
@@ -93,7 +96,8 @@ export default function AdminCategoryListPage() {
     }
 
     return <>
-        <BaseLayout title="Categorie">
+        <BaseLayout title="Cibi">
+
             <Topbar>
                 <TopbarLeft>
                     <HomeButton></HomeButton>
@@ -105,30 +109,30 @@ export default function AdminCategoryListPage() {
             </Topbar>
             <Header></Header>
             <HeaderMenu>
-                <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
+                <ol className="flex flex-row space-x-2 items-center h-16 pl-8 text-white">
                     <li>
                         <BreadcrumbLink href={route("account.dashboard")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>
                     <li>::</li>
-                    <li>Amministrazione categorie</li>
+                    <li>Amministrazione cibi</li>
                 </ol>
             </HeaderMenu>
             <div className="flex flex-col px-8 py-4 flex-grow">
                 <Messages></Messages>
                 <div className="w-full pb-4">
-                    <p className="text-2xl antialiased font-bold">Categorie</p>
+                    <p className="text-2xl antialiased font-bold">Cibi</p>
                 </div>
                 <div className="flex w-full bg-gray-100 p-2">
                     <div className="w-1/2">
                         <div className="flex">
-                            <Link href={route("admin.category.create")} className="btn-primary">Crea</Link>
+                            <Link href={route("admin.food.create")} className="btn-primary">Crea</Link>
                         </div>
                     </div>
                     <div className="w-1/2 flex justify-end">
                         <form className="m-0 flex space-x-2" onSubmit={handleSubmit(onSubmit)}>
-                            <input {...register("search")} type="text" className="text-input bg-white" name="search" placeholder="Cerca una categoria"
+                            <input {...register("search")} type="text" className="text-input bg-white" name="search" placeholder="Cerca un cibo"
                             />
                             <button type="submit" className="btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -144,16 +148,15 @@ export default function AdminCategoryListPage() {
                     <table className="w-full flex flex-col">
                         <thead>
                             <tr className="h-10 flex flex-row items-center">
-                                <th className="w-1/12 lg:w-1/12 text-center">
+                                <th className="w-1/12 text-center">
                                     <AdminOrderToggler
                                         className="flex w-full flex-row space-x-1 justify-center"
                                         ascending={ascending}
                                         isCurrent={orderBy === "id"}
                                         label="Id" onClick={() => {
                                             toggleOrder("id")
-                                        }}></AdminOrderToggler>
-                                </th>
-                                <th className="w-5/12 lg:w-8/12 text-left">
+                                        }}></AdminOrderToggler></th>
+                                <th className="w-6/12 md:w-5/12 text-left">
                                     <AdminOrderToggler
                                         className="flex w-full flex-row space-x-1 justify-start"
                                         ascending={ascending}
@@ -162,11 +165,29 @@ export default function AdminCategoryListPage() {
                                             toggleOrder("name")
                                         }}></AdminOrderToggler>
                                 </th>
-                                <th className="w-6/12 lg:w-3/12 text-center">Azioni</th>
+                                <th className="w-2/12 text-center hidden lg:block">
+                                    <AdminOrderToggler
+                                        className="flex w-full flex-row space-x-1 justify-center"
+                                        ascending={ascending}
+                                        isCurrent={orderBy === "category_id"}
+                                        label="Categoria" onClick={() => {
+                                            toggleOrder("category_id")
+                                        }}></AdminOrderToggler>
+                                </th>
+                                <th className="w-2/12 text-center hidden lg:block">
+                                    <AdminOrderToggler
+                                        className="flex w-full flex-row space-x-1 justify-center"
+                                        ascending={ascending}
+                                        isCurrent={orderBy === "price"}
+                                        label="Prezzo" onClick={() => {
+                                            toggleOrder("price")
+                                        }}></AdminOrderToggler>
+                                </th>
+                                <th className="w-4/12 md:w-3/12 text-center">Azioni</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {items?.map((row: any) => <AdminCategoryRow item={row} key={row.id}></AdminCategoryRow>)}
+                            {items?.map((row: any) => <AdminFoodRow item={row} key={row.id}></AdminFoodRow>)}
                         </tbody>
                     </table>
                 </div>

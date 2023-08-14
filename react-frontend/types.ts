@@ -11,7 +11,8 @@ export type CartRow = {
 
 export type CategoryFields = {
   name: string;
-  image: FileList;
+  imageFile: FileList;
+  image: string;
 };
 
 export type CreateCategoryFields = CategoryFields;
@@ -70,18 +71,21 @@ export interface OrderStateFields {
   cssBadgeClass?: string;
 }
 
-export type FoodFields = {
-  id: number;
+export type CreateFoodFields = {
   name: string;
   ingredients: string;
   price: number;
-  categoryId: number;
+  category_id: number;
+};
+
+export type UpdateFoodFields = CreateFoodFields & {
+  id: number;
 };
 
 export type Category = {
   id: number;
   name: string;
-  image: FileList;
+  image: string;
 };
 
 export type InformazioniConsegnaFields = {

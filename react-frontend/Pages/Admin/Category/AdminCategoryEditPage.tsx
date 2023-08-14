@@ -24,12 +24,16 @@ export default function AdminCategoryEditPage() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<UpdateCategoryFields>({
         resolver: yupResolver(updateCategoryValidator),
-        defaultValues: category
+        defaultValues: {
+            id: category.id,
+            name: category.name,
+            image: category.image
+        }
     });
 
 
     const onSubmit = async (data: UpdateCategoryFields) => {
-        router.post(route("admin.category.update", { category: category.id }), {
+        router.post(route("admin.category.update", { category: category }), {
             name: data.name,
             image: data.image ? data.image[0] : null
         }, {
@@ -65,7 +69,13 @@ export default function AdminCategoryEditPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href="/amministrazione/categorie">
+                        <BreadcrumbLink href={route("account.dashboard")}>
+                            Profilo
+                        </BreadcrumbLink>
+                    </li>
+                    <li>::</li>
+                    <li>
+                        <BreadcrumbLink href={route("admin.category.list")}>
                             Categorie
                         </BreadcrumbLink>
                     </li>
