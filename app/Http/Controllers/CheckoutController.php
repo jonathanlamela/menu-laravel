@@ -8,6 +8,7 @@ use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrdiniSetting;
+use App\Models\Settings;
 use App\Models\ShippingSetting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -18,9 +19,7 @@ class CheckoutController extends Controller
 {
     public function step1()
     {
-        return view('checkout/step1', [
-            "shippingSettings" => ShippingSetting::first() ?? new ShippingSetting()
-        ]);
+        return view('checkout/step1');
     }
 
     public function storeStep1(Request $request)
@@ -91,7 +90,6 @@ class CheckoutController extends Controller
         if ($cart) {
             return view('checkout/step3', [
                 "cart" => $cart,
-                "shippingSettings" => ShippingSetting::first() ?? new ShippingSetting()
             ]);
         }
     }
@@ -106,7 +104,9 @@ class CheckoutController extends Controller
             "total" => 0
         ]);
 
-        $shipping_costs = (ShippingSetting::first()->shipping_costs) ?? 0;
+        $settings = Settings::first();
+
+        $shipping_costs = ($settings->shipping_costs) ?? 0;
 
 
         $attributes = [
@@ -116,7 +116,7 @@ class CheckoutController extends Controller
             "is_shipping" => $request->session()->get('tipoConsegna') != "asporto",
             "shipping_address" => $request->session()->get('indirizzo') ?? "",
             "shipping_datetime" => $request->session()->get('orario') ?? "",
-            "order_status_id" => OrdiniSetting::first()->order_created_state_id ?? null,
+            "order_status_id" => $settings->order_created_state_id ?? null,
             "note" => $note,
             "is_paid" => False
         ];

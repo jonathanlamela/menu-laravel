@@ -10,6 +10,7 @@ use Laravel\Cashier\Events\WebhookReceived;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Illuminate\Support\Facades\Mail;
 use App\Models\OrdiniSetting;
+use App\Models\Settings;
 
 class StripeEventListener
 {
@@ -37,7 +38,7 @@ class StripeEventListener
             $metadata = $event->payload["data"]["object"]["metadata"];
             $order_sku = $metadata["order_sku"];
             $order = Order::find($order_sku);
-            $order->order_status_id =  OrdiniSetting::first()->order_paid_state_id ?? null;
+            $order->order_status_id = Settings::first()->order_paid_state_id ?? null;
             $order->is_paid = true;
             $order->save();
 

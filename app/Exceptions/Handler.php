@@ -58,13 +58,13 @@ class Handler extends ExceptionHandler
         if ($response->status() === 404) {
 
             return Inertia::render("Error404Page", [
-                "general_settings" => GeneralSetting::all()->first(),
+                "settings" => GeneralSetting::all()->first(),
             ])->toResponse($request)->setStatusCode(404);
         }
 
         if ($response->status() === 403) {
             return Inertia::render("Error403Page", [[
-                "general_settings" => GeneralSetting::all()->first(),
+                "settings" => GeneralSetting::all()->first(),
             ]])->toResponse($request)->setStatusCode(403);
         }
 

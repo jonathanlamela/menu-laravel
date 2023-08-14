@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use App\Models\Settings;
 use App\Models\ShippingSetting;
+use Illuminate\Support\Facades\Schema;
 
 class GlobalVarsServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,8 @@ class GlobalVarsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('settings', GeneralSetting::first() ?? new GeneralSetting());
+        if (Schema::hasTable('settings')) {
+            view()->share('settings', Settings::first() ?? new Settings());
+        }
     }
 }

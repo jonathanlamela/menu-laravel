@@ -106,33 +106,6 @@ export type TipologiaConsegnaFields = {
   tipologiaConsegna: TipologiaConsegna;
 };
 
-export enum AccountSigninStatus {
-  none,
-  pending,
-  failed,
-  success,
-}
-
-export enum AccountVerifyStatus {
-  none,
-  failed,
-  success,
-}
-
-export enum RequestResult {
-  none,
-  failed,
-  success,
-}
-
-export type AccountState = {
-  signinStatus: AccountSigninStatus;
-  verifyAccountStatus: AccountVerifyStatus;
-  pendingRequest: boolean;
-  user: any;
-  userLogged: any;
-};
-
 export type CartState = {
   items: { [name: string]: CartRow };
   total: number;
@@ -151,9 +124,12 @@ export type Message = {
   text: string;
 };
 
-export type GeneralSettings = {
+export type Settings = {
   site_title: string;
   site_subtitle: string;
+  shipping_costs: number;
+  order_created_state_id: number;
+  order_paid_state_id: number;
 };
 
 export type CurrentUser = {

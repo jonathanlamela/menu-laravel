@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Category;
 use App\Models\GeneralSetting;
 use App\Models\Setting;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -88,7 +89,7 @@ class HandleInertiaRequests extends Middleware
             "user" => fn () => $request->user()
                 ? $request->user()->only(['id', 'firstname', 'lastname', 'role', 'email'])
                 : null,
-            "general_settings" => GeneralSetting::all()->first(),
+            "settings" => Settings::all()->first(),
             "categories" => Category::all(["id", "name", "slug"]),
             "message" => $message,
         ]);
