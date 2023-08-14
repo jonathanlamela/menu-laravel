@@ -1,4 +1,4 @@
-import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, UpdateCategoryFields, UpdateFoodFields } from "@src/types";
+import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, UpdateCategoryFields, UpdateFoodFields } from "@react-src/types";
 import { Resolver } from "react-hook-form";
 import * as yup from "yup";
 

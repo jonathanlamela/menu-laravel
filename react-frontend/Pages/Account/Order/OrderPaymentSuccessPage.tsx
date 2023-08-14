@@ -1,15 +1,14 @@
-import AccountManage from "@src/components/AccountManage";
-import BreadcrumbLink from "@src/components/BreadcrumbLink";
-import CartButton from "@src/components/CartButton";
-import Header from "@src/components/Header";
-import HeaderMenu from "@src/components/HeaderMenu";
-import HomeButton from "@src/components/HomeButton";
-import LoadingContent from "@src/components/LoadingContent";
-import Messages from "@src/components/Messages";
-import Topbar from "@src/components/Topbar";
-import TopbarLeft from "@src/components/TopbarLeft";
-import TopbarRight from "@src/components/TopbarRight";
-import BaseLayout from "@src/layouts/BaseLayout";
+import AccountManage from "@react-src/components/AccountManage";
+import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
+import CartButton from "@react-src/components/CartButton";
+import Header from "@react-src/components/Header";
+import HeaderMenu from "@react-src/components/HeaderMenu";
+import HomeButton from "@react-src/components/HomeButton";
+import Topbar from "@react-src/components/Topbar";
+import TopbarLeft from "@react-src/components/TopbarLeft";
+import TopbarRight from "@react-src/components/TopbarRight";
+import BaseLayout from "@react-src/layouts/BaseLayout";
+import route from "ziggy-js";
 
 
 export default function OrderPaymentSuccessPage() {
@@ -35,12 +34,10 @@ export default function OrderPaymentSuccessPage() {
                     </li>
                     <li>::</li>
                     <li>
-                        <BreadcrumbLink href="/account/i-miei-ordini">
+                        <BreadcrumbLink href={route("ordini.list")}>
                             I miei ordini
                         </BreadcrumbLink>
                     </li>
-
-
                 </ol>
             </HeaderMenu>
 

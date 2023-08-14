@@ -1,5 +1,5 @@
 import { Head, usePage } from '@inertiajs/react'
-import { GeneralSettings } from '@src/types';
+import { GeneralSettings } from '@react-src/types';
 
 export default function BaseLayout({ title, children }: any) {
     const page = usePage<{ general_settings: GeneralSettings }>();

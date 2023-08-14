@@ -1,5 +1,5 @@
 
-import { Message } from "@src/types";
+import { Message } from "@react-src/types";
 import { usePage } from "@inertiajs/react";
 
 

@@ -1,5 +1,5 @@
 import { usePage } from "@inertiajs/react";
-import CategoryPill from "@src/components/CategoryPill";
+import CategoryPill from "@react-src/components/CategoryPill";
 
 
 export default function CategoryPills() {

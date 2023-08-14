@@ -12,14 +12,14 @@ class OrderController extends Controller
 
     public function list()
     {
-        return Inertia::render("Account/Order/OrderListPage", [
+        return Inertia::render("account/order/OrderListPage", [
             "orders" => Order::where("user_id", "=", request()->user()->id)->get()
         ]);
     }
 
     public function orderView(Order $order)
     {
-        return Inertia::render("Account/Order/OrderDetailPage", [
+        return Inertia::render("account/order/OrderDetailPage", [
             "order" => $order
         ]);
     }

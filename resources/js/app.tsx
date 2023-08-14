@@ -5,9 +5,9 @@ import React from "react"
 
 createInertiaApp({
   resolve: name => {
-    const pages = import.meta.glob('/react-frontend/Pages/**/*.tsx', { eager: true });
+    const pages = import.meta.glob('/react-frontend/pages/**/*.tsx', { eager: true });
 
-    const pageToLoad = pages[`/react-frontend/Pages/${name}.tsx`];
+    const pageToLoad = pages[`/react-frontend/pages/${name}.tsx`];
 
     return pageToLoad;
   },

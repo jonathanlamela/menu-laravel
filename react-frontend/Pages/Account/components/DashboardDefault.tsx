@@ -1,4 +1,4 @@
-import DashboardButton from "@src/components/account/DashboardButton";
+import DashboardButton from "@react-src/components/account/DashboardButton";
 import route from "ziggy-js"
 
 export default function DashboardDefault() {

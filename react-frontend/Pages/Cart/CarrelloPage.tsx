@@ -1,18 +1,18 @@
-import AccountManage from "@src/components/AccountManage";
-import CartButton from "@src/components/CartButton";
-import CartRow from "@src/Pages/Cart/components/CartRow";
-import CategoryPills from "@src/components/CategoryPills";
-import CheckoutButton from "@src/Pages/Cart/components/CheckoutButton";
-import Header from "@src/components/Header";
-import HomeButton from "@src/components/HomeButton";
-import Messages from "@src/components/Messages";
-import Topbar from "@src/components/Topbar";
-import TopbarLeft from "@src/components/TopbarLeft";
-import TopbarRight from "@src/components/TopbarRight";
-import BaseLayout from "@src/layouts/BaseLayout";
+import AccountManage from "@react-src/components/AccountManage";
+import CartButton from "@react-src/components/CartButton";
+import CartRow from "@react-src/pages/cart/components/CartRow";
+import CategoryPills from "@react-src/components/CategoryPills";
+import CheckoutButton from "@react-src/pages/cart/components/CheckoutButton";
+import Header from "@react-src/components/Header";
+import HomeButton from "@react-src/components/HomeButton";
+import Messages from "@react-src/components/Messages";
+import Topbar from "@react-src/components/Topbar";
+import TopbarLeft from "@react-src/components/TopbarLeft";
+import TopbarRight from "@react-src/components/TopbarRight";
+import BaseLayout from "@react-src/layouts/BaseLayout";
 
-import HeaderMenu from "@src/components/HeaderMenu";
-import { CartRow as CartRowType, CartState } from "@src/types";
+import HeaderMenu from "@react-src/components/HeaderMenu";
+import { CartRow as CartRowType, CartState } from "@react-src/types";
 import { usePage } from "@inertiajs/react";
 
 

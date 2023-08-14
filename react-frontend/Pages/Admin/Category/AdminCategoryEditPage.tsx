@@ -1,20 +1,20 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import AccountManage from "@src/components/AccountManage";
-import CartButton from "@src/components/CartButton";
-import Header from "@src/components/Header";
-import HomeButton from "@src/components/HomeButton";
-import Messages from "@src/components/Messages";
-import Topbar from "@src/components/Topbar";
-import TopbarLeft from "@src/components/TopbarLeft";
-import TopbarRight from "@src/components/TopbarRight";
-import BaseLayout from "@src/layouts/BaseLayout";
+import AccountManage from "@react-src/components/AccountManage";
+import CartButton from "@react-src/components/CartButton";
+import Header from "@react-src/components/Header";
+import HomeButton from "@react-src/components/HomeButton";
+import Messages from "@react-src/components/Messages";
+import Topbar from "@react-src/components/Topbar";
+import TopbarLeft from "@react-src/components/TopbarLeft";
+import TopbarRight from "@react-src/components/TopbarRight";
+import BaseLayout from "@react-src/layouts/BaseLayout";
 import { useForm } from "react-hook-form";
-import HeaderMenu from "@src/components/HeaderMenu";
-import BreadcrumbLink from "@src/components/BreadcrumbLink";
-import { Category, UpdateCategoryFields } from "@src/types";
+import HeaderMenu from "@react-src/components/HeaderMenu";
+import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
+import { Category, UpdateCategoryFields } from "@react-src/types";
 import { router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
-import { updateCategoryValidator } from "@src/validators";
+import { updateCategoryValidator } from "@react-src/validators";
 
 
 export default function AdminCategoryEditPage() {

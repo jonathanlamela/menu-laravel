@@ -1,6 +1,6 @@
 import { usePage } from "@inertiajs/react";
-import DashboardButton from "@src/components/account/DashboardButton";
-import { CurrentUser } from "@src/types";
+import DashboardButton from "@react-src/components/account/DashboardButton";
+import { CurrentUser } from "@react-src/types";
 import route from "ziggy-js";
 
 

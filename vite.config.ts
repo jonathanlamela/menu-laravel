@@ -14,6 +14,6 @@ export default defineConfig({
     vue(),
   ],
   resolve: {
-    alias: { "@src": path.resolve(__dirname, "react-frontend") },
+    alias: { "@react-src": path.resolve(__dirname, "react-frontend") },
   },
 });

@@ -10,16 +10,16 @@ class AccountController extends Controller
 
     public function cambiaPassword()
     {
-        return Inertia::render("Account/ChangePasswordPage", []);
+        return Inertia::render("account/ChangePasswordPage", []);
     }
 
     public function informazioniPersonaliView()
     {
-        return Inertia::render("Account/InformazioniPersonaliPage", []);
+        return Inertia::render("account/InformazioniPersonaliPage", []);
     }
 
     public function dashboard()
     {
-        return Inertia::render("Account/AccountPage", []);
+        return Inertia::render("account/AccountPage", []);
     }
 }

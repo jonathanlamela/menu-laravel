@@ -1,4 +1,4 @@
-import { CartState } from "@src/types"
+import { CartState } from "@react-src/types"
 import { Link, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
 

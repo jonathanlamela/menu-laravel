@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import { CartRow as CartRowType } from "@src/types";
+import { CartRow as CartRowType } from "@react-src/types";
 import route from "ziggy-js"
 
 export default function CartRow({ row, actionsVisible }: { row: CartRowType; actionsVisible?: boolean }) {

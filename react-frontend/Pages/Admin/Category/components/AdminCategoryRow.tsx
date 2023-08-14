@@ -1,5 +1,5 @@
-import AdminDeleteButton from "@src/Pages/Admin/components/AdminDeleteButton";
-import AdminEditButton from "@src/Pages/Admin/components/AdminEditButton";
+import AdminDeleteButton from "@react-src/pages/admin/components/AdminDeleteButton";
+import AdminEditButton from "@react-src/pages/admin/components/AdminEditButton";
 import route from "ziggy-js";
 
 export default function AdminCategoryRow({ item }: any) {

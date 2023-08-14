@@ -15,7 +15,7 @@ class CartController extends Controller
             "items" => [],
             "total" => 0
         ]);
-        return Inertia::render("Cart/CarrelloPage", [
+        return Inertia::render("cart/CarrelloPage", [
             "cart" => $cart
         ]);
     }

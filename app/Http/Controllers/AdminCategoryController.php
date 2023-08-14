@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render("Admin/Category/AdminCategoryListPage", [
+        return Inertia::render("admin/category/AdminCategoryListPage", [
             "data" => Category::filter(request(['search']))->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render("Admin/Category/AdminCategoryCreatePage");
+        return Inertia::render("admin/category/AdminCategoryCreatePage");
     }
 
     public function store(Request $request)
@@ -71,7 +71,7 @@ class AdminCategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return Inertia::render("Admin/Category/AdminCategoryEditPage", [
+        return Inertia::render("admin/category/AdminCategoryEditPage", [
             "category" => $category
         ]);
     }
@@ -115,7 +115,7 @@ class AdminCategoryController extends Controller
 
     public function delete(Category $category)
     {
-        return Inertia::render("Admin/Category/AdminCategoryDeletePage", [
+        return Inertia::render("admin/category/AdminCategoryDeletePage", [
             "category" => $category
         ]);
     }

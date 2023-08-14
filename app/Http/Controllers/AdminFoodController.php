@@ -17,7 +17,7 @@ class AdminFoodController extends Controller
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render("Admin/Food/AdminFoodListPage", [
+        return Inertia::render("admin/Food/AdminFoodListPage", [
             "data" => Food::filter(request(['search']))->with('category')->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -27,7 +27,7 @@ class AdminFoodController extends Controller
 
     public function create()
     {
-        return Inertia::render("Admin/Food/AdminFoodCreatePage", [
+        return Inertia::render("admin/Food/AdminFoodCreatePage", [
             "categories" => Category::all(["id", "name"])
         ]);
     }
@@ -66,7 +66,7 @@ class AdminFoodController extends Controller
 
     public function edit(Food $food)
     {
-        return Inertia::render("Admin/Food/AdminFoodEditPage", [
+        return Inertia::render("admin/Food/AdminFoodEditPage", [
             "item" => $food,
             "categories" => Category::all(["id", "name"])
         ]);
@@ -107,7 +107,7 @@ class AdminFoodController extends Controller
 
     public function delete(Food $food)
     {
-        return Inertia::render("Admin/Food/AdminFoodDeletePage", [
+        return Inertia::render("admin/Food/AdminFoodDeletePage", [
             "item" => $food
         ]);
     }
