@@ -1,4 +1,4 @@
-import { CreateCategoryFields, CreateFoodFields, ResetPasswordTokenFields, Settings, UpdateCategoryFields, UpdateFoodFields } from "@react-src/types";
+import { CreateCategoryFields, CreateFoodFields, CreateOrderStateFields, ResetPasswordTokenFields, Settings, UpdateCategoryFields, UpdateFoodFields, UpdateOrderStateFields } from "@react-src/types";
 import { Resolver } from "react-hook-form";
 import * as yup from "yup";
 
@@ -195,6 +195,7 @@ export const signinValidator = yup.object({
 
 
 
+
 export const tipologiaConsegnaValidator = yup.object({
     tipologiaConsegna: yup.string().required("La tipologia è obbligatoria"),
 });
@@ -204,3 +205,14 @@ export const verifyAccountValidator = yup.object({
         "Questo campo è obbligatorio",
     ),
 }).required();
+
+export const createOrderStateValidator = yup.object().shape<SchemaObject<CreateOrderStateFields>>({
+    name: yup.string().required("Il campo nome è obbligatorio"),
+    css_badge_class: yup.string().required("Seleziona un elemento dalla lista")
+});
+
+export const updateOrderStateValidator = yup.object().shape<SchemaObject<UpdateOrderStateFields>>({
+    id: yup.number().required(),
+    name: yup.string().required("Il campo nome è obbligatorio"),
+    css_badge_class: yup.string().required("Seleziona un elemento dalla lista")
+});

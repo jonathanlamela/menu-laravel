@@ -143,8 +143,17 @@ export type CurrentUser = {
 export interface OrderState {
   id: number;
   name: string;
-  cssBadgeClass: string | null;
+  css_badge_class: string | undefined;
 }
+
+export type CreateOrderStateFields = {
+  name: string;
+  css_badge_class: string | undefined;
+};
+
+export type UpdateOrderStateFields = CreateOrderStateFields & {
+  id: number;
+};
 
 export interface OrderDetail {
   id: number;

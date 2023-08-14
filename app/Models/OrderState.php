@@ -10,7 +10,7 @@ class OrderState extends Model
     use HasFactory;
 
     protected $fillable = [
-        'description',
+        'name',
         'css_badge_class'
     ];
 
@@ -19,7 +19,7 @@ class OrderState extends Model
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
-            $query->where('description', 'like', '%' . $search . '%')
+            $query->where('name', 'like', '%' . $search . '%')
         );
     }
 }
