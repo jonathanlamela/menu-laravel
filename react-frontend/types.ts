@@ -103,13 +103,13 @@ export enum TipologiaConsegna {
 }
 
 export type TipologiaConsegnaFields = {
-  tipologiaConsegna: TipologiaConsegna;
+  tipologia_consegna: TipologiaConsegna;
 };
 
 export type CartState = {
   items: { [name: string]: CartRow };
   total: number;
-  tipologiaConsegna: TipologiaConsegna;
+  tipologia_consegna: TipologiaConsegna;
   indirizzo: string;
   orario: string;
   note: string;

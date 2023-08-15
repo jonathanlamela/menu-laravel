@@ -74,23 +74,23 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::loginView(function () {
-            return Inertia::render("Account/LoginPage");
+            return Inertia::render("account/LoginPage");
         });
 
         Fortify::registerView(function () {
-            return Inertia::render("Account/SigninPage");
+            return Inertia::render("account/SigninPage");
         });
 
         Fortify::verifyEmailView(function () {
-            return Inertia::render("Account/ConfermaEmailPage");
+            return Inertia::render("account/ConfermaEmailPage");
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return Inertia::render("Account/ResetPasswordPage");
+            return Inertia::render("account/ResetPasswordPage");
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return Inertia::render("Account/ResetPasswordTokenPage", [
+            return Inertia::render("account/ResetPasswordTokenPage", [
                 "token" => $request->token,
                 "email" => $request->email
             ]);

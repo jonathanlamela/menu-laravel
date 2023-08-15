@@ -43,6 +43,8 @@ class HandleInertiaRequests extends Middleware
         $cart = session('cart', [
             "items" => [],
             "total" => 0,
+            "orario" => null,
+            "indirizzo" => null,
         ]);
 
 

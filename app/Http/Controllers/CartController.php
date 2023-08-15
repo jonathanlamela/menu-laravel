@@ -89,7 +89,6 @@ class CartController extends Controller
 
 
             //update total
-
             $cart["total"] = 0;
 
             foreach ($cart["items"] as $item) {
