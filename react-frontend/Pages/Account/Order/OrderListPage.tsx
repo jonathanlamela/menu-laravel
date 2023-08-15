@@ -47,7 +47,7 @@ export default function OrderListPage() {
                 <div className="w-full pb-4">
                     <p className="text-2xl antialiased font-bold">I miei ordini</p>
                 </div>
-                <div className="w-full">
+                <div className="flex flex-col space-y-4 md:flex-row md:space-x-5 md:space-y-0">
                     {orders.length == 0 ? <p>Non ci sono ordini</p> : null}
                     {orders.map((item: any) => <MyOrderCard order={item}></MyOrderCard>)}
                 </div>

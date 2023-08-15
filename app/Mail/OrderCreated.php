@@ -4,8 +4,9 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Asahasrabuddhe\LaravelMJML\Mail\Mailable;
+
 
 
 use App\Models\Order;
@@ -22,8 +23,6 @@ class OrderCreated extends Mailable
         $this->order = $order;
     }
 
-
-
     /**
      * Build the message.
      *
@@ -31,7 +30,7 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails/order_created')->subject("Ordine creato #NUM-" . $this->order->id)->with([
+        return $this->mjml('emails/order_created')->subject("Ordine creato #NUM-" . $this->order->id)->with([
             "order" => $this->order
         ]);
     }

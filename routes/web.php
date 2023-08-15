@@ -41,6 +41,7 @@ Route::prefix("account")->group(function () {
     Route::prefix("ordini")->middleware(['auth', 'verified'])->group(function () {
 
         Route::get("", [OrderController::class, "list"])->name("ordini.list");
+        Route::post("crea", [OrderController::class, "crea"])->name("ordini.crea");
         Route::get("view/{order}", [OrderController::class, "orderView"])->name("ordini.view");
         Route::get("paga/{order}", [OrderController::class, "paga"])->name("ordini.paga")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
         Route::get("paga/{order}/completato", [OrderController::class, "storePagamento"])->name("ordini.pagamento-completato");
@@ -117,5 +118,4 @@ Route::prefix('checkout')->middleware(['auth', 'verified', 'cartIsFilled'])->gro
 
     //Riepilogo ordine e possibilità di inserire una nota per l'ordine
     Route::get('step3', [CheckoutController::class, "step3"])->name("checkout.step3");;
-    Route::post('step3', [CheckoutController::class, "storeStep3"])->name("checkout.step");
 });

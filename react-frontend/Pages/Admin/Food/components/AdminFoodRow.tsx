@@ -3,7 +3,6 @@ import AdminEditButton from "@react-src/pages/admin/components/AdminEditButton";
 import route from "ziggy-js";
 
 export default function AdminFoodRow({ item }: any) {
-    console.log(item);
     return <>
         <tr className="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
             <td className="w-1/12 text-center flex items-center justify-center">{item.id}</td>

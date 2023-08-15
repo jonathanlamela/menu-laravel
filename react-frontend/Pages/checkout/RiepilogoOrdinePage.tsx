@@ -41,11 +41,11 @@ export default function RiepilogoOrdinePage() {
                 <table className="w-full">
                     <tr>
                         <td className="font-medium">Indirizzo</td>
-                        <td>{cart.orario}</td>
+                        <td>{cart.delivery_address}</td>
                     </tr>
                     <tr>
                         <td className="font-medium">Orario</td>
-                        <td>{cart.indirizzo}</td>
+                        <td>{cart.delivery_time}</td>
                     </tr>
                 </table>
             </>
@@ -55,7 +55,7 @@ export default function RiepilogoOrdinePage() {
     }
 
     const onSubmit = (data: RiepilogoOrdineFields) => {
-        router.post(route("checkout.step3"), data);
+        router.post(route("ordini.crea"), data);
     }
 
     const shipping_costs_row = () => {

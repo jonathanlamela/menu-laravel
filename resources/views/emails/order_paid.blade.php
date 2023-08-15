@@ -1,25 +1,35 @@
-@component('mail::message')
-    <p>Gentile cliente abbiamo ricevuto il tuo pagamento.</p>
-    <p><b>Codice ordine</b> : {{ $order->id }}</p>
-    <p>Hai pagato: {{ number_format($order->total, 2) }} €</p>
-
-    <b>Cosa c'era nel tuo ordine</b><br />
-    <table style="width:100%">
-        <thead>
-            <tr>
-                <td style="font-weight:bold">Nome</td>
-                <td style="font-weight:bold">Prezzo</td>
-                <td style="font-weight:bold">Quantità</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($order->order_details as $item)
-                <tr>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ number_format($item->price, 2) }} €</td>
-                    <td>{{ $item->quantity }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endcomponent
+<mjml>
+    <mj-body background-color="#f8f9fa">
+        <mj-section>
+            <mj-column background-color="white" padding="32px">
+                <mj-text font-size="14px" align="center">Ristorante | Pizzeria </mj-text>
+                <mj-text font-size="20px" align="center">Fittizzio </mj-text>
+                <mj-divider border-width="1px"></mj-divider>
+                <mj-text font-size="12px">
+                    <p>Gentile cliente hai pagato il tuo ordine.</p>
+                    <p>
+                        <b>Codice ordine</b> : {{ $order->id }}
+                    </p>
+                    <p>Totale da pagare alla consegna: {{ number_format($order->total, 2) }} €</p>
+                </mj-text>
+                <mj-text font-weight="bold" padding-top="0" padding-bottom="0">
+                    Cosa c'e nel tuo ordine
+                </mj-text>
+                <mj-table>
+                    <tr align="left">
+                        <th>Nome</th>
+                        <th align="center">Prezzo</th>
+                        <th align="center">Quantità</th>
+                    </tr>
+                    @foreach ($order->order_details as $item)
+                        <tr>
+                            <td>{{ $item->name }}</td>
+                            <td align="center">{{ number_format($item->price, 2) }} €</td>
+                            <td align="center">{{ $item->quantity }}</td>
+                        </tr>
+                    @endforeach
+                </mj-table>
+            </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>

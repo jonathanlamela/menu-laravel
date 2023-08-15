@@ -68,7 +68,7 @@ export type SearchFields = {
 export interface OrderStateFields {
   id: number;
   name: string;
-  cssBadgeClass?: string;
+  css_badge_class?: string;
 }
 
 export type CreateFoodFields = {
@@ -89,8 +89,8 @@ export type Category = {
 };
 
 export type InformazioniConsegnaFields = {
-  orario: string;
-  indirizzo: string;
+  delivery_time: string;
+  delivery_address: string;
 };
 
 export type RiepilogoOrdineFields = {
@@ -110,8 +110,8 @@ export type CartState = {
   items: { [name: string]: CartRow };
   total: number;
   tipologia_consegna: TipologiaConsegna;
-  indirizzo: string;
-  orario: string;
+  delivery_address: string;
+  delivery_time: string;
   note: string;
 };
 
@@ -156,21 +156,36 @@ export type UpdateOrderStateFields = CreateOrderStateFields & {
 };
 
 export interface OrderDetail {
+  orderId: number;
   id: number;
   name: string | null;
   quantity: number;
-  unitPrice: number;
+  unit_price: number;
+}
+
+export interface OrderDetailRow {
+  orderId: number;
+  id: number;
+  name: string | null;
+  quantity: number;
+  unit_price: number;
 }
 
 export interface GetOrderDetailResponse {
   id: number;
-  orderState: OrderState | null;
-  isPaid: boolean;
-  isShippingRequired: boolean;
-  deliveryAddress: string | null;
-  deliveryTime: string | null;
+  order_status: OrderState | null;
+  is_paid: boolean;
+  is_shipping_required: boolean;
+  delivery_address: string | null;
+  delivery_time: string | null;
   notes: string | null;
-  shippingCosts: number;
-  orderDetails: OrderDetail[] | null;
+  shipping_costs: number;
+  order_details: OrderDetail[] | null;
   total: number;
 }
+
+export type OrderCardItem = {
+  id: number;
+  total: number;
+  order_status: OrderState;
+};

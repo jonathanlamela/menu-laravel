@@ -43,8 +43,8 @@ class HandleInertiaRequests extends Middleware
         $cart = session('cart', [
             "items" => [],
             "total" => 0,
-            "orario" => null,
-            "indirizzo" => null,
+            "delivery_time" => null,
+            "delivery_address" => null,
         ]);
 
 
@@ -91,7 +91,7 @@ class HandleInertiaRequests extends Middleware
             "user" => fn () => $request->user()
                 ? $request->user()->only(['id', 'firstname', 'lastname', 'role', 'email'])
                 : null,
-            "settings" => Settings::all()->first(),
+            "settings" => Settings::all()->first() ?? new Settings(),
             "categories_for_pills" => Category::all(["id", "name", "slug"]),
             "message" => $message,
         ]);

@@ -23,10 +23,7 @@ export default function InformazioniConsegnaPage() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<InformazioniConsegnaFields>({
         resolver: yupResolver(informazioniConsegnaValidator),
-        defaultValues: {
-            orario: cart.orario,
-            indirizzo: cart.indirizzo
-        }
+        defaultValues: cart
     });
 
 
@@ -73,19 +70,19 @@ export default function InformazioniConsegnaPage() {
                             <div className="flex flex-col space-y-2">
                                 <label className="form-label">Indirizzo</label>
                                 <input type="text"
-                                    {...register("indirizzo")}
-                                    className={errors.indirizzo ? "text-input-invalid" : "text-input"} />
+                                    {...register("delivery_address")}
+                                    className={errors.delivery_address ? "text-input-invalid" : "text-input"} />
                                 <div className="invalid-feedback">
-                                    {errors.indirizzo?.message}
+                                    {errors.delivery_address?.message}
                                 </div>
                             </div>
                             <div className="flex flex-col space-y-2">
                                 <label className="form-label">Orario</label>
                                 <input type="text"
-                                    {...register("orario")}
-                                    className={errors.orario ? "text-input-invalid" : "text-input"} />
+                                    {...register("delivery_time")}
+                                    className={errors.delivery_time ? "text-input-invalid" : "text-input"} />
                                 < div className="invalid-feedback">
-                                    {errors.orario?.message}
+                                    {errors.delivery_time?.message}
                                 </div>
                             </div>
                             <div className="w-full">

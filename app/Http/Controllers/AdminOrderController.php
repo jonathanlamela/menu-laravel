@@ -13,8 +13,8 @@ class AdminOrderController extends Controller
     public function list()
     {
         return view('admin/order/list', [
-            "items" => Order::filter(request(['search']))->paginate(request('elementsPerPage') ?? 5),
-            "elementsPerPage" => request('elementsPerPage') ?? 5
+            "items" => Order::filter(request(['search']))->paginate(request('elements_per_page') ?? 5),
+            "elements_per_page" => request('elements_per_page') ?? 5
         ]);
     }
 
@@ -58,7 +58,7 @@ class AdminOrderController extends Controller
 
         $order = Order::find($id);
 
-        foreach ($order->orderDetails as $detail) {
+        foreach ($order->order_details as $detail) {
             OrderDetail::destroy($detail->id);
         }
 

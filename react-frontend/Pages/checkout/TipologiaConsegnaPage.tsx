@@ -11,24 +11,24 @@ import { useForm } from "react-hook-form";
 import HeaderMenu from "@react-src/components/HeaderMenu";
 import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
 import { router, usePage } from "@inertiajs/react";
-import { CartState, Settings, TipologiaConsegnaFields } from "@react-src/types";
-import { tipologiaConsegnaValidator } from "@react-src/validators";
+import { CartState, Settings, tipologia_consegnaFields } from "@react-src/types";
+import { tipologia_consegnaValidator } from "@react-src/validators";
 import route from "ziggy-js";
 
 
-export default function TipologiaConsegnaPage() {
+export default function tipologia_consegnaPage() {
 
     const page = usePage<{ settings: Settings, cart: CartState }>();
     const { cart } = page.props;
 
-    const { register, handleSubmit, formState: { errors } } = useForm<TipologiaConsegnaFields>({
-        resolver: yupResolver(tipologiaConsegnaValidator),
+    const { register, handleSubmit, formState: { errors } } = useForm<tipologia_consegnaFields>({
+        resolver: yupResolver(tipologia_consegnaValidator),
         defaultValues: {
             tipologia_consegna: cart.tipologia_consegna
         }
     });
 
-    const onSubmit = (data: TipologiaConsegnaFields) => {
+    const onSubmit = (data: tipologia_consegnaFields) => {
         router.post(route("checkout.step1"), data);
     }
 

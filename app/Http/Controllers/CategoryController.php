@@ -16,7 +16,7 @@ class CategoryController extends Controller
         return Inertia::render("CategoriaPage", [
             "category" => $category,
             "foods" => $foods,
-            "elementsPerPage" => request('elementsPerPage') ?? 5
+            "elements_per_page" => request('elements_per_page') ?? 5
         ]);
     }
 }

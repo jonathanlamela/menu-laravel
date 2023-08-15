@@ -14,9 +14,12 @@ export const createCategoryValidator = yup.object().shape<SchemaObject<CreateCat
         "fileSize",
         "File troppo grande (max 1 mega)",
         (value: any) => {
-            if (value && value.length === 0) {
+
+            if (value == undefined || value.length === 0) {
                 return true;
             }
+
+            console.log(value);
 
             return value.length && value[0].size <= 1000 * 1000;
         },
@@ -25,7 +28,7 @@ export const createCategoryValidator = yup.object().shape<SchemaObject<CreateCat
             "fileFormat",
             "Formato non accettato",
             (value: any) => {
-                if (value.length === 0) {
+                if (value == undefined || value.length === 0) {
                     return true;
                 }
 
@@ -107,8 +110,8 @@ export const updateFoodValidator = yup.object().shape<SchemaObject<UpdateFoodFie
 }).required();
 
 export const informazioniConsegnaValidator = yup.object({
-    indirizzo: yup.string().required("L'indirizzo è obbligatorio"),
-    orario: yup.string().required("L'orario è obbligatorio"),
+    delivery_address: yup.string().required("L'indirizzo è obbligatorio"),
+    delivery_time: yup.string().required("L'orario è obbligatorio"),
 });
 
 export const loginValidator = yup.object({
@@ -196,7 +199,7 @@ export const signinValidator = yup.object({
 
 
 
-export const tipologiaConsegnaValidator = yup.object().shape<SchemaObject<TipologiaConsegnaFields>>({
+export const tipologia_consegnaValidator = yup.object().shape<SchemaObject<TipologiaConsegnaFields>>({
     tipologia_consegna: yup.string().required("La tipologia è obbligatoria"),
 });
 

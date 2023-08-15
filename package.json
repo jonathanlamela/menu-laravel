@@ -22,6 +22,7 @@
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-react": "^4.0.4",
         "@vitejs/plugin-vue": "^4.2.3",
+        "mjml": "^4.14.1",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.45.4",
         "yup": "^1.2.0",

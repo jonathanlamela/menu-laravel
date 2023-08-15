@@ -1,9 +1,9 @@
 import { Head, usePage } from '@inertiajs/react'
-import { GeneralSettings } from '@react-src/types';
+import { Settings } from '@react-src/types';
 
 export default function BaseLayout({ title, children }: any) {
-    const page = usePage<{ settings: GeneralSettings }>();
-    const { settings }: { settings: GeneralSettings } = page.props;
+    const page = usePage<{ settings: Settings }>();
+    const { settings }: { settings: Settings } = page.props;
 
     var site_name = title;
 

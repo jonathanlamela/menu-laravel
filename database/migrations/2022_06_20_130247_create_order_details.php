@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('order_id');
-            $table->unsignedInteger('id')->nullable();
             $table->integer('quantity');
             $table->decimal('price');
             $table->decimal('unit_price');

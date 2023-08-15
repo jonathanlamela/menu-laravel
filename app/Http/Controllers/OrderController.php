@@ -5,7 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\Order;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
+
+use App\Mail\OrderCreated;
+
+use App\Mail\OrderPaid;
+
+use App\Models\OrderDetail;
+use App\Models\Settings;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+
 
 class OrderController extends Controller
 {
@@ -13,14 +24,73 @@ class OrderController extends Controller
     public function list()
     {
         return Inertia::render("account/order/OrderListPage", [
-            "orders" => Order::where("user_id", "=", request()->user()->id)->get()
+            "orders" => Order::where("user_id", "=", request()->user()->id)->with("order_status")->get()
         ]);
     }
 
-    public function orderView(Order $order)
+    public function orderView(Order $order, Request $request)
     {
+        $order =  Order::where("id", "=", $order->id)->with("order_status", "order_details")->get()->first();
+
+        Mail::to($request->user())->send(new OrderCreated($order));
+
         return Inertia::render("account/order/OrderDetailPage", [
             "order" => $order
+        ]);
+    }
+
+    public function crea(Request $request)
+    {
+        $cart = session('cart');
+
+        $settings = Settings::first();
+
+        $shipping_costs = ($settings->shipping_costs) ?? 0;
+
+        $attributes = [
+            "user_id" => $request->user()->id,
+            "total" => (float)$cart["total"] + ($cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00),
+            "shipping_costs" => $cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00,
+            "is_shipping" => $cart["tipologia_consegna"] != "ASPORTO",
+            "delivery_address" => $cart["delivery_address"] ?? "",
+            "delivery_time" => $cart["delivery_time"] ?? "",
+            "order_status_id" => $settings->order_created_state_id ?? null,
+            "note" => $request->input('note') ?? "",
+            "is_paid" => false
+        ];
+
+        $order = Order::create($attributes);
+
+        foreach ($cart["items"] as $item) {
+
+            OrderDetail::create([
+                "order_id" => $order->id,
+                "quantity" => $item["quantity"],
+                "unit_price" => $item["item"]["price"],
+                "price" => $item["item"]["price"] * $item["quantity"],
+                "name" => $item["item"]["name"]
+            ]);
+        }
+
+        if ($order->is_shipping) {
+            OrderDetail::create([
+                "order_id" => $order->id,
+                "quantity" => 1,
+                "unit_price" => $shipping_costs,
+                "price" => $shipping_costs,
+                "name" => "Spese di consegna"
+            ]);
+        }
+
+        $request->session()->forget(['cart']);
+
+        Mail::to($request->user())->send(new OrderCreated($order));
+
+        //TODO: Inviare email all'amministrazione
+        session()->flash("success_message", "Ordine creato");
+
+        return redirect()->action([OrderController::class, "orderView"], [
+            "order" => $order->id
         ]);
     }
 
@@ -46,6 +116,7 @@ class OrderController extends Controller
             ]);
         }
 
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $checkout_session = \Stripe\Checkout\Session::create([
             'line_items' => $line_items,
@@ -61,9 +132,9 @@ class OrderController extends Controller
             ]),
         ]);
 
-        return view('order.pagamento', [
-            "checkout_session_id" => $checkout_session["id"],
-            "checkout_public_key" => env('STRIPE_PUBLIC_KEY')
+
+        return Response::json([
+            "redirect_url" => $checkout_session->url
         ]);
     }
 

@@ -14,9 +14,9 @@ class Order extends Model
         "total",
         "shipping_costs",
         "is_shipping",
-        "shipping_address",
-        "shipping_datetime",
-        "order_status",
+        "delivery_address",
+        "delivery_time",
+        "order_status_id",
         "note",
         "is_paid"
     ];

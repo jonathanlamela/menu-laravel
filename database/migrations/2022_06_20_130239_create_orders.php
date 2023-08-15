@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('total');
             $table->decimal('shipping_costs');
             $table->boolean('is_shipping');
-            $table->string('shipping_address')->nullable();
-            $table->string('shipping_datetime')->nullable();
+            $table->string('delivery_address')->nullable();
+            $table->string('delivery_time')->nullable();
             $table->unsignedInteger('order_status_id');
             $table->boolean('is_paid');
             $table->text('note')->nullable();
