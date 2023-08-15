@@ -25,19 +25,11 @@ export default function SigninPage() {
         resolver: yupResolver(signinValidator),
         mode: "onSubmit",
         reValidateMode: "onSubmit",
-
     });
 
-
-
     const onSubmit = async (data: SigninFields) => {
-
         router.post(route("register"), data)
-
     }
-
-
-
 
     return <>
         <BaseLayout title='Crea account'>

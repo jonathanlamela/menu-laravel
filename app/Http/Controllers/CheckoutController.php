@@ -25,7 +25,7 @@ class CheckoutController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'tipologia_consegna' => 'required',
+            'delivery_type' => 'required',
         ], []);
 
         if ($validator->fails()) {
@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         $attributes = $validator->validated();
 
         $cart = session()->get("cart");
-        $cart["tipologia_consegna"] = $attributes["tipologia_consegna"];
+        $cart["delivery_type"] = $attributes["delivery_type"];
         session(["cart" => $cart]);
 
         return redirect(route('checkout.step2'));
@@ -48,7 +48,7 @@ class CheckoutController extends Controller
     {
         $cart = session()->get("cart");
 
-        if ($cart["tipologia_consegna"] == "ASPORTO") {
+        if ($cart["delivery_type"] == "ASPORTO") {
             return redirect()->action([CheckoutController::class, 'step3']);
         }
         return Inertia::render("checkout/InformazioniConsegnaPage");

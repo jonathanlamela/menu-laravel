@@ -31,9 +31,6 @@ class OrderController extends Controller
     public function orderView(Order $order, Request $request)
     {
         $order =  Order::where("id", "=", $order->id)->with("order_status", "order_details")->get()->first();
-
-        Mail::to($request->user())->send(new OrderCreated($order));
-
         return Inertia::render("account/order/OrderDetailPage", [
             "order" => $order
         ]);
@@ -49,9 +46,9 @@ class OrderController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "total" => (float)$cart["total"] + ($cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00),
-            "shipping_costs" => $cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00,
-            "is_shipping" => $cart["tipologia_consegna"] != "ASPORTO",
+            "total" => (float)$cart["total"] + ($cart["delivery_type"] != "ASPORTO" ? $shipping_costs : 0.00),
+            "shipping_costs" => $cart["delivery_type"] != "ASPORTO" ? $shipping_costs : 0.00,
+            "is_shipping" => $cart["delivery_type"] != "ASPORTO",
             "delivery_address" => $cart["delivery_address"] ?? "",
             "delivery_time" => $cart["delivery_time"] ?? "",
             "order_status_id" => $settings->order_created_state_id ?? null,

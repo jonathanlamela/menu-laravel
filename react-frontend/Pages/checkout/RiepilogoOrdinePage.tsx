@@ -10,7 +10,7 @@ import CartRow from "@react-src/pages/cart/components/CartRow";
 import { useForm } from "react-hook-form";
 import HeaderMenu from "@react-src/components/HeaderMenu";
 import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
-import { CartRow as CartRowType, CartState, RiepilogoOrdineFields, TipologiaConsegna } from "@react-src/types";
+import { CartRow as CartRowType, CartState, RiepilogoOrdineFields, DeliveryType } from "@react-src/types";
 import { Settings } from "@react-src/types";
 import { Link, router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
@@ -35,7 +35,7 @@ export default function RiepilogoOrdinePage() {
         }
     });
     const informazioniConsegna = () => {
-        if (cart.tipologia_consegna !== TipologiaConsegna.ASPORTO) {
+        if (cart.delivery_type !== DeliveryType.ASPORTO) {
             return <>
                 <h6 className="uppercase font-semibold">Indirizzo e orario</h6>
                 <table className="w-full">
@@ -59,14 +59,14 @@ export default function RiepilogoOrdinePage() {
     }
 
     const shipping_costs_row = () => {
-        if (cart.tipologia_consegna !== TipologiaConsegna.ASPORTO) {
+        if (cart.delivery_type !== DeliveryType.ASPORTO) {
             return <CartRow key={-1} row={shipping_row}></CartRow>
         }
         return null;
     }
 
     const subTotal = () => {
-        return cart.tipologia_consegna !== TipologiaConsegna.ASPORTO ? cart.total + settings.shipping_costs : cart.total;
+        return cart.delivery_type !== DeliveryType.ASPORTO ? cart.total + settings.shipping_costs : cart.total;
     }
 
     const content = () => {
@@ -75,7 +75,7 @@ export default function RiepilogoOrdinePage() {
                 <div className="flex flex-col space-y-4 pt-4">
                     <div className="w-full md:w-1/2">
                         <h6 className="uppercase font-semibold">Informazioni di consegna</h6>
-                        {cart.tipologia_consegna === TipologiaConsegna.ASPORTO ? <p>Hai scelto di ritirare il tuo ordine (asporto)</p> : <p>Hai scelto la consegna a domicilio</p>}
+                        {cart.delivery_type === DeliveryType.ASPORTO ? <p>Hai scelto di ritirare il tuo ordine (asporto)</p> : <p>Hai scelto la consegna a domicilio</p>}
                     </div>
                     <div className="w-full md:w-1/2">
                         {informazioniConsegna()}
@@ -126,7 +126,7 @@ export default function RiepilogoOrdinePage() {
 
     const getBreadcrumb = () => {
 
-        if (cart.tipologia_consegna === TipologiaConsegna.DOMICILIO) {
+        if (cart.delivery_type === DeliveryType.DOMICILIO) {
             return <>
                 <BreadcrumbLink href={route("cart.show")}>
                     Carrello
@@ -159,7 +159,7 @@ export default function RiepilogoOrdinePage() {
 
     const sectionLinks = () => {
 
-        if (cart.tipologia_consegna === TipologiaConsegna.DOMICILIO) {
+        if (cart.delivery_type === DeliveryType.DOMICILIO) {
             return <>
                 <div className="w-full md:w-1/2">
                     <Link href={route("checkout.step1")}>

@@ -10,7 +10,7 @@ import BaseLayout from "@react-src/layouts/BaseLayout";
 import { useForm } from "react-hook-form";
 import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
 import HeaderMenu from "@react-src/components/HeaderMenu";
-import { informazioniConsegnaValidator } from "@react-src/validators";
+import { deliveryTypeValidator } from "@react-src/validators";
 import { CartState, InformazioniConsegnaFields, Settings } from "@react-src/types";
 import { Link, router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
@@ -22,7 +22,7 @@ export default function InformazioniConsegnaPage() {
     const { cart } = page.props;
 
     const { register, handleSubmit, formState: { errors } } = useForm<InformazioniConsegnaFields>({
-        resolver: yupResolver(informazioniConsegnaValidator),
+        resolver: yupResolver(deliveryTypeValidator),
         defaultValues: cart
     });
 

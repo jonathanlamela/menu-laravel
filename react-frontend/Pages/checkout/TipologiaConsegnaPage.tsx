@@ -11,24 +11,24 @@ import { useForm } from "react-hook-form";
 import HeaderMenu from "@react-src/components/HeaderMenu";
 import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
 import { router, usePage } from "@inertiajs/react";
-import { CartState, Settings, tipologia_consegnaFields } from "@react-src/types";
-import { tipologia_consegnaValidator } from "@react-src/validators";
+import { CartState, Settings, delivery_typeFields } from "@react-src/types";
+import { delivery_typeValidator } from "@react-src/validators";
 import route from "ziggy-js";
 
 
-export default function tipologia_consegnaPage() {
+export default function delivery_typePage() {
 
     const page = usePage<{ settings: Settings, cart: CartState }>();
     const { cart } = page.props;
 
-    const { register, handleSubmit, formState: { errors } } = useForm<tipologia_consegnaFields>({
-        resolver: yupResolver(tipologia_consegnaValidator),
+    const { register, handleSubmit, formState: { errors } } = useForm<delivery_typeFields>({
+        resolver: yupResolver(delivery_typeValidator),
         defaultValues: {
-            tipologia_consegna: cart.tipologia_consegna
+            delivery_type: cart.delivery_type
         }
     });
 
-    const onSubmit = (data: tipologia_consegnaFields) => {
+    const onSubmit = (data: delivery_typeFields) => {
         router.post(route("checkout.step1"), data);
     }
 
@@ -60,13 +60,13 @@ export default function tipologia_consegnaPage() {
                         <form className="w-full m-0 flex flex-col space-y-2" onSubmit={handleSubmit(onSubmit)}>
                             <h5 className="font-semibold text-lg  border-b-slate-300 border-b-2 pb-2">1. Consegna ordine</h5>
                             <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
-                            <select {...register("tipologia_consegna")}
-                                className={errors.tipologia_consegna ? "text-input-invalid" : "text-input"}>
+                            <select {...register("delivery_type")}
+                                className={errors.delivery_type ? "text-input-invalid" : "text-input"}>
                                 <option value="ASPORTO">Asporto</option>
                                 <option value="DOMICILIO">A domicilio</option>
                             </select>
                             <div className="invalid-feedback">
-                                {errors.tipologia_consegna?.message}
+                                {errors.delivery_type?.message}
                             </div>
                             <div className="w-full">
                                 <button type="submit" className="btn-secondary-outlined w-20 h-10">Vai</button>

@@ -97,19 +97,19 @@ export type RiepilogoOrdineFields = {
   note: string;
 };
 
-export enum TipologiaConsegna {
+export enum DeliveryType {
   ASPORTO = "ASPORTO",
   DOMICILIO = "DOMICILIO",
 }
 
-export type TipologiaConsegnaFields = {
-  tipologia_consegna: TipologiaConsegna;
+export type DeliveryTypeFields = {
+  delivery_type: DeliveryType;
 };
 
 export type CartState = {
   items: { [name: string]: CartRow };
   total: number;
-  tipologia_consegna: TipologiaConsegna;
+  delivery_type: DeliveryType;
   delivery_address: string;
   delivery_time: string;
   note: string;
