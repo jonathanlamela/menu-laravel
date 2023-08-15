@@ -105,9 +105,9 @@ class CheckoutController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "total" => (float)$cart["total"] + ($cart["tipologia_consegna"] != "asporto" ? $shipping_costs : 0.00),
-            "shipping_costs" => $cart["tipologia_consegna"] != "asporto" ? $shipping_costs : 0.00,
-            "is_shipping" => $cart["tipologia_consegna"] != "asporto",
+            "total" => (float)$cart["total"] + ($cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00),
+            "shipping_costs" => $cart["tipologia_consegna"] != "ASPORTO" ? $shipping_costs : 0.00,
+            "is_shipping" => $cart["tipologia_consegna"] != "ASPORTO",
             "shipping_address" => $cart["indirizzo"] ?? "",
             "shipping_datetime" => $cart["orario"] ?? "",
             "order_status_id" => $settings->order_created_state_id ?? null,
