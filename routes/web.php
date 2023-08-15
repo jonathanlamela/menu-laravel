@@ -105,7 +105,7 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
 });
 
 
-Route::prefix('cassa')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
+Route::prefix('checkout')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
 
     //Scegliere consegna o ritiro
     Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1");

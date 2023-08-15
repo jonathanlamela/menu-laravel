@@ -98,7 +98,6 @@ export default function InformazioniConsegnaPage() {
                     </div>
                 </div>
             </div>
-
         </BaseLayout >
     </>
 }

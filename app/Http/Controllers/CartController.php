@@ -11,13 +11,8 @@ class CartController extends Controller
 
     public function show()
     {
-        $cart = session('cart', [
-            "items" => [],
-            "total" => 0
-        ]);
-        return Inertia::render("cart/CarrelloPage", [
-            "cart" => $cart
-        ]);
+
+        return Inertia::render("cart/CarrelloPage");
     }
 
     public function postAddToCart(Request $request)
