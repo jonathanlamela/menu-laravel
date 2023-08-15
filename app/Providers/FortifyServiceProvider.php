@@ -6,6 +6,8 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Mail\ResetPassword as MailResetPassword;
+use App\Mail\VerificaEmail;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -16,7 +18,7 @@ use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Laravel\Fortify\Http\Controllers\LoginController;
+use Illuminate\Auth\Notifications\VerifyEmail;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -87,6 +89,15 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::requestPasswordResetLinkView(function () {
             return Inertia::render("account/ResetPasswordPage");
+        });
+
+
+        VerifyEmail::toMailUsing(function ($notifiable, $verificationUrl) {
+            return new VerificaEmail($notifiable, $verificationUrl);
+        });
+
+        ResetPassword::toMailUsing(function ($notifiable, $token) {
+            return new MailResetPassword($notifiable, $token);
         });
 
         Fortify::resetPasswordView(function ($request) {

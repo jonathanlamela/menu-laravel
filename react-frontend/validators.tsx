@@ -124,6 +124,7 @@ export const deliveryTypeValidator = yup.object().shape<SchemaObject<Informazion
   delivery_time: yup.string().required("L'orario è obbligatorio"),
 }).required();
 
+
 export const loginValidator = yup.object().shape<SchemaObject<LoginFields>>({
   email: yup.string().email("Inserisci un indirizzo email valido").required(
     "Questo campo è obbligatorio",
