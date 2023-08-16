@@ -16,7 +16,7 @@ import AdminOrderToggler from "@react-src/pages/admin/components/AdminOrderToggl
 import { SearchFields } from "@react-src/types";
 import { Link, router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
-import AdminOrderRow from "@react-src/pages/admin/order/componets/AdminOrderRow";
+import AdminOrderRow from "@react-src/pages/admin/order/components/AdminOrderRow";
 
 export default function AdminOrderListPage() {
 
