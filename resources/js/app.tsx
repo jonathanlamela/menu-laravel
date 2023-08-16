@@ -12,6 +12,7 @@ createInertiaApp({
     return pageToLoad;
   },
   setup({ el, App, props }) {
+    console.log("App load");
     createRoot(el).render(<App {...props} />)
   },
 })

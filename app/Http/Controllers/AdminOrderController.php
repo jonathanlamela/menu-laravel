@@ -12,19 +12,18 @@ class AdminOrderController extends Controller
 {
     public function list()
     {
-        return view('admin/order/list', [
-            "items" => Order::filter(request(['search']))->paginate(request('elements_per_page') ?? 5),
-            "elements_per_page" => request('elements_per_page') ?? 5
+        $orderBy = request("orderBy") ?? "id";
+        $ascending_value = request("ascending", 'true');
+        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+
+        return Inertia::render("admin/order/AdminOrderListPage", [
+            "data" => Order::filter(request(['search']))->with(['user', 'orderStatus'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "search" => request('search', null),
+            "orderBy" => $orderBy,
+            "ascending" => $ascending_value === "true",
         ]);
     }
 
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
 
     public function edit(Order $order)
     {

@@ -43,12 +43,12 @@ class Order extends Model
         return $this->belongsTo(User::class, "user_id");
     }
 
-    public function order_details()
+    public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
     }
 
-    public function order_status()
+    public function orderStatus()
     {
         return $this->belongsTo(OrderState::class, "order_status_id");
     }
