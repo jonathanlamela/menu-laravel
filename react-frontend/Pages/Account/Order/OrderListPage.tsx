@@ -49,7 +49,7 @@ export default function OrderListPage() {
                 </div>
                 <div className="flex flex-col space-y-4 md:flex-row md:space-x-5 md:space-y-0">
                     {orders.length == 0 ? <p>Non ci sono ordini</p> : null}
-                    {orders.map((item: any) => <MyOrderCard order={item}></MyOrderCard>)}
+                    {orders.map((item: any) => <MyOrderCard key={item.id} order={item}></MyOrderCard>)}
                 </div>
             </div>
         </BaseLayout>

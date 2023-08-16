@@ -8,15 +8,8 @@ export default function Messages() {
     const page = usePage<{ message: Message }>();
     const { message } = page.props;
 
-
-
     if (message != null) {
-
         const { type, text } = message;
-
-
-        console.log(type);
-
         switch (type) {
             case "success":
                 return <>

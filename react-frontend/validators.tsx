@@ -6,6 +6,7 @@ import {
   DeliveryTypeFields,
   InformazioniConsegnaFields,
   LoginFields,
+  OrderState,
   PersonalInfoFields,
   ResetPasswordFields,
   Settings,
@@ -130,6 +131,7 @@ export const loginValidator = yup.object().shape<SchemaObject<LoginFields>>({
     "Questo campo è obbligatorio",
   ),
   password: yup.string().required("Il campo password è obbligatorio"),
+  backUrl: yup.string().nullable()
 }).required();
 
 export const personalInfoValidator = yup.object().shape<SchemaObject<PersonalInfoFields>>({
@@ -220,4 +222,8 @@ export const updateOrderStateValidator = yup.object().shape<SchemaObject<UpdateO
   id: yup.number().required(),
   name: yup.string().required("Il campo nome è obbligatorio"),
   css_badge_class: yup.string().required("Seleziona un elemento dalla lista"),
+}).required();
+
+export const updateOrderStatusValidator = yup.object().shape<SchemaObject<{ order_state: OrderState }>>({
+  order_state: yup.string().required(),
 }).required();

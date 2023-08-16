@@ -16,7 +16,7 @@ class Order extends Model
         "is_shipping",
         "delivery_address",
         "delivery_time",
-        "order_status_id",
+        "order_state_id",
         "note",
         "is_paid"
     ];
@@ -48,8 +48,8 @@ class Order extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
-    public function orderStatus()
+    public function orderState()
     {
-        return $this->belongsTo(OrderState::class, "order_status_id");
+        return $this->belongsTo(OrderState::class, "order_state_id");
     }
 }

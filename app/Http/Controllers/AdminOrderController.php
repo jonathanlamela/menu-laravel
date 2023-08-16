@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\OrderState;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -17,7 +18,7 @@ class AdminOrderController extends Controller
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
         return Inertia::render("admin/order/AdminOrderListPage", [
-            "data" => Order::filter(request(['search']))->with(['user', 'orderStatus'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "data" => Order::filter(request(['search']))->with(['user', 'orderState'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
             "ascending" => $ascending_value === "true",
@@ -27,6 +28,36 @@ class AdminOrderController extends Controller
 
     public function edit(Order $order)
     {
+        $result =  Order::where("id", "=", $order->id)->with(['user', 'orderState', 'orderDetails'])->first();
+
+        return Inertia::render("admin/order/AdminOrderEditPage", [
+            "order" => $result,
+            "order_states" => OrderState::all()
+        ]);
+    }
+
+    public function updateOrderState(Order $order, Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'order_state_id' => 'required',
+        ], [
+            'order_state_id.required' => "Il campo stato ordine è obbligatorio",
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('admin.order.edit', ["order" => $order]))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        $attributes = $validator->validated();
+
+        $order->update(["order_state_id" => $attributes["order_state_id"]]);
+
+        return response()->json(["status" => "success"]);
     }
 
     public function update(Order $order, Request $request)

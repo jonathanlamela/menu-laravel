@@ -24,13 +24,13 @@ class OrderController extends Controller
     public function list()
     {
         return Inertia::render("account/order/OrderListPage", [
-            "orders" => Order::where("user_id", "=", request()->user()->id)->with("order_status")->get()
+            "orders" => Order::where("user_id", "=", request()->user()->id)->with("orderState")->get()
         ]);
     }
 
     public function orderView(Order $order, Request $request)
     {
-        $order =  Order::where("id", "=", $order->id)->with("order_status", "order_details")->get()->first();
+        $order =  Order::where("id", "=", $order->id)->with("orderState", "orderDetails")->get()->first();
         return Inertia::render("account/order/OrderDetailPage", [
             "order" => $order
         ]);
@@ -51,7 +51,7 @@ class OrderController extends Controller
             "is_shipping" => $cart["delivery_type"] != "ASPORTO",
             "delivery_address" => $cart["delivery_address"] ?? "",
             "delivery_time" => $cart["delivery_time"] ?? "",
-            "order_status_id" => $settings->order_created_state_id ?? null,
+            "order_state_id" => $settings->order_created_state_id ?? null,
             "note" => $request->input('note') ?? "",
             "is_paid" => false
         ];

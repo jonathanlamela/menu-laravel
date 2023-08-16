@@ -30,7 +30,7 @@ export type ChangePasswordFields = {
 export type LoginFields = {
   email: string;
   password: string;
-  backUrl?: string;
+  backUrl: string;
 };
 
 export type PersonalInfoFields = {
@@ -173,7 +173,7 @@ export interface OrderDetailRow {
 
 export interface GetOrderDetailResponse {
   id: number;
-  order_status: OrderState | null;
+  order_state: OrderState | null;
   is_paid: boolean;
   is_shipping_required: boolean;
   delivery_address: string | null;
@@ -187,5 +187,5 @@ export interface GetOrderDetailResponse {
 export type OrderCardItem = {
   id: number;
   total: number;
-  order_status: OrderState;
+  order_state: OrderState;
 };

@@ -70,7 +70,7 @@ export default function AdminOrderListPage() {
     }
 
     const goToPage = (page: number) => {
-        router.visit(route("admin.food.list"), {
+        router.visit(route("admin.order.list"), {
             data: {
                 search: search,
                 page: page,
@@ -95,7 +95,6 @@ export default function AdminOrderListPage() {
 
     return <>
         <BaseLayout title="Ordini">
-
             <Topbar>
                 <TopbarLeft>
                     <HomeButton></HomeButton>
@@ -110,7 +109,7 @@ export default function AdminOrderListPage() {
                 <ol className="flex flex-row space-x-2 items-center h-16 pl-8 text-white">
                     <li>
                         <BreadcrumbLink href={route("account.dashboard")}>
-                            Ordini
+                            Profilo
                         </BreadcrumbLink>
                     </li>
                     <li>::</li>
@@ -162,9 +161,9 @@ export default function AdminOrderListPage() {
                                     <AdminOrderToggler
                                         className="flex w-full flex-row space-x-1 justify-center"
                                         ascending={ascending}
-                                        isCurrent={orderBy === "orderStatus"}
+                                        isCurrent={orderBy === "order_state_id"}
                                         label="Stato ordine" onClick={() => {
-                                            toggleOrder("orderStatus")
+                                            toggleOrder("order_state_id")
                                         }}></AdminOrderToggler>
                                 </th>
                                 <th className="w-1/12">

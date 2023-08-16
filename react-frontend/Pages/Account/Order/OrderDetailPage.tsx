@@ -21,7 +21,6 @@ export default function OrderDetailPage() {
     const page = usePage<{ order: GetOrderDetailResponse }>();
     const { order } = page.props;
 
-    console.log(order);
 
     const paga = async () => {
 
@@ -31,6 +30,7 @@ export default function OrderDetailPage() {
         var data = await request.json();
         window.location.href = data.redirect_url;
     }
+
 
     return <>
         <BaseLayout title="I miei ordini">
@@ -69,7 +69,7 @@ export default function OrderDetailPage() {
                 </div>
                 <div className="w-full flex flex-col">
                     <b>Stato dell'ordine</b>
-                    <span>{order.order_status?.name}</span>
+                    <span>{order.order_state?.name}</span>
                 </div>
                 {order.is_paid ? <></> : <>
                     <div className="w-full flex flex-col items-start">

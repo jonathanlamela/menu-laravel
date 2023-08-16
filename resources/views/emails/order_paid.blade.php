@@ -21,7 +21,7 @@
                         <th align="center">Prezzo</th>
                         <th align="center">Quantità</th>
                     </tr>
-                    @foreach ($order->order_details as $item)
+                    @foreach ($order->orderDetails as $item)
                         <tr>
                             <td>{{ $item->name }}</td>
                             <td align="center">{{ number_format($item->price, 2) }} €</td>
