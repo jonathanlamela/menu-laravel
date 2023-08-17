@@ -88,7 +88,7 @@ export type Category = {
   image: string;
 };
 
-export type InformazioniConsegnaFields = {
+export type DeliveryInfoFields = {
   delivery_time: string;
   delivery_address: string;
 };

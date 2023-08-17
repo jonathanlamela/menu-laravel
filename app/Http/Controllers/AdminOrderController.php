@@ -57,7 +57,64 @@ class AdminOrderController extends Controller
 
         $order->update(["order_state_id" => $attributes["order_state_id"]]);
 
-        return response()->json(["status" => "success"]);
+        session()->flash("success_message", "Stato ordine aggiornato");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
+    }
+
+    public function updateOrderDeliveryType(Order $order, Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'delivery_type' => 'required',
+        ], [
+            'delivery_type.required' => "Il campo stato ordine è obbligatorio",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('admin.order.edit', ["order" => $order]))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $attributes = $validator->validated();
+
+        $data = [
+            "is_shipping" => $attributes["delivery_type"] === 'DOMICILIO',
+            "delivery_address" => $attributes["delivery_type"] === 'DOMICILIO' ? $order->delivery_address : null,
+            "delivery_time" => $attributes["delivery_type"] === 'DOMICILIO' ? $order->delivery_time : null
+        ];
+
+        $order->update($data);
+
+        session()->flash("success_message", "Tipo di consegna aggiornato");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
+    }
+
+    public function updateOrderDeliveryInfo(Order $order, Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'delivery_address' => 'required',
+            'delivery_time' => 'required',
+        ], [
+            'delivery_address.required' => "Il campo stato ordine è obbligatorio",
+            'delivery_time.required' => "Il campo stato ordine è obbligatorio",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('admin.order.edit', ["order" => $order]))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $attributes = $validator->validated();
+        $order->update($attributes);
+
+        session()->flash("success_message", "Informazioni consegna aggiornate");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
     }
 
     public function update(Order $order, Request $request)

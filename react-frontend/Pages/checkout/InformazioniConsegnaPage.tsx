@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import BreadcrumbLink from "@react-src/components/BreadcrumbLink";
 import HeaderMenu from "@react-src/components/HeaderMenu";
 import { deliveryTypeValidator } from "@react-src/validators";
-import { CartState, InformazioniConsegnaFields, Settings } from "@react-src/types";
+import { CartState, DeliveryInfoFields, Settings } from "@react-src/types";
 import { Link, router, usePage } from "@inertiajs/react";
 import route from "ziggy-js";
 
@@ -21,13 +21,13 @@ export default function InformazioniConsegnaPage() {
     const page = usePage<{ settings: Settings, cart: CartState }>();
     const { cart } = page.props;
 
-    const { register, handleSubmit, formState: { errors } } = useForm<InformazioniConsegnaFields>({
+    const { register, handleSubmit, formState: { errors } } = useForm<DeliveryInfoFields>({
         resolver: yupResolver(deliveryTypeValidator),
         defaultValues: cart
     });
 
 
-    const onSubmit = (data: InformazioniConsegnaFields) => {
+    const onSubmit = (data: DeliveryInfoFields) => {
         router.post(route("checkout.step2"), data);
     }
 

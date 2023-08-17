@@ -4,7 +4,7 @@ import {
   CreateFoodFields,
   CreateOrderStateFields,
   DeliveryTypeFields,
-  InformazioniConsegnaFields,
+  DeliveryInfoFields,
   LoginFields,
   OrderState,
   PersonalInfoFields,
@@ -120,7 +120,7 @@ export const updateFoodValidator = yup.object().shape<SchemaObject<UpdateFoodFie
   category_id: yup.number().required("La categoria è obbligatoria"),
 }).required();
 
-export const deliveryTypeValidator = yup.object().shape<SchemaObject<InformazioniConsegnaFields>>({
+export const deliveryTypeValidator = yup.object().shape<SchemaObject<DeliveryInfoFields>>({
   delivery_address: yup.string().required("L'indirizzo è obbligatorio"),
   delivery_time: yup.string().required("L'orario è obbligatorio"),
 }).required();
