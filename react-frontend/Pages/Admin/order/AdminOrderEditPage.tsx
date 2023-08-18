@@ -18,6 +18,7 @@ import AdminUpdateDeliveryType from "@react-src/pages/admin/order/components/Adm
 import AdminUpdateDeliveryInfo from "@react-src/pages/admin/order/components/AdminUpdateDeliveryInfo";
 import AdminUpdateOrderDetail from "@react-src/pages/admin/order/components/AdminUpdateOrderDetail";
 import AdminUpdateOrderSummary from "@react-src/pages/admin/order/components/AdminUpdateOrderSummary";
+import AdminUpdaterOrderNote from "@react-src/pages/admin/order/components/AdminUpdaterOrderNote";
 
 export default function AdminOrderListPage() {
     const page = usePage<{ order: any, order_states: OrderState[] }>();
@@ -94,6 +95,11 @@ export default function AdminOrderListPage() {
                 <div className="w-full flex">
                     <div className="w-full border border-gray-200  p-2 flex flex-col space-y-2 items-center ">
                         <AdminUpdateOrderDetail></AdminUpdateOrderDetail>
+                    </div>
+                </div>
+                <div className="w-full flex">
+                    <div className="w-full border border-gray-200  p-2 flex flex-col space-y-2 items-center ">
+                        <AdminUpdaterOrderNote></AdminUpdaterOrderNote>
                     </div>
                 </div>
                 <div className="w-full flex">

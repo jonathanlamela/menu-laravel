@@ -71,13 +71,25 @@ export default function OrderDetailPage() {
                     <b>Stato dell'ordine</b>
                     <span>{order.order_state?.name}</span>
                 </div>
+                <div className="w-full flex flex-col">
+                    <b>Informazioni sulla consegna</b>
+                    <span>{order.is_shipping ? "Consegna a domicilio" : "Asporto"}</span>
+                </div>
+                {order.is_shipping ? <>
+                    <div className="w-full flex flex-col">
+                        <b>Dettagli sulla consegna</b>
+                        <p className="flex flex-col">
+                            <span>Indirizzo: {order.delivery_address}</span>
+                            <span>Orario: {order.delivery_time}</span>
+                        </p>
+                    </div>
+                </> : null}
                 {order.is_paid ? <></> : <>
                     <div className="w-full flex flex-col items-start">
                         <b>Azioni sull'ordine</b>
                         <button onClick={() => paga
                             ()} className="btn btn-sm btn-success">Paga ora</button>
                     </div>
-
                 </>}
                 <div className="w-full lg:w-1/3 flex flex-col">
                     <b>Cosa c'è nel tuo ordine</b>
@@ -91,23 +103,13 @@ export default function OrderDetailPage() {
                                 </tr>
                             </thead>
                             <tbody>
-
                                 {order.order_details?.map((row: OrderDetailRow) => {
                                     return <tr className="align-middle" key={row.id}>
                                         <td>{row.name}</td>
                                         <td className="text-center">{row.quantity}</td>
                                         <td className="text-center">{row.unit_price.toFixed(2)} €</td>
                                     </tr>
-
                                 })}
-                                {order.is_shipping_required ? <>
-                                    <tr className="align-middle" key="none">
-                                        <td>Spese di consegna</td>
-                                        <td className="text-center">1</td>
-                                        <td className="text-center">{order.shipping_costs.toFixed(2)} €</td>
-                                    </tr>
-
-                                </> : null}
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -121,6 +123,13 @@ export default function OrderDetailPage() {
                         </table>
                     </div>
                 </div>
+                {order.note ? <>
+                    <div className="w-full lg:w-1/3 flex flex-col">
+                        <b>Note</b>
+                        <p>{order.note}</p>
+                    </div>
+                </> : null}
+
             </div>
         </BaseLayout >
     </>

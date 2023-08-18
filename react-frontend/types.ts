@@ -175,10 +175,10 @@ export interface GetOrderDetailResponse {
   id: number;
   order_state: OrderState | null;
   is_paid: boolean;
-  is_shipping_required: boolean;
+  is_shipping: boolean;
   delivery_address: string | null;
   delivery_time: string | null;
-  notes: string | null;
+  note: string | null;
   shipping_costs: number;
   order_details: OrderDetail[] | null;
   total: number;

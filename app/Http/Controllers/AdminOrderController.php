@@ -148,8 +148,15 @@ class AdminOrderController extends Controller
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
 
-    public function update(Order $order, Request $request)
+    public function updateOrderNote(Order $order, Request $request)
     {
+        $order->update([
+            "note" => request()->note ?? null
+        ]);
+
+        session()->flash("success_message", "Note ordine aggiornate");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
     }
 
     public function delete(Order $order)

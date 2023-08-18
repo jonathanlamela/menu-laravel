@@ -96,6 +96,7 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
         Route::post("updateOrderDeliveryType/{order}", [AdminOrderController::class, "updateOrderDeliveryType"])->name("admin.order.updateOrderDeliveryType");
         Route::post("updateOrderDeliveryInfo/{order}", [AdminOrderController::class, "updateOrderDeliveryInfo"])->name("admin.order.updateOrderDeliveryInfo");
         Route::post("addOrderDetail/{order}", [AdminOrderController::class, "addOrderDetail"])->name("admin.order.addOrderDetail");
+        Route::post("updateOrderNote/{order}", [AdminOrderController::class, "updateOrderNote"])->name("admin.order.updateOrderNote");
     });
 
     Route::prefix("orderDetails")->group(function () {
