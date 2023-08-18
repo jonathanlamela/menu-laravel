@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -32,7 +33,8 @@ class AdminOrderController extends Controller
 
         return Inertia::render("admin/order/AdminOrderEditPage", [
             "order" => $result,
-            "order_states" => OrderState::all()
+            "order_states" => OrderState::all(),
+            "foods" => Food::with("category")->get()
         ]);
     }
 
@@ -88,6 +90,35 @@ class AdminOrderController extends Controller
         $order->update($data);
 
         session()->flash("success_message", "Tipo di consegna aggiornato");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
+    }
+
+    public function addOrderDetail(Order $order, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+        ], [
+            'name.required' => "Il campo stato ordine è obbligatorio",
+            'price.required' => "Il campo stato ordine è obbligatorio",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('admin.order.edit', ["order" => $order]))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        OrderDetail::create([
+            "order_id" => $order->id,
+            "quantity" => 1,
+            "unit_price" => request()->price,
+            "price" => request()->price * 1,
+            "name" => request()->name
+        ]);
+
+        session()->flash("success_message", "Elemento aggiunto all'ordine");
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }

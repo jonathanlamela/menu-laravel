@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminOrderDetailController;
 use App\Http\Controllers\AdminOrderStateController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -90,9 +91,17 @@ Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
         Route::post("crea", [AdminOrderController::class, "store"])->name("admin.order.store");
         Route::post("modifica/{order}", [AdminOrderController::class, "update"])->name("admin.order.update");
         Route::post("elimina/{order}", [AdminOrderController::class, "destroy"])->name("admin.order.destroy");
+
         Route::post("updateOrderState/{order}", [AdminOrderController::class, "updateOrderState"])->name("admin.order.updateOrderState");
         Route::post("updateOrderDeliveryType/{order}", [AdminOrderController::class, "updateOrderDeliveryType"])->name("admin.order.updateOrderDeliveryType");
         Route::post("updateOrderDeliveryInfo/{order}", [AdminOrderController::class, "updateOrderDeliveryInfo"])->name("admin.order.updateOrderDeliveryInfo");
+        Route::post("addOrderDetail/{order}", [AdminOrderController::class, "addOrderDetail"])->name("admin.order.addOrderDetail");
+    });
+
+    Route::prefix("orderDetails")->group(function () {
+        Route::post("increaseQty/{orderDetail}", [AdminOrderDetailController::class, "increaseQty"])->name("admin.orderDetails.increaseQty");
+        Route::post("reduceQty/{orderDetail}", [AdminOrderDetailController::class, "reduceQty"])->name("admin.orderDetails.reduceQty");
+        Route::post("removeItem/{orderDetail}", [AdminOrderDetailController::class, "removeItem"])->name("admin.orderDetails.removeItem");
     });
 
     Route::prefix("stati-ordine")->group(function () {

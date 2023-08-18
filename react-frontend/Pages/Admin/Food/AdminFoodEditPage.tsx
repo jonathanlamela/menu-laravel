@@ -47,7 +47,7 @@ export default function AdminCategoryFoodPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("admin.cibi.list")}>
+                        <BreadcrumbLink href={route("admin.food.list")}>
                             Cibi
                         </BreadcrumbLink>
                     </li>

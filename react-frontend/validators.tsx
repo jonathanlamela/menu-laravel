@@ -227,3 +227,8 @@ export const updateOrderStateValidator = yup.object().shape<SchemaObject<UpdateO
 export const updateOrderStatusValidator = yup.object().shape<SchemaObject<{ order_state: OrderState }>>({
   order_state: yup.string().required(),
 }).required();
+
+
+export const updateOrderDetailsAddItemValidator = yup.object().shape<SchemaObject<{ id: number }>>({
+  id: yup.string().required(),
+}).required();
