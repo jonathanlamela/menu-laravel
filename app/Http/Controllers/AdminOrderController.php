@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderStateUpdated;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderState;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -55,9 +57,14 @@ class AdminOrderController extends Controller
         }
 
 
+
         $attributes = $validator->validated();
 
         $order->update(["order_state_id" => $attributes["order_state_id"]]);
+
+        $order = Order::where("id", "=", $order->id)->with(["user", "orderState"])->first();
+
+        Mail::to($order->user)->send(new OrderStateUpdated($order->user, $order->id, $order->orderState->name));
 
         session()->flash("success_message", "Stato ordine aggiornato");
 

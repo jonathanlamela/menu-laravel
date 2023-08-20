@@ -1,8 +1,5 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { router, usePage } from "@inertiajs/react";
-import { DeliveryInfoFields } from "@react-src/types";
-import { deliveryTypeValidator } from "@react-src/validators";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import route from "ziggy-js";
 
@@ -11,6 +8,8 @@ export default function AdminUpdateOrderNote() {
     const page = usePage<{ order: any }>();
     const { order } = page.props;
     const [isEdit, setIsEdit] = useState(false);
+    const editorRef = useRef<any>();
+
 
     const { register, handleSubmit, formState: { errors } }
         = useForm<{ note: string }>({
@@ -65,6 +64,7 @@ export default function AdminUpdateOrderNote() {
                     </div>
                     <div className="w-full flex flex-col">
                         <textarea className="text-input" {...register("note")}>{order.note}</textarea>
+
                     </div>
                     <div className="w-full flex items-center justify-end">
                         <button type="submit" className="btn-success flex flex-row space-x-2">
