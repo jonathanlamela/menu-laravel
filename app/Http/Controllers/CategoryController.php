@@ -11,12 +11,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
 
-        $foods = $category->foods()->filter(request(['search']))->get();
+        $foods = $category->foods()->get();
 
-        return Inertia::render("CategoriaPage", [
+        return view("category.show", [
             "category" => $category,
-            "foods" => $foods,
-            "elements_per_page" => request('elements_per_page') ?? 5
+            "foods" => $foods
         ]);
     }
 }

@@ -15,8 +15,10 @@
             @section('topbar')
             @show
             <x-header></x-header>
-            @section('navHeader')
-            @show
+            <div class="bg-gray-800 md:h-16 flex">
+                @section('navHeader')
+                @show
+            </div>
             @yield('content')
         </div>
     </div>

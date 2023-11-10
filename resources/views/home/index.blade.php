@@ -15,3 +15,7 @@
         </div>
     </div>
 @stop
+
+@section('navHeader')
+    <x-category-pills></x-category-pills>
+@stop
