@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class CartButton extends Component
+class Header extends Component
 {
     /**
      * Create a new component instance.
@@ -23,13 +23,6 @@ class CartButton extends Component
      */
     public function render()
     {
-        return view('components.cart-button', [
-            "cart" => session('cart', [
-                "items" => [],
-                "total" => 0,
-                "deliveryTime" => null,
-                "deliveryAddress" => null,
-            ])
-        ]);
+        return view('components.header');
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\View\Components;
 
-use App\Models\Category;
 use Illuminate\View\Component;
 
-class CategoryList extends Component
+class HomeButton extends Component
 {
     /**
      * Create a new component instance.
@@ -24,12 +23,6 @@ class CategoryList extends Component
      */
     public function render()
     {
-        $categories = cache()->remember('categories', 30, function () {
-            return Category::get();
-        });
-
-        return view('components.category-list', [
-            "categories" => $categories
-        ]);
+        return view('components.home-button');
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\View\Components;
 
-use App\Models\Category;
 use Illuminate\View\Component;
 
-class HomeCategoryCards extends Component
+class AccountManage extends Component
 {
     /**
      * Create a new component instance.
@@ -24,9 +23,6 @@ class HomeCategoryCards extends Component
      */
     public function render()
     {
-
-        return view('components.home-category-cards', [
-            "categories" => Category::all()
-        ]);
+        return view('components.account-manage');
     }
 }
