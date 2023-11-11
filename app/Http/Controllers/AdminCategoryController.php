@@ -7,7 +7,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
 class AdminCategoryController extends Controller
 {
@@ -18,7 +17,7 @@ class AdminCategoryController extends Controller
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render("admin/category/AdminCategoryListPage", [
+        return view("admin.category.list", [
             "data" => Category::filter(request(['search']))->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -28,7 +27,7 @@ class AdminCategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render("admin/category/AdminCategoryCreatePage");
+        return view("admin.category.create");
     }
 
     public function store(Request $request)
@@ -52,8 +51,8 @@ class AdminCategoryController extends Controller
 
         $category = Category::create($attributes);
 
-        if ($request->file('imageFile')) {
-            $uploadedFile = $request->file('imageFile');
+        if ($request->file('image')) {
+            $uploadedFile = $request->file('image');
 
             $file_path = Storage::putFileAs('media/category', $uploadedFile, $category->id . "." . $uploadedFile->extension());
 
@@ -71,7 +70,7 @@ class AdminCategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return Inertia::render("admin/category/AdminCategoryEditPage", [
+        return view("admin.category.edit", [
             "category" => $category
         ]);
     }
@@ -95,8 +94,8 @@ class AdminCategoryController extends Controller
 
         $attributes = $validator->validated();
 
-        if ($request->file('imageFile')) {
-            $uploadedFile = $request->file('imageFile');
+        if ($request->file('image')) {
+            $uploadedFile = $request->file('image');
 
             $file_path = Storage::putFileAs('media/category', $uploadedFile, $category->id . "." . $uploadedFile->extension());
 
@@ -115,27 +114,14 @@ class AdminCategoryController extends Controller
 
     public function delete(Category $category)
     {
-        return Inertia::render("admin/category/AdminCategoryDeletePage", [
+        return view("admin.category.delete", [
             "category" => $category
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Category $category)
     {
 
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect(route('admin.category.list'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $id = $validator->validated()['id'];
-
-        $category = Category::find($id);
 
         if ($category->image) {
             Storage::delete("media/category", $category->image);
@@ -145,7 +131,7 @@ class AdminCategoryController extends Controller
         session()->flash("success_message", "Categoria " . $category->name . " eliminata");
 
 
-        Category::destroy($id);
+        Category::destroy($category->id);
         return redirect(route('admin.category.list'));
     }
 }
