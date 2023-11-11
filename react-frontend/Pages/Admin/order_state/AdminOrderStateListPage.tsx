@@ -106,7 +106,7 @@ export default function AdminOrderStateListPage() {
             <HeaderMenu>
                 <ol className="flex flex-row space-x-2 items-center h-16 pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("account.dashboard")}>
+                        <BreadcrumbLink href={route("account.index")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

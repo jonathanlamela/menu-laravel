@@ -29,7 +29,7 @@ export default function ImpostazioniGeneraliPage() {
     });
 
     const onSubmit = async (data: Settings) => {
-        router.post(route("admin.impostazioni.generali"), data);
+        router.post(route("admin.settings.generals"), data);
     }
 
     return <>
@@ -48,7 +48,7 @@ export default function ImpostazioniGeneraliPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("account.dashboard")}>
+                        <BreadcrumbLink href={route("account.index")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

@@ -37,7 +37,7 @@ class AdminImpostazioniGeneraliController extends Controller
 
 
         if ($validator->fails()) {
-            return redirect(route('admin.impostazioni.generali'))
+            return redirect(route('admin.settings.generals'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -53,6 +53,6 @@ class AdminImpostazioniGeneraliController extends Controller
 
         session()->flash("success_message", "Impostazioni aggiornate");
 
-        return redirect(route('admin.impostazioni.generali'));
+        return redirect(route('admin.settings.generals'));
     }
 }

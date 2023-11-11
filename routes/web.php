@@ -19,116 +19,119 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [ErrorController::class, 'index']);
-Route::get('/categoria/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
-Route::get('/cerca', [SearchController::class, 'doSearch'])->name("searchGlobally");
+Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
+Route::get('/search', [SearchController::class, 'doSearch'])->name("searchGlobally");
 
 
-Route::prefix("carrello")->group(function () {
+Route::prefix("cart")->group(function () {
     Route::get("", [CartController::class, "show"])->name("cart.show");
-    Route::post('aggiungiAlCarrello', [CartController::class, 'postAddToCart'])->name('cart.add_item');
-    Route::post('rimuoviDalCarrello', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
-    Route::post('incrementaQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
-    Route::post('riduciQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
+    Route::post('addToCart', [CartController::class, 'postAddToCart'])->name('cart.add_item');
+    Route::post('removeFromCart', [CartController::class, 'removeFromCart'])->name('cart.remove_item');
+    Route::post('increaseQty', [CartController::class, 'increaseQty'])->name('cart.increase_qty');
+    Route::post('decreaseQty', [CartController::class, 'decreaseQty'])->name('cart.decrease_qty');
+
+    Route::prefix('checkout')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
+
+        //Scegliere consegna o ritiro
+        Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1");
+        Route::post('step1', [CheckoutController::class, "storeStep1"])->name("checkout.step1");
+
+        //Se scelto consegna mettere l'indirizzo e l'orario
+        Route::get('step2', [CheckoutController::class, "step2"])->name("checkout.step2");;
+        Route::post('step2', [CheckoutController::class, "storeStep2"])->name("checkout.step2");
+
+        //Riepilogo ordine e possibilità di inserire una nota per l'ordine
+        Route::get('step3', [CheckoutController::class, "step3"])->name("checkout.step3");;
+    });
 });
 
 Route::prefix("account")->group(function () {
 
     Route::middleware(['auth', 'verified'])->group(function () {
-        Route::get('', [AccountController::class, 'dashboard'])->name("account.dashboard");
-        Route::get('cambia-password', [AccountController::class, "cambiaPassword"])->name("account.cambia-password");
-        Route::get('informazioni-personali', [AccountController::class, "informazioniPersonaliView"])->name("account.informazioni-personali");
+        Route::get('', [AccountController::class, 'index'])->name("account.index");
+        Route::get('change-password', [AccountController::class, "changePassword"])->name("account.change-password");
+        Route::get('my-account', [AccountController::class, "myAccount"])->name("account.my-account");
     });
 
-    Route::prefix("ordini")->middleware(['auth', 'verified'])->group(function () {
+    Route::prefix("orders")->middleware(['auth', 'verified'])->group(function () {
 
-        Route::get("", [OrderController::class, "list"])->name("ordini.list");
-        Route::post("crea", [OrderController::class, "crea"])->name("ordini.crea");
-        Route::get("view/{order}", [OrderController::class, "orderView"])->name("ordini.view");
-        Route::get("paga/{order}", [OrderController::class, "paga"])->name("ordini.paga")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
-        Route::get("paga/{order}/completato", [OrderController::class, "storePagamento"])->name("ordini.pagamento-completato");
-    });
-});
-
-
-Route::prefix('amministrazione')->middleware('can:isAdmin')->group(function () {
-
-    Route::prefix("impostazioni")->group(function () {
-        Route::get("generali", [AdminImpostazioniGeneraliController::class, "index"])->name("admin.impostazioni.generali");
-        Route::post("generali", [AdminImpostazioniGeneraliController::class, "store"])->name("admin.impostazioni.generali");
-    });
-
-    Route::prefix("categorie")->group(function () {
-
-        Route::get("", [AdminCategoryController::class, "list"])->name("admin.category.list");
-        Route::get("crea", [AdminCategoryController::class, "create"])->name("admin.category.create");
-        Route::get("modifica/{category}", [AdminCategoryController::class, "edit"])->name("admin.category.edit");
-        Route::get("elimina/{category}", [AdminCategoryController::class, "delete"])->name("admin.category.delete");
-
-        Route::post("crea", [AdminCategoryController::class, "store"])->name("admin.category.store");
-        Route::post("modifica/{category}", [AdminCategoryController::class, "update"])->name("admin.category.update");
-        Route::post("elimina/{category}", [AdminCategoryController::class, "destroy"])->name("admin.category.destroy");;
-    });
-
-    Route::prefix("cibi")->group(function () {
-
-        Route::get("", [AdminFoodController::class, "list"])->name("admin.food.list");
-        Route::get("crea", [AdminFoodController::class, "create"])->name("admin.food.create");
-        Route::get("modifica/{food}", [AdminFoodController::class, "edit"])->name("admin.food.edit");
-        Route::get("elimina/{food}", [AdminFoodController::class, "delete"])->name("admin.food.delete");
-
-        Route::post("crea", [AdminFoodController::class, "store"])->name("admin.food.store");
-        Route::post("modifica/{food}", [AdminFoodController::class, "update"])->name("admin.food.update");
-        Route::post("elimina/{food}", [AdminFoodController::class, "destroy"])->name("admin.food.destroy");;
-    });
-
-    Route::prefix("ordini")->group(function () {
-
-        Route::get("", [AdminOrderController::class, "list"])->name("admin.order.list");
-        Route::get("crea", [AdminOrderController::class, "create"])->name("admin.order.create");
-        Route::get("modifica/{order}", [AdminOrderController::class, "edit"])->name("admin.order.edit");
-        Route::get("elimina/{order}", [AdminOrderController::class, "delete"])->name("admin.order.delete");
-
-        Route::post("crea", [AdminOrderController::class, "store"])->name("admin.order.store");
-        Route::post("modifica/{order}", [AdminOrderController::class, "update"])->name("admin.order.update");
-        Route::post("elimina/{order}", [AdminOrderController::class, "destroy"])->name("admin.order.destroy");
-
-        Route::post("updateOrderState/{order}", [AdminOrderController::class, "updateOrderState"])->name("admin.order.updateOrderState");
-        Route::post("updateOrderDeliveryType/{order}", [AdminOrderController::class, "updateOrderDeliveryType"])->name("admin.order.updateOrderDeliveryType");
-        Route::post("updateOrderDeliveryInfo/{order}", [AdminOrderController::class, "updateOrderDeliveryInfo"])->name("admin.order.updateOrderDeliveryInfo");
-        Route::post("addOrderDetail/{order}", [AdminOrderController::class, "addOrderDetail"])->name("admin.order.addOrderDetail");
-        Route::post("updateOrderNote/{order}", [AdminOrderController::class, "updateOrderNote"])->name("admin.order.updateOrderNote");
-    });
-
-    Route::prefix("orderDetails")->group(function () {
-        Route::post("increaseQty/{orderDetail}", [AdminOrderDetailController::class, "increaseQty"])->name("admin.orderDetails.increaseQty");
-        Route::post("reduceQty/{orderDetail}", [AdminOrderDetailController::class, "reduceQty"])->name("admin.orderDetails.reduceQty");
-        Route::post("removeItem/{orderDetail}", [AdminOrderDetailController::class, "removeItem"])->name("admin.orderDetails.removeItem");
-    });
-
-    Route::prefix("stati-ordine")->group(function () {
-
-        Route::get("", [AdminOrderStateController::class, "list"])->name("admin.order-state.list");
-        Route::get("crea", [AdminOrderStateController::class, "create"])->name("admin.order-state.create");
-        Route::get("modifica/{orderState}", [AdminOrderStateController::class, "edit"])->name("admin.order-state.edit");
-        Route::get("elimina/{orderState}", [AdminOrderStateController::class, "delete"])->name("admin.order-state.delete");
-
-        Route::post("crea", [AdminOrderStateController::class, "store"])->name("admin.order-state.store");
-        Route::post("modifica/{orderState}", [AdminOrderStateController::class, "update"])->name("admin.order-state.update");
-        Route::post("elimina/{orderState}", [AdminOrderStateController::class, "destroy"])->name("admin.order-state.destroy");
+        Route::get("", [OrderController::class, "list"])->name("orders.list");
+        Route::post("create", [OrderController::class, "create"])->name("orders.create");
+        Route::get("view/{order}", [OrderController::class, "orderView"])->name("orders.view");
+        Route::get("pay/{order}", [OrderController::class, "pay"])->name("orders.pay")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
+        Route::get("pay/{order}/completato", [OrderController::class, "storePayment"])->name("orders.paymentCompleted");
     });
 });
 
 
-Route::prefix('checkout')->middleware(['auth', 'verified', 'cartIsFilled'])->group(function () {
+Route::prefix('admin')->middleware('can:isAdmin')->group(function () {
 
-    //Scegliere consegna o ritiro
-    Route::get('step1', [CheckoutController::class, "step1"])->name("checkout.step1");
-    Route::post('step1', [CheckoutController::class, "storeStep1"])->name("checkout.step1");
+    Route::prefix("settings")->group(function () {
+        Route::get("generals", [AdminImpostazioniGeneraliController::class, "index"])->name("admin.settings.generals");
+        Route::post("generals", [AdminImpostazioniGeneraliController::class, "store"])->name("admin.settings.generals");
+    });
 
-    //Se scelto consegna mettere l'indirizzo e l'orario
-    Route::get('step2', [CheckoutController::class, "step2"])->name("checkout.step2");;
-    Route::post('step2', [CheckoutController::class, "storeStep2"])->name("checkout.step2");
+    Route::prefix("catalog")->group(function () {
+        Route::prefix("categories")->group(function () {
 
-    //Riepilogo ordine e possibilità di inserire una nota per l'ordine
-    Route::get('step3', [CheckoutController::class, "step3"])->name("checkout.step3");;
+            Route::get("", [AdminCategoryController::class, "list"])->name("admin.category.list");
+            Route::get("create", [AdminCategoryController::class, "create"])->name("admin.category.create");
+            Route::get("edit/{category}", [AdminCategoryController::class, "edit"])->name("admin.category.edit");
+            Route::get("delete/{category}", [AdminCategoryController::class, "delete"])->name("admin.category.delete");
+
+            Route::post("create", [AdminCategoryController::class, "store"])->name("admin.category.store");
+            Route::post("edit/{category}", [AdminCategoryController::class, "update"])->name("admin.category.update");
+            Route::post("delete/{category}", [AdminCategoryController::class, "destroy"])->name("admin.category.destroy");;
+        });
+
+        Route::prefix("foods")->group(function () {
+
+            Route::get("", [AdminFoodController::class, "list"])->name("admin.food.list");
+            Route::get("create", [AdminFoodController::class, "create"])->name("admin.food.create");
+            Route::get("edit/{food}", [AdminFoodController::class, "edit"])->name("admin.food.edit");
+            Route::get("delete/{food}", [AdminFoodController::class, "delete"])->name("admin.food.delete");
+
+            Route::post("create", [AdminFoodController::class, "store"])->name("admin.food.store");
+            Route::post("edit/{food}", [AdminFoodController::class, "update"])->name("admin.food.update");
+            Route::post("delete/{food}", [AdminFoodController::class, "destroy"])->name("admin.food.destroy");;
+        });
+    });
+
+    Route::prefix("sales")->group(function () {
+        Route::prefix("orders")->group(function () {
+
+            Route::get("", [AdminOrderController::class, "list"])->name("admin.order.list");
+            Route::get("create", [AdminOrderController::class, "create"])->name("admin.order.create");
+            Route::get("edit/{order}", [AdminOrderController::class, "edit"])->name("admin.order.edit");
+            Route::get("delete/{order}", [AdminOrderController::class, "delete"])->name("admin.order.delete");
+
+            Route::post("create", [AdminOrderController::class, "store"])->name("admin.order.store");
+            Route::post("edit/{order}", [AdminOrderController::class, "update"])->name("admin.order.update");
+            Route::post("delete/{order}", [AdminOrderController::class, "destroy"])->name("admin.order.destroy");
+
+            Route::post("updateOrderState/{order}", [AdminOrderController::class, "updateOrderState"])->name("admin.order.updateOrderState");
+            Route::post("updateOrderDeliveryType/{order}", [AdminOrderController::class, "updateOrderDeliveryType"])->name("admin.order.updateOrderDeliveryType");
+            Route::post("updateOrderDeliveryInfo/{order}", [AdminOrderController::class, "updateOrderDeliveryInfo"])->name("admin.order.updateOrderDeliveryInfo");
+            Route::post("addOrderDetail/{order}", [AdminOrderController::class, "addOrderDetail"])->name("admin.order.addOrderDetail");
+            Route::post("updateOrderNote/{order}", [AdminOrderController::class, "updateOrderNote"])->name("admin.order.updateOrderNote");
+        });
+
+        Route::prefix("orderDetails")->group(function () {
+            Route::post("increaseQty/{orderDetail}", [AdminOrderDetailController::class, "increaseQty"])->name("admin.orderDetails.increaseQty");
+            Route::post("reduceQty/{orderDetail}", [AdminOrderDetailController::class, "reduceQty"])->name("admin.orderDetails.reduceQty");
+            Route::post("removeItem/{orderDetail}", [AdminOrderDetailController::class, "removeItem"])->name("admin.orderDetails.removeItem");
+        });
+
+        Route::prefix("stati-ordine")->group(function () {
+
+            Route::get("", [AdminOrderStateController::class, "list"])->name("admin.order-state.list");
+            Route::get("create", [AdminOrderStateController::class, "create"])->name("admin.order-state.create");
+            Route::get("edit/{orderState}", [AdminOrderStateController::class, "edit"])->name("admin.order-state.edit");
+            Route::get("delete/{orderState}", [AdminOrderStateController::class, "delete"])->name("admin.order-state.delete");
+
+            Route::post("create", [AdminOrderStateController::class, "store"])->name("admin.order-state.store");
+            Route::post("edit/{orderState}", [AdminOrderStateController::class, "update"])->name("admin.order-state.update");
+            Route::post("delete/{orderState}", [AdminOrderStateController::class, "destroy"])->name("admin.order-state.destroy");
+        });
+    });
 });

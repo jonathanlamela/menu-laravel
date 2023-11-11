@@ -36,7 +36,7 @@ class Food extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when(
-            $filters['search'] ?? false,
+            $filters['key'] ?? false,
             fn ($query, $search) =>
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('ingredients', 'like', '%' . $search . '%')

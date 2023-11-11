@@ -69,7 +69,7 @@ export default function AdminCategoryEditPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("account.dashboard")}>
+                        <BreadcrumbLink href={route("account.index")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>

@@ -8,18 +8,18 @@ use Inertia\Inertia;
 class AccountController extends Controller
 {
 
-    public function cambiaPassword()
+    public function changePassword()
     {
-        return Inertia::render("account/ChangePasswordPage", []);
+        return view("account.change_password", []);
     }
 
-    public function informazioniPersonaliView()
+    public function myAccount()
     {
-        return Inertia::render("account/InformazioniPersonaliPage", []);
+        return view("account.my_account", []);
     }
 
-    public function dashboard()
+    public function index()
     {
-        return Inertia::render("account/AccountPage", []);
+        return view("account.index", []);
     }
 }

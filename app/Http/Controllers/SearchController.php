@@ -12,10 +12,10 @@ class SearchController extends Controller
     {
         $attributes = request();
 
-        if ($attributes["chiave"]) {
-            return Inertia::render("CercaPage", [
-                "foods" => Food::filter(request(['chiave']))->with('category')->get(),
-                "chiave" => request("chiave")
+        if ($attributes["key"]) {
+            return view("search.show", [
+                "foods" => Food::filter(request(['key']))->with('category')->get(),
+                "key" => request("key")
             ]);
         }
 

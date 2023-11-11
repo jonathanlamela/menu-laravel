@@ -36,7 +36,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function crea(Request $request)
+    public function create(Request $request)
     {
         $cart = session('cart');
 
@@ -91,7 +91,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function paga(Order $order)
+    public function pay(Order $order)
     {
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -135,7 +135,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function storePagamento(Request $request, Order $order)
+    public function storePayment(Request $request, Order $order)
     {
         session()->flash("success_message", "Ordine pagato");
 

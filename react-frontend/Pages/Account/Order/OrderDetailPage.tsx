@@ -47,13 +47,13 @@ export default function OrderDetailPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("account.dashboard")}>
+                        <BreadcrumbLink href={route("account.index")}>
                             Profilo
                         </BreadcrumbLink>
                     </li>
                     <li>::</li>
                     <li>
-                        <BreadcrumbLink href={route("ordini.list")}>
+                        <BreadcrumbLink href={route("orders.list")}>
                             I miei ordini
                         </BreadcrumbLink>
                     </li>

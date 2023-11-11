@@ -1,6 +1,6 @@
 @if (auth()->user())
     <a class="text-white flex flex-row p-2 items-center hover:bg-slate-800 justify-center space-x-2"
-        href="{{ route('account.dashboard') }}">
+        href="{{ route('account.index') }}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -8,15 +8,17 @@
         </svg>
         <span>Profilo</span>
     </a>
-    <a href="{{ route('logout') }}"
-        class="text-white flex flex-row p-2 items-center hover:bg-slate-800 justify-center space-x-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-            stroke="currentColor" class="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round"
-                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-        </svg>
-        <span>Esci</span>
-    </a>
+    <form method="post" action="{{ route('logout') }}">
+        @csrf
+        <button class="text-white flex flex-row p-2 items-center hover:bg-slate-800 justify-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+            </svg>
+            <span>Esci</span>
+        </button>
+    </form>
 @else
     <a href={{ route('login') }}
         class="text-white flex flex-row p-2 items-center hover:bg-slate-800 justify-center space-x-2"><svg
