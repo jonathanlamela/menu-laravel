@@ -25,19 +25,19 @@ export default function AdminUpdateOrderDetail() {
     };
 
     const increaseQtyAction = (row: any) => {
-        router.post(route("admin.orderDetails.increaseQty", { orderDetail: row }), {
+        router.post(route("admin.order_details.increase_qty", { orderDetail: row }), {
             id: row.id
         })
     }
 
     const reduceQtyAction = (row: any) => {
-        router.post(route("admin.orderDetails.reduceQty", { orderDetail: row }), {
+        router.post(route("admin.order_details.reduce_qty", { orderDetail: row }), {
             id: row.id
         })
     }
 
     const removeItem = (row: any) => {
-        router.post(route("admin.orderDetails.removeItem", { orderDetail: row }), {
+        router.post(route("admin.order_details.remove_item", { orderDetail: row }), {
             id: row.id
         })
     }

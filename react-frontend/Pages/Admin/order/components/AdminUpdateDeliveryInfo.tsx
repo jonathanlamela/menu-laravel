@@ -18,7 +18,7 @@ export default function AdminUpdateDeliveryInfo() {
     });
 
     const onSubmit = async (data: DeliveryInfoFields) => {
-        router.post(route("admin.order.updateOrderDeliveryInfo", { order: order }), data);
+        router.post(route("admin.order.update_order_delivery_info", { order: order }), data);
     }
 
     const [isTransitioning, setIsTransitioning] = useState(false); // Nuovo stato

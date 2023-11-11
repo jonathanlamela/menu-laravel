@@ -26,7 +26,7 @@ export default function AdminOrderStateEditPage() {
     });
     const values = watch();
     const onSubmit = async (data: UpdateOrderStateFields) => {
-        router.post(route("admin.order-state.update", { orderState: item }), data);
+        router.post(route("admin.order_state.update", { orderState: item }), data);
     }
     return <>
         <BaseLayout title="Crea stato">
@@ -43,7 +43,7 @@ export default function AdminOrderStateEditPage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("admin.order-state.list")}>
+                        <BreadcrumbLink href={route("admin.order_state.list")}>
                             Stati ordine
                         </BreadcrumbLink>
                     </li>

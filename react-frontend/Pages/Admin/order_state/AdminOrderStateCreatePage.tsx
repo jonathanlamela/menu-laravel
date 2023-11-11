@@ -26,7 +26,7 @@ export default function AdminOrderStateCreatePage() {
     const values = watch();
 
     const onSubmit = async (data: CreateOrderStateFields) => {
-        router.post(route("admin.order-state.store"), data);
+        router.post(route("admin.order_state.store"), data);
     }
 
     return <>

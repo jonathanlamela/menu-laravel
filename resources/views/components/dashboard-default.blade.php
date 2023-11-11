@@ -4,7 +4,7 @@
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
     <div
         class='w-full md:w-1/2 lg:w-1/6 bg-slate-50 lg:max-w-xs hover:bg-slate-500  hover:text-white border-b-red-900  border-b-8 text-red-900'>
-        <a class="flex flex-col space-y-8 p-8 justify-center items-center" href="{{ route('account.my-account') }}">
+        <a class="flex flex-col space-y-8 p-8 justify-center items-center" href="{{ route('account.my_account') }}">
             <div class="w-full flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                     stroke="currentColor" class="w-6 h-6">
@@ -18,7 +18,7 @@
     <div
         class='w-full md:w-1/2 lg:w-1/6 bg-slate-50 lg:max-w-xs hover:bg-slate-500  hover:text-white border-b-red-900  border-b-8 text-red-900'>
         <a class="flex flex-col space-y-8 p-8 justify-center items-center"
-            href="{{ route('account.change-password') }}">
+            href="{{ route('account.change_password') }}">
             <div class="w-full flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                     stroke="currentColor" class="w-6 h-6">

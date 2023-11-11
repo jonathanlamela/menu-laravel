@@ -25,7 +25,7 @@ export default function AdminUpdateDeliveryType() {
 
     const onSubmit = async (data: DeliveryTypeFields) => {
 
-        router.post(route("admin.order.updateOrderDeliveryType", { order: order }), {
+        router.post(route("admin.order.update_order_delivery_type", { order: order }), {
             delivery_type: data.delivery_type
         });
 

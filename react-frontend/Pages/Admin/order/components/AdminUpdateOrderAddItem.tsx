@@ -27,7 +27,7 @@ export default function AdminUpdateOrderAddItem() {
 
     const onItemAddSubmit = async (data: { id: number }) => {
         const food = foods[data.id];
-        router.post(route("admin.order.addOrderDetail", { order: order }), { name: food.name, price: food.price });
+        router.post(route("admin.order.add_order_detail", { order: order }), { name: food.name, price: food.price });
     }
 
     return <>

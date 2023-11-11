@@ -24,7 +24,7 @@ export default function AdminUpdateOrderState() {
         });
 
     const onOrderStatusSubmit = async (data: { order_state: number }) => {
-        router.post(route("admin.order.updateOrderState", { order: order }), { order_state_id: data.order_state });
+        router.post(route("admin.order.update_order_state", { order: order }), { order_state_id: data.order_state });
     }
 
     const toggleEdit = () => {

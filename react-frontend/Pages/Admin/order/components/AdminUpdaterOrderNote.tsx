@@ -19,7 +19,7 @@ export default function AdminUpdateOrderNote() {
         });
 
     const onOrderUpdateNoteSubmit = async (data: { note: string }) => {
-        router.post(route("admin.order.updateOrderNote", { order: order }), { note: data.note });
+        router.post(route("admin.order.update_order_note", { order: order }), { note: data.note });
     }
 
 

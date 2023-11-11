@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Accedi @stop
+@section('title') Il mio profilo @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">

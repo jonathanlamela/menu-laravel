@@ -39,7 +39,7 @@ class AdminOrderStateController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('admin.order-state.create'))
+            return redirect(route('admin.order_state.create'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -53,7 +53,7 @@ class AdminOrderStateController extends Controller
 
         session()->flash("success_message", "Stato ordine creato");
 
-        return redirect(route('admin.order-state.list'));
+        return redirect(route('admin.order_state.list'));
     }
 
     public function edit(OrderState $orderState)
@@ -75,7 +75,7 @@ class AdminOrderStateController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('admin.order-state.edit', ["orderState" => $orderState->id]))
+            return redirect(route('admin.order_state.edit', ["orderState" => $orderState->id]))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -90,7 +90,7 @@ class AdminOrderStateController extends Controller
 
         session()->flash("success_message", "Stato ordine aggiornato");
 
-        return redirect(route('admin.order-state.edit', ["orderState" => $orderState->id]));
+        return redirect(route('admin.order_state.edit', ["orderState" => $orderState->id]));
     }
 
     public function delete(OrderState $orderState)
@@ -123,6 +123,6 @@ class AdminOrderStateController extends Controller
         session()->flash("success_message", "Stato ordine " . $orderState->name . " eliminato");
 
         OrderState::destroy($id);
-        return redirect(route('admin.order-state.list'));
+        return redirect(route('admin.order_state.list'));
     }
 }

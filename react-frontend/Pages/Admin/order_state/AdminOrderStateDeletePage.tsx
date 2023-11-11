@@ -19,7 +19,7 @@ export default function AdminOrderStateDeletePage() {
     const { item } = page.props;
 
     const doDelete = async () => {
-        router.post(route("admin.order-state.destroy", { orderState: item }), { id: item.id });
+        router.post(route("admin.order_state.destroy", { orderState: item }), { id: item.id });
     }
 
     return <>
@@ -37,7 +37,7 @@ export default function AdminOrderStateDeletePage() {
             <HeaderMenu>
                 <ol className="flex h-16 flex-row space-x-2 items-center pl-8 text-white">
                     <li>
-                        <BreadcrumbLink href={route("admin.order-state.list")}>
+                        <BreadcrumbLink href={route("admin.order_state.list")}>
                             Stati ordine
                         </BreadcrumbLink>
                     </li>

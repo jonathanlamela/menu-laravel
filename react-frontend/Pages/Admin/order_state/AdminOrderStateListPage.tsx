@@ -30,7 +30,7 @@ export default function AdminOrderStateListPage() {
     });
 
     const onSubmit = async (formData: SearchFields) => {
-        router.visit(route("admin.order-state.list"), {
+        router.visit(route("admin.order_state.list"), {
             data: {
                 search: formData.search,
                 page: data.current_page,
@@ -45,7 +45,7 @@ export default function AdminOrderStateListPage() {
 
         if (by === orderBy) {
 
-            router.visit(route("admin.order-state.list"), {
+            router.visit(route("admin.order_state.list"), {
                 data: {
                     search: search,
                     page: data.current_page,
@@ -55,7 +55,7 @@ export default function AdminOrderStateListPage() {
                 }
             })
         } else {
-            router.visit(route("admin.order-state.list"), {
+            router.visit(route("admin.order_state.list"), {
                 data: {
                     search: search,
                     page: data.current_page,
@@ -68,7 +68,7 @@ export default function AdminOrderStateListPage() {
     }
 
     const goToPage = (page: number) => {
-        router.visit(route("admin.order-state.list"), {
+        router.visit(route("admin.order_state.list"), {
             data: {
                 search: search,
                 page: page,
@@ -122,7 +122,7 @@ export default function AdminOrderStateListPage() {
                 <div className="flex w-full bg-gray-100 p-2">
                     <div className="w-1/2">
                         <div className="flex">
-                            <Link href={route("admin.order-state.create")} className="btn-primary">Crea</Link>
+                            <Link href={route("admin.order_state.create")} className="btn-primary">Crea</Link>
                         </div>
                     </div>
                     <div className="w-1/2 flex justify-end">
