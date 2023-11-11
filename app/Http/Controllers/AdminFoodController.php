@@ -17,7 +17,7 @@ class AdminFoodController extends Controller
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render("admin/food/AdminFoodListPage", [
+        return view("admin.food.list", [
             "data" => Food::filter(request(['search']))->with('category')->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -27,7 +27,7 @@ class AdminFoodController extends Controller
 
     public function create()
     {
-        return Inertia::render("admin/food/AdminFoodCreatePage", [
+        return view("admin.food.create", [
             "categories" => Category::all(["id", "name"])
         ]);
     }
@@ -56,8 +56,7 @@ class AdminFoodController extends Controller
 
         $attributes = $validator->validated();
 
-        $food = Food::create($attributes);
-
+        Food::create($attributes);
 
         session()->flash("success_message", "Cibo creato");
 
@@ -66,8 +65,8 @@ class AdminFoodController extends Controller
 
     public function edit(Food $food)
     {
-        return Inertia::render("admin/food/AdminFoodEditPage", [
-            "item" => $food,
+        return view("admin.food.edit", [
+            "food" => $food,
             "categories" => Category::all(["id", "name"])
         ]);
     }
@@ -107,33 +106,18 @@ class AdminFoodController extends Controller
 
     public function delete(Food $food)
     {
-        return Inertia::render("admin/food/AdminFoodDeletePage", [
-            "item" => $food
+        return view("admin.food.delete", [
+            "food" => $food
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Food $food)
     {
-
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ], [
-            'name.required' => "Il campo nome è obbligatorio",
-        ]);
-
-        if ($validator->fails()) {
-            return redirect(route('admin.food.list'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $id = $validator->validated()['id'];
-
-        $food = Food::find($id);
+        $food = Food::find($food->id);
 
         session()->flash("success_message", "Cibo " . $food->name . " eliminato");
 
-        Food::destroy($id);
+        Food::destroy($food->id);
         return redirect(route('admin.food.list'));
     }
 }
