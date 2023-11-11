@@ -12,7 +12,7 @@ class CartRow extends Component
      *
      * @return void
      */
-    public function __construct(public $cartItem)
+    public function __construct(public $cartItem, public bool $actions  = true)
     {
         //
     }

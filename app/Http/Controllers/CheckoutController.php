@@ -18,7 +18,11 @@ class CheckoutController extends Controller
 {
     public function step1()
     {
-        return Inertia::render("checkout/TipologiaConsegnaPage");
+        $cart = session()->get("cart");
+
+        return view("checkout.delivery_type", [
+            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO'
+        ]);
     }
 
     public function storeStep1(Request $request)
@@ -39,6 +43,7 @@ class CheckoutController extends Controller
 
         $cart = session()->get("cart");
         $cart["delivery_type"] = $attributes["delivery_type"];
+
         session(["cart" => $cart]);
 
         return redirect(route('checkout.step2'));
@@ -51,7 +56,11 @@ class CheckoutController extends Controller
         if ($cart["delivery_type"] == "ASPORTO") {
             return redirect()->action([CheckoutController::class, 'step3']);
         }
-        return Inertia::render("checkout/InformazioniConsegnaPage");
+        return view("checkout.delivery_info", [
+            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO',
+            "delivery_time" =>  $cart != null ? $cart['delivery_time'] : '',
+            "delivery_address" =>  $cart != null ? $cart['delivery_address'] : '',
+        ]);
     }
 
     public function storeStep2(Request $request)
@@ -85,6 +94,13 @@ class CheckoutController extends Controller
 
     public function step3()
     {
-        return Inertia::render('checkout/RiepilogoOrdinePage');
+        $cart = session()->get("cart");
+        return view('checkout.order_summary', [
+            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO',
+            "delivery_time" =>  $cart != null ? $cart['delivery_time'] : '',
+            "delivery_address" =>  $cart != null ? $cart['delivery_address'] : '',
+            "total" =>  $cart != null ? $cart['total'] : 0,
+            "items" => $cart != null ? $cart['items'] : [],
+        ]);
     }
 }
