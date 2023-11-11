@@ -9,13 +9,22 @@ use Inertia\Inertia;
 
 class AdminOrderStateController extends Controller
 {
+
+    public $badge_options = [
+        "badge-primary" => "Primary",
+        "badge-secondary" => "Secondary",
+        "badge-info" => "Info",
+        "badge-success" => "Success",
+        "badge-danger" => "Danger"
+    ];
+
     public function list()
     {
         $orderBy = request("orderBy") ?? "id";
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render('admin/order_state/AdminOrderStateListPage', [
+        return view('admin.order_state.list', [
             "data" => OrderState::filter(request(['search']))->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -25,7 +34,9 @@ class AdminOrderStateController extends Controller
 
     public function create()
     {
-        return Inertia::render('admin/order_state/AdminOrderStateCreatePage', []);
+        return view('admin.order_state.create', [
+            "badge_options" => $this->badge_options
+        ]);
     }
 
     public function store(Request $request)
@@ -58,18 +69,17 @@ class AdminOrderStateController extends Controller
 
     public function edit(OrderState $orderState)
     {
-        return Inertia::render('admin/order_state/AdminOrderStateEditPage', [
-            "item" => $orderState
+        return view('admin.order_state.edit', [
+            "orderState" => $orderState,
+            "badge_options" => $this->badge_options
         ]);
     }
 
     public function update(OrderState $orderState, Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'css_badge_class' => ''
+
         ], [
             'name.required' => "Il campo nome è obbligatorio",
         ]);
@@ -95,34 +105,16 @@ class AdminOrderStateController extends Controller
 
     public function delete(OrderState $orderState)
     {
-        return Inertia::render('admin/order_state/AdminOrderStateDeletePage', [
-            "item" => $orderState
+        return view('admin.order_state.delete', [
+            "orderState" => $orderState
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(OrderState $orderState)
     {
-
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'name.unique' => "Il nome della categoria deve essere univoco"
-        ]);
-
-        if ($validator->fails()) {
-            return redirect(route('admin.category.list'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $id = $validator->validated()['id'];
-
-        $orderState = OrderState::find($id);
-
         session()->flash("success_message", "Stato ordine " . $orderState->name . " eliminato");
 
-        OrderState::destroy($id);
+        OrderState::destroy($orderState->id);
         return redirect(route('admin.order_state.list'));
     }
 }

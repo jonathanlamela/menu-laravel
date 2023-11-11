@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>@yield('title') :: {{ $settings['site_title'] }}</title>
     @vite('resources/css/app.css')
-
 </head>
 
 <body class="flex flex-col flex-grow bg-slate-50">
