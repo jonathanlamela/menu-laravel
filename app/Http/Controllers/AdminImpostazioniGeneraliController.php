@@ -12,7 +12,7 @@ class AdminImpostazioniGeneraliController extends Controller
 {
     public function index()
     {
-        return Inertia::render('admin/settings/ImpostazioniGeneraliPage', [
+        return view('admin.settings.generals', [
             "item" => Settings::first() ?? new Settings(),
             "order_states" => OrderState::all()
         ]);
