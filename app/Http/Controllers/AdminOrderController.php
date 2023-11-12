@@ -10,7 +10,6 @@ use App\Models\OrderDetail;
 use App\Models\OrderState;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
 class AdminOrderController extends Controller
 {
@@ -20,7 +19,7 @@ class AdminOrderController extends Controller
         $ascending_value = request("ascending", 'true');
         $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
 
-        return Inertia::render("admin/order/AdminOrderListPage", [
+        return view("admin.order.list", [
             "data" => Order::filter(request(['search']))->with(['user', 'orderState'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
@@ -33,7 +32,7 @@ class AdminOrderController extends Controller
     {
         $result =  Order::where("id", "=", $order->id)->with(['user', 'orderState', 'orderDetails'])->first();
 
-        return Inertia::render("admin/order/AdminOrderEditPage", [
+        return view("admin.order.edit", [
             "order" => $result,
             "order_states" => OrderState::all(),
             "foods" => Food::with("category")->get()
@@ -168,7 +167,7 @@ class AdminOrderController extends Controller
 
     public function delete(Order $order)
     {
-        return view('admin/order/delete', [
+        return view('admin.order.delete', [
             "item" => $order
         ]);
     }
