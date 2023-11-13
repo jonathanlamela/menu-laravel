@@ -6,7 +6,6 @@ use App\Models\OrderState;
 use Illuminate\Http\Request;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
 class AdminImpostazioniGeneraliController extends Controller
 {

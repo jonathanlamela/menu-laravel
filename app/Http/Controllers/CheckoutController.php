@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {

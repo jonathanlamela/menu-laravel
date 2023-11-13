@@ -5,10 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@types/react": "^18.2.20",
-        "@types/ziggy-js": "^1.3.2",
         "autoprefixer": "^10.4.13",
-        "axios": "^0.25.0",
         "laravel-mix": "^6.0.6",
         "laravel-vite-plugin": "^0.7.4",
         "lodash": "^4.17.19",
@@ -17,17 +14,8 @@
         "vite": "^4.1.1"
     },
     "dependencies": {
-        "@hookform/resolvers": "^3.2.0",
-        "@inertiajs/react": "^1.0.10",
         "@tailwindcss/forms": "^0.5.3",
-        "@vitejs/plugin-react": "^4.0.4",
-        "@vitejs/plugin-vue": "^4.2.3",
         "mjml": "^4.14.1",
-        "quill": "^1.3.6",
-        "react-dom": "^18.2.0",
-        "react-hook-form": "^7.45.4",
-        "react-quill": "^2.0.0",
-        "vue": "^3.3.4",
         "yup": "^1.2.0",
         "ziggy-js": "^1.6.1"
     }

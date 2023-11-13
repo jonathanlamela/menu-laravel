@@ -16,14 +16,13 @@ class AdminOrderController extends Controller
     public function list()
     {
         $orderBy = request("orderBy") ?? "id";
-        $ascending_value = request("ascending", 'true');
-        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+        $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view("admin.order.list", [
-            "data" => Order::filter(request(['search']))->with(['user', 'orderState'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "data" => Order::filter(request(['search']))->with(['user', 'orderState'])->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
-            "ascending" => $ascending_value === "true",
+            "ascending" => request("ascending", 'true') === "true",
         ]);
     }
 

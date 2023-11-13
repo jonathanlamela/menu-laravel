@@ -58,7 +58,7 @@
                 </svg>
 
             </div>
-            <p class="text-center">Stati ordini</p>
+            <p class="text-center">Stati ordine</p>
         </a>
     </div>
 </div>

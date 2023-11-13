@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OrderState;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
 class AdminOrderStateController extends Controller
 {
@@ -21,14 +20,14 @@ class AdminOrderStateController extends Controller
     public function list()
     {
         $orderBy = request("orderBy") ?? "id";
-        $ascending_value = request("ascending", 'true');
-        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+
+        $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view('admin.order_state.list', [
-            "data" => OrderState::filter(request(['search']))->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "data" => OrderState::filter(request(['search']))->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
-            "ascending" => $ascending_value === "true",
+            "ascending" => request("ascending", 'true') == 'true',
         ]);
     }
 

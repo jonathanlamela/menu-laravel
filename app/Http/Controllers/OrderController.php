@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\Order;
 use Illuminate\Support\Facades\Response;
-use Inertia\Inertia;
 
 use App\Mail\OrderCreated;
 
@@ -23,15 +22,22 @@ class OrderController extends Controller
 
     public function list()
     {
-        return Inertia::render("account/order/OrderListPage", [
-            "orders" => Order::where("user_id", "=", request()->user()->id)->with("orderState")->get()
+        $orderBy = request("orderBy") ?? "id";
+        $ascending_value = request("ascending", true);
+        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+
+        return view("order.list", [
+            "data" => Order::where("user_id", auth()->user()->id)->filter(request(['search']))->with(['user', 'orderState'])->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "search" => request('search', null),
+            "orderBy" => $orderBy,
+            "ascending" => $ascending_value === "true",
         ]);
     }
 
     public function orderView(Order $order, Request $request)
     {
         $order =  Order::where("id", "=", $order->id)->with("orderState", "orderDetails")->get()->first();
-        return Inertia::render("account/order/OrderDetailPage", [
+        return view("order.detail", [
             "order" => $order
         ]);
     }

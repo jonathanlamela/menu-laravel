@@ -14,14 +14,13 @@ class AdminCategoryController extends Controller
     public function list()
     {
         $orderBy = request("orderBy") ?? "id";
-        $ascending_value = request("ascending", 'true');
-        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+        $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view("admin.category.list", [
-            "data" => Category::filter(request(['search']))->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "data" => Category::filter(request(['search']))->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
-            "ascending" => $ascending_value === "true",
+            "ascending" => request("ascending", 'true') === 'true',
         ]);
     }
 

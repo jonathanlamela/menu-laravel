@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Food;
-use Inertia\Inertia;
 
 class AdminFoodController extends Controller
 {
@@ -14,14 +13,13 @@ class AdminFoodController extends Controller
     public function list()
     {
         $orderBy = request("orderBy") ?? "id";
-        $ascending_value = request("ascending", 'true');
-        $ascending = $ascending_value === 'true' ? 'asc' : 'desc';
+        $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view("admin.food.list", [
-            "data" => Food::filter(request(['search']))->with('category')->orderBy($orderBy, $ascending)->paginate(request('perPage') ?? 5),
+            "data" => Food::filter(request(['search']))->with('category')->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
-            "ascending" => $ascending_value === "true",
+            "ascending" => request("ascending", 'true') === 'true',
         ]);
     }
 

@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Inertia\Inertia;
 use Throwable;
 use App\Models\Settings;
 
