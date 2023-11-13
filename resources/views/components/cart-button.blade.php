@@ -1,8 +1,8 @@
 <a class="text-white hover:bg-slate-800 p-2 flex flex-row space-x-1 justify-center items-center"
     href="{{ route('cart.show') }}">
-    @if (count($cart['items']) > 0)
+    @if (count($cart->items) > 0)
         <span class="text-white bg-red-600 text-sm rounded-full h-6 w-6 flex justify-center items-center ">
-            {{ count($cart['items']) }}
+            {{ count($cart->items) }}
         </span>
     @endif
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

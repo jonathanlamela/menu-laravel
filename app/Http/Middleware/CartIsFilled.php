@@ -16,7 +16,7 @@ class CartIsFilled
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session('cart') || count(session('cart')["items"]) == 0) {
+        if (!session('cart') || count(session('cart')->items) == 0) {
             return redirect(route('cart.show'));
         }
         return $next($request);

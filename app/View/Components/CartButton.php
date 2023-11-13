@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Classes\Cart;
 
 class CartButton extends Component
 {
@@ -24,12 +25,7 @@ class CartButton extends Component
     public function render()
     {
         return view('components.cart-button', [
-            "cart" => session('cart', [
-                "items" => [],
-                "total" => 0,
-                "deliveryTime" => null,
-                "deliveryAddress" => null,
-            ])
+            "cart" => session('cart', new Cart())
         ]);
     }
 }

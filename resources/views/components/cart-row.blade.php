@@ -1,16 +1,16 @@
 <tr class="flex border-b justify-center items-center py-2">
 
     @if ($actions)
-        <td class="w-3/6">{{ $cartItem['item']['name'] }}</td>
-        <td class="w-1/6 text-center">{{ $cartItem['quantity'] }}</td>
-        <td class="w-1/6 text-center">{{ number_format($cartItem['item']['price'], 2) }} €</td>
+        <td class="w-3/6">{{ $cartItem->name }}</td>
+        <td class="w-1/6 text-center">{{ $cartItem->quantity }}</td>
+        <td class="w-1/6 text-center">{{ number_format($cartItem->price, 2) }} €</td>
         <td class="w-1/6 text-center">
             <div
                 class="flex flex-col content-center items-center md:flex-row justify-center space-x-0 space-y-2
         md:space-x-2 md:space-y-0">
                 <form method="post" action="{{ route('cart.increase_qty') }}">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $cartItem['item']['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $cartItem->id }}" />
                     <button class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700 rounded-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -23,7 +23,7 @@
                 </form>
                 <form method="post" action="{{ route('cart.decrease_qty') }}">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $cartItem['item']['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $cartItem->id }}" />
                     <button class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700  rounded-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16">
@@ -35,7 +35,7 @@
                     </button>
                 </form>
                 <form method="post" action="{{ route('cart.remove_item') }}">
-                    <input type="hidden" name="id" value="{{ $cartItem['item']['id'] }}" />
+                    <input type="hidden" name="id" value="{{ $cartItem->id }}" />
                     @csrf
                     <button type="submit" class="p-2 bg-gray-300 hover:text-white hover:bg-gray-700  rounded-xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -50,9 +50,9 @@
             </div>
         </td>
     @else
-        <td class="w-4/6">{{ $cartItem['item']['name'] }}</td>
-        <td class="w-1/6 text-center">{{ $cartItem['quantity'] }}</td>
-        <td class="w-1/6 text-center">{{ number_format($cartItem['item']['price'], 2) }} €</td>
+        <td class="w-4/6">{{ $cartItem->name }}</td>
+        <td class="w-1/6 text-center">{{ $cartItem->quantity }}</td>
+        <td class="w-1/6 text-center">{{ number_format($cartItem->price, 2) }} €</td>
     @endif
 
 </tr>

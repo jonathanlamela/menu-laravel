@@ -28,7 +28,7 @@
 
 @section('content')
     <div class="flex flex-col p-8">
-        @if (count($cart['items']) > 0)
+        @if (count($cart->items) > 0)
             <div class="flex flex-col">
                 <div class="w-full">
                     <table class="flex flex-col">
@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cart['items'] as $item)
+                            @foreach ($cart->items as $item)
                                 <x-cart-row :cartItem="$item"></x-cart-row>
                             @endforeach
                         </tbody>
@@ -49,7 +49,7 @@
                             <tr class='flex text-center pt-2'>
                                 <td class="w-3/6"></td>
                                 <td class="w-1/6 font-semibold">Totale</td>
-                                <td class="w-1/6">{{ number_format($cart['total'], 2) }} €</td>
+                                <td class="w-1/6">{{ number_format($cart->total, 2) }} €</td>
                                 <td class="w-1/6"></td>
                             </tr>
                         </tfoot>

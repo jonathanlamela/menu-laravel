@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Classes\Cart;
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
@@ -28,6 +29,7 @@ class GlobalVarsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        session('cart', new Cart());
         if (Schema::hasTable('settings')) {
             view()->share('settings', Settings::first() ?? new Settings());
         }

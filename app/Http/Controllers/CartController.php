@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Cart;
+use App\Classes\CartItem;
+use App\Classes\CartRow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,12 +14,7 @@ class CartController extends Controller
     public function show()
     {
         return view("cart/show", [
-            "cart" => session('cart', [
-                "items" => [],
-                "total" => 0,
-                "deliveryTime" => null,
-                "deliveryAddress" => null,
-            ])
+            "cart" => session('cart', new Cart())
         ]);
     }
 
@@ -33,40 +31,37 @@ class CartController extends Controller
             $attributes = $validator->validated();
 
             $id = $attributes["id"];
-            $food_name = $attributes["name"];
-            $food_price = $attributes["price"];
 
-            $cart = session('cart', [
-                "items" => [],
-                "total" => 0
-            ]);
+            $cart = session('cart', new Cart());
 
-            if (key_exists("product_" . $id, $cart["items"])) {
-                $row = $cart["items"]["product_" . $id];
-                $cart["items"]["product_" . $id]["quantity"] = $row["quantity"] + 1;
+            if (key_exists("product_" . $id, $cart->items)) {
+                $row = $cart->items["product_" . $id];
+                $row->quantity = $row->quantity + 1;
             } else {
-                $cart["items"]["product_" . $id] = [
-                    "quantity" => 1,
-                    "item" => [
-                        "name" => $food_name,
-                        "price" => $food_price,
-                        "id" => $id
-                    ]
-                ];
+                $row = new CartRow();
+                $row->quantity = 1;
+                $row->name = $attributes["name"];
+                $row->price = $attributes["price"];
+                $row->id = $attributes["id"];
             }
 
-
-            $cart["total"] = 0;
-
-            foreach ($cart["items"] as $item) {
-
-                $cart["total"] += $item["item"]["price"] * $item["quantity"];
-            }
+            $cart->items["product_" . $id] = $row;
+            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
 
         return redirect()->back();
+    }
+
+    public function updateTotal($cart)
+    {
+        $cart->total = 0;
+        foreach ($cart->items as $row) {
+            $cart->total += $row->price * $row->quantity;
+        }
+
+        return $cart->total;
     }
 
     public function increaseQty(Request $request)
@@ -80,21 +75,11 @@ class CartController extends Controller
 
             $id = $attributes["id"];
 
-            $cart = session('cart', [
-                "items" => [],
-                "total" => 0
-            ]);
+            $cart = session('cart', new Cart());
 
-            $cart["items"]["product_" . $id]["quantity"] = $cart["items"]["product_" . $id]["quantity"] + 1;
+            $cart->items["product_" . $id]->quantity = $cart->items["product_" . $id]->quantity + 1;
 
-
-            //update total
-            $cart["total"] = 0;
-
-            foreach ($cart["items"] as $item) {
-
-                $cart["total"] += $item["item"]["price"] * $item["quantity"];
-            }
+            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
@@ -113,24 +98,15 @@ class CartController extends Controller
 
             $id = $attributes["id"];
 
-            $cart = session('cart', [
-                "items" => [],
-                "total" => 0
-            ]);
+            $cart = session('cart', new Cart());
 
-            if ($cart["items"]["product_" . $id]["quantity"] == 1) {
-                unset($cart["items"]["product_" . $id]);
+            if ($cart->items["product_" . $id]->quantity == 1) {
+                unset($cart->items["product_" . $id]);
             } else {
-                $cart["items"]["product_" . $id]["quantity"] = $cart["items"]["product_" . $id]["quantity"] - 1;
+                $cart->items["product_" . $id]->quantity = $cart->items["product_" . $id]->quantity - 1;
             }
-            //update total
 
-            $cart["total"] = 0;
-
-            foreach ($cart["items"] as $item) {
-
-                $cart["total"] += $item["item"]["price"] * $item["quantity"];
-            }
+            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
@@ -149,22 +125,11 @@ class CartController extends Controller
 
             $id = $attributes["id"];
 
-            $cart = session('cart', [
-                "items" => [],
-                "total" => 0
-            ]);
+            $cart = session('cart', new Cart());
 
-            unset($cart["items"]["product_" . $id]);
+            unset($cart->items["product_" . $id]);
 
-            //update total
-
-            $cart["total"] = 0;
-
-            foreach ($cart["items"] as $item) {
-
-                $cart["total"] += $item["item"]["price"] * $item["quantity"];
-            }
-
+            $cart->total = $this->updateTotal($cart);
             session(["cart" => $cart]);
         }
 

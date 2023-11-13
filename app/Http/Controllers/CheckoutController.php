@@ -16,7 +16,7 @@ class CheckoutController extends Controller
 
         return view("checkout.order_carrier", [
             "carriers" => Carrier::where('deleted', false)->get(),
-            "carrier_id" => $cart['carrier_id'] ?? Carrier::where('deleted', false)->first()->id
+            "carrier_id" => $cart->carrier_id ?? Carrier::where('deleted', false)->first()->id
         ]);
     }
 
@@ -39,7 +39,7 @@ class CheckoutController extends Controller
         $attributes = $validator->validated();
 
         $cart = session()->get("cart");
-        $cart["carrier_id"] = $attributes["carrier_id"];
+        $cart->carrier_id = $attributes["carrier_id"];
 
         session(["cart" => $cart]);
 
@@ -51,10 +51,9 @@ class CheckoutController extends Controller
         $cart = session()->get("cart");
 
 
-
         return view("checkout.delivery_info", [
-            "delivery_time" =>   $cart['delivery_time'] ?? '',
-            "delivery_address" =>  $cart['delivery_address'] ?? '',
+            "delivery_time" =>   $cart->delivery_time ?? '',
+            "delivery_address" =>  $cart->delivery_address ?? '',
         ]);
     }
 
@@ -75,11 +74,10 @@ class CheckoutController extends Controller
 
         $attributes = $validator->validate();
 
-        $cart = session()->get("cart");
 
         $cart = session()->get("cart");
-        $cart["delivery_address"] = request("delivery_address");
-        $cart["delivery_time"] = $attributes["delivery_time"];
+        $cart->delivery_address = request("delivery_address");
+        $cart->delivery_time = $attributes["delivery_time"];
 
         session()->put("cart", $cart);
 
@@ -90,11 +88,11 @@ class CheckoutController extends Controller
     {
         $cart = session()->get("cart");
         return view('checkout.order_summary', [
-            "carrier" => Carrier::where("id", $cart["carrier_id"])->first(),
-            "delivery_time" =>  $cart['delivery_time'] ?? 'Nessun orario',
-            "delivery_address" =>  $cart['delivery_address'] ?? 'Nessun indirizzo',
-            "total" =>  $cart['total'] ?? 0,
-            "items" => $cart['items'] ?? [],
+            "carrier" => Carrier::where("id", $cart->carrier_id)->first(),
+            "delivery_time" =>  $cart->delivery_time ?? 'Nessun orario',
+            "delivery_address" =>  $cart->delivery_address ?? 'Nessun indirizzo',
+            "total" =>  $cart->total ?? 0,
+            "items" => $cart->items ?? [],
         ]);
     }
 }

@@ -47,15 +47,15 @@ class OrderController extends Controller
 
         $settings = Settings::first();
 
-        $carrier = Carrier::where("id", $cart["carrier_id"])->first();
+        $carrier = Carrier::where("id", $cart->carrier_id)->first();
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "total" => $cart["total"],
+            "total" => $cart->total,
             "carrier_id" => $carrier->id,
             "delivery_costs" => $carrier->costs,
-            "delivery_address" => $cart["delivery_address"] ?? "",
-            "delivery_time" => $cart["delivery_time"] ?? "",
+            "delivery_address" => $cart->delivery_address ?? "",
+            "delivery_time" => $cart->delivery_time ?? "",
             "order_state_id" => $settings->order_created_state_id ?? null,
             "note" => $request->input('note') ?? "",
             "is_paid" => false
@@ -63,14 +63,14 @@ class OrderController extends Controller
 
         $order = Order::create($attributes);
 
-        foreach ($cart["items"] as $item) {
+        foreach ($cart->items as $item) {
 
             OrderDetail::create([
                 "order_id" => $order->id,
-                "quantity" => $item["quantity"],
-                "unit_price" => $item["item"]["price"],
-                "price" => $item["item"]["price"] * $item["quantity"],
-                "name" => $item["item"]["name"]
+                "quantity" => $item->quantity,
+                "unit_price" => $item->price,
+                "price" => $item->price * $item->quantity,
+                "name" => $item->name
             ]);
         }
 
