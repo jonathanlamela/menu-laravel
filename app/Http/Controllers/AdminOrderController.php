@@ -30,11 +30,10 @@ class AdminOrderController extends Controller
 
     public function edit(Order $order)
     {
-        $result =  Order::where("id", "=", $order->id)->with(['user', 'orderState', 'orderDetails'])->first();
+        $result =  Order::where("id", "=", $order->id)->first();
 
         return view("admin.order.edit", [
             "order" => $result,
-            "order_states" => OrderState::all(),
             "foods" => Food::with("category")->get()
         ]);
     }

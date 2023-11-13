@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('site_subtitle')->nullable();
             $table->unsignedInteger('order_created_state_id');
             $table->unsignedInteger('order_paid_state_id');
+            $table->unsignedInteger('order_deleted_state_id');
             $table->double('shipping_costs');
             $table->timestamps();
         });

@@ -14,6 +14,7 @@ class Settings extends Model
         'site_subtitle',
         'shipping_costs',
         'order_created_state_id',
-        'order_paid_state_id'
+        'order_paid_state_id',
+        'order_deleted_state_id'
     ];
 }

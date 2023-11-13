@@ -100,6 +100,22 @@
                         </div>
                     @enderror
                 </div>
+                <div class="w-full md:w-1/3 flex flex-col space-y-2">
+                    <label class="form-label">Stato quando l'ordine viene eliminato</label>
+                    <select name="order_deleted_state_id"
+                        class="@if ($errors->has('order_deleted_state_id')) text-input-invalid @else text-input @endif">
+                        <option>-- Nessuna opzione --</option>
+                        @foreach ($order_states as $state)
+                            <option value="{{ $state->id }}" @if ($state->id == $item->order_deleted_state_id) selected @endif>
+                                {{ $state->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('order_deleted_state_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
             <div class="w-1/3 flex flex-col space-y-2 items-start">
