@@ -49,7 +49,7 @@
                             <tr class='flex text-center pt-2'>
                                 <td class="w-3/6"></td>
                                 <td class="w-1/6 font-semibold">Totale</td>
-                                <td class="w-1/6">{{ number_format($cart->total, 2) }} €</td>
+                                <td class="w-1/6">{{ number_format($cart->total(), 2) }} €</td>
                                 <td class="w-1/6"></td>
                             </tr>
                         </tfoot>

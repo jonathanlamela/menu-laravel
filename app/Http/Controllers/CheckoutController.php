@@ -91,7 +91,7 @@ class CheckoutController extends Controller
             "carrier" => Carrier::where("id", $cart->carrier_id)->first(),
             "delivery_time" =>  $cart->delivery_time ?? 'Nessun orario',
             "delivery_address" =>  $cart->delivery_address ?? 'Nessun indirizzo',
-            "total" =>  $cart->total ?? 0,
+            "total" =>  $cart->total(),
             "items" => $cart->items ?? [],
         ]);
     }

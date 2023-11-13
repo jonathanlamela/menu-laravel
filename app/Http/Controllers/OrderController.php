@@ -51,7 +51,7 @@ class OrderController extends Controller
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "total" => $cart->total,
+            "total" => $cart->total(),
             "carrier_id" => $carrier->id,
             "delivery_costs" => $carrier->costs,
             "delivery_address" => $cart->delivery_address ?? "",

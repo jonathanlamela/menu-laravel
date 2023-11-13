@@ -46,7 +46,6 @@ class CartController extends Controller
             }
 
             $cart->items["product_" . $id] = $row;
-            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
@@ -54,15 +53,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function updateTotal($cart)
-    {
-        $cart->total = 0;
-        foreach ($cart->items as $row) {
-            $cart->total += $row->price * $row->quantity;
-        }
 
-        return $cart->total;
-    }
 
     public function increaseQty(Request $request)
     {
@@ -79,7 +70,6 @@ class CartController extends Controller
 
             $cart->items["product_" . $id]->quantity = $cart->items["product_" . $id]->quantity + 1;
 
-            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
@@ -106,7 +96,6 @@ class CartController extends Controller
                 $cart->items["product_" . $id]->quantity = $cart->items["product_" . $id]->quantity - 1;
             }
 
-            $cart->total = $this->updateTotal($cart);
 
             session(["cart" => $cart]);
         }
@@ -129,7 +118,6 @@ class CartController extends Controller
 
             unset($cart->items["product_" . $id]);
 
-            $cart->total = $this->updateTotal($cart);
             session(["cart" => $cart]);
         }
 
