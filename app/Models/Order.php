@@ -12,14 +12,22 @@ class Order extends Model
     protected $fillable = [
         "user_id",
         "total",
-        "shipping_costs",
-        "is_shipping",
+        "delivery_costs",
         "delivery_address",
         "delivery_time",
         "order_state_id",
         "note",
-        "is_paid"
+        "is_paid",
+        "carrier_id"
     ];
+
+    protected $appends = ['total_paid'];
+
+    public function getTotalPaidAttribute()
+    {
+        return $this->total + $this->delivery_costs;
+    }
+
 
     public function scopeFilter($query, array $filters)
     {
@@ -27,7 +35,7 @@ class Order extends Model
             $filters['search'] ?? false,
             fn ($query, $search) =>
             $query->where('id', 'like', '%' . $search . '%')
-                ->orWhere('shipping_address', 'like', '%' . $search . '%')
+                ->orWhere('delivery_address', 'like', '%' . $search . '%')
                 ->orWhereHas('user', fn ($query) => $query->where('firstname', 'like', '%' . $search . '%')->orWhere('lastname', 'like', '%' . $search . '%'))
         );
     }
@@ -37,9 +45,6 @@ class Order extends Model
         return number_format($this->total, 2);
     }
 
-
-
-
     public function user()
     {
         return $this->belongsTo(User::class, "user_id");
@@ -48,6 +53,11 @@ class Order extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function carrier()
+    {
+        return  $this->belongsTo(Carrier::class, "carrier_id");
     }
 
     public function orderState()

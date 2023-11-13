@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OrderCreated;
 
-
-use App\Models\Order;
-use App\Models\OrderDetail;
-use App\Models\Settings;
+use App\Models\Carrier;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 
@@ -19,8 +14,9 @@ class CheckoutController extends Controller
     {
         $cart = session()->get("cart");
 
-        return view("checkout.delivery_type", [
-            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO'
+        return view("checkout.order_carrier", [
+            "carriers" => Carrier::where('deleted', false)->get(),
+            "carrier_id" => $cart['carrier_id'] ?? Carrier::where('deleted', false)->first()->id
         ]);
     }
 
@@ -28,8 +24,10 @@ class CheckoutController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'delivery_type' => 'required',
-        ], []);
+            'carrier_id' => 'required',
+        ], [
+            "carrier_id.required" => "Il campo corriere è obbligatorio"
+        ]);
 
         if ($validator->fails()) {
             return redirect(route('checkout.step1'))
@@ -41,7 +39,7 @@ class CheckoutController extends Controller
         $attributes = $validator->validated();
 
         $cart = session()->get("cart");
-        $cart["delivery_type"] = $attributes["delivery_type"];
+        $cart["carrier_id"] = $attributes["carrier_id"];
 
         session(["cart" => $cart]);
 
@@ -52,26 +50,21 @@ class CheckoutController extends Controller
     {
         $cart = session()->get("cart");
 
-        if ($cart["delivery_type"] == "ASPORTO") {
-            return redirect()->action([CheckoutController::class, 'step3']);
-        }
+
+
         return view("checkout.delivery_info", [
-            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO',
-            "delivery_time" =>  $cart != null ? $cart['delivery_time'] : '',
-            "delivery_address" =>  $cart != null ? $cart['delivery_address'] : '',
+            "delivery_time" =>   $cart['delivery_time'] ?? '',
+            "delivery_address" =>  $cart['delivery_address'] ?? '',
         ]);
     }
 
     public function storeStep2(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
-            'delivery_address' => 'required',
-            'delivery_time' => 'required|date_format:H:i'
+            'delivery_time' => 'required',
         ], [
-            'delivery_address.required' => 'Inserisci il tuo indirizzo di consegna',
-            'delivery_time.required' => "Inserisci l'orario di consegna",
-            "delivery_time.after" => "Inserisci un orario di consegna superiore all'ora attuale",
-            "delivery_time.date_format" => "Inserisci un orario valido"
+            "delivery_time.required" => "Il campo orario è obbligatorio"
         ]);
 
         if ($validator->fails()) {
@@ -80,13 +73,15 @@ class CheckoutController extends Controller
                 ->withInput();
         }
 
-        $attributes = $validator->validated();
+        $attributes = $validator->validate();
 
         $cart = session()->get("cart");
-        $cart["delivery_address"] = $attributes["delivery_address"];
-        $cart["delivery_time"] = $attributes["delivery_time"];
-        session()->put("cart", $cart);
 
+        $cart = session()->get("cart");
+        $cart["delivery_address"] = request("delivery_address");
+        $cart["delivery_time"] = $attributes["delivery_time"];
+
+        session()->put("cart", $cart);
 
         return redirect(route('checkout.step3'));
     }
@@ -95,11 +90,11 @@ class CheckoutController extends Controller
     {
         $cart = session()->get("cart");
         return view('checkout.order_summary', [
-            "delivery_type" => $cart != null ? $cart['delivery_type'] : 'ASPORTO',
-            "delivery_time" =>  $cart != null ? $cart['delivery_time'] : '',
-            "delivery_address" =>  $cart != null ? $cart['delivery_address'] : '',
-            "total" =>  $cart != null ? $cart['total'] : 0,
-            "items" => $cart != null ? $cart['items'] : [],
+            "carrier" => Carrier::where("id", $cart["carrier_id"])->first(),
+            "delivery_time" =>  $cart['delivery_time'] ?? 'Nessun orario',
+            "delivery_address" =>  $cart['delivery_address'] ?? 'Nessun indirizzo',
+            "total" =>  $cart['total'] ?? 0,
+            "items" => $cart['items'] ?? [],
         ]);
     }
 }

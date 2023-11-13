@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Categorie @stop
+@section('title') Corrieri @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -20,9 +20,9 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>Vendite</li>
         <li>::</li>
-        <li>Categorie</li>
+        <li>Corrieri</li>
     </ol>
 @stop
 
@@ -30,43 +30,48 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 flex-grow">
         <x-messages></x-messages>
         <div class="w-full pb-4">
-            <p class="text-2xl antialiased font-bold">Categorie</p>
+            <p class="text-2xl antialiased font-bold">Corrieri</p>
         </div>
         <div class="flex w-full bg-gray-100 p-2">
             <div class="w-1/2">
                 <div class="flex">
-                    <a href={{ route('admin.category.create') }} class="btn-primary">Crea</a>
+                    <a href={{ route('admin.carrier.create') }} class="btn-primary">Crea</a>
                 </div>
             </div>
             <div class="w-1/2 flex justify-end">
-                <x-admin-search placeholder="Cerca una categoria"></x-admin-search>
+                <x-admin-search placeholder="Cerca un corriere"></x-admin-search>
             </div>
         </div>
         <div class="flex w-full flex-grow">
             <table class="w-full flex flex-col">
                 <thead>
                     <tr class="h-10 flex flex-row items-center">
-                        <th class="w-1/12 lg:w-1/12 text-center">
+                        <th class="w-1/12 text-center">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Id"
                                 field="id"></x-admin-order-toggler>
                         </th>
-                        <th class="w-5/12 lg:w-8/12 text-left">
+                        <th class="w-3/12 text-left">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Nome"
                                 field="name"></x-admin-order-toggler>
                         </th>
-                        <th class="w-6/12 lg:w-3/12 text-center">Azioni</th>
+                        <th class="w-2/12 text-left">
+                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Costo"
+                                field="costs"></x-admin-order-toggler>
+                        </th>
+                        <th class="w-full text-center">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $category)
+                    @foreach ($data as $carrier)
                         <tr class="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
-                            <td class="w-1/12 lg:w-1/12 text-center flex items-center justify-center">{{ $category->id }}
+                            <td class="w-1/12 text-center flex items-center justify-center">{{ $carrier->id }}
                             </td>
-                            <td class="w-5/12 lg:w-8/12 text-left flex items-center">{{ $category->name }}</td>
+                            <td class="w-3/12 text-start flex items-center">{{ $carrier->name }}</td>
+                            <td class="w-2/12 text-start flex items-center">{{ number_format($carrier->costs, 2) }} €</td>
                             <td
-                                class="w-6/12 lg:w-3/12 text-center flex flex-row space-x-2 items-center content-center justify-center">
-                                <x-admin-edit-button :link="route('admin.category.edit', ['category' => $category])"></x-admin-edit-button>
-                                <x-admin-delete-button :link="route('admin.category.delete', ['category' => $category])"></x-admin-delete-button>
+                                class="w-full  text-center flex flex-row space-x-2 items-center content-center justify-center">
+                                <x-admin-edit-button :link="route('admin.carrier.edit', ['carrier' => $carrier])"></x-admin-edit-button>
+                                <x-admin-delete-button :link="route('admin.carrier.delete', ['carrier' => $carrier])"></x-admin-delete-button>
                             </td>
                         </tr>
                     @endforeach

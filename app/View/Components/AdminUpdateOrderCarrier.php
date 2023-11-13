@@ -2,10 +2,11 @@
 
 namespace App\View\Components;
 
+use App\Models\Carrier;
 use Illuminate\View\Component;
 use App\Models\Order;
 
-class AdminUpdateDeliveryType extends Component
+class AdminUpdateOrderCarrier extends Component
 {
     /**
      * Create a new component instance.
@@ -24,6 +25,9 @@ class AdminUpdateDeliveryType extends Component
      */
     public function render()
     {
-        return view('components.admin-update-delivery-type');
+        return view('components.admin-update-order-carrier', [
+            "order" => $this->order,
+            "carriers" => Carrier::get()
+        ]);
     }
 }

@@ -40,25 +40,23 @@
         </div>
         <div class="flex flex-row lg:flex space-x-2">
             <div class="w-1/2 flex flex-col space-y-2">
-                <div class="w-full border border-gray-200 flex flex-col space-y-2 items-center ">
+                <div class="w-full border border-gray-200 flex flex-col space-y-2 items-center">
                     <x-admin-update-order-state :order="$order"></x-admin-update-order-state>
                 </div>
-                <div class="w-full border border-gray-200 flex flex-col space-y-2 items-center ">
-                    <x-admin-update-delivery-type :order="$order"></x-admin-update-delivery-type>
+                <div class="w-full border border-gray-200 flex flex-col space-y-2 items-center">
+                    <x-admin-update-order-carrier :order="$order"></x-admin-update-order-carrier>
                 </div>
             </div>
-            @if ($order->is_shipping)
-                <div class="w-1/2">
-                    <x-admin-update-delivery-info :order="$order"></x-admin-update-delivery-info>
-                </div>
-            @endif
+            <div class="w-1/2">
+                <x-admin-update-delivery-info :order="$order"></x-admin-update-delivery-info>
+            </div>
         </div>
         <div class="flex flex-col lg:hidden space-y-2">
             <div class="w-full lg:w-1/2 border border-gray-200 flex flex-col space-y-2 items-center">
                 <x-admin-update-order-state :order="$order"></x-admin-update-order-state>
             </div>
             <div class="w-full lg:w-1/2 border border-gray-200 flex flex-col space-y-2 items-center">
-                <x-admin-update-delivery-type :order="$order"></x-admin-update-delivery-type>
+                <x-admin-update-order-carrier :order="$order"></x-admin-update-order-carrier>
             </div>
             <x-admin-update-delivery-info :order="$order"></x-admin-update-delivery-info>
         </div>

@@ -12,7 +12,6 @@ class Settings extends Model
     protected $fillable = [
         'site_title',
         'site_subtitle',
-        'shipping_costs',
         'order_created_state_id',
         'order_paid_state_id',
         'order_deleted_state_id'

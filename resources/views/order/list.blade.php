@@ -59,13 +59,13 @@
                         <tr class="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
                             <td class="w-2/12 text-center flex items-center justify-center">{{ $order->id }}
                             </td>
-                            <td class="w-2/12 text-start flex items-center">{{ number_format($order->total, 2) }} €
+                            <td class="w-2/12 text-start flex items-center">{{ number_format($order->total_paid, 2) }} €
                             </td>
                             <td class="w-6/12 text-left flex items-center">{{ $order->orderState->name }}</td>
                             <td
                                 class="w-2/12 text-center flex flex-row space-x-2 items-center content-center justify-center">
                                 <a class="flex flex-row space-x-2 items-center justify-center p-2 hover:bg-green-700 hover:text-white"
-                                    href="{{ route('orders.view', ['order' => $order]) }}">
+                                    href="{{ route('order.view', ['order' => $order]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"

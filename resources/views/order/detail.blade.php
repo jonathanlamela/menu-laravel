@@ -21,7 +21,7 @@
         </li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('orders.list') }}">I miei ordini</a>
+            <a class="breadcrumb-link" href="{{ route('order.list') }}">I miei ordini</a>
         </li>
         <li>::</li>
         <li>Dettaglio ordine</li>
@@ -40,21 +40,28 @@
         </div>
         <div class="w-full flex flex-col">
             <b>Informazioni sulla consegna</b>
-            @if ($order->is_shipping)
-                <span>Consegna a domicilio</span>
-            @else
-                <span>Asporto</span>
-            @endif
+            <span>{{ $order->carrier->name }} - Costo {{ number_format($order->carrier->costs, 2) }} €</span>
         </div>
-        @if ($order->is_shipping)
-            <div class="w-full flex flex-col">
-                <b>Dettagli sulla consegna</b>
-                <p class="flex flex-col">
+        <div class="w-full flex flex-col">
+            <b>Dettagli sulla consegna</b>
+            <p class="flex flex-col">
+                @if ($order->delivery_address != '')
                     <span>Indirizzo: {{ $order->delivery_address }}</span>
-                    <span>Orario: {{ $order->delivery_time }}</span>
+                @endif
+                <span>Orario: {{ $order->delivery_time }}</span>
+            </p>
+        </div>
+        <div class="w-full flex flex-col">
+            <b>Informazioni sul pagamento</b>
+            @if ($order->is_paid)
+                <p>Ordine pagato</a>
+                @else
+                <p class="flex flex-col items-start">
+                    <a href="{{ route('order.pay', ['order' => $order]) }}" class="btn-success">Paga</a>
                 </p>
-            </div>
-        @endif
+            @endif
+
+        </div>
         <div class="w-full lg:w-1/3 flex flex-col">
             <b>Cosa c'è nel tuo ordine</b>
             <div class="p-4 bg-slate-100">
@@ -81,7 +88,7 @@
                             <td class="text-center">
                                 <b>Totale</b>
                             </td>
-                            <td class="text-center">{{ number_format($order->total, 2) }} €</td>
+                            <td class="text-center">{{ number_format($order->total_paid, 2) }} €</td>
                         </tr>
                     </tfoot>
                 </table>

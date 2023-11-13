@@ -41,17 +41,12 @@
                 <form class="flex flex-col m-0 space-y-4 pb-4" method="post" action="{{ route('checkout.step2') }}">
                     @csrf
                     <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">2. Indirizzo e orario</h5>
-                    <p>Inserisci le informazioni di consegna</p>
+                    <p>Inserisci le informazioni di consegna. Salta questo passaggio se hai scelto il ritiro dell'ordine.
+                    </p>
                     <div class="flex flex-col space-y-2">
                         <label class="form-label">Indirizzo</label>
                         <input type="text" name="delivery_address"
-                            value="{{ old('delivery_address') ?? $delivery_address }}"
-                            class="@if ($errors->has('delivery_address')) text-input-invalid @else text-input @endif" />
-                        @error('delivery_address')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            value="{{ old('delivery_address') ?? $delivery_address }}" class="text-input" />
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label class="form-label">Orario</label>

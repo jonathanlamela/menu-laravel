@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Modifica categoria @stop
+@section('title') Modifica corriere @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -20,10 +20,10 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>Vendite</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.category.list') }}">Categorie</a>
+            <a class="breadcrumb-link" href="{{ route('admin.carrier.list') }}">Corrieri</a>
         </li>
     </ol>
 @stop
@@ -32,14 +32,14 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Modifica categoria "{{ $category->name }}"</p>
+            <p class="text-2xl antialiased font-bold">Modifica corriere "{{ $carrier->name }}"</p>
         </div>
         <form class="flex-col space-y-2" method="post" enctype="multipart/form-data"
-            action="{{ route('admin.category.update', ['category' => $category]) }}">
+            action="{{ route('admin.carrier.update', ['carrier' => $carrier]) }}">
             @csrf
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
-                <input type="text" value="{{ old('name') ?? $category->name }}" name="name"
+                <input type="text" value="{{ old('name') ?? $carrier->name }}" name="name"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
                 @error('name')
                     <div class="invalid-feedback">
@@ -48,20 +48,15 @@
                 @enderror
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Immagine</label>
-                <input type="file" name="image" />
-                @error('image')
+                <label class="form-label">Nome</label>
+                <input type="text" value="{{ old('costs') ?? $carrier->costs }}" name="costs"
+                    class="@if ($errors->has('costs')) text-input-invalid @else text-input @endif" />
+                @error('costs')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            @if ($category->image)
-                <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                    <label class="form-label">Immagine esistente</label>
-                    <img src="{{ $category->image }}" class="w-100" />
-                </div>
-            @endif
 
             <div class="w-1/3 flex flex-col space-y-2 items-start">
                 <button type="submit" class="btn-success ">

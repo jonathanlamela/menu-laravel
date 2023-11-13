@@ -1,12 +1,6 @@
 @extends('layout')
 
-@section('title')
-    @if ($delivery_type == 'ASPORTO')
-        Checkout 2 - Riepilogo ordine
-    @else
-        Checkout 3 - Riepilogo ordine
-    @endif
-@stop
+@section('title')Checkout 3 - Riepilogo ordine @stop
 
 
 
@@ -32,17 +26,11 @@
             <a class="breadcrumb-link" href="{{ route('checkout.step1') }}">1</a>
         </li>
         <li>::</li>
-        @if ($delivery_type == 'ASPORTO')
-            <li>
-                3
-            </li>
-        @else
-            <li>
-                <a class="breadcrumb-link" href="{{ route('checkout.step2') }}">2</a>
-            </li>
-            <li>::</li>
-            <li>3</li>
-        @endif
+        <li>
+            <a class="breadcrumb-link" href="{{ route('checkout.step2') }}">2</a>
+        </li>
+        <li>::</li>
+        <li>3</li>
     </ol>
 @stop
 
@@ -66,28 +54,21 @@
                 <div class="flex flex-col space-y-4 pt-4">
                     <div class="w-full md:w-1/2">
                         <h6 class="uppercase font-semibold">Informazioni di consegna</h6>
-                        @if ($delivery_type == 'ASPORTO')
-                            <p>Hai scelto di ritirare il tuo ordine (asporto)
-                            </p>
-                        @else
-                            <p>Hai scelto la consegna a domicilio</p>
-                        @endif
+                        <p>{{ $carrier->name }}</p>
                     </div>
-                    @if ($delivery_type == 'DOMICILIO')
-                        <div class="w-full md:w-1/2">
-                            <h6 class="uppercase font-semibold">Indirizzo e orario</h6>
-                            <table class="w-full">
-                                <tr>
-                                    <td class="font-medium">Indirizzo</td>
-                                    <td>{{ $delivery_address }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">Orario</td>
-                                    <td>{{ $delivery_time }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    @endif
+                    <div class="w-full md:w-1/2">
+                        <h6 class="uppercase font-semibold">Indirizzo e orario</h6>
+                        <table class="w-full">
+                            <tr>
+                                <td class="font-medium">Indirizzo</td>
+                                <td>{{ $delivery_address }}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">Orario</td>
+                                <td>{{ $delivery_time }}</td>
+                            </tr>
+                        </table>
+                    </div>
                     <div class="w-full ">
                         <h6 class="uppercase font-semibold pb-4">Cosa c'è nel tuo ordine</h6>
                         <div class="p-4 bg-slate-100">
@@ -103,33 +84,29 @@
                                     @foreach ($items as $item)
                                         <x-cart-row :cartItem="$item" :actions="false"></x-cart-row>
                                     @endforeach
-                                    @if ($delivery_type == 'DOMICILIO')
-                                        <tr class="flex border-b justify-center items-center py-2">
-                                            <td class="w-4/6">Spese di consegna</td>
-                                            <td class="w-1/6 text-center">1</td>
-                                            <td class="w-1/6 text-center">
-                                                {{ number_format($settings['shipping_costs'], 2) }} €
-                                            </td>
-                                        </tr>
-                                    @endif
+                                    <tr class="flex border-b justify-center items-center py-2">
+                                        <td class="w-4/6">Spese di consegna</td>
+                                        <td class="w-1/6 text-center">1</td>
+                                        <td class="w-1/6 text-center">
+                                            {{ number_format($carrier->costs, 2) }} €
+                                        </td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr class="flex border-b py-2">
                                         <td class="w-4/6 text-left"></td>
                                         <td class="w-1/6 text-center font-bold">Totale</td>
-                                        @if ($delivery_type == 'DOMICILIO')
-                                            <td class="w-1/6 text-center">
-                                                {{ number_format($total + $settings['shipping_costs'], 2) }} €</td>
-                                        @else
-                                            <td class="w-1/6 text-center">{{ number_format($total, 2) }} €</td>
-                                        @endif
+                                        <td class="w-1/6 text-center">{{ number_format($total + $carrier->costs, 2) }} €
+                                        </td>
+
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2">
-                        <form class="flex flex-col m-0" method="post" action="{{ route('orders.create') }}">
+                        <form class="flex flex-col m-0" method="post" action="{{ route('order.create') }}">
+                            @csrf
                             <div class="flex flex-col py-2">
                                 <label class="form-label">Note</label>
                                 <textarea name="note" class="text-input"></textarea>

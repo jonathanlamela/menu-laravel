@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('costs', 10, 2);
+            $table->boolean('deleted')->default(false);
+            $table->timestamps();
         });
     }
 

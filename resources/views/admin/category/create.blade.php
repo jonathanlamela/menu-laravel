@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Categorie @stop
+@section('title') Crea categoria @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">

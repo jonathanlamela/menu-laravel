@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminCarrierController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminFoodController;
 use App\Http\Controllers\AdminImpostazioniGeneraliController;
@@ -48,11 +49,11 @@ Route::prefix("account")->group(function () {
     });
 
     Route::prefix("orders")->middleware(['auth', 'verified'])->group(function () {
-        Route::get("", [OrderController::class, "list"])->name("orders.list");
-        Route::post("create", [OrderController::class, "create"])->name("orders.create");
-        Route::get("view/{order}", [OrderController::class, "orderView"])->name("orders.view");
-        Route::get("pay/{order}", [OrderController::class, "pay"])->name("orders.pay")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
-        Route::get("pay/{order}/completato", [OrderController::class, "storePayment"])->name("orders.payment_completed");
+        Route::get("", [OrderController::class, "list"])->name("order.list");
+        Route::post("create", [OrderController::class, "create"])->name("order.create");
+        Route::get("view/{order}", [OrderController::class, "orderView"])->name("order.view");
+        Route::get("pay/{order}", [OrderController::class, "pay"])->name("order.pay")->middleware(["orderBelongsToCustomer", "orderIsNotPaid"]);
+        Route::get("pay/{order}/completato", [OrderController::class, "storePayment"])->name("order.payment_completed");
     });
 });
 
@@ -96,8 +97,7 @@ Route::prefix('admin')->middleware('can:isAdmin')->group(function () {
             Route::post("edit/{order}", [AdminOrderController::class, "update"])->name("admin.order.update");
             Route::post("delete/{order}", [AdminOrderController::class, "destroy"])->name("admin.order.destroy");
             Route::post("update-order-state/{order}", [AdminOrderController::class, "updateOrderState"])->name("admin.order.update_order_state");
-            Route::post("update-order-
-            delivery-type/{order}", [AdminOrderController::class, "updateOrderDeliveryType"])->name("admin.order.update_order_delivery_type");
+            Route::post("update-order-carrier/{order}", [AdminOrderController::class, "updateOrderCarrier"])->name("admin.order.update_order_carrier");
             Route::post("update-order-delivery-info/{order}", [AdminOrderController::class, "updateOrderDeliveryInfo"])->name("admin.order.update_order_delivery_info");
             Route::post("add-order-detail/{order}", [AdminOrderController::class, "addOrderDetail"])->name("admin.order.add_order_detail");
             Route::post("update-order-note/{order}", [AdminOrderController::class, "updateOrderNote"])->name("admin.order.update_order_note");
@@ -109,7 +109,7 @@ Route::prefix('admin')->middleware('can:isAdmin')->group(function () {
             Route::post("remove-item/{orderDetail}", [AdminOrderDetailController::class, "removeItem"])->name("admin.order_details.remove_item");
         });
 
-        Route::prefix("stati-ordine")->group(function () {
+        Route::prefix("order-states")->group(function () {
             Route::get("", [AdminOrderStateController::class, "list"])->name("admin.order_state.list");
             Route::get("create", [AdminOrderStateController::class, "create"])->name("admin.order_state.create");
             Route::get("edit/{orderState}", [AdminOrderStateController::class, "edit"])->name("admin.order_state.edit");
@@ -117,6 +117,17 @@ Route::prefix('admin')->middleware('can:isAdmin')->group(function () {
             Route::post("create", [AdminOrderStateController::class, "store"])->name("admin.order_state.store");
             Route::post("edit/{orderState}", [AdminOrderStateController::class, "update"])->name("admin.order_state.update");
             Route::post("delete/{orderState}", [AdminOrderStateController::class, "destroy"])->name("admin.order_state.destroy");
+        });
+
+
+        Route::prefix("carriers")->group(function () {
+            Route::get("", [AdminCarrierController::class, "list"])->name("admin.carrier.list");
+            Route::get("create", [AdminCarrierController::class, "create"])->name("admin.carrier.create");
+            Route::get("edit/{carrier}", [AdminCarrierController::class, "edit"])->name("admin.carrier.edit");
+            Route::get("delete/{carrier}", [AdminCarrierController::class, "delete"])->name("admin.carrier.delete");
+            Route::post("create", [AdminCarrierController::class, "store"])->name("admin.carrier.store");
+            Route::post("edit/{carrier}", [AdminCarrierController::class, "update"])->name("admin.carrier.update");
+            Route::post("delete/{carrier}", [AdminCarrierController::class, "destroy"])->name("admin.carrier.destroy");
         });
     });
 });

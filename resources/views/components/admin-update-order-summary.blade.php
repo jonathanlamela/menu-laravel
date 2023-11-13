@@ -4,7 +4,7 @@
             <label class="form-label">Riepilogo</label>
         </div>
         <div class="w-full flex flex-col">
-            <p>Totale: {{ number_format($order->total, 2) }} €</p>
+            <p>Totale: {{ number_format($order->total_paid, 2) }} €</p>
         </div>
     </div>
 </div>

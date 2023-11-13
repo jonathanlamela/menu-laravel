@@ -23,7 +23,7 @@
         </button>
     </form>
 @else
-    <form method='get'>
+    <form method='get' class="{{ $class }}">
         <input type='hidden' name='search' value="{{ request('search') }}" />
         <input type='hidden' name='orderBy' value="{{ $field }}" />
         <input type='hidden' name='ascending' value="true" />

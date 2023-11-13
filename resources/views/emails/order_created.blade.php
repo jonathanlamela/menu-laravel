@@ -10,7 +10,7 @@
                     <p>
                         <b>Codice ordine</b> : {{ $order->id }}
                     </p>
-                    <p>Totale da pagare alla consegna: {{ number_format($order->total, 2) }} €</p>
+                    <p>Totale da pagare alla consegna: {{ number_format($order->total_paid, 2) }} €</p>
                 </mj-text>
                 <mj-text font-weight="bold" padding-top="0" padding-bottom="0">
                     Cosa c'e nel tuo ordine

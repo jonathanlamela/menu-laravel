@@ -58,17 +58,6 @@
             <div class="flex flex-col space-y-2">
                 <h6 class="font-semibold uppercase">Impostazioni ordini</h6>
                 <div class="w-full md:w-1/3 flex flex-col space-y-2">
-                    <label class="form-label">Spese di consegna</label>
-                    <input type="text" name="shipping_costs"
-                        value="{{ number_format(old('shipping_costs') ?? $item->shipping_costs, 2) }}"
-                        class="@if ($errors->has('shipping_costs')) text-input-invalid @else text-input @endif" />
-                    @error('shipping_costs')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="w-full md:w-1/3 flex flex-col space-y-2">
                     <label class="form-label">Stato quando l'ordine viene creato</label>
                     <select name="order_created_state_id"
                         class="@if ($errors->has('order_creted_state_id')) text-input-invalid @else text-input @endif">

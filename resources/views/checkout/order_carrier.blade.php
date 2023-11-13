@@ -34,12 +34,15 @@
                     @csrf
                     <h5 class="font-semibold text-lg  border-b-slate-300 border-b-2 pb-2">1. Consegna ordine</h5>
                     <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
-                    <select name="delivery_type"
-                        class="@if ($errors->has('delivery_type')) text-input-invalid @else text-input @endif">
-                        <option value="ASPORTO" @if ($delivery_type == 'ASPORTO') selected @endif>Asporto</option>
-                        <option value="DOMICILIO" @if ($delivery_type == 'DOMICILIO') selected @endif>A domicilio</option>
+                    <select name="carrier_id"
+                        class="@if ($errors->has('carrier_id')) text-input-invalid @else text-input @endif">
+                        <option value="">-- Seleziona un corriere --</option>
+                        @foreach ($carriers as $carrier)
+                            <option value="{{ $carrier->id }}" @if ($carrier_id == $carrier->id) selected @endif>
+                                {{ $carrier->name }} ({{ number_format($carrier->costs, 2) }} €)</option>
+                        @endforeach
                     </select>
-                    @error('delivery_type')
+                    @error('carrier_id')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

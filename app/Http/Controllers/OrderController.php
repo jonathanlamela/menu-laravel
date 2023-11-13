@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Stripe;
-use App\Models\Order;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCreated;
 
-use App\Mail\OrderPaid;
 
 use App\Models\OrderDetail;
 use App\Models\Settings;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Carrier;
+use App\Models\Order;
+
 
 
 class OrderController extends Controller
@@ -34,9 +33,9 @@ class OrderController extends Controller
         ]);
     }
 
-    public function orderView(Order $order, Request $request)
+    public function orderView(Order $order)
     {
-        $order =  Order::where("id", "=", $order->id)->with("orderState", "orderDetails")->get()->first();
+        $order =  Order::where("id", "=", $order->id)->with("orderState", "orderDetails", "carrier")->first();
         return view("order.detail", [
             "order" => $order
         ]);
@@ -48,13 +47,13 @@ class OrderController extends Controller
 
         $settings = Settings::first();
 
-        $shipping_costs = ($settings->shipping_costs) ?? 0;
+        $carrier = Carrier::where("id", $cart["carrier_id"])->first();
 
         $attributes = [
             "user_id" => $request->user()->id,
-            "total" => (float)$cart["total"] + ($cart["delivery_type"] != "ASPORTO" ? $shipping_costs : 0.00),
-            "shipping_costs" => $cart["delivery_type"] != "ASPORTO" ? $shipping_costs : 0.00,
-            "is_shipping" => $cart["delivery_type"] != "ASPORTO",
+            "total" => $cart["total"],
+            "carrier_id" => $carrier->id,
+            "delivery_costs" => $carrier->costs,
             "delivery_address" => $cart["delivery_address"] ?? "",
             "delivery_time" => $cart["delivery_time"] ?? "",
             "order_state_id" => $settings->order_created_state_id ?? null,
@@ -75,15 +74,6 @@ class OrderController extends Controller
             ]);
         }
 
-        if ($order->is_shipping) {
-            OrderDetail::create([
-                "order_id" => $order->id,
-                "quantity" => 1,
-                "unit_price" => $shipping_costs,
-                "price" => $shipping_costs,
-                "name" => "Spese di consegna"
-            ]);
-        }
 
         $request->session()->forget(['cart']);
 
@@ -105,12 +95,12 @@ class OrderController extends Controller
         $line_items = [];
 
 
-        foreach ($order->order_details as $row) {
+        foreach ($order->orderDetails as $row) {
 
             array_push($line_items, [
                 'price_data' => [
                     "currency" => "eur",
-                    "unit_amount" => $row->price * 100,
+                    "unit_amount" => $row->unit_price * 100,
                     "product_data" => [
                         "name" => $row->name
                     ],
@@ -118,6 +108,19 @@ class OrderController extends Controller
                 'quantity' => $row->quantity,
             ]);
         }
+
+        $carrier = Carrier::where("id", $order->carrier_id)->first();
+
+        array_push($line_items, [
+            'price_data' => [
+                "currency" => "eur",
+                "unit_amount" => $carrier->costs * 100,
+                "product_data" => [
+                    "name" => $carrier->name
+                ],
+            ],
+            'quantity' => 1,
+        ]);
 
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
@@ -127,18 +130,16 @@ class OrderController extends Controller
                 "order_sku" => $order->id
             ],
             'mode' => 'payment',
-            'success_url' => route('ordini.pagamento-completato', [
+            'success_url' => route('order.payment_completed', [
                 "order" => $order->id
             ]),
-            'cancel_url' => route('ordini.view', [
+            'cancel_url' => route('order.view', [
                 "order" => $order->id
             ]),
         ]);
 
 
-        return Response::json([
-            "redirect_url" => $checkout_session->url
-        ]);
+        return redirect($checkout_session->url);
     }
 
     public function storePayment(Request $request, Order $order)

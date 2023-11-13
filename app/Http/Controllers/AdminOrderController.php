@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderStateUpdated;
+use App\Models\Carrier;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -86,14 +87,46 @@ class AdminOrderController extends Controller
         $attributes = $validator->validated();
 
         $data = [
-            "is_shipping" => $attributes["delivery_type"] === 'DOMICILIO',
-            "delivery_address" => $attributes["delivery_type"] === 'DOMICILIO' ? $order->delivery_address : null,
-            "delivery_time" => $attributes["delivery_type"] === 'DOMICILIO' ? $order->delivery_time : null
+            "delivery_address" => $order->delivery_address ?? null,
+            "delivery_time" =>  $order->delivery_time ?? null
         ];
 
         $order->update($data);
 
         session()->flash("success_message", "Tipo di consegna aggiornato");
+
+        return redirect(route('admin.order.edit', ["order" => $order]));
+    }
+
+    public function updateOrderCarrier(Order $order, Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'carrier_id' => 'required',
+        ], [
+            'carrier_id.required' => "Il campo corriere è obbligatorio",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('admin.order.edit', ["order" => $order]))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $attributes = $validator->validated();
+
+        $carrier = Carrier::where("id", $attributes["carrier_id"])->first();
+
+        print_r($carrier);
+
+        $data = [
+            "carrier_id" => $carrier->id,
+            "delivery_costs" => $carrier->costs
+        ];
+
+        $order->update($data);
+
+        session()->flash("success_message", "Corriere aggiornato");
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }

@@ -42,15 +42,15 @@
             <table class="w-full flex flex-col">
                 <thead>
                     <tr class="h-10 flex flex-row items-center">
-                        <th class="w-1/12 lg:w-1/12 text-center">
+                        <th class="w-1/12">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Id"
                                 field="id"></x-admin-order-toggler>
                         </th>
-                        <th class="w-5/12 lg:w-6/12">
+                        <th class="w-5/12 lg:w-4/12">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Cliente"
                                 field="user"></x-admin-order-toggler>
                         </th>
-                        <th class="hidden lg:flex lg:w-1/12 items-center justify-center">
+                        <th class="hidden lg:flex lg:w-3/12">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center"
                                 label="Stato ordine" field="order_state_id"></x-admin-order-toggler>
                         </th>
@@ -58,7 +58,7 @@
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Totale"
                                 field="total"></x-admin-order-toggler>
                         </th>
-                        <th class="w-3/12 text-center">Azioni</th>
+                        <th class="w-full text-center">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,13 +66,15 @@
                         <tr class="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
                             <td class="w-1/12 lg:w-1/12 text-center flex items-center justify-center">{{ $order->id }}
                             </td>
-                            <td class="w-5/12 lg:w-6/12 flex items-center text-clip">{{ $order->user->firstname }}
+                            <td class="w-5/12 lg:w-4/12 text-start flex items-center text-clip">
+                                {{ $order->user->firstname }}
                                 {{ $order->user->lastname }}</td>
-                            <td class="hidden lg:flex lg:w-1/12 items-center justify-center">{{ $order->orderState->name }}
+                            <td class="hidden lg:flex lg:w-3/12 items-center justify-center">{{ $order->orderState->name }}
                             </td>
-                            <td class="w-1/12 flex items-center justify-center">{{ number_format($order->total, 2) }} €
+                            <td class="w-1/12 flex text-center items-center justify-center">
+                                {{ number_format($order->total_paid, 2) }} €
                             </td>
-                            <td class="w-3/12 flex flex-row space-x-2 items-center content-center justify-center">
+                            <td class="w-full flex flex-row space-x-2 items-center content-center justify-center">
                                 <x-admin-edit-button :link="route('admin.order.edit', ['order' => $order])"></x-admin-edit-button>
                                 <x-admin-delete-button :link="route('admin.order.delete', ['order' => $order])"></x-admin-delete-button>
                             </td>
