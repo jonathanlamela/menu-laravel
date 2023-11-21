@@ -36,7 +36,7 @@
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.order_state.store') }}">
             @csrf
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
                 <input type="text" name="name" value="{{ old('name') }}"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
@@ -46,7 +46,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Classe CSS per il badge</label>
                 <select name="css_badge_class" class="text-input" onchange="onBadgeChange(event)">
                     @foreach ($badge_options as $key => $value)
@@ -55,7 +55,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Preview</label>
                 <p id="preview_badge" class="badge-primary">
                     Esempio badge

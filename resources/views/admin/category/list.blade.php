@@ -43,35 +43,56 @@
             </div>
         </div>
         <div class="flex w-full flex-grow">
-            <table class="w-full flex flex-col">
-                <thead>
-                    <tr class="h-10 flex flex-row items-center">
-                        <th class="w-1/12 lg:w-1/12 text-center">
+            <div class="w-full flex flex-col">
+                <div class="hidden lg:flex w-full flex-row">
+                    <div class="h-10 w-full flex flex-row items-center font-bold">
+                        <div class="w-1/12 text-center">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Id"
                                 field="id"></x-admin-order-toggler>
-                        </th>
-                        <th class="w-5/12 lg:w-8/12 text-left">
+                        </div>
+                        <div class="w-8/12 text-left">
                             <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Nome"
                                 field="name"></x-admin-order-toggler>
-                        </th>
-                        <th class="w-6/12 lg:w-3/12 text-center">Azioni</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        </div>
+                        <div class="w-3/12 text-center">Azioni</div>
+                    </div>
+                </div>
+                <div class="w-full flex-col">
                     @foreach ($data as $category)
-                        <tr class="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
-                            <td class="w-1/12 lg:w-1/12 text-center flex items-center justify-center">{{ $category->id }}
-                            </td>
-                            <td class="w-5/12 lg:w-8/12 text-left flex items-center">{{ $category->name }}</td>
-                            <td
-                                class="w-6/12 lg:w-3/12 text-center flex flex-row space-x-2 items-center content-center justify-center">
-                                <x-admin-edit-button :link="route('admin.category.edit', ['category' => $category])"></x-admin-edit-button>
-                                <x-admin-delete-button :link="route('admin.category.delete', ['category' => $category])"></x-admin-delete-button>
-                            </td>
-                        </tr>
+                        <div class="w-full odd:bg-gray-100">
+                            <div class="hidden lg:flex w-full flex-row flex-grow">
+                                <div class="w-1/12 text-center flex items-center justify-center">
+                                    {{ $category->id }}
+                                </div>
+                                <div class="w-8/12 text-left flex items-center">{{ $category->name }}</div>
+                                <div
+                                    class="w-3/12 text-center flex flex-row space-x-2 items-center content-center justify-center">
+                                    <x-admin-edit-button :link="route('admin.category.edit', ['category' => $category])"></x-admin-edit-button>
+                                    <x-admin-delete-button :link="route('admin.category.delete', ['category' => $category])"></x-admin-delete-button>
+                                </div>
+                            </div>
+
+                            <div class="flex lg:hidden w-full flex-col p-8 space-y-4">
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Id</div>
+                                    <div class="w-3/4">{{ $category->id }}</div>
+                                </div>
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Nome</div>
+                                    <div class="w-3/4">{{ $category->name }}</div>
+                                </div>
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Azioni</div>
+                                    <div class="w-3/4 flex flex-row">
+                                        <x-admin-edit-button :link="route('admin.category.edit', ['category' => $category])"></x-admin-edit-button>
+                                        <x-admin-delete-button :link="route('admin.category.delete', ['category' => $category])"></x-admin-delete-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
         <div class="w-full flex px-4 py-4">
             <x-admin-per-page></x-admin-per-page>
@@ -79,6 +100,5 @@
         <div class="w-full flex px-4 py-4 bg-gray-100">
             {{ $data->links('globals.admin-paginator') }}
         </div>
-    </div>
     </div>
 @stop

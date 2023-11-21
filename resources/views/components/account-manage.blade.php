@@ -20,7 +20,7 @@
         </button>
     </form>
 @else
-    <a href={{ route('login') }}
+    <a href="{{ route('login') }}"
         class="text-white flex flex-row p-2 items-center hover:bg-slate-800 justify-center space-x-2"><svg
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
             stroke="currentColor" class="w-6 h-6">

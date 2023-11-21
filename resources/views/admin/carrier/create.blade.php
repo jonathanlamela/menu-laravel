@@ -36,7 +36,7 @@
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.carrier.store') }}">
             @csrf
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
                 <input type="text" name="name"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
@@ -46,7 +46,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Costo</label>
                 <input type="text" name="costs"
                     class="@if ($errors->has('costs')) text-input-invalid @else text-input @endif" />

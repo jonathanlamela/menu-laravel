@@ -29,7 +29,6 @@ class GlobalVarsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        session('cart', new Cart());
         if (Schema::hasTable('settings')) {
             view()->share('settings', Settings::first() ?? new Settings());
         }

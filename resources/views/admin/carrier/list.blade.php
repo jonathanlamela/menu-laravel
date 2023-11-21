@@ -43,40 +43,63 @@
             </div>
         </div>
         <div class="flex w-full flex-grow">
-            <table class="w-full flex flex-col">
-                <thead>
-                    <tr class="h-10 flex flex-row items-center">
-                        <th class="w-1/12 text-center">
-                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Id"
-                                field="id"></x-admin-order-toggler>
-                        </th>
-                        <th class="w-3/12 text-left">
-                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Nome"
-                                field="name"></x-admin-order-toggler>
-                        </th>
-                        <th class="w-2/12 text-left">
-                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Costo"
-                                field="costs"></x-admin-order-toggler>
-                        </th>
-                        <th class="w-full text-center">Azioni</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="w-full flex flex-col">
+                <div class="hidden h-10 lg:flex flex-row items-center">
+                    <div class="w-1/12 text-center">
+                        <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Id"
+                            field="id"></x-admin-order-toggler>
+                    </div>
+                    <div class="w-7/12 text-left">
+                        <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Nome"
+                            field="name"></x-admin-order-toggler>
+                    </div>
+                    <div class="w-1/12 text-left">
+                        <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-start" label="Costo"
+                            field="costs"></x-admin-order-toggler>
+                    </div>
+                    <div class="w-3/12 text-center">Azioni</div>
+                </div>
+                <div>
                     @foreach ($data as $carrier)
-                        <tr class="h-10 w-full odd:bg-gray-100 flex-row flex flex-grow">
-                            <td class="w-1/12 text-center flex items-center justify-center">{{ $carrier->id }}
-                            </td>
-                            <td class="w-3/12 text-start flex items-center">{{ $carrier->name }}</td>
-                            <td class="w-2/12 text-start flex items-center">{{ number_format($carrier->costs, 2) }} €</td>
-                            <td
-                                class="w-full  text-center flex flex-row space-x-2 items-center content-center justify-center">
-                                <x-admin-edit-button :link="route('admin.carrier.edit', ['carrier' => $carrier])"></x-admin-edit-button>
-                                <x-admin-delete-button :link="route('admin.carrier.delete', ['carrier' => $carrier])"></x-admin-delete-button>
-                            </td>
-                        </tr>
+                        <div class="w-full odd:bg-gray-100">
+                            <div class="hidden lg:flex w-full flex-row flex-grow">
+                                <div class="w-1/12 text-center flex items-center justify-center">{{ $carrier->id }}
+                                </div>
+                                <div class="w-7/12 text-start flex items-center">{{ $carrier->name }}</div>
+                                <div class="w-1/12 text-start flex items-center">{{ number_format($carrier->costs, 2) }} €
+                                </div>
+                                <div
+                                    class="w-3/12  text-center flex flex-row space-x-2 items-center content-center justify-center">
+                                    <x-admin-edit-button :link="route('admin.carrier.edit', ['carrier' => $carrier])"></x-admin-edit-button>
+                                    <x-admin-delete-button :link="route('admin.carrier.delete', ['carrier' => $carrier])"></x-admin-delete-button>
+                                </div>
+                            </div>
+
+                            <div class="flex lg:hidden w-full flex-col p-8 space-y-4">
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Id</div>
+                                    <div class="w-3/4">{{ $carrier->id }}</div>
+                                </div>
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Nome</div>
+                                    <div class="w-3/4">{{ $carrier->name }}</div>
+                                </div>
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Costo</div>
+                                    <div class="w-3/4">{{ number_format($carrier->costs, 2) }} €</div>
+                                </div>
+                                <div class="w-full flex flex-row space-x-4 items-center">
+                                    <div class="w-1/4 font-bold text-end">Azioni</div>
+                                    <div class="w-3/4 flex flex-row">
+                                        <x-admin-edit-button :link="route('admin.carrier.edit', ['carrier' => $carrier])"></x-admin-edit-button>
+                                        <x-admin-delete-button :link="route('admin.carrier.delete', ['carrier' => $carrier])"></x-admin-delete-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
         <div class="w-full flex px-4 py-4">
             <x-admin-per-page></x-admin-per-page>

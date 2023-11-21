@@ -1,6 +1,6 @@
 @if ($isCurrent)
     <form method='get' class="{{ $class }}">
-        {{ request('ascending', true) ? false : true }}
+
         <input type='hidden' name='search' value="{{ request('search') }}" />
         <input type='hidden' name='orderBy' value="{{ $field }}" />
         <input type='hidden' name='ascending' value="{{ $ascending == 'true' ? 'false' : 'true' }}" />

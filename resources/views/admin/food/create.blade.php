@@ -36,7 +36,7 @@
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.food.store') }}">
             @csrf
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Nome</label>
                 <input type="text" name="name" value="{{ old('name') }}"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
@@ -46,11 +46,11 @@
                     </div>
                 @enderror
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Ingredienti</label>
                 <textarea class="text-input" name="ingredients">{{ old('ingredients') }}</textarea>
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Prezzo</label>
                 <input type="text" name="price"
                     class="@if ($errors->has('price')) text-input-invalid @else text-input @endif" />
@@ -60,7 +60,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="w-1/3 flex flex-col space-y-2">
+            <div class="w-full lg:w-1/3 flex flex-col space-y-2">
                 <label class="form-label">Categoria</label>
                 <select name="category_id"
                     class="@if ($errors->has('category_id')) text-input-invalid @else text-input @endif">
