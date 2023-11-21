@@ -18,5 +18,9 @@ return [
     'throttled' => 'Hai fatto troppe richieste ti invitiamo a riprovare fra alcuni minuti.',
     'token' => 'Il token di reset password non è valido.',
     'user' => "Nessun utente trovato con queste credenziali.",
-
+    'password_required' => "Inserisci un password (6 caratteri min)",
+    'password_regex' => "La password deve essere lunga almeno 6 caratteri e contenere: 1 maiuscola ,1 numero, 1 carattere speciale",
+    'password_confirmation_same' => "Le due password non corrispondono",
+    'current_password_required' => "Il campo password attuale è obbligatorio",
+    "current_password_invalid" => "La password attuale non è valida"
 ];

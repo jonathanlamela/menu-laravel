@@ -1,5 +1,5 @@
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>Catalogo</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ ucfirst(__('account.catalog')) }}</h4>
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
     <div
@@ -12,7 +12,7 @@
                         d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                 </svg>
             </div>
-            <p class="text-center">Categorie</p>
+            <p class="text-center">{{ ucfirst(__('globals.categories')) }}</p>
         </a>
     </div>
     <div
@@ -25,12 +25,12 @@
                         d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
                 </svg>
             </div>
-            <p class="text-center">Cibi</p>
+            <p class="text-center">{{ ucfirst(__('globals.foods')) }}</p>
         </a>
     </div>
 </div>
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>Vendite</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ ucfirst(__('account.sales')) }}</h4>
 
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
@@ -44,7 +44,7 @@
                         d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
             </div>
-            <p class="text-center">Ordini</p>
+            <p class="text-center">{{ ucfirst(__('globals.orders')) }}</p>
         </a>
     </div>
     <div
@@ -58,7 +58,7 @@
                 </svg>
 
             </div>
-            <p class="text-center">Stati ordine</p>
+            <p class="text-center">{{ ucfirst(__('globals.order_states')) }}</p>
         </a>
     </div>
     <div
@@ -73,12 +73,12 @@
 
 
             </div>
-            <p class="text-center">Corrieri</p>
+            <p class="text-center">{{ ucfirst(__('globals.carriers')) }}</p>
         </a>
     </div>
 </div>
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>Negozio</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ ucfirst(__('account.shop')) }}</h4>
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
     <div
@@ -92,7 +92,7 @@
                         d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
                 </svg>
             </div>
-            <p class="text-center">Impostazioni</p>
+            <p class="text-center">{{ ucfirst(__('account.settings')) }}</p>
         </a>
     </div>
 </div>

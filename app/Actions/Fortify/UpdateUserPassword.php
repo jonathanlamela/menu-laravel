@@ -24,15 +24,15 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'password' => 'required|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{0,}$/',
             'password_confirmation' => 'same:password',
         ], [
-            'password.required' => "Inserisci un password (6 caratteri min)",
-            'password.regex' => "La password deve essere lunga almeno 6 caratteri e contenere: 1 maiuscola ,1 numero, 1 carattere speciale",
-            'password_confirmation.same' => "Le due password non corrispondono",
-            'current_password.required' => "Il campo password attuale è obbligatorio"
+            'password.required' => __("passwords.password_required"),
+            'password.regex' =>  __("passwords.password_regex"),
+            'password_confirmation.same' =>  __("passwords.password_confirmation_same"),
+            'current_password.required' =>  __("passwords.current_password_required"),
         ])->after(function ($validator) use ($user, $input) {
             if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
-                session()->flash("error_message", "Password attuale non valida");
+                session()->flash("error_message",  __("passwords.current_password_invalid"));
 
-                $validator->errors()->add('current_password', "La password attuale non è valida");
+                $validator->errors()->add('current_password', __("passwords.current_password_invalid"));
             }
         })->validate();
 
