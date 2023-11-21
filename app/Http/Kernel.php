@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CartIsFilled;
+use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\OrderBelongsToCustomer;
 use App\Http\Middleware\OrderIsNotPaid;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -41,6 +42,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LanguageMiddleware::class
+
         ],
 
         'api' => [

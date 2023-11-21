@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('carriers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('costs', 10, 2);
+            $table->decimal('cost', 10, 2);
             $table->boolean('deleted')->default(false);
             $table->timestamps();
         });

@@ -22,7 +22,7 @@
 
 @section('content')
 
-    <div class="flex flex-col p-8">
+    <div class="flex flex-col p-8 w-full">
         <div class="w-full pb-4">
             <h4 class="font-bold text-lg">Categoria {{ strtolower($category->name) }}</h4>
         </div>

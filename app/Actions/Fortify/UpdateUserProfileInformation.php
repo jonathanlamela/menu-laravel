@@ -22,10 +22,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'firstname' => ['required', 'string'],
             'lastname' => ['required', 'string'],
         ], [
-            'firstname.required' => 'Il campo nome è obbligatorio',
-            'lastname.required' => 'Il campo nome è obbligatorio',
-            'firstname.string' => 'Il campo nome può contenere solo lettere',
-            'lastname.string' => 'Il campo cognome può contenere solo lettere',
+            'firstname.required' => __("account.firstname_required"),
+            'lastname.required' => __("account.lastname_required"),
+            'firstname.string' => __("account.firstname_string"),
+            'lastname.string' => __("account.lastname_string"),
         ])->validate();
 
 

@@ -25,7 +25,7 @@
 @stop
 
 @section('content')
-    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8">
+    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full w-full">
         <x-messages></x-messages>
         <x-dashboard-default></x-dashboard-default>
         @if (auth()->user()->role == 'admin')

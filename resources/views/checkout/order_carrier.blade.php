@@ -27,7 +27,7 @@
 @stop
 
 @section('content')
-    <div class="p-8">
+    <div class="p-8 w-full">
         <div class="flex flex-col flex-grow space-y-4">
             <div class="w-full md:w-1/3">
                 <form class="w-full m-0 flex flex-col space-y-2" method="post" action="{{ route('checkout.step1') }}">

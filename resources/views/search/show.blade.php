@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Risultati di ricerca per "{{ $key }}" @stop
+@section('title') Risultati di ricerca per "{{ $search }}" @stop
 
 
 
@@ -21,9 +21,9 @@
 @stop
 
 @section('content')
-    <div class="flex flex-col p-8">
+    <div class="flex flex-col p-8 w-full">
         <div class="w-full pb-4">
-            <h4 class="font-bold text-lg">Risultati di ricerca per "{{ $key }}"</h4>
+            <h4 class="font-bold text-lg">Risultati di ricerca per "{{ $search }}"</h4>
         </div>
         <div class="w-full space-y-4">
             @if (count($foods) == 0)

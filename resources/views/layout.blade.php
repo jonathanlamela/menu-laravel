@@ -18,7 +18,10 @@
                 @section('navHeader')
                 @show
             </div>
-            @yield('content')
+            <div class="flex flex-grow w-full">
+                @yield('content')
+            </div>
+            <x-language-selector></x-language-selector>
         </div>
     </div>
 </body>

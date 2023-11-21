@@ -21,9 +21,9 @@ class ResetUserPassword implements ResetsUserPasswords
             'password' => 'required|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{0,}$/',
             'password_confirmation' => 'same:password',
         ], [
-            'password.required' => "Inserisci un password (6 caratteri min)",
-            'password.regex' => "La password deve essere lunga almeno 6 caratteri e contenere: 1 maiuscola ,1 numero, 1 carattere speciale",
-            'password_confirmation.same' => "Le due password non corrispondono",
+            'password.required' => __("account.password_required"),
+            'password.regex' => __("account.password_regex"),
+            'password_confirmation.same' => __("account.password_confirmation_same"),
         ])->validate();
 
         $user->forceFill([

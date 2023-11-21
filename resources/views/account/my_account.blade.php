@@ -25,7 +25,7 @@
 @stop
 
 @section('content')
-    <div class="px-8 py-4">
+    <div class="px-8 py-4 w-full">
         <x-messages></x-messages>
         <div class="w-full">
             <p class="text-2xl antialiased font-bold">Informazioni personali</p>

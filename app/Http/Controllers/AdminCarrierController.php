@@ -31,11 +31,11 @@ class AdminCarrierController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories',
-            'costs' => 'required'
+            'name' => 'required',
+            'cost' => 'required'
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'costs.required' => "Il campo costo è obbligatorio",
+            'name.required' => __("carrier.name_required"),
+            'cost.required' => __("carrier.cost_required"),
         ]);
 
         if ($validator->fails()) {
@@ -48,7 +48,7 @@ class AdminCarrierController extends Controller
 
         Carrier::create($attributes);
 
-        session()->flash("success_message", "Corriere creato");
+        session()->flash("success_message", __("carrier.create_success"));
 
         return redirect(route('admin.carrier.list'));
     }
@@ -64,11 +64,11 @@ class AdminCarrierController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories',
+            'name' => 'required',
             'costs' => 'required'
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'costs.required' => "Il campo costo è obbligatorio",
+            'name.required' => __("carrier.name_required"),
+            'cost.required' => __("carrier.cost_required"),
         ]);
 
         if ($validator->fails()) {
@@ -82,7 +82,7 @@ class AdminCarrierController extends Controller
 
         $carrier->update($attributes);
 
-        session()->flash("success_message", "Corriere aggiornato");
+        session()->flash("success_message", __("carrier.update_success"));
 
         return redirect(route('admin.carrier.edit', ["carrier" => $carrier->id]));
     }
@@ -96,7 +96,11 @@ class AdminCarrierController extends Controller
 
     public function destroy(Carrier $carrier)
     {
-        session()->flash("success_message", "Corriere " . $carrier->name . " eliminato");
+
+        session()->flash("success_message", __("carrier.delete_success", [
+            "name" => $carrier->name
+        ]));
+
 
         $carrier->update([
             "deleted" => true

@@ -25,7 +25,7 @@
 @stop
 
 @section('content')
-    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-2 pb-8">
+    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-2 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
             <p class="text-2xl antialiased font-bold">Impostazioni</p>

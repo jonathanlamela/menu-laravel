@@ -30,7 +30,7 @@
 
 @section('content')
 
-    <div class="p-8">
+    <div class="p-8 w-full">
         <div class="flex flex-col flex-grow">
             <div class="w-full md:w-1/3">
                 <a href={{ route('checkout.step1') }}>

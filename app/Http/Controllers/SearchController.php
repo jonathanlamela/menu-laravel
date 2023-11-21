@@ -11,10 +11,10 @@ class SearchController extends Controller
     {
         $attributes = request();
 
-        if ($attributes["key"]) {
+        if ($attributes["search"]) {
             return view("search.show", [
-                "foods" => Food::filter(request(['key']))->with('category')->get(),
-                "key" => request("key")
+                "foods" => Food::filter(request(['search']))->with('category')->get(),
+                "search" => request("search")
             ]);
         }
 

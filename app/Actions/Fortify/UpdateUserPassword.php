@@ -24,15 +24,15 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'password' => 'required|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{0,}$/',
             'password_confirmation' => 'same:password',
         ], [
-            'password.required' => __("passwords.password_required"),
-            'password.regex' =>  __("passwords.password_regex"),
-            'password_confirmation.same' =>  __("passwords.password_confirmation_same"),
-            'current_password.required' =>  __("passwords.current_password_required"),
+            'password.required' => __("account.password_required"),
+            'password.regex' =>  __("account.password_regex"),
+            'password_confirmation.same' =>  __("account.password_confirmation_same"),
+            'current_password.required' =>  __("account.current_password_required"),
         ])->after(function ($validator) use ($user, $input) {
             if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
-                session()->flash("error_message",  __("passwords.current_password_invalid"));
+                session()->flash("error_message",  __("account.current_password_invalid"));
 
-                $validator->errors()->add('current_password', __("passwords.current_password_invalid"));
+                $validator->errors()->add('current_password', __("account.current_password_invalid"));
             }
         })->validate();
 

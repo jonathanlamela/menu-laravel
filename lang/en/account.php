@@ -1,26 +1,30 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'personal_info' => 'personal info',
-    'change_password' => 'change password',
-    'my_orders' => 'my orders',
-    'my_profile' => 'my profile',
-    'catalog' => 'catalog',
-    'sales' => 'sales',
-    'shop' => 'shop',
-    'settings' => 'settings',
-    'your_profile' => 'your profile'
-
+    "catalog" => "Catalog",
+    "change_password" => "Change Password",
+    "current_password" => "Current Password",
+    "my_orders" => "My Orders",
+    "my_profile" => "My Profile",
+    "new_password" => "New Password",
+    "new_password_repeat" => "New Password (Repeat)",
+    "personal_info" => "Personal Information",
+    "profile" => "Profile",
+    "sales" => "Sales",
+    "settings" => "Settings",
+    "shop" => "Shop",
+    "your_profile" => "Your Profile",
+    "email_required" => "Email address is required",
+    "email_unique" => "Email address already in use",
+    "email_valid" => "Invalid email address",
+    "password_required" => "Please enter a password (min. 6 characters)",
+    "password_min" => "Password must be at least 6 characters long",
+    "password_regex" => "Password must be at least 6 characters long and include: 1 uppercase letter, 1 number, 1 special character",
+    "password_confirmation_same" => "The two passwords do not match",
+    "firstname_required" => "First name is required",
+    "lastname_required" => "Last name is required",
+    "firstname_string" => "First name can only contain letters",
+    "lastname_string" => "Last name can only contain letters",
+    "current_password_required" => "Current password is required",
+    "current_password_invalid" => "Current password is not valid"
 ];

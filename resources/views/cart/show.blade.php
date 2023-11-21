@@ -27,7 +27,7 @@
 @stop
 
 @section('content')
-    <div class="flex flex-col p-8">
+    <div class="flex flex-col p-8 w-full">
         @if (count($cart->items) > 0)
             <div class="flex flex-col">
                 <div class="w-full">

@@ -26,17 +26,17 @@ class CreateNewUser implements CreatesNewUsers
             'firstname' => 'required|string',
             'lastname' => 'required|string'
         ], [
-            'email.required' => "L'indirizzo email è obbligatorio",
-            'email.unique' => "Indirizzo email in uso",
-            'email.email' => "Indirizzo email non valido",
-            'password.required' => "Inserisci una password (6 caratteri min)",
-            'password.min' => "Inserisci almeno 6 caratteri",
-            'password.regex' => "La password deve essere lunga almeno 6 caratteri e contenere: 1 maiuscola ,1 numero, 1 carattere speciale",
-            'password_confirmation.same' => "Le due password non corrispondono",
-            'firstname.required' => 'Il campo nome è obbligatorio',
-            'lastname.required' => 'Il campo nome è obbligatorio',
-            'firstname.string' => 'Il campo nome può contenere solo lettere',
-            'lastname.string' => 'Il campo cognome può contenere solo lettere',
+            'email.required' => __("account.email_required"),
+            'email.unique' => __("account.email_unique"),
+            'email.email' => __("account.email_valid"),
+            'password.required' => __("account.password_required"),
+            'password.min' => __("account.password_min"),
+            'password.regex' => __("account.password_regex"),
+            'password_confirmation.same' => __("account.password_confirmation_same"),
+            'firstname.required' => __("account.firstname_required"),
+            'lastname.required' => __("account.lastname_required"),
+            'firstname.string' => __("account.firstname_string"),
+            'lastname.string' => __("account.lastname_string"),
         ])->validate();
 
         return User::create([

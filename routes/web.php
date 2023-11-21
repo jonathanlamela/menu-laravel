@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/error', [ErrorController::class, 'index']);
 Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name("category.show");
 Route::get('/search', [SearchController::class, 'doSearch'])->name("search_globally");
-
+Route::get('/changeLang', [HomeController::class, 'changeLanguage'])->name("change_language");
 
 Route::prefix("cart")->group(function () {
     Route::get("", [CartController::class, "show"])->name("cart.show");

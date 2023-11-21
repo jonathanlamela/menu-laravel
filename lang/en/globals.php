@@ -1,12 +1,14 @@
-
 <?php
 
-
 return [
-    'categories' => 'categories',
-    'foods' => 'foods',
-    'orders' => 'orders',
-    'order_states' => 'order states',
-    'carriers' => 'carriers',
-
+    "carriers" => "Carriers",
+    "categories" => "Categories",
+    "foods" => "Foods",
+    "orders" => "Orders",
+    "order_states" => "Order States",
+    "language" => "Language",
+    "create" => "Create",
+    "delete" => "Delete",
+    "edit" => "Edit",
+    "actions" => "Actions"
 ];

@@ -11,7 +11,7 @@ class Carrier extends Model
 
     protected $fillable = [
         'name',
-        'costs',
+        'cost',
         'deleted'
     ];
 
