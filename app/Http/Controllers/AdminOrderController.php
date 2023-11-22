@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderState;
+use App\Models\Settings;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,7 +45,7 @@ class AdminOrderController extends Controller
         $validator = Validator::make($request->all(), [
             'order_state_id' => 'required',
         ], [
-            'order_state_id.required' => "Il campo stato ordine è obbligatorio",
+            'order_state_id.required' => __('order.order_state_required'),
 
         ]);
 
@@ -54,8 +55,6 @@ class AdminOrderController extends Controller
                 ->withInput();
         }
 
-
-
         $attributes = $validator->validated();
 
         $order->update(["order_state_id" => $attributes["order_state_id"]]);
@@ -64,7 +63,7 @@ class AdminOrderController extends Controller
 
         Mail::to($order->user)->send(new OrderStateUpdated($order->user, $order->id, $order->orderState->name));
 
-        session()->flash("success_message", "Stato ordine aggiornato");
+        session()->flash("success_message", __('order.order_state_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -75,7 +74,7 @@ class AdminOrderController extends Controller
         $validator = Validator::make($request->all(), [
             'delivery_type' => 'required',
         ], [
-            'delivery_type.required' => "Il campo stato ordine è obbligatorio",
+            'delivery_type.required' => __('globals.delivery_type_required'),
         ]);
 
         if ($validator->fails()) {
@@ -93,7 +92,7 @@ class AdminOrderController extends Controller
 
         $order->update($data);
 
-        session()->flash("success_message", "Tipo di consegna aggiornato");
+        session()->flash("success_message", __('order.delivery_type_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -104,7 +103,7 @@ class AdminOrderController extends Controller
         $validator = Validator::make($request->all(), [
             'carrier_id' => 'required',
         ], [
-            'carrier_id.required' => "Il campo corriere è obbligatorio",
+            'carrier_id.required' => __('order.carrier_required'),
         ]);
 
         if ($validator->fails()) {
@@ -126,7 +125,7 @@ class AdminOrderController extends Controller
 
         $order->update($data);
 
-        session()->flash("success_message", "Corriere aggiornato");
+        session()->flash("success_message", __('order.carrier_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -137,8 +136,8 @@ class AdminOrderController extends Controller
             'name' => 'required',
             'price' => 'required',
         ], [
-            'name.required' => "Il campo stato ordine è obbligatorio",
-            'price.required' => "Il campo stato ordine è obbligatorio",
+            'name.required' => __('order.detail_name_required'),
+            'price.required' => __('order.detail_price_required'),
         ]);
 
         if ($validator->fails()) {
@@ -155,7 +154,7 @@ class AdminOrderController extends Controller
             "name" => request()->name
         ]);
 
-        session()->flash("success_message", "Elemento aggiunto all'ordine");
+        session()->flash("success_message", __('order.detail_add_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -167,8 +166,8 @@ class AdminOrderController extends Controller
             'delivery_address' => 'required',
             'delivery_time' => 'required',
         ], [
-            'delivery_address.required' => "Il campo stato ordine è obbligatorio",
-            'delivery_time.required' => "Il campo stato ordine è obbligatorio",
+            'delivery_address.required' => __('order.delivery_address_required'),
+            'delivery_time.required' => __('order.delivery_time_required'),
         ]);
 
         if ($validator->fails()) {
@@ -180,7 +179,7 @@ class AdminOrderController extends Controller
         $attributes = $validator->validated();
         $order->update($attributes);
 
-        session()->flash("success_message", "Informazioni consegna aggiornate");
+        session()->flash("success_message", __('order.delivery_info_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -191,7 +190,7 @@ class AdminOrderController extends Controller
             "note" => request()->note ?? null
         ]);
 
-        session()->flash("success_message", "Note ordine aggiornate");
+        session()->flash("success_message", __('order.note_success'));
 
         return redirect(route('admin.order.edit', ["order" => $order]));
     }
@@ -220,14 +219,15 @@ class AdminOrderController extends Controller
 
         $order = Order::find($id);
 
-        foreach ($order->order_details as $detail) {
-            OrderDetail::destroy($detail->id);
-        }
+        session()->flash("success_message", __('order.delete_success', [
+            "id" => $id
+        ]));
 
-        session()->flash("success_message", "Ordine " . $order->id . " eliminato");
+        $order->update([
+            "order_state_id" => Settings::first()->order_deleted_state_id
+        ]);
 
 
-        Order::destroy($id);
         return redirect(route('admin.order.list'));
     }
 }

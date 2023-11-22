@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title') Carrello @stop
-
-
+@section('title') {{ __('cart.index_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -19,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link">Carrello</a>
+            <a class="breadcrumb-link">{{ __('cart.index_title') }}</a>
         </li>
         <li>::</li>
-        <li>Il tuo carrello</li>
+        <li>{{ __('cart.your_cart') }}</li>
     </ol>
 @stop
 
@@ -34,10 +32,10 @@
                     <table class="flex flex-col">
                         <thead>
                             <tr class='flex'>
-                                <th class="w-3/6 text-left">Cibo</th>
-                                <th class="w-1/6 text-center">Quantità</th>
-                                <th class="w-1/6 text-center">Prezzo</th>
-                                <th class="w-1/6 text-center">Azioni</th>
+                                <th class="w-3/6 text-left">{{ __('cart.food') }}</th>
+                                <th class="w-1/6 text-center">{{ __('cart.quantity') }}</th>
+                                <th class="w-1/6 text-center">{{ __('cart.price') }}</th>
+                                <th class="w-1/6 text-center">{{ __('globals.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +46,7 @@
                         <tfoot>
                             <tr class='flex text-center pt-2'>
                                 <td class="w-3/6"></td>
-                                <td class="w-1/6 font-semibold">Totale</td>
+                                <td class="w-1/6 font-semibold">{{ __('cart.total') }}</td>
                                 <td class="w-1/6">{{ number_format($cart->total(), 2) }} €</td>
                                 <td class="w-1/6"></td>
                             </tr>
@@ -60,7 +58,7 @@
                 </div>
             </div>
         @else
-            <p>Non ci sono elementi nel carrello</p>
+            <p>{{ __('cart.cart_empty') }}</p>
         @endif
     </div>
 @stop

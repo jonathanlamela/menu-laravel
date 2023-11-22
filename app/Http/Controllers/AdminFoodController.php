@@ -39,10 +39,10 @@ class AdminFoodController extends Controller
             'category_id' => 'required',
             'ingredients' => ''
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'price.required' => "Il prezzo del prodotto è obbligatorio",
-            'price.numeric' => "Inserisci un valore numerico",
-            'category_id.required' => "Seleziona una categoria",
+            'name.required' => __('food.name_required'),
+            'price.required' => __('food.price_required'),
+            'price.numeric' => __('food.price_required'),
+            'category_id.required' => __('food.category_required'),
         ]);
 
         if ($validator->fails()) {
@@ -56,7 +56,7 @@ class AdminFoodController extends Controller
 
         Food::create($attributes);
 
-        session()->flash("success_message", "Cibo creato");
+        session()->flash("success_message", __('food.create_success'));
 
         return redirect(route('admin.food.list'));
     }
@@ -78,10 +78,10 @@ class AdminFoodController extends Controller
             'category_id' => 'required',
             'ingredients' => ''
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'price.required' => "Il prezzo del prodotto è obbligatorio",
-            'price.numeric' => "Inserisci un valore numerico",
-            'category_id.required' => "Seleziona una categoria",
+            'name.required' => __('food.name_required'),
+            'price.required' => __('food.price_required'),
+            'price.numeric' => __('food.price_required'),
+            'category_id.required' => __('food.category_required'),
         ]);
 
         if ($validator->fails()) {
@@ -97,7 +97,7 @@ class AdminFoodController extends Controller
         $food->update($attributes);
 
 
-        session()->flash("success_message", "Cibo aggiornato");
+        session()->flash("success_message", __('food.update_success'));
 
         return redirect(route('admin.food.edit', ["food" => $food->id]));
     }
@@ -111,11 +111,15 @@ class AdminFoodController extends Controller
 
     public function destroy(Food $food)
     {
-        $food = Food::find($food->id);
 
-        session()->flash("success_message", "Cibo " . $food->name . " eliminato");
+        session()->flash("success_message", __('food.delete_success', [
+            "name" => $food->name
+        ]));
 
-        Food::destroy($food->id);
+        $food->update([
+            "deleted" => true
+        ]);
+
         return redirect(route('admin.food.list'));
     }
 }

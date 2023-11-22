@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Asahasrabuddhe\LaravelMJML\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Order;
+use App\Models\Settings;
 
 class OrderPaid extends Mailable
 {
@@ -26,10 +27,14 @@ class OrderPaid extends Mailable
      */
     public function build()
     {
+        $settings = Settings::first();
+
         return $this->mjml('emails/order_paid')
-            ->subject("Ordine pagato #NUM-" . $this->order->id)
+            ->subject(__('emails.order_paid_subject') . " #NUM-" . $this->order->id)
             ->with([
-                "order" => $this->order
+                "order" => $this->order,
+                "site_title" => $settings->site_title,
+                "site_subtitle" => $settings->site_subtitle
             ]);
     }
 }

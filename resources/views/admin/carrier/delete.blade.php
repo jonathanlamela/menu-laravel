@@ -20,7 +20,7 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>{{ __('account.sales') }}</li>
+        <li>{{ __('sections.sales') }}</li>
         <li>::</li>
         <li>
             <a class="breadcrumb-link" href="{{ route('admin.carrier.list') }}">{{ __('carrier.list_title') }}</a>
@@ -36,14 +36,14 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">{{ __('carrier.delete_carrier_warning_title') }}
+            <p class="text-2xl antialiased font-bold">{{ __('carrier.delete_warning_title') }}
                 "{{ $carrier->name }}"</p>
         </div>
         <form class="flex-col space-y-2" method="post"
             action="{{ route('admin.carrier.destroy', ['carrier' => $carrier]) }}">
             @csrf
-            <p>{{ __('carrier.delete_carrier_warning_msg1') }}
-                <b>{{ $carrier->name }}</b>.{{ __('carrier.delete_carrier_warning_msg2') }}
+            <p>{{ __('carrier.delete_warning_msg1') }}
+                <b>{{ $carrier->name }}</b>.{{ __('carrier.delete_warning_msg2') }}
             </p>
             <button type="submit" class="btn-success">
                 {{ __('globals.delete') }}

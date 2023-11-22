@@ -20,7 +20,7 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>{{ __('account.sales') }}</li>
+        <li>{{ __('sections.sales') }}</li>
         <li>::</li>
         <li>
             <a class="breadcrumb-link" href="{{ route('admin.carrier.list') }}">{{ __('carrier.list_title') }}</a>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="w-1/2 flex justify-end">
-                <x-admin-search placeholder="Cerca un corriere"></x-admin-search>
+                <x-admin-search placeholder="{{ __('carrier.search_placeholder') }}"></x-admin-search>
             </div>
         </div>
         <div class="flex w-full flex-grow">

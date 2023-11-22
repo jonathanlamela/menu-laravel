@@ -26,7 +26,7 @@ class CheckoutController extends Controller
         $validator = Validator::make($request->all(), [
             'carrier_id' => 'required',
         ], [
-            "carrier_id.required" => "Il campo corriere è obbligatorio"
+            "carrier_id.required" => __('checkout.carrier_require')
         ]);
 
         if ($validator->fails()) {
@@ -63,7 +63,7 @@ class CheckoutController extends Controller
         $validator = Validator::make($request->all(), [
             'delivery_time' => 'required',
         ], [
-            "delivery_time.required" => "Il campo orario è obbligatorio"
+            "delivery_time.required" => __('checkout.delivery_time_required')
         ]);
 
         if ($validator->fails()) {
@@ -89,8 +89,8 @@ class CheckoutController extends Controller
         $cart = session()->get("cart");
         return view('checkout.order_summary', [
             "carrier" => Carrier::where("id", $cart->carrier_id)->first(),
-            "delivery_time" =>  $cart->delivery_time ?? 'Nessun orario',
-            "delivery_address" =>  $cart->delivery_address ?? 'Nessun indirizzo',
+            "delivery_time" =>  $cart->delivery_time ?? __('checkout.no_time'),
+            "delivery_address" =>  $cart->delivery_address ?? __('checkout.no_address'),
             "total" =>  $cart->total(),
             "items" => $cart->items ?? [],
         ]);

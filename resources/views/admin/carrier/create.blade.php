@@ -20,7 +20,7 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>{{ __('account.sales') }}</li>
+        <li>{{ __('sections.sales') }}</li>
         <li>::</li>
         <li>
             <a class="breadcrumb-link" href="{{ route('admin.carrier.list') }}">{{ __('carrier.list_title') }}</a>

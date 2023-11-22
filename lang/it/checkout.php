@@ -1,0 +1,32 @@
+<?php
+
+return [
+    "go_to_checkout" => "Vai alla cassa",
+    "carrier" => "Corriere",
+    "carrier_required" => "Il campo corriere è obbligatorio",
+    "delivery_time" => "Orario di consegna",
+    "delivery_time_required" => "Il campo orario di consegna è obbligatorio",
+    "no_time" => "Nessun orario",
+    "no_address" => "Nessun indirizzo",
+    "step_1_title" => "Checkout 1 - Tipologia consegna",
+    "step_1_name" => "1. Tipologia consegna",
+    "step_1_description" => "Scegli il modo in cui vuoi ricevere il tuo ordine",
+    "pick_a_carrier" => "-- Seleziona un corriere --",
+    "step_2_title" => "Checkout 2 - Indirizzo e orario",
+    "step_2_name" => "2. Indirizzo e orario",
+    "step_2_description" => "Inserisci le informazioni di consegna. Salta questo passaggio se hai scelto il ritiro dell'ordine.",
+    "step_3_title" =>  "Checkout 3 - Riepilogo",
+    "step_3_name" => "3. Riepilogo",
+    "go" => "Vai",
+    "shipping_info" => "Informazioni consegna",
+    "addess_and_time" => "Indirizzo e orario",
+    "address" => "Indirizzo",
+    "time" => "Orario",
+    "order_details" => "Cosa c'è nel tuo ordine",
+    "food" => "Cibo",
+    "quantity" => "Quantità",
+    "price" => "Prezzo",
+    "shipping_costs" => "Spese di consegna",
+    "total" => "Totale",
+    "send_order" => "Invia ordine"
+];

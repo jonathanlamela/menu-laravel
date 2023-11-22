@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
+use App\Models\Settings;
 
 class VerificaEmail extends Mailable
 {
@@ -30,11 +31,15 @@ class VerificaEmail extends Mailable
      */
     public function build()
     {
+        $settings = Settings::first();
+
         return $this->mjml('emails/verify_email')
             ->cc($this->user->email)
-            ->subject("Verifica la tua email")
+            ->subject(__('emails.verify_email_subject'))
             ->with([
-                "link" => $this->verificationLink
+                "link" => $this->verificationLink,
+                "site_title" => $settings->site_title,
+                "site_subtitle" => $settings->site_subtitle
             ]);
     }
 }

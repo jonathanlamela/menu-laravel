@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') I miei ordini @stop
+@section('title') {{ __('order.order_details') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,14 +17,14 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('order.list') }}">I miei ordini</a>
+            <a class="breadcrumb-link" href="{{ route('order.list') }}">{{ __('account.my_orders') }}</a>
         </li>
         <li>::</li>
-        <li>Dettaglio ordine</li>
+        <li>{{ __('order.order_details') }}</li>
     </ol>
 @stop
 
@@ -32,45 +32,44 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full flex-grow">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Ordine {{ $order->id }}</p>
+            <p class="text-2xl antialiased font-bold">{{ __('globals.order') }} {{ $order->id }}</p>
         </div>
         <div class="w-full flex flex-col">
-            <b>Stato dell'ordine</b>
+            <b>{{ __('order.order_state') }}</b>
             <span>{{ $order->orderState->name }}</span>
         </div>
         <div class="w-full flex flex-col">
-            <b>Informazioni sulla consegna</b>
-            <span>{{ $order->carrier->name }} - Costo {{ number_format($order->carrier->costs, 2) }} €</span>
+            <b>{{ __('order.delivery_type') }}</b>
+            <span>{{ $order->carrier->name }} - {{ __('carrier.cost') }} {{ number_format($order->carrier->costs, 2) }}
+                €</span>
         </div>
         <div class="w-full flex flex-col">
-            <b>Dettagli sulla consegna</b>
+            <b>{{ __('order.delivery_info') }}</b>
             <p class="flex flex-col">
                 @if ($order->delivery_address != '')
-                    <span>Indirizzo: {{ $order->delivery_address }}</span>
+                    <span>{{ __('order.delivery_address') }}: {{ $order->delivery_address }}</span>
                 @endif
-                <span>Orario: {{ $order->delivery_time }}</span>
+                <span>{{ __('order.delivery_time') }}: {{ $order->delivery_time }}</span>
             </p>
         </div>
-        <div class="w-full flex flex-col">
-            <b>Informazioni sul pagamento</b>
-            @if ($order->is_paid)
-                <p>Ordine pagato</a>
-                @else
+        @if (!$order->is_paid)
+            <div class="w-full flex flex-col">
                 <p class="flex flex-col items-start">
-                    <a href="{{ route('order.pay', ['order' => $order]) }}" class="btn-success">Paga</a>
+                    <a href="{{ route('order.pay', ['order' => $order]) }}"
+                        class="btn-success">{{ __('order.pay_now') }}</a>
                 </p>
-            @endif
+            </div>
+        @endif
 
-        </div>
         <div class="w-full lg:w-1/3 flex flex-col">
-            <b>Cosa c'è nel tuo ordine</b>
+            <b>{{ __('order.order_details') }}</b>
             <div class="p-4 bg-slate-100">
                 <table class="p-4 w-full">
                     <thead>
                         <tr>
-                            <th class="text-left">Cibo</th>
-                            <th class="text-center" scope="col">Quantità</th>
-                            <th class="text-center" scope="col">Prezzo</th>
+                            <th class="text-left">{{ __('order.detail_name') }}</th>
+                            <th class="text-center" scope="col">{{ __('order.detail_quantity') }}</th>
+                            <th class="text-center" scope="col">{{ __('order.detail_price') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,7 +85,7 @@
                         <tr>
                             <td></td>
                             <td class="text-center">
-                                <b>Totale</b>
+                                <b>{{ __('order.total') }}</b>
                             </td>
                             <td class="text-center">{{ number_format($order->total_paid, 2) }} €</td>
                         </tr>
@@ -96,7 +95,7 @@
         </div>
         @if ($order->note)
             <div class="w-full lg:w-1/3 flex flex-col">
-                <b>Note</b>
+                <b>{{ __('order.notes') }}</b>
                 <p>{{ $order->note }}</p>
             </div>
         @endif

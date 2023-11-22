@@ -1,29 +1,30 @@
 <div class="w-full flex flex-row p-4 space-x-4">
     <div class="w-full flex flex-col space-y-2">
         <div class="w-full flex">
-            <label class="form-label">Dettaglio ordine</label>
+            <label class="form-label">{{ __('order.order_details') }}</label>
         </div>
         <div class="w-full flex flex-col">
             <table class="w-full flex flex-col">
                 <thead>
                     <tr class="h-10 flex flex-row items-center">
                         <th class="flex w-4/12 items-center">
-                            Nome
+                            {{ __('order.detail_name') }}
                         </th>
                         <th class="flex w-1/12 items-center justify-center">
-                            <span class="hidden lg:block">Quantità</span>
-                            <span class="lg:hidden">Qta</span>
+                            <span class="hidden lg:block"> {{ __('order.detail_quantity') }}
+                            </span>
+                            <span class="lg:hidden">{{ __('order.detail_qty') }}</span>
                         </th>
                         <th class="flex w-2/12 items-center justify-center">
-                            <span class="hidden lg:block">Prezzo unitario</span>
-                            <span class="lg:hidden">Unit</span>
+                            <span class="hidden lg:block">{{ __('order.detail_unit_price') }}</span>
+                            <span class="lg:hidden">{{ __('order.detail_unit') }}</span>
                         </th>
                         <th class="flex w-2/12 items-center justify-center">
-                            <span class="hidden lg:block">Prezzo totale</span>
-                            <span class="lg:hidden">Totale</span>
+                            <span class="hidden lg:block">{{ __('order.total_price') }}</span>
+                            <span class="lg:hidden">{{ __('order.total') }}</span>
                         </th>
                         <th class="flex w-4/12 items-center justify-center">
-                            Azioni
+                            {{ __('globals.actions') }}
                         </th>
                     </tr>
                 </thead>
@@ -91,7 +92,7 @@
             </table>
         </div>
         <div class="w-full flex">
-            <label class="form-label">Aggiungi all'ordine</label>
+            <label class="form-label">{{ __('order.add_to_order') }}</label>
         </div>
         <div class="w-full flex">
             <form class="w-full flex flex-row items-center space-x-2" method='post'
@@ -113,7 +114,7 @@
                     @enderror
                 </div>
                 <div class="flex w-1/4 items-center">
-                    <button type="submit" class="btn btn-success">Aggiungi</button>
+                    <button type="submit" class="btn btn-success">{{ __('order.add') }}</button>
                 </div>
             </form>
         </div>

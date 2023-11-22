@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') I miei ordini @stop
+@section('title') {{ __('account.my_orders') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>I miei ordini</li>
+        <li>{{ __('account.my_orders') }}</li>
     </ol>
 @stop
 
@@ -28,7 +28,7 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full flex-grow">
         <x-messages></x-messages>
         <div class="w-full pb-4">
-            <p class="text-2xl antialiased font-bold">I miei ordini</p>
+            <p class="text-2xl antialiased font-bold">{{ __('account.my_orders') }}</p>
         </div>
         <div class="flex w-full bg-gray-100 p-2">
             <div class="w-full flex justify-end">
@@ -40,18 +40,18 @@
                 <thead>
                     <tr class="h-10 flex flex-row items-center">
                         <th class="w-2/12 text-center">
-                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center" label="Codice"
-                                field="id"></x-admin-order-toggler>
+                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-center"
+                                label="{{ __('order.code') }}" field="id"></x-admin-order-toggler>
                         </th>
                         <th class="w-2/12 text-start">
-                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-left" label="Totale"
-                                field="total"></x-admin-order-toggler>
+                            <x-admin-order-toggler class="flex w-full flex-row space-x-1 justify-left"
+                                label="{{ __('order.total') }}" field="total"></x-admin-order-toggler>
                         </th>
                         <th class="w-6/12 text-left">
                             <span class="flex w-full flex-row space-x-1 justify-left">
-                                Stato ordine</span>
+                                {{ __('order.order_state') }}</span>
                         </th>
-                        <th class="w-2/12 text-center">Azioni</th>
+                        <th class="w-2/12 text-center">{{ __('globals.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,7 +72,7 @@
                                             d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                                     </svg>
 
-                                    <span class="hidden md:block">Mostra</span>
+                                    <span class="hidden md:block">{{ __('globals.show') }}</span>
                                 </a>
                             </td>
                         </tr>

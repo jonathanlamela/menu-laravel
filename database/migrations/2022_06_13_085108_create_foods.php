@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('category_id');
             $table->double('price');
             $table->string('slug')->nullable();
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

@@ -35,8 +35,8 @@ class AdminCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories',
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'name.unique' => "Il nome della categoria deve essere univoco"
+            'name.required' => __('category.name_required'),
+            'name.unique' => __('category.name_unique')
         ]);
 
         if ($validator->fails()) {
@@ -62,7 +62,7 @@ class AdminCategoryController extends Controller
             }
         }
 
-        session()->flash("success_message", "Categoria creata");
+        session()->flash("success_message", __('category.create_success'));
 
         return redirect(route('admin.category.list'));
     }
@@ -80,8 +80,8 @@ class AdminCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories,name,' . $category->id,
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
-            'name.unique' => "Il nome della categoria deve essere univoco"
+            'name.required' => __('category.name_required'),
+            'name.unique' => __('category.name_unique')
         ]);
 
         if ($validator->fails()) {
@@ -106,7 +106,7 @@ class AdminCategoryController extends Controller
         $category->update($attributes);
 
 
-        session()->flash("success_message", "Categoria aggiornata");
+        session()->flash("success_message", __('category.update_success'));
 
         return redirect(route('admin.category.edit', ["category" => $category->id]));
     }
@@ -127,10 +127,15 @@ class AdminCategoryController extends Controller
         }
 
 
-        session()->flash("success_message", "Categoria " . $category->name . " eliminata");
+        session()->flash("success_message", __('category.delete_success', [
+            "name" => $category->name
+        ]));
+
+        $category->update([
+            "deleted" => true
+        ]);
 
 
-        Category::destroy($category->id);
         return redirect(route('admin.category.list'));
     }
 }

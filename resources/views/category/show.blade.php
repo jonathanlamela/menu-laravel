@@ -24,11 +24,11 @@
 
     <div class="flex flex-col p-8 w-full">
         <div class="w-full pb-4">
-            <h4 class="font-bold text-lg">Categoria {{ strtolower($category->name) }}</h4>
+            <h4 class="font-bold text-lg">{{ __('globals.category') }} {{ strtolower($category->name) }}</h4>
         </div>
         <div class="w-full space-y-4">
             @if (count($foods) == 0)
-                <p>Non ci sono cibi per questa categoria</p>
+                <p>{{ __('category.no_foods') }}</p>
             @endif
             @foreach ($foods as $food)
                 <div class="flex flex-row">

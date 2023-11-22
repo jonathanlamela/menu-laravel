@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Accesso negato @stop
+@section('title') {{ __('globals.access_denied') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('home') }}">Home</a>
+            <a class="breadcrumb-link" href="{{ route('home') }}">{{ __('globals.home') }}</a>
         </li>
         <li>::</li>
-        <li>Accesso negato</li>
+        <li>{{ __('globals.access_denied') }}</li>
     </ol>
 @stop
 
@@ -37,7 +37,7 @@
                         d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
                 </svg>
             </div>
-            <p>Non hai i permessi necessari per visualizzare questa pagina</p>
+            <p>{{ __('globals.access_denied_text') }}</p>
         </div>
     </div>
 @stop

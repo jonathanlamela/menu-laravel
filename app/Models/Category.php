@@ -15,7 +15,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'image'
+        'image',
+        'deleted'
     ];
 
     protected static function booted()
@@ -36,7 +37,7 @@ class Category extends Model
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
-            $query->where('name', 'like', '%' . $search . '%')
+            $query->where('name', 'like', '%' . $search . '%')->where("deleted", false)
         );
     }
 

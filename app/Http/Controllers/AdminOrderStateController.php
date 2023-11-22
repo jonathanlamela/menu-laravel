@@ -45,7 +45,7 @@ class AdminOrderStateController extends Controller
             'name' => 'required',
             'css_badge_class' => ''
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
+            'name.required' => __('order_state.name_required'),
         ]);
 
         if ($validator->fails()) {
@@ -59,9 +59,7 @@ class AdminOrderStateController extends Controller
 
         OrderState::create($attributes);
 
-
-
-        session()->flash("success_message", "Stato ordine creato");
+        session()->flash("success_message", __('order_state.create_success'));
 
         return redirect(route('admin.order_state.list'));
     }
@@ -80,7 +78,7 @@ class AdminOrderStateController extends Controller
             'name' => 'required',
 
         ], [
-            'name.required' => "Il campo nome è obbligatorio",
+            'name.required' => __('order_state.name_required'),
         ]);
 
         if ($validator->fails()) {
@@ -89,15 +87,9 @@ class AdminOrderStateController extends Controller
                 ->withInput();
         }
 
-
         $attributes = $validator->validated();
-
-
-
         $orderState->update($attributes);
-
-
-        session()->flash("success_message", "Stato ordine aggiornato");
+        session()->flash("success_message", __('order_state.update_success'));
 
         return redirect(route('admin.order_state.edit', ["orderState" => $orderState->id]));
     }
@@ -111,9 +103,13 @@ class AdminOrderStateController extends Controller
 
     public function destroy(OrderState $orderState)
     {
-        session()->flash("success_message", "Stato ordine " . $orderState->name . " eliminato");
+        session()->flash("success_message", __('order_state.delete_success', [
+            "name" => $orderState->name
+        ]));
 
-        OrderState::destroy($orderState->id);
+        $orderState->update([
+            "deleted" => true
+        ]);
         return redirect(route('admin.order_state.list'));
     }
 }

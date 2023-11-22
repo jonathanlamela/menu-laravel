@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Conferma la tua email @stop
+@section('title') {{ __('account.confirm_email_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link">Account</a>
+            <a class="breadcrumb-link">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Crea account</li>
+        <li>{{ __('account.create_account') }}</li>
     </ol>
 @stop
 
@@ -33,17 +33,18 @@
     <div class='flex flex-grow flex-col justify-center items-center'>
         <div class='flex flex-grow justify-center items-center'>
             <div class="flex flex-col space-y-2 w-full md:w-1/2">
-                <p>Il tuo account è stato creato, ma dobbiamo verificare che la mail sia realmente tu.
-                    Ti abbiamo inviato su {{ auth()->user()->email }} un link da
-                    cliccare per verificare la tua email.</p>
+                <p>{{ __('account.email_required_message', [
+                    'email' => auth()->user()->email,
+                ]) }}.
+                </p>
                 <div class="flex flex-row space-x-2">
                     <form method="post" action="{{ route('verification.send') }}">
                         @csrf
-                        <button class="btn btn-primary">Non ho ricevuto la mail</button>
+                        <button class="btn btn-primary">{{ __('account.require_new_email') }}</button>
                     </form>
                     <form class="m-0" action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="btn btn-secondary-outlined">Esci da questo account</button>
+                        <button class="btn btn-secondary-outlined">{{ __('account.logout_my_account') }}</button>
                     </form>
                 </div>
             </div>

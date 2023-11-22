@@ -10,7 +10,7 @@ use Asahasrabuddhe\LaravelMJML\Mail\Mailable;
 
 
 use App\Models\Order;
-
+use App\Models\Settings;
 
 class OrderCreated extends Mailable
 {
@@ -30,8 +30,11 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
-        return $this->mjml('emails/order_created')->subject("Ordine creato #NUM-" . $this->order->id)->with([
-            "order" => $this->order
+        $settings = Settings::first();
+        return $this->mjml('emails/order_created')->subject(__('emails.order_created_subjet') . " #NUM-" . $this->order->id)->with([
+            "order" => $this->order,
+            "site_title" => $settings->site_title,
+            "site_subtitle" => $settings->site_subtitle
         ]);
     }
 }

@@ -17,7 +17,7 @@ class AdminOrderDetailController extends Controller
         ]);
 
 
-        session()->flash("success_message", "Dettagli ordine aggiornati");
+        session()->flash("success_message", __('order_detail.update_success'));
 
         return redirect(route('admin.order.edit', ["order" => $orderDetail->order_id]));
     }
@@ -32,7 +32,7 @@ class AdminOrderDetailController extends Controller
             $orderDetail->delete();
         }
 
-        session()->flash("success_message", "Dettagli ordine aggiornati");
+        session()->flash("success_message", __('order_detail.update_success'));
 
         return redirect(route('admin.order.edit', ["order" => $orderDetail->order_id]));
     }
@@ -41,7 +41,7 @@ class AdminOrderDetailController extends Controller
     {
         $orderDetail->delete();
 
-        session()->flash("success_message", "Dettagli ordine aggiornati");
+        session()->flash("success_message", __('order_detail.update_success'));
 
         return redirect(route('admin.order.edit', ["order" => $orderDetail->order_id]));
     }

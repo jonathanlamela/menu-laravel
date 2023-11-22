@@ -26,11 +26,10 @@ class AdminImpostazioniGeneraliController extends Controller
             'order_paid_state_id' => 'required|numeric',
             'order_deleted_state_id' => 'required|numeric',
         ], [
-            'site_title.required' => "Il campo nome del sito è obbligatorio",
-            'order_created_state_id.required' => "Campo obbligatorio",
-            'order_paid_state_id.required' => "Campo obbligatorio",
-            'order_deleted_state_id.required' => "Campo obbligatorio",
-
+            'site_title.required' => __('settings.site_title_required'),
+            'order_created_state_id.required' => __('settings.order_created_state_required'),
+            'order_paid_state_id.required' => __('settings.order_paid_state_required'),
+            'order_deleted_state_id.required' =>  __('settings.order_deleted_state_required'),
         ]);
 
 
@@ -49,7 +48,7 @@ class AdminImpostazioniGeneraliController extends Controller
             Settings::create($attributes);
         }
 
-        session()->flash("success_message", "Impostazioni aggiornate");
+        session()->flash("success_message", __('settings.update_success'));
 
         return redirect(route('admin.settings.generals'));
     }

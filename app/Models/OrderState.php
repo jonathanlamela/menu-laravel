@@ -11,7 +11,8 @@ class OrderState extends Model
 
     protected $fillable = [
         'name',
-        'css_badge_class'
+        'css_badge_class',
+        'deleted'
     ];
 
     public function scopeFilter($query, array $filters)
@@ -19,7 +20,7 @@ class OrderState extends Model
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
-            $query->where('name', 'like', '%' . $search . '%')
+            $query->where('name', 'like', '%' . $search . '%')->where("deleted", false)
         );
     }
 }

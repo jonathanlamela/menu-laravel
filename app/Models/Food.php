@@ -17,7 +17,9 @@ class Food extends Model
         'price',
         'category_id',
         'image',
-        'ingredients'
+        'ingredients',
+        'deleted'
+
     ];
 
     protected static function booted()
@@ -40,7 +42,7 @@ class Food extends Model
             fn ($query, $search) =>
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('ingredients', 'like', '%' . $search . '%')
-                ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))
+                ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))->where("deleted", false)
         );
     }
 

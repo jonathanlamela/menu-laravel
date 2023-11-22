@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Il mio profilo @stop
+@section('title') {{ __('account.my_profile') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,15 +17,13 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
-        <li>::</li>
-        <li>Il tuo profilo</li>
     </ol>
 @stop
 
 @section('content')
-    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full w-full">
+    <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8  w-full">
         <x-messages></x-messages>
         <x-dashboard-default></x-dashboard-default>
         @if (auth()->user()->role == 'admin')

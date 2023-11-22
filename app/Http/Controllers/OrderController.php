@@ -80,7 +80,7 @@ class OrderController extends Controller
         Mail::to($request->user())->send(new OrderCreated($order));
 
         //TODO: Inviare email all'amministrazione
-        session()->flash("success_message", "Ordine creato");
+        session()->flash("success_message", __('order.create_success'));
 
         return redirect()->action([OrderController::class, "orderView"], [
             "order" => $order->id
@@ -144,7 +144,7 @@ class OrderController extends Controller
 
     public function storePayment(Request $request, Order $order)
     {
-        session()->flash("success_message", "Ordine pagato");
+        session()->flash("success_message", __('order.paid_success'));
 
         return redirect()->action([OrderController::class, "orderView"], [
             "order" => $order->id

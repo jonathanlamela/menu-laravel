@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Accedi @stop
+@section('title') {{ __('account.login') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link">Account</a>
+            <a class="breadcrumb-link">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Login</li>
+        <li>{{ __('account.login') }}</li>
     </ol>
 @stop
 
@@ -38,7 +38,7 @@
                 <input type="hidden" name="backUrl" value="{{ request('backUrl') }}" />
             @endif
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Email</label>
+                <label class="form-label">{{ __('account.email') }}</label>
                 <input name="email" type="text"
                     class="@if ($errors->has('email')) text-input-invalid @else text-input @endif" />
                 @error('email')
@@ -48,7 +48,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Password</label>
+                <label class="form-label">{{ __('account.password') }}</label>
                 <input name="password" type="password"
                     class="@if ($errors->has('password')) text-input-invalid @else text-input @endif" />
                 @error('password')
@@ -59,15 +59,15 @@
             </div>
             <div class="flex flex-col space-y-0.5">
                 <a href={{ route('password.request') }} class="hover:text-red-900">
-                    Ho dimenticato la password
+                    {{ __('account.password_recovery_link') }}
                 </a>
             </div>
             <div class="flex flex-row space-x-2">
                 <button type="submit" class="btn-primary">
-                    Accedi
+                    {{ __('account.login') }}
                 </button>
                 <a href={{ route('register') }} class="btn-secondary-outlined">
-                    Crea account
+                    {{ __('account.signin') }}
                 </a>
             </div>
         </form>

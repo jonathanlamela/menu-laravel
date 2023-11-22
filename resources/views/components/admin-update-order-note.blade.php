@@ -3,14 +3,14 @@
         action="{{ route('admin.order.update_order_note', ['order' => $order]) }}">
         @csrf
         <div class="w-full flex">
-            <label class="form-label">Note</label>
+            <label class="form-label">{{ __('order.notes') }}</label>
         </div>
         <div class="w-full flex flex-col">
             <textarea class="text-input" name="note">{{ $order->note }}</textarea>
         </div>
         <div class="w-full flex items-center justify-end">
             <button type="submit" class="btn-success flex flex-row space-x-2">
-                <span>Aggiorna</span>
+                <span>{{ __('globals.update') }}</span>
             </button>
         </div>
     </form>

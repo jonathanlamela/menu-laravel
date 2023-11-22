@@ -1,5 +1,5 @@
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>{{ __('account.catalog') }}</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ __('sections.catalog') }}</h4>
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
     <div
@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>{{ __('account.sales') }}</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ __('sections.sales') }}</h4>
 
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
@@ -78,7 +78,7 @@
     </div>
 </div>
 <div class="w-full">
-    <h4 class='text-2xl antialiased font-sans'>{{ __('account.shop') }}</h4>
+    <h4 class='text-2xl antialiased font-sans'>{{ __('sections.shop') }}</h4>
 </div>
 <div class='w-full flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0'>
     <div
@@ -92,7 +92,7 @@
                         d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
                 </svg>
             </div>
-            <p class="text-center">{{ __('account.settings') }}</p>
+            <p class="text-center">{{ __('settings.index_title') }}</p>
         </a>
     </div>
 </div>

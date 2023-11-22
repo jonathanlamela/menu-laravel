@@ -2,24 +2,24 @@
     <mj-body background-color="#f8f9fa">
         <mj-section>
             <mj-column background-color="white" padding="32px">
-                <mj-text font-size="14px" align="center">Ristorante | Pizzeria </mj-text>
-                <mj-text font-size="20px" align="center">Fittizzio </mj-text>
+                <mj-text font-size="14px" align="center">{{ $site_subtitle }}</mj-text>
+                <mj-text font-size="20px" align="center">{{ $site_title }} </mj-text>
                 <mj-divider border-width="1px"></mj-divider>
                 <mj-text font-size="12px">
-                    <p>Gentile cliente il tuo ordine è stato creato.</p>
+                    <p>{{ __('emails.order_created') }}</p>
                     <p>
-                        <b>Codice ordine</b> : {{ $order->id }}
+                        <b>{{ __('emails.order_code') }}</b> : {{ $order->id }}
                     </p>
-                    <p>Totale da pagare alla consegna: {{ number_format($order->total_paid, 2) }} €</p>
+                    <p>{{ __('emails.total_paid_delivery') }}: {{ number_format($order->total_paid, 2) }} €</p>
                 </mj-text>
                 <mj-text font-weight="bold" padding-top="0" padding-bottom="0">
-                    Cosa c'e nel tuo ordine
+                    {{ __('emails.order_content') }}
                 </mj-text>
                 <mj-table>
                     <tr align="left">
-                        <th>Nome</th>
-                        <th align="center">Prezzo</th>
-                        <th align="center">Quantità</th>
+                        <th>{{ __('emails.detail_name') }}</th>
+                        <th align="center">{{ __('emails.detail_price') }}</th>
+                        <th align="center">{{ __('emails.detail_quantity') }}</th>
                     </tr>
                     @foreach ($order->orderDetails as $item)
                         <tr>

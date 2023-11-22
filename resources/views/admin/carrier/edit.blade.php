@@ -20,7 +20,7 @@
             <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>{{ __('account.sales') }}</li>
+        <li>{{ __('sections.sales') }}</li>
         <li>::</li>
         <li>
             <a class="breadcrumb-link" href="{{ route('admin.carrier.list') }}">{{ __('carrier.list_title') }}</a>
@@ -64,7 +64,7 @@
 
             <div class="w-1/3 flex flex-col space-y-2 items-start">
                 <button type="submit" class="btn-success ">
-                    {{ __('globals.edit') }}
+                    {{ __('globals.update') }}
                 </button>
             </div>
         </form>

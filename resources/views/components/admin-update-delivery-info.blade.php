@@ -3,10 +3,10 @@
         action="{{ route('admin.order.update_order_delivery_info', ['order' => $order]) }}">
         @csrf
         <div class="w-full flex">
-            <label class="form-label">Informazioni consegna</label>
+            <label class="form-label">{{ __('order.delivery_info') }}</label>
         </div>
         <div class="w-full flex flex-col">
-            <label>Indirizzo</label>
+            <label>{{ __('order.delivery_address') }}</label>
             <input type="text" name="delivery_address" value="{{ old('delivery_address') ?? $order->delivery_address }}"
                 class="@if ($errors->has('delivery_address')) text-input-invalid @else text-input @endif" />
             @error('delivery_address')
@@ -14,7 +14,7 @@
                     {{ $message }}
                 </div>
             @enderror
-            <label>Orario di consegna</label>
+            <label>{{ __('order.delivery_time') }}</label>
             <input type="text" name="delivery_time" value="{{ old('delivery_time') ?? $order->delivery_time }}"
                 class="@if ($errors->has('delivery_time')) text-input-invalid @else text-input @endif" />
             @error('delivery_time')
@@ -25,7 +25,7 @@
         </div>
         <div class="w-full flex items-center justify-end">
             <button type="submit" class="btn-success flex flex-row space-x-2">
-                <span>Aggiorna</span>
+                <span>{{ __('globals.update') }}</span>
             </button>
         </div>
     </form>

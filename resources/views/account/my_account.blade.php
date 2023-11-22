@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Informazioni personali @stop
+@section('title') {{ __('account.personal_info') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Informazioni personali</li>
+        <li>{{ __('account.personal_info') }}</li>
     </ol>
 @stop
 
@@ -28,14 +28,14 @@
     <div class="px-8 py-4 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Informazioni personali</p>
+            <p class="text-2xl antialiased font-bold">{{ __('account.personal_info') }}</p>
         </div>
         <form class="w-full md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2" method="POST"
             action="{{ route('user-profile-information.update') }}">
             @csrf
             @method('PUT')
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Nome</label>
+                <label class="form-label">{{ __('account.firstname') }}</label>
                 <input type="text" name="firstname" value="{{ old('firstname') ?? auth()->user()->firstname }}"
                     class="@if ($errors->has('firstname')) text-input-invalid @else text-input @endif" />
                 @error('firstname')
@@ -45,7 +45,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Cognome</label>
+                <label class="form-label">{{ __('account.lastname') }}</label>
                 <input type="text" name="lastname" value="{{ old('lastname') ?? auth()->user()->lastname }}"
                     class="@if ($errors->has('lastname')) text-input-invalid @else text-input @endif" />
                 @error('lastname')
@@ -56,7 +56,7 @@
             </div>
             <div class="flex flex-row space-x-2">
                 <button type="submit" class="btn-primary">
-                    <span>Aggiorna informazioni</span>
+                    <span>{{ __('globals.update') }}</span>
                 </button>
             </div>
         </form>

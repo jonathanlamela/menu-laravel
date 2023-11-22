@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('css_badge_class')->nullable();
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

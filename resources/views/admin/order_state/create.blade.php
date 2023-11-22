@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Crea stato ordine @stop
+@section('title') {{ __('order_state.create_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,13 +17,17 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>{{ __('sections.catalog') }}</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.order_state.list') }}">Stati ordine</a>
+            <a class="breadcrumb-link" href="{{ route('admin.order_state.list') }}">{{ __('order_state.list_title') }}</a>
+        </li>
+        <li>::</li>
+        <li>
+            {{ __('order_state.create_title') }}
         </li>
     </ol>
 @stop
@@ -32,12 +36,12 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Crea stato ordine</p>
+            <p class="text-2xl antialiased font-bold">{{ __('order_state.create_title') }}</p>
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.order_state.store') }}">
             @csrf
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Nome</label>
+                <label class="form-label">{{ __('order_state.name') }}</label>
                 <input type="text" name="name" value="{{ old('name') }}"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
                 @error('name')
@@ -47,7 +51,7 @@
                 @enderror
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Classe CSS per il badge</label>
+                <label class="form-label">{{ __('order_state.css_badge_class') }}</label>
                 <select name="css_badge_class" class="text-input" onchange="onBadgeChange(event)">
                     @foreach ($badge_options as $key => $value)
                         <option value="{{ $key }}" @if ($key == old('css_badge_class'))  @endif>{{ $value }}
@@ -56,14 +60,14 @@
                 </select>
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Preview</label>
+                <label class="form-label">{{ __('order_state.preview') }}</label>
                 <p id="preview_badge" class="badge-primary">
-                    Esempio badge
+                    Lorem impsum
                 </p>
             </div>
             <div class="w-1/3 flex flex-col space-y-2 items-start">
                 <button type="submit" class="btn-success ">
-                    Crea
+                    {{ __('globals.create') }}
                 </button>
             </div>
         </form>

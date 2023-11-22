@@ -1,0 +1,32 @@
+<?php
+
+return [
+    "go_to_checkout" => "Go to Checkout",
+    "carrier" => "Carrier",
+    "carrier_required" => "The carrier field is required",
+    "delivery_time" => "Delivery Time",
+    "delivery_time_required" => "The delivery time field is required",
+    "no_time" => "No time",
+    "no_address" => "No address",
+    "step_1_title" => "Checkout 1 - Delivery Type",
+    "step_1_name" => "1. Delivery Type",
+    "step_1_description" => "Choose how you want to receive your order",
+    "pick_a_carrier" => "-- Select a carrier --",
+    "step_2_title" => "Checkout 2 - Address and Time",
+    "step_2_name" => "2. Address and Time",
+    "step_2_description" => "Enter delivery information. Skip this step if you have chosen order pickup.",
+    "step_3_title" =>  "Checkout 3 - Summary",
+    "step_3_name" => "3. Summary",
+    "go" => "Go",
+    "shipping_info" => "Delivery Information",
+    "addess_and_time" => "Address and Time",
+    "address" => "Address",
+    "time" => "Time",
+    "order_details" => "What's in your order",
+    "food" => "Food",
+    "quantity" => "Quantity",
+    "price" => "Price",
+    "shipping_costs" => "Shipping Costs",
+    "total" => "Total",
+    "send_order" => "Send Order"
+];

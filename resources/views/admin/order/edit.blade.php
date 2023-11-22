@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Modifica ordine @stop
+@section('title') {{ __('order.edit_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,18 +17,18 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
         <li>
-            <span class="breadcrumb-link">Vendite</span>
+            <span class="breadcrumb-link">{{ __('sections.sales') }}</span>
         </li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.order.list') }}">Ordini</a>
+            <a class="breadcrumb-link" href="{{ route('admin.order.list') }}">{{ __('order.list_title') }}</a>
         </li>
         <li>::</li>
-        <li>Modifica ordine</li>
+        <li>{{ __('order.edit_title') }}</li>
     </ol>
 @stop
 
@@ -36,7 +36,7 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-2 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Modifica ordine {{ $order->id }}</p>
+            <p class="text-2xl antialiased font-bold">{{ __('order.edit_title') }} {{ $order->id }}</p>
         </div>
         <div class="flex flex-row lg:flex space-x-2">
             <div class="w-1/2 flex flex-col space-y-2">

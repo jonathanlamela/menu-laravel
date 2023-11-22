@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
+use App\Models\Settings;
 
 class ResetPassword extends Mailable
 {
@@ -30,11 +31,15 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
+        $settings = Settings::first();
+
         return $this->mjml('emails/reset_password')
             ->cc($this->user->email)
-            ->subject("Reset della password")
+            ->subject(__('emails.password_reset_subject'))
             ->with([
-                "link" => route("password.reset", ["token" => $this->resetLink])
+                "link" => route("password.reset", ["token" => $this->resetLink]),
+                "site_title" => $settings->site_title,
+                "site_subtitle" => $settings->site_subtitle
             ]);
     }
 }

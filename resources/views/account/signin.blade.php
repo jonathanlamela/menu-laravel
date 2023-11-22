@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Crea account @stop
+@section('title') {{ __('account.signin') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link">Account</a>
+            <a class="breadcrumb-link">{{ __('account.my_profile') }}</a>
         </li>
         <li>::</li>
-        <li>Crea account</li>
+        <li>{{ __('account.signin') }}</li>
     </ol>
 @stop
 
@@ -35,7 +35,7 @@
             method='post'>
             @csrf
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Nome</label>
+                <label class="form-label">{{ __('account.firstname') }}</label>
                 <input name="firstname" type="text"
                     class="@if ($errors->has('firstname')) text-input-invalid @else text-input @endif" />
                 @error('firstname')
@@ -45,7 +45,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Cognome</label>
+                <label class="form-label">{{ __('account.lastname') }}</label>
                 <input name="lastname" type="text"
                     class="@if ($errors->has('lastname')) text-input-invalid @else text-input @endif" />
                 @error('lastname')
@@ -55,7 +55,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Email</label>
+                <label class="form-label">{{ __('account.email') }}</label>
                 <input name="email" type="text"
                     class="@if ($errors->has('email')) text-input-invalid @else text-input @endif" />
                 @error('email')
@@ -65,7 +65,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Password</label>
+                <label class="form-label">{{ __('account.password') }}</label>
                 <input name="password" type="password"
                     class="@if ($errors->has('password')) text-input-invalid @else text-input @endif" />
                 @error('password')
@@ -75,7 +75,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Password (ripeti)</label>
+                <label class="form-label">{{ __('account.password_confirmation') }}</label>
                 <input name="password_confirmation" type="password"
                     class="@if ($errors->has('password_confirmation')) text-input-invalid @else text-input @endif" />
                 @error('password_confirmation')
@@ -87,7 +87,7 @@
 
             <div class="flex flex-row space-x-2">
                 <button type="submit" class="btn-primary">
-                    Crea account
+                    {{ __('account.signin') }}
                 </button>
             </div>
         </form>

@@ -1,0 +1,25 @@
+<?php
+
+return [
+    "order_created" => "Dear customer, your order has been created.",
+    "order_created_subject" => "Order Created",
+    "order_paid" => "Dear customer, you have paid for your order.",
+    "order_paid_subject" => "Order Paid",
+    "order_updated" => "Dear customer, there are updates on your order.",
+    "order_updated_subject" => "Your Order",
+    "email_verification_required" => "Dear customer, email verification is required",
+    "email_verification_text" => "Click the button below to activate your email",
+    "email_verification_btn" => "Verify Email",
+    "reset_password_text" => "Click the button below to change your password",
+    "reset_password_btn" => "Reset Password",
+    "order_state" => "Order Status",
+    "order_code" => "Order Code",
+    "total_paid_delivery" => "Total to be paid on delivery",
+    "total_paid" => "Total Paid",
+    "order_content" => "What's in your order",
+    "detail_name" => "Name",
+    "detail_price" => "Price",
+    "detail_quantity" => "Quantity",
+    "password_reset_subject" => "Password Reset",
+    "verify_email_subject" => "Verify Your Email",
+];

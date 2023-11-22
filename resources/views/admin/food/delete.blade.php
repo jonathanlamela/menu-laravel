@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Elimina cibo @stop
+@section('title') {{ __('food.delete_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,13 +17,17 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>{{ __('sections.catalog') }}</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.food.list') }}">Cibie</a>
+            <a class="breadcrumb-link" href="{{ route('admin.food.list') }}">{{ __('food.list_title') }}</a>
+        </li>
+        <li>::</li>
+        <li>
+            {{ __('food.delete_title') }}
         </li>
     </ol>
 @stop
@@ -38,7 +42,7 @@
             @csrf
             <p>Stai per eliminare il seguente cibo: <b>{{ $food->name }}</b>. Sei sicuro di volerlo fare?</p>
             <button type="submit" class="btn-success">
-                Elimina
+                {{ __('globals.delete') }}
             </button>
         </form>
     </div>

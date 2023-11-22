@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title')Checkout 3 - Riepilogo ordine @stop
+@section('title') {{ __('checkout.step_3_title') }} @stop
 
 
 
@@ -19,7 +19,7 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('cart.show') }}">Carrello</a>
+            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('cart') }}</a>
         </li>
         <li>::</li>
         <li>
@@ -39,45 +39,48 @@
         <div class="flex flex-col flex-grow space-y-4">
             <div class="w-full md:w-1/2">
                 <a href="{{ route('checkout.step1') }}">
-                    <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">1. Tipologia consegna</h5>
+                    <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">
+                        {{ __('checkout.step_1_name') }}</h5>
                 </a>
             </div>
             <div class="w-full md:w-1/2">
                 <a href="{{ route('checkout.step2') }}">
-                    <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">2. Indirizzo e orario</h5>
+                    <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">
+                        {{ __('checkout.step_2_name') }}</h5>
                 </a>
             </div>
             <div class="w-full md:w-1/2">
-                <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">3. Riepilogo</h5>
+                <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">
+                    {{ __('checkout.step_3_name') }}</h5>
             </div>
             <div class="w-full md:w-1/2">
                 <div class="flex flex-col space-y-4 pt-4">
                     <div class="w-full md:w-1/2">
-                        <h6 class="uppercase font-semibold">Informazioni di consegna</h6>
+                        <h6 class="uppercase font-semibold">{{ __('order.delivery_info') }}</h6>
                         <p>{{ $carrier->name }}</p>
                     </div>
                     <div class="w-full md:w-1/2">
-                        <h6 class="uppercase font-semibold">Indirizzo e orario</h6>
+                        <h6 class="uppercase font-semibold">{{ __('checkout.address_and_time') }}</h6>
                         <table class="w-full">
                             <tr>
-                                <td class="font-medium">Indirizzo</td>
+                                <td class="font-medium">{{ __('order.delivery_address') }}</td>
                                 <td>{{ $delivery_address }}</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Orario</td>
+                                <td class="font-medium">{{ __('order.delivery_time') }}</td>
                                 <td>{{ $delivery_time }}</td>
                             </tr>
                         </table>
                     </div>
                     <div class="w-full ">
-                        <h6 class="uppercase font-semibold pb-4">Cosa c'è nel tuo ordine</h6>
+                        <h6 class="uppercase font-semibold pb-4">{{ __('checkout.order_details') }}</h6>
                         <div class="p-4 bg-slate-100">
                             <table class="flex flex-col">
                                 <thead>
                                     <tr class="flex border-b">
-                                        <th class="w-4/6 text-left">Cibo</th>
-                                        <th class="w-1/6 text-center">Quantità</th>
-                                        <th class="w-1/6 text-center">Prezzo</th>
+                                        <th class="w-4/6 text-left">{{ __('checkout.food') }}</th>
+                                        <th class="w-1/6 text-center">{{ __('checkout.quantity') }}</th>
+                                        <th class="w-1/6 text-center">{{ __('checkout.price') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +88,7 @@
                                         <x-cart-row :cartItem="$item" :actions="false"></x-cart-row>
                                     @endforeach
                                     <tr class="flex border-b justify-center items-center py-2">
-                                        <td class="w-4/6">Spese di consegna</td>
+                                        <td class="w-4/6">{{ __('checkout.shipping_costs') }}</td>
                                         <td class="w-1/6 text-center">1</td>
                                         <td class="w-1/6 text-center">
                                             {{ number_format($carrier->costs, 2) }} €
@@ -95,7 +98,7 @@
                                 <tfoot>
                                     <tr class="flex border-b py-2">
                                         <td class="w-4/6 text-left"></td>
-                                        <td class="w-1/6 text-center font-bold">Totale</td>
+                                        <td class="w-1/6 text-center font-bold">{{ __('checkout.total') }}</td>
                                         <td class="w-1/6 text-center">{{ number_format($total + $carrier->costs, 2) }} €
                                         </td>
 
@@ -108,11 +111,11 @@
                         <form class="flex flex-col m-0" method="post" action="{{ route('order.create') }}">
                             @csrf
                             <div class="flex flex-col py-2">
-                                <label class="form-label">Note</label>
+                                <label class="form-label">{{ __('order.notes') }}</label>
                                 <textarea name="note" class="text-input"></textarea>
                             </div>
                             <div class="flex flex-col py-2 items-start">
-                                <button type="submit" class="btn-success">Invia ordine</button>
+                                <button type="submit" class="btn-success">{{ __('checkout.send_order') }}</button>
                             </div>
                         </form>
                     </div>

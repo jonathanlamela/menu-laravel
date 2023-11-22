@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Pagina non trovata @stop
+@section('title') {{ __('globals.page_not_founded') }} @stop
 
 
 
@@ -19,10 +19,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('home') }}">Home</a>
+            <a class="breadcrumb-link" href="{{ route('home') }}">{{ __('globals.home') }}</a>
         </li>
         <li>::</li>
-        <li>Pagina non trovata</li>
+        <li>{{ __('globals.page_not_founded') }}</li>
     </ol>
 @stop
 
@@ -39,7 +39,7 @@
                         d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
                 </svg>
             </div>
-            <p>Pagina non trovata o non disponibile</p>
+            <p>{{ __('globals.page_not_founded_text') }}</p>
         </div>
     </div>
 @stop

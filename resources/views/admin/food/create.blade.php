@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Crea cibo @stop
+@section('title') {{ __('food.create_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,13 +17,17 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>{{ __('sections.catalog') }}</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.food.list') }}">Cibi</a>
+            <a class="breadcrumb-link" href="{{ route('admin.food.list') }}">{{ __('food.list_title') }}</a>
+        </li>
+        <li>::</li>
+        <li>
+            {{ __('food.create_title') }}
         </li>
     </ol>
 @stop
@@ -32,12 +36,12 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Crea cibo</p>
+            <p class="text-2xl antialiased font-bold">{{ __('globals.create') }}</p>
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.food.store') }}">
             @csrf
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Nome</label>
+                <label class="form-label">{{ __('food.name') }}</label>
                 <input type="text" name="name" value="{{ old('name') }}"
                     class="@if ($errors->has('name')) text-input-invalid @else text-input @endif" />
                 @error('name')
@@ -47,11 +51,11 @@
                 @enderror
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Ingredienti</label>
+                <label class="form-label">{{ __('food.ingredients') }}</label>
                 <textarea class="text-input" name="ingredients">{{ old('ingredients') }}</textarea>
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Prezzo</label>
+                <label class="form-label">{{ __('food.price') }}</label>
                 <input type="text" name="price"
                     class="@if ($errors->has('price')) text-input-invalid @else text-input @endif" />
                 @error('price')
@@ -61,10 +65,10 @@
                 @enderror
             </div>
             <div class="w-full lg:w-1/3 flex flex-col space-y-2">
-                <label class="form-label">Categoria</label>
+                <label class="form-label">{{ __('food.category') }}</label>
                 <select name="category_id"
                     class="@if ($errors->has('category_id')) text-input-invalid @else text-input @endif">
-                    <option>Seleziona una categoria</option>
+                    <option>{{ __('food.pick_a_category') }}</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>
                             {{ $category->name }}
@@ -79,7 +83,7 @@
             </div>
             <div class="w-1/3 flex flex-col space-y-2 items-start">
                 <button type="submit" class="btn-success ">
-                    Crea
+                    {{ __('globals.create') }}
                 </button>
             </div>
         </form>

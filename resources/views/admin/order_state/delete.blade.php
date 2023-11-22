@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Elimina stato ordine @stop
+@section('title') {{ __('order_state.delete_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,13 +17,17 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('account.index') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('account.index') }}">{{ __('account.profile') }}</a>
         </li>
         <li>::</li>
-        <li>Catalogo</li>
+        <li>{{ __('sections.catalog') }}</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.order_state.list') }}">Stati ordine</a>
+            <a class="breadcrumb-link" href="{{ route('admin.order_state.list') }}">{{ __('order_state.list_title') }}</a>
+        </li>
+        <li>::</li>
+        <li>
+            {{ __('order_state.delete_title') }}
         </li>
     </ol>
 @stop
@@ -32,14 +36,17 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Elimina categoria "{{ $orderState->name }}"</p>
+            <p class="text-2xl antialiased font-bold">{{ __('order_state.delete_title') }} "{{ $orderState->name }}"
+            </p>
         </div>
         <form class="flex-col space-y-2" method="post"
             action="{{ route('admin.order_state.destroy', ['orderState' => $orderState]) }}">
             @csrf
-            <p>Stai per eliminare lo stato ordine <b>{{ $orderState->name }}</b>. Sei sicuro di volerlo fare?</p>
+            <p>{{ __('order_state.delete_warning_msg1') }}
+                <b>{{ $orderState->name }}</b>.{{ __('order_state.delete_warning_msg2') }}
+            </p>
             <button type="submit" class="btn-success">
-                Elimina
+                {{ __('globals.delete') }}
             </button>
         </form>
     </div>

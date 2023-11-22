@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') Reset password @stop
+@section('title') {{ __('account.reset_password_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -17,10 +17,10 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('login') }}">Profilo</a>
+            <a class="breadcrumb-link" href="{{ route('login') }}">{{ __('account.my_profile') }}</a>
         </li>
         <li>::</li>
-        <li>Reset password</li>
+        <li>{{ __('account.reset_password_title') }}</li>
     </ol>
 @stop
 
@@ -28,14 +28,14 @@
     <div class="px-8 py-4">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">Reset password</p>
+            <p class="text-2xl antialiased font-bold">{{ __('account.reset_password_title') }}</p>
         </div>
         <form class="w-full p-16 md:p-0 md:w-1/2 lg:w-1/3 flex flex-col space-y-2" action="{{ route('password.update') }}"
             method='post'>
             @csrf
             <input type="hidden" name="token" value="{{ request('token') }}" />
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Email</label>
+                <label class="form-label">{{ __('account.email') }}</label>
                 <input name="email" type="text"
                     class="@if ($errors->has('email')) text-input-invalid @else text-input @endif" />
                 @error('email')
@@ -45,7 +45,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Password</label>
+                <label class="form-label">{{ __('account.password') }}</label>
                 <input name="password" type="password"
                     class="@if ($errors->has('password')) text-input-invalid @else text-input @endif" />
                 @error('password')
@@ -55,7 +55,7 @@
                 @enderror
             </div>
             <div class="flex flex-col space-y-2">
-                <label class="form-label">Password (ripeti)</label>
+                <label class="form-label">{{ __('account.password_confirmation') }}</label>
                 <input name="password_confirmation" type="password"
                     class="@if ($errors->has('password_confirmation')) text-input-invalid @else text-input @endif" />
                 @error('password_confirmation')
@@ -67,7 +67,7 @@
 
             <div class="flex flex-row space-x-2">
                 <button type="submit" class="btn-primary">
-                    Reset password
+                    {{ __('account.reset_password_btn') }}
                 </button>
             </div>
         </form>
