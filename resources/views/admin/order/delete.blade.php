@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title') {{ __('category.delete_title') }} @stop
+@section('title') {{ __('order.delete_title') }} @stop
 
 @section('topbar')
     <div class="w-full bg-red-900 flex flex-col md:flex-row p-1">
@@ -23,11 +23,11 @@
         <li>{{ __('sections.catalog') }}</li>
         <li>::</li>
         <li>
-            <a class="breadcrumb-link" href="{{ route('admin.category.list') }}">{{ __('category.list_title') }}</a>
+            <a class="breadcrumb-link" href="{{ route('admin.order.list') }}">{{ __('order.list_title') }}</a>
         </li>
         <li>::</li>
         <li>
-            {{ __('category.delete_title') }}
+            {{ __('order.delete_title') }}
         </li>
     </ol>
 @stop
@@ -36,14 +36,12 @@
     <div class="pl-8 pr-8 pt-8 flex flex-col space-y-4 pb-8 w-full">
         <x-messages></x-messages>
         <div class="w-full">
-            <p class="text-2xl antialiased font-bold">{{ __('category.delete_warning_title') }}
-                "{{ $category->name }}"</p>
+            <p class="text-2xl antialiased font-bold">{{ __('order.delete_title') }} "{{ $item->id }}"</p>
         </div>
-        <form class="flex-col space-y-2" method="post"
-            action="{{ route('admin.category.destroy', ['category' => $category]) }}">
+        <form class="flex-col space-y-2" method="post" action="{{ route('admin.order.destroy', ['order' => $item]) }}">
             @csrf
-            <p>{{ __('category.delete_warning_msg1') }}
-                <b>{{ $category->name }}</b>. {{ __('category.delete_warning_msg2') }}
+            <p>{{ __('order.delete_warning_msg1') }}
+                <b>{{ $item->id }}</b>. {{ __('order.delete_warning_msg2') }}
             </p>
             <button type="submit" class="btn-success">
                 {{ __('globals.delete') }}

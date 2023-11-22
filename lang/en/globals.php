@@ -2,6 +2,7 @@
 
 return [
     "language" => "Language",
+    "cart" => "Cart",
     "home" => "Home",
     "create" => "Create",
     "delete" => "Delete",

@@ -18,7 +18,7 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('cart') }}</a>
+            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('globals.cart') }}</a>
         </li>
         <li>::</li>
         <li>1</li>

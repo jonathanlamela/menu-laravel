@@ -17,7 +17,7 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('cart') }}</a>
+            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('globals.cart') }}</a>
         </li>
         <li>::</li>
         <li>
@@ -35,14 +35,14 @@
             <div class="w-full md:w-1/3">
                 <a href={{ route('checkout.step1') }}>
                     <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">
-                        {{ __('checkout.step1_name') }}</h5>
+                        {{ __('checkout.step_1_name') }}</h5>
                 </a>
             </div>
             <div class="w-full md:w-1/3">
                 <form class="flex flex-col m-0 space-y-4 pb-4" method="post" action="{{ route('checkout.step2') }}">
                     @csrf
                     <h5 class="font-semibold text-lg border-b-slate-300 border-b-2 pb-2">
-                        {{ __('checkout.step2_name') }}</h5>
+                        {{ __('checkout.step_2_name') }}</h5>
                     <p>{{ __('checkout.step_2_description') }}</p>
                     <div class="flex flex-col space-y-2">
                         <label class="form-label">{{ __('order.delivery_address') }}</label>

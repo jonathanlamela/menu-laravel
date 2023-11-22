@@ -10,6 +10,8 @@ return [
     "create_success" => "Ordine creato",
     "paid_success" => "Ordine pagato",
     "list_title" => "Elenco ordini",
+    "edit_title" => "Modifica ordine",
+    "delete_title" => "Cancella ordine",
     "search_placeholder" => "Cerca un ordine",
     "delivery_type_required" => "Il campo stato ordine è obbligatorio",
     "delivery_type_success" => "Tipo di consegna aggiornato",
@@ -43,5 +45,7 @@ return [
     "notes" => "Note",
     "summary" => "Riepilogo",
     "code" => "Codice",
-    "pay_now" => "Paga"
+    "pay_now" => "Paga",
+    "delete_warning_msg1" => "Stai per cancellare l'ordine",
+    "delete_warning_msg2" => "Sei sicuro di volerlo fare?",
 ];

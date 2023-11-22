@@ -10,6 +10,8 @@ return [
     "create_success" => "Order created",
     "paid_success" => "Order paid",
     "list_title" => "List of Orders",
+    "edit_title" => "Edit order",
+    "delete_title" => "Cancel order",
     "search_placeholder" => "Search for an order",
     "delivery_type_required" => "The delivery type field is required",
     "delivery_type_success" => "Delivery type updated",
@@ -43,5 +45,7 @@ return [
     "notes" => "Notes",
     "summary" => "Summary",
     "code" => "Code",
-    "pay_now" => "Pay"
+    "pay_now" => "Pay",
+    "delete_warning_msg1" => "You're cancelling this order",
+    "delete_warning_msg2" => "Are you sure?",
 ];

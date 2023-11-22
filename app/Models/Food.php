@@ -42,7 +42,7 @@ class Food extends Model
             fn ($query, $search) =>
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('ingredients', 'like', '%' . $search . '%')
-                ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))->where("deleted", false)
+                ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))
         );
     }
 

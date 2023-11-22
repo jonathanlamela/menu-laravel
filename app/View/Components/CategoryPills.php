@@ -27,7 +27,7 @@ class CategoryPills extends Component
     {
 
         return view('components.category-pills', [
-            "categories" => Category::all(["id", "name", "slug"])
+            "categories" => Category::where('deleted', false)->get()
         ]);
     }
 }

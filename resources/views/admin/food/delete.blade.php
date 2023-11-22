@@ -40,7 +40,9 @@
         </div>
         <form class="flex-col space-y-2" method="post" action="{{ route('admin.food.destroy', ['food' => $food]) }}">
             @csrf
-            <p>Stai per eliminare il seguente cibo: <b>{{ $food->name }}</b>. Sei sicuro di volerlo fare?</p>
+            <p>{{ __('food.delete_warning_msg1') }}
+                <b>{{ $food->name }}</b>. {{ __('food.delete_warning_msg2') }}
+            </p>
             <button type="submit" class="btn-success">
                 {{ __('globals.delete') }}
             </button>

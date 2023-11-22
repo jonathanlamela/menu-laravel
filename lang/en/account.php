@@ -21,7 +21,6 @@ return [
     "password_confirmation" => "Password (Repeat)",
     "password_confirmation_same" => "The two passwords do not match",
     "password_recovery_link" => "Forgot Password",
-
     "firstname" => "First Name",
     "firstname_required" =>  "The first name field is required",
     "firstname_string" => "The first name field can only contain letters",
@@ -40,5 +39,9 @@ return [
     "require_new_email" => "I haven't received the email",
     "logout_my_account" => "Logout from this account",
     "reset_password_title" => "Reset Password",
-    "reset_password_btn" => "Reset Password"
+    "reset_password_btn" => "Reset Password",
+    "verification_link_sent" => "Verification link sent to your email",
+    "profile_information_updated" => "Profile's information updated",
+    "password_updated" => "Password updated"
+
 ];

@@ -17,7 +17,7 @@ class AdminCategoryController extends Controller
         $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view("admin.category.list", [
-            "data" => Category::filter(request(['search']))->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
+            "data" => Category::filter(request(['search']))->where('deleted', false)->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
             "ascending" => request("ascending", 'true') === 'true',

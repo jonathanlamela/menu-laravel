@@ -16,7 +16,7 @@ class AdminFoodController extends Controller
         $ascending_value = request("ascending", 'true') === 'true' ? 'asc' : 'desc';
 
         return view("admin.food.list", [
-            "data" => Food::filter(request(['search']))->with('category')->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
+            "data" => Food::filter(request(['search']))->with('category')->where("deleted", false)->orderBy($orderBy, $ascending_value)->paginate(request('perPage') ?? 5),
             "search" => request('search', null),
             "orderBy" => $orderBy,
             "ascending" => request("ascending", 'true') === 'true',
@@ -26,7 +26,7 @@ class AdminFoodController extends Controller
     public function create()
     {
         return view("admin.food.create", [
-            "categories" => Category::all(["id", "name"])
+            "categories" => Category::where('deleted', false)->get()
         ]);
     }
 
@@ -65,7 +65,7 @@ class AdminFoodController extends Controller
     {
         return view("admin.food.edit", [
             "food" => $food,
-            "categories" => Category::all(["id", "name"])
+            "categories" => Category::all()
         ]);
     }
 

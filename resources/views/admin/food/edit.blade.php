@@ -27,7 +27,7 @@
         </li>
         <li>::</li>
         <li>
-            {{ __('food.update_title') }}
+            {{ __('food.edit_title') }}
         </li>
     </ol>
 @stop
@@ -68,11 +68,17 @@
                 <label class="form-label">{{ __('food.category') }}</label>
                 <select name="category_id"
                     class="@if ($errors->has('category_id')) text-input-invalid @else text-input @endif">
-                    <option>Seleziona una categoria</option>
+                    <option value="">{{ __('food.pick_a_category') }}</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" @if ($category->id == (old('category_id') ?? $food->category->id)) selected @endif>
-                            {{ $category->name }}
-                        </option>
+                        @if ($category->deleted)
+                            <option value="" @if ($category->id == (old('category_id') ?? $food->category->id)) selected @endif>
+                                {{ $category->name }} ({{ __('category.deleted') }})
+                            </option>
+                        @else
+                            <option value="{{ $category->id }}" @if ($category->id == (old('category_id') ?? $food->category->id)) selected @endif>
+                                {{ $category->name }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('category_id')

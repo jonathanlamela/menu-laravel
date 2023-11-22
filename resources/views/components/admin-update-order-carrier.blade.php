@@ -11,7 +11,7 @@
                 <option>{{ __('order.pick_a_carrier') }}</option>
                 @foreach ($carriers as $carrier)
                     <option value="{{ $carrier->id }}" @if ($carrier->id == $order->carrier_id) selected @endif>
-                        {{ $carrier->name }} {{ number_format($carrier->costs, 2) }} € @if ($carrier->deleted)
+                        {{ $carrier->name }} {{ number_format($carrier->cost, 2) }} € @if ($carrier->deleted)
                             ({{ __('order.carrier_deleted') }})
                         @endif
                     </option>

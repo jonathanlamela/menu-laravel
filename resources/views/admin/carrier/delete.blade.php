@@ -43,7 +43,7 @@
             action="{{ route('admin.carrier.destroy', ['carrier' => $carrier]) }}">
             @csrf
             <p>{{ __('carrier.delete_warning_msg1') }}
-                <b>{{ $carrier->name }}</b>.{{ __('carrier.delete_warning_msg2') }}
+                <b>{{ $carrier->name }}</b>. {{ __('carrier.delete_warning_msg2') }}
             </p>
             <button type="submit" class="btn-success">
                 {{ __('globals.delete') }}

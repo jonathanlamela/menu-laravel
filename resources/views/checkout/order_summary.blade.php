@@ -19,7 +19,7 @@
 @section('navHeader')
     <ol class="flex flex-row space-x-2 items-center pl-8 text-white h-16">
         <li>
-            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('cart') }}</a>
+            <a class="breadcrumb-link" href="{{ route('cart.show') }}">{{ __('globals.cart') }}</a>
         </li>
         <li>::</li>
         <li>
@@ -60,7 +60,7 @@
                         <p>{{ $carrier->name }}</p>
                     </div>
                     <div class="w-full md:w-1/2">
-                        <h6 class="uppercase font-semibold">{{ __('checkout.address_and_time') }}</h6>
+                        <h6 class="uppercase font-semibold">{{ __('checkout.addess_and_time') }}</h6>
                         <table class="w-full">
                             <tr>
                                 <td class="font-medium">{{ __('order.delivery_address') }}</td>

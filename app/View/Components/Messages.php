@@ -45,13 +45,13 @@ class Messages extends Component
 
             switch (session()->get('status')) {
                 case "verification-link-sent":
-                    $message['text'] = "Email di verifica inviata";
+                    $message['text'] = __('account.verification_link_sent');
                     break;
                 case "profile-information-updated":
-                    $message['text'] = "Informazioni profilo aggiornate";
+                    $message['text'] =  __('account.profile_information_updated');
                     break;
                 case "password-updated":
-                    $message['text'] = "Password aggiornata con successo";
+                    $message['text'] =  __('account.password_updated');
                     break;
                 default:
                     $message['text'] = session()->get('status');

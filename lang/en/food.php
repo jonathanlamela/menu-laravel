@@ -20,5 +20,6 @@ return [
     "delete_warning_title" => "Delete Food",
     "delete_warning_msg1" => "You are about to delete the food",
     "delete_warning_msg2" => "Are you sure you want to do this?",
-    "search_placeholder" => "Search for a food"
+    "search_placeholder" => "Search for a food",
+    "ingredients" => "Ingredients"
 ];

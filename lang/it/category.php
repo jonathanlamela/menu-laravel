@@ -6,6 +6,7 @@ return [
     "image" => "Immagine",
     "existing_image" => "Immagine esistente",
     "name_required" => "Il campo nome è obbligatorio",
+    "name_unique" => "Non puoi usare un nome già utilizzato da un altra categoria",
     "create_success" => "Categoria creata",
     "update_success" => "Categoria aggiornata",
     "delete_success" => "Categoria \":name\" eliminata con successo",
@@ -17,5 +18,6 @@ return [
     "delete_warning_msg1" => "Stai per eliminare il corriere",
     "delete_warning_msg2" => "Sei sicuro di volerlo fare?",
     "search_placeholder" => "Cerca una categoria",
-    "no_foods" => "Non ci sono cibi per questa categoria"
+    "no_foods" => "Non ci sono cibi per questa categoria",
+    "deleted" => "Eliminata"
 ];

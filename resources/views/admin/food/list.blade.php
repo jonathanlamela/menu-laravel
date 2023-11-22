@@ -76,6 +76,7 @@
                                 </div>
                                 <div class="w-2/12 text-center hidden lg:flex items-center justify-center">
                                     {{ $food->category->name }}
+                                    {{ $food->category->deleted ? '(' . __('category.deleted') . ')' : '' }}
                                 </div>
                                 <div class="w-1/12 text-center hidden lg:flex items-center justify-center">
                                     {{ number_format($food->price, 2) }} €
@@ -97,7 +98,8 @@
                                 </div>
                                 <div class="w-full flex flex-row space-x-4 items-center">
                                     <div class="w-1/4 font-bold text-end">{{ __('food.category') }}</div>
-                                    <div class="w-3/4">{{ $food->category->name }}</div>
+                                    <div class="w-3/4">{{ $food->category->name }}
+                                        {{ $food->category->deleted ? '(' . __('category.deleted') . ')' : '' }}</div>
                                 </div>
                                 <div class="w-full flex flex-row space-x-4 items-center">
                                     <div class="w-1/4 font-bold text-end">{{ __('food.price') }}</div>

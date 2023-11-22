@@ -6,6 +6,7 @@ return [
     "image" => "Image",
     "existing_image" => "Existing Image",
     "name_required" => "The name field is required",
+    "name_unique" => "A category with this name already exist",
     "create_success" => "Category created",
     "update_success" => "Category updated",
     "delete_success" => "Category \":name\" successfully deleted",
@@ -17,5 +18,6 @@ return [
     "delete_warning_msg1" => "You are about to delete the category",
     "delete_warning_msg2" => "Are you sure you want to do this?",
     "search_placeholder" => "Search for a category",
-    "no_foods" => "There are no foods for this category"
+    "no_foods" => "There are no foods for this category",
+    "deleted" => "Deleted"
 ];

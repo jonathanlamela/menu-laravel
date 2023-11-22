@@ -68,7 +68,7 @@
                 <label class="form-label">{{ __('food.category') }}</label>
                 <select name="category_id"
                     class="@if ($errors->has('category_id')) text-input-invalid @else text-input @endif">
-                    <option>{{ __('food.pick_a_category') }}</option>
+                    <option value="">{{ __('food.pick_a_category') }}</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>
                             {{ $category->name }}

@@ -25,5 +25,5 @@ return [
     "previous_page" => "Precedente",
     "next_page" => "Successiva",
     "show" => "Mostra",
-    "order" => "Ordine"
+    "order" => "Ordine",
 ];

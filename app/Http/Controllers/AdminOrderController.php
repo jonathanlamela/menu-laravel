@@ -83,7 +83,6 @@ class AdminOrderController extends Controller
                 ->withInput();
         }
 
-        $attributes = $validator->validated();
 
         $data = [
             "delivery_address" => $order->delivery_address ?? null,
@@ -116,11 +115,10 @@ class AdminOrderController extends Controller
 
         $carrier = Carrier::where("id", $attributes["carrier_id"])->first();
 
-        print_r($carrier);
 
         $data = [
             "carrier_id" => $carrier->id,
-            "delivery_costs" => $carrier->costs
+            "delivery_costs" => $carrier->cost
         ];
 
         $order->update($data);
@@ -202,30 +200,20 @@ class AdminOrderController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Order $order)
     {
 
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ],);
-
-        if ($validator->fails()) {
-            return redirect(route('admin.order.list'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $id = $validator->validated()['id'];
-
-        $order = Order::find($id);
-
         session()->flash("success_message", __('order.delete_success', [
-            "id" => $id
+            "id" => $order->id
         ]));
+
+        $order = Order::where("id", "=", $order->id)->with(["user", "orderState"])->first();
 
         $order->update([
             "order_state_id" => Settings::first()->order_deleted_state_id
         ]);
+
+        Mail::to($order->user)->send(new OrderStateUpdated($order->user, $order->id, Settings::first()->orderDeletedState->name));
 
 
         return redirect(route('admin.order.list'));

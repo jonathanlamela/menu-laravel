@@ -22,7 +22,6 @@ return [
     "password_confirmation" => "Password (ripeti)",
     "password_confirmation_same" => "Le due password non corrispondono",
     "password_recovery_link" => "Ho dimenticato la password",
-
     "firstname" => "Nome",
     "firstname_required" =>  "Il campo nome è obbligatorio",
     "firstname_string" => "Il campo nome può contenere solo lettere",
@@ -42,5 +41,9 @@ return [
     "require_new_email" => "Non ho ricevuto la mail",
     "logout_my_account" => "Esci da questo account",
     "reset_password_title" => "Reset password",
-    "reset_password_btn" => "Reset password"
+    "reset_password_btn" => "Reset password",
+    "verification_link_sent" => "Link di verifica inviato alla tua email",
+    "profile_information_updated" => "Informazioni profilo aggiornate",
+    "password_updated" => "Password aggiornata con successo"
+
 ];
