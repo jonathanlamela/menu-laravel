@@ -31,7 +31,7 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
-        $settings = Settings::first();
+        $settings = Settings::first() ?? new Settings();
 
         return $this->mjml('emails/reset_password')
             ->cc($this->user->email)

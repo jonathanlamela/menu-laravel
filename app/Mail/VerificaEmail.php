@@ -31,7 +31,7 @@ class VerificaEmail extends Mailable
      */
     public function build()
     {
-        $settings = Settings::first();
+        $settings = Settings::first() ?? new Settings();
 
         return $this->mjml('emails/verify_email')
             ->cc($this->user->email)

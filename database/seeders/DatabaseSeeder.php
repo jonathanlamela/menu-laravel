@@ -21,19 +21,5 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        /*Category::factory(6)->create();
-
-        $categories = Category::all();
-
-        foreach ($categories as $category) {
-
-            Food::factory(10)->create([
-                "category_id" => $category->id
-            ]);
-        }*/
-
-        $order = Order::find(11);
-        Mail::to($order->user)->send(new OrderPaid($order));
     }
 }
