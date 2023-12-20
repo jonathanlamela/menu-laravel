@@ -2,15 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Mail\OrderPaid;
 use App\Models\Category;
 use App\Models\Food;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Order;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\OrdineCreato;
-use App\Mail\OrdineRicevuto;
 use App\Models\OrderState;
 use App\Models\Settings;
 
@@ -58,5 +52,44 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $settings->save();
+
+        $category = new Category([
+            "id" => 1,
+            "name" => "Pizze"
+        ]);
+
+        $category->save();
+
+        $category = new Category([
+            "id" => 2,
+            "name" => "Panini"
+        ]);
+
+        $category->save();
+
+        $category = new Category([
+            "id" => 3,
+            "name" => "Contorni"
+        ]);
+
+        $category->save();
+
+        $category = new Category([
+            "id" => 4,
+            "name" => "Bibite e bevande"
+        ]);
+
+        $category->save();
+
+
+        $cibo = new Food([
+            "id" => 1,
+            "name" => "Pizza Margherita",
+            "ingredients" => "pomodoro, mozzarella",
+            "category_id" => 1,
+            "price" => 3.50
+        ]);
+
+        $cibo->save();
     }
 }
